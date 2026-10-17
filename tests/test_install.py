@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import ctr_install as ci  # noqa: E402
 
 NAME = ci.NAME
+CURRENT = (SKILL / "VERSION").read_text(encoding="utf-8").strip()   # 現行の版。テストを版の更新に依存させない
 REAL_SKILL_DIRS = [Path.home() / ".claude" / "skills" / NAME, Path.home() / ".agents" / "skills" / NAME,
                    Path.home() / ".gemini" / "config" / "skills" / NAME, Path.home() / ".gemini" / "antigravity-cli" / "skills" / NAME]
 
@@ -49,7 +50,7 @@ class Install(TmpCase):
         return a + list(extra) + (["--apply"] if apply else [])
 
     def bump(self, text="x"):
-        (self.src / "VERSION").write_text("0.1.1\n", encoding="utf-8")
+        (self.src / "VERSION").write_text("99.0.0\n", encoding="utf-8")   # 実際の版に依存させない
         with open(self.src / "references" / "judgment.md", "a", encoding="utf-8") as f:
             f.write(f"\n<!-- {text} -->\n")
 
@@ -72,7 +73,7 @@ class Install(TmpCase):
                 self.assertEqual((code, out["results"][0]["applied"]["result"]), (0, "install"))
                 self.assertEqual(code, 0)
                 marker = json.loads((dest / ci.MARKER).read_text(encoding="utf-8"))
-                self.assertEqual(marker["version"], "0.1.0")
+                self.assertEqual(marker["version"], CURRENT)
                 self.assertEqual({k: v for k, v in tree(dest).items() if k != ci.MARKER}, {k: v for k, v in tree(self.src).items()})
                 self.assertEqual(run(*self.args("verify", target))[0], 0)
                 self.assertEqual(run(*self.args("install", target, apply=True))[1]["results"][0]["applied"]["result"], "noop")
@@ -108,9 +109,9 @@ class Install(TmpCase):
         code, out = run(*self.args("update", "claude-code", apply=True))
         self.assertEqual((code, out["results"][0]["applied"]["result"]), (0, "update"))
         dest = skills / NAME
-        self.assertEqual((dest / "VERSION").read_text().strip(), "0.1.1")
+        self.assertEqual((dest / "VERSION").read_text().strip(), "99.0.0")
         bak = Path(out["results"][0]["applied"]["backup"])
-        self.assertEqual((bak / "VERSION").read_text().strip(), "0.1.0")        # 旧版を退避
+        self.assertEqual((bak / "VERSION").read_text().strip(), CURRENT)        # 旧版を退避
         self.assertEqual(tree(other), before_other)                              # 他のSkillに触れない
         self.assertEqual(tree(data), before_data)                                # データに触れない
         self.assertEqual(run(*self.args("verify", "claude-code"))[0], 0)
@@ -141,7 +142,7 @@ class Install(TmpCase):
                 self.assertEqual(tree(skills / NAME), old, "旧版が完全に戻っていない")
                 self.assertEqual([p.name for p in skills.iterdir() if p.name.startswith(".")], [])   # 作りかけを残さない
                 shutil.copytree(SKILL, self.src, dirs_exist_ok=True, ignore=shutil.ignore_patterns("__pycache__"))
-                (self.src / "VERSION").write_text("0.1.0\n", encoding="utf-8")
+                (self.src / "VERSION").write_text(CURRENT + "\n", encoding="utf-8")
 
     def test_A30_foreign_and_modified_installs_are_not_overwritten_or_deleted_without_consent(self):
         dest = self.dirs("codex")[0]
