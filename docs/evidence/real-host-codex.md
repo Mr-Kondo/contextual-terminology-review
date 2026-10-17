@@ -186,3 +186,107 @@
 省略した確認は、同僚への聞き取りです。伝わり方の実測はありません。
 
 
+
+
+---
+
+# 0.1.1 へ更新した後の再実行(記録・フィードバック・書き出し・取り込みまで)
+
+実施日: 2026-10-17。実ユーザー環境の導入先を `ctr_install.py update --apply` で 0.1.1 に更新した後の実行。入力は合成データのみ。作業ディレクトリ・保存先・取り込み先は一時ディレクトリ(`<work>/codex`)。共有許可は、検証のため私(実行者)が一時の保存先にだけ設定した仮の許可で、利用者の業務上の許可ではない。
+
+- ホスト・モデル: codex-cli 0.155.1、`-m gpt-6-sol`。結果: 正常終了、失敗(turn.failed)なし
+- 実行: `codex exec -m gpt-6-sol --skip-git-repo-check --json -s workspace-write -C <work>/codex <prompt>`
+- 実行後の独立確認(別プロセス): `ctr.py check store` が ok(3ファイル・問題0)、`check runs` が completed。取り込み: 受理3・重複0・隔離0
+
+## プロンプト
+
+```
+会議で「私が取りまとめます。」と言うつもりです。本人の意図は、論点整理・関係者調整・成果物作成を自分が主担当として行うことです。
+資料は、この作業ディレクトリの sources.json にある owner(版1)です(架空の資料)。
+この言い方が用語として合っているか、同僚に伝わるかを確認し、修正案と口頭の言い直し、出典を示してください。
+記録の保存先は ./runtime(初期化済み、共有許可は設定済み)の絶対パスを使ってください。
+記録を保存したら、この指摘について妥当・意図は保たれた・提案は使った・受け手は未確認、というフィードバックも記録してください。
+そのうえで、共有用の書き出しを行い、書き出したものを ./improvement に取り込んで結果を報告してください。
+```
+
+## 観測したコマンド実行(順序どおり、最大200文字に省略。`rtk` はこの環境の出力圧縮ラッパー)
+
+1. exit=0 `/bin/zsh -lc 'cat ~/.codex/RTK.md'`
+2. exit=0 `/bin/zsh -lc 'cat ~/.agents/skills/contextual-terminology-review/SKILL.md'`
+3. exit=0 `/bin/zsh -lc "pwd && rg --files -g 'sources.json' -g 'AGENTS.md' -g 'RTK.md' -g '*' . | head -80"`
+4. exit=0 `/bin/zsh -lc "rg -n '取りまとめ|owner|用語|フィードバック|runtime|improvement' ~/.codex/memories/MEMORY.md | head -70"`
+5. exit=0 `/bin/zsh -lc 'rtk cat ~/.agents/skills/contextual-terminology-review/references/judgment.md'`
+6. exit=0 `/bin/zsh -lc 'rtk cat runtime/policy.json'`
+7. exit=0 `/bin/zsh -lc 'rtk cat sources.json'`
+8. exit=0 `/bin/zsh -lc 'rtk cat ~/.agents/skills/contextual-terminology-review/references/citation.md'`
+9. exit=0 `/bin/zsh -lc "rtk sed -n '215,265p' ~/.codex/memories/MEMORY.md"`
+10. exit=0 `/bin/zsh -lc 'rtk cat ~/.agents/skills/contextual-terminology-review/references/feedback-loop.md'`
+11. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py --help'`
+12. exit=0 `/bin/zsh -lc 'rtk cat ~/.agents/skills/contextual-terminology-review/references/review-example.json'`
+13. exit=0 `/bin/zsh -lc "rtk python3 -c 'from pathlib import Path; print(Path(\"runtime\").resolve()); print(Path(\"improvement\").resolve())'"`
+14. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py feedback add --help'`
+15. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py record start --help'`
+16. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py import --help'`
+17. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py search exact --help'`
+18. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py record start --runtime-root <work>/codex/runtime --host codex --route local --domains 業務用語,ビジネス用語 --task-group m`
+19. exit=0 `/bin/zsh -lc "rtk rg -n 'class Review|class Finding|class Ref|professional_fit|business_premise|proposal_kind' ~/.agents/skills/contextual-terminology-review/scripts/ctr_refs.py"`
+20. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py check refs --help'`
+21. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py export --help'`
+22. exit=0 `/bin/zsh -lc 'rtk python3 -m json.tool .review.json'`
+23. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py check refs --review .review.json --sources sources.json'`
+24. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py record finish --runtime-root <work>/codex/runtime --run-id run-20261017T081815-02665b --review .review.json --so`
+25. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py feedback add --runtime-root <work>/codex/runtime --run-id run-20261017T081815-02665b --finding-id F1 --validity `
+26. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py export --runtime-root <work>/codex/runtime --run-id run-20261017T081815-02665b'`
+27. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py import <work>/codex/runtime/outbox/pkg-20261017T081842-5e0a3a --improvement-root <work>/codex/improvement'`
+28. exit=0 `/bin/zsh -lc 'rtk rg --files runtime improvement'`
+29. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py check runs --runtime-root <work>/codex/runtime'`
+30. exit=0 `/bin/zsh -lc 'rtk python3 ~/.agents/skills/contextual-terminology-review/scripts/ctr.py check data --runtime-root <work>/codex/runtime --improvement-root <work>/codex/improvement'`
+31. exit=1 `/bin/zsh -lc "rtk rg -n '担当者は|最終承認は部長が行う|私が取りまとめます' improvement/inbox/pkg-20261017T081842-5e0a3a"`
+32. exit=0 `/bin/zsh -lc 'rtk cat improvement/inbox/pkg-20261017T081842-5e0a3a/receipt.json'`
+33. exit=0 `/bin/zsh -lc 'rtk cat improvement/inbox/pkg-20261017T081842-5e0a3a/events/fb-20261017T081839-f22532.json'`
+34. exit=0 `/bin/zsh -lc 'rtk rm .review.json'`
+35. exit=0 `/bin/zsh -lc "rtk sed -n '247,261p' ~/.codex/memories/MEMORY.md"`
+36. exit=0 `/bin/zsh -lc "rtk rg -n 'when workplace wording|Choose terminology evidence|Do not infer principal responsibility|Keep structural validation' ~/.codex/memories/MEMORY.md"`
+
+ホスト自身のメモリファイルの検索・閲覧が含まれることがあるが、Skillとは無関係(内容は記録しない)。
+
+## 最終回答(モデルの出力そのまま)
+
+## 文脈
+
+会議での「取りまとめ」は、本人の意図では論点整理・関係者調整・成果物作成を主担当として行うことです。[owner（版1）](<work>/codex/sources.json)では、最終承認は部長の役割です。
+
+## 核心的な論理
+
+- **証拠:** owner（版1）は三つの作業と最終承認者を明記しています。
+- **判断:** 「私が取りまとめます」は資料と矛盾せず、誤用とは断定できません。ただし、その一言で主担当の範囲まで同僚に伝わるかは不明です。
+- **反論:** 役割を全員が既に共有していれば短い表現で足りる可能性があります。その共有状況は確認できていません。
+
+## 重要ポイント・具体例
+
+**修正案:**「論点の整理、関係者調整、成果物の作成を私が主担当として進めます。最終承認は部長が行います。」
+
+**口頭の言い直し:**「論点整理と関係者調整、成果物作成は私が主担当です。最終承認は部長です。」
+
+## 平易な説明
+
+わかりやすく言うと、「取りまとめます」は間違いとは言えないが、何を担当するかまで言うと役割が明確になる、ということである。
+
+## 自己批判的考察
+
+出典の位置と引用の一致は機械検査で合格しました。引用が判断を支えるかについての独立した意味適合審査と、同僚の理解の確認は未実施です。この資料に限った判断の信頼度は **0.85** です。
+
+## 結論・記録結果
+
+レビュー記録 `run-20261017T081815-02665b` を保存し、指定どおり「妥当・意図は保たれた・提案は使った・受け手は未確認」をフィードバックとして記録しました。共有用パッケージ `pkg-20261017T081842-5e0a3a` を書き出し、[improvement の受領記録](<work>/codex/improvement/inbox/pkg-20261017T081842-5e0a3a/receipt.json)で **3件受理、重複・隔離0件**を確認しました。
+
+## 参考文献
+
+［F1／直接引用］架空案件Aの役割分担（版1）｜行1｜担当者は論点の整理、関係者調整、成果物の作成を主担当として行う。｜リンク未確認  
+［F1／直接引用］架空案件Aの役割分担（版1）｜行2｜最終承認は部長が行う。｜リンク未確認
+
+元資料は [sources.json](<work>/codex/sources.json) です。
+
+省略した確認は同僚への実地確認です。「提案を使った」は指定されたフィードバックとして保存しており、実際の発言は独立に検証していません。
+
+

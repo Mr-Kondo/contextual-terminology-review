@@ -126,7 +126,7 @@ def write_report(s, ledger, bench, spec):
         "## 区分別の状態(06-acceptance-matrix.md)", "",
         "| 区分 | 状態 | 根拠・残り |", "|---|---|---|",
         "| 設計資料の整合性 | 検査済み(合格) | `tools/check_design_docs.py`(manifestのハッシュ・JSON・ID・リンク)。資料の検査であり実装の検証ではない |",
-        f"| 用語・責務の判断 A01〜A12, A17, A28〜A29 | 機械ガード合格／**意味審査は未実施(独立確認待ち)** | 作成者は実装担当AI。語彙ガードは必要条件のみ。確認票: docs/SEMANTIC-REVIEW-SHEET.md |",
+        f"| 用語・責務の判断 A01〜A12, A17, A28〜A29 | 機械ガード合格／**意味審査は未実施(独立確認待ち)** | 作成者は実装担当AI。語彙ガードは必要条件のみ。確認票: docs/SEMANTIC-REVIEW-SHEET.md。別モデル(Codex・Antigravity)による確認は参考情報で、独立審査の代わりにならない: docs/evidence/cross-model-semantic-review.md |",
         "| 出典・引用の機械検査 A13〜A18 | 機械検査 合格 | 不明ID・版違い・範囲外・改変・否定欠落を検出。A17は機械合格と意味不支持を別表示 |",
         "| 画像・PDFの実読解 A19〜A20 | 機械側合格／視覚確認は自己確認のみ | A20: 実PNG・1ページPDFを開いて凡例を確認(実装担当AI)。独立確認・実利用でのPDF読解は未実施 |",
         "| 匿名比較・理解問題 A21〜A23 | 機械検査 合格／人の評価は未実施 | 配布物の秘匿・割付保存・非相殺・単一版配布を検査。実際の評価者による採点は未実施 |",
@@ -185,6 +185,10 @@ def write_sheet(spec, summary):
         for f in rev.findings:
             out += [f"**判定** 適合={f.professional_fit}・意図={f.intent_clarity}・前提={f.business_premise}・提案={f.proposal_kind}（{f.judgment}）", "",
                     f"理由: {f.reason}", ""]
+            if f.correction:
+                cr = f.correction
+                out += [f"訂正の記録: 訂正箇所={cr.corrected_item}／根拠={cr.basis_ref_id}／意味(前)={cr.meaning_before}／意味(後)={cr.meaning_after}／"
+                        f"無関係な追加={'、'.join(cr.unrelated_additions) or 'なし'}", ""]
             if f.proposal_text:
                 out.append(f"修正案: {f.proposal_text}")
             if f.oral_rephrase:
@@ -192,7 +196,8 @@ def write_sheet(spec, summary):
         for k, v in fx.get("variants", {}).items():
             out.append(f"相手={k}: {v}")
         footer = [f"- {l}" for l in rep["footer"]] or ["- (なし)"]
-        out += ["", "出典一覧(生成):", *footer, "",
+        checks = "、".join(f"{r['ref_id']}=機械検査 {r['mechanical']}・意味適合 {r['semantic']}・視覚確認 {r['visual_check']}" for r in rep["refs"]) or "参照なし"
+        out += ["", "出典一覧(生成):", *footer, "", f"参照の機械検査(原文との文字の一致。意味の支持は見ていない): {checks}", "",
                 "| 確認項目 | 合 | 否 | 保留 |", "|---|---|---|---|", "| must をすべて満たす | ☐ | ☐ | ☐ |", "| must_not に触れていない | ☐ | ☐ | ☐ |",
                 "| 引用が判断を支えている(意味適合) | ☐ | ☐ | ☐ |", "", "確認者: ________  日付: ________  理由: ________", ""]
     (DOCS / "SEMANTIC-REVIEW-SHEET.md").write_text("\n".join(out), encoding="utf-8")
