@@ -1,0 +1,162 @@
+{
+ "split": "test",
+ "positive_runs": 36,
+ "negative_runs": 33,
+ "borderline_runs": 3,
+ "recall": {
+  "hit": 23,
+  "n": 36,
+  "rate": 0.639,
+  "wilson_95": [
+   0.4757,
+   0.7752
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 33,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1043
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 3
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {},
+ "no_skill_on_positive": 13,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "P02": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "P04": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "P06": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "P08": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "P10": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "P12": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "P14": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "P16": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "P18": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "P20": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "P22": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "P24": {
+   "runs": 3,
+   "ours": 1,
+   "other": {}
+  },
+  "N02": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N04": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N06": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N08": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N10": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N12": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N14": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N16": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N18": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N20": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N22": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "N24": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": false,
+  "false_fire": true
+ }
+}

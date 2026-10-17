@@ -1,0 +1,166 @@
+{
+ "split": "dev",
+ "positive_runs": 24,
+ "negative_runs": 22,
+ "borderline_runs": 2,
+ "recall": {
+  "hit": 20,
+  "n": 24,
+  "rate": 0.833,
+  "wilson_95": [
+   0.6415,
+   0.9332
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 22,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1487
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 2
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {
+  "japanese-readability-editor": 1
+ },
+ "no_skill_on_positive": 4,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "P01": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "P03": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "P05": {
+   "runs": 2,
+   "ours": 1,
+   "other": {}
+  },
+  "P07": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "P09": {
+   "runs": 2,
+   "ours": 1,
+   "other": {}
+  },
+  "P11": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "P13": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "P15": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "P17": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "P19": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "P21": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "P23": {
+   "runs": 2,
+   "ours": 2,
+   "other": {}
+  },
+  "N01": {
+   "runs": 2,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 1
+   }
+  },
+  "N03": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N05": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N07": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N09": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N11": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N13": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N15": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N17": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N19": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N21": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  },
+  "N23": {
+   "runs": 2,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": true,
+  "false_fire": true
+ }
+}
