@@ -1,0 +1,2433 @@
+{
+ "as_of": "2026-10-17T07:55:30Z",
+ "dataset_sha256": "bdc1b40fd50ac4ed2eeb0dee8618358a0cf62bd19e6263cf2974a6b607a9d902",
+ "scope": "Ruri検索の採否判断用の課題セット。作成者はSkillの設計・実装者と同じAIで、独立していない。架空の用語集40語と課題80件(verbatim16/variant20/paraphrase24/negative20)。偶数番=dev(閾値決定のみ)、奇数番=test(報告の主)。 (初回の実行で課題IDの衝突と、言い換え課題が用語集の文言に近すぎる問題が見つかったため、言い換え課題を文脈の中の言い方に書き直しID接頭辞を修正した。採否基準は変更していない。初回の出力は ruri-adoption-bench-run1-invalid.json)",
+ "counts": {
+  "dev/verbatim": 8,
+  "dev/variant": 10,
+  "dev/paraphrase": 12,
+  "dev/negative": 10,
+  "test/verbatim": 8,
+  "test/variant": 10,
+  "test/paraphrase": 12,
+  "test/negative": 10
+ },
+ "engines": {
+  "exact": {
+   "dev/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": null
+   },
+   "dev/variant": {
+    "hit@1": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    },
+    "hit@3": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    },
+    "hit@3_at_threshold": null
+   },
+   "dev/paraphrase": {
+    "hit@1": {
+     "numerator": 0,
+     "denominator": 12,
+     "value": 0.0,
+     "wilson_95": [
+      0.0,
+      0.2425
+     ]
+    },
+    "hit@3": {
+     "numerator": 0,
+     "denominator": 12,
+     "value": 0.0,
+     "wilson_95": [
+      0.0,
+      0.2425
+     ]
+    },
+    "hit@3_at_threshold": null
+   },
+   "dev/negative": {
+    "false_positive": null
+   },
+   "dev/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 0,
+     "denominator": 22,
+     "value": 0.0,
+     "wilson_95": [
+      0.0,
+      0.1487
+     ]
+    },
+    "hit@3": {
+     "numerator": 0,
+     "denominator": 22,
+     "value": 0.0,
+     "wilson_95": [
+      0.0,
+      0.1487
+     ]
+    },
+    "hit@3_at_threshold": null
+   },
+   "test/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": null
+   },
+   "test/variant": {
+    "hit@1": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    },
+    "hit@3": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    },
+    "hit@3_at_threshold": null
+   },
+   "test/paraphrase": {
+    "hit@1": {
+     "numerator": 0,
+     "denominator": 12,
+     "value": 0.0,
+     "wilson_95": [
+      0.0,
+      0.2425
+     ]
+    },
+    "hit@3": {
+     "numerator": 0,
+     "denominator": 12,
+     "value": 0.0,
+     "wilson_95": [
+      0.0,
+      0.2425
+     ]
+    },
+    "hit@3_at_threshold": null
+   },
+   "test/negative": {
+    "false_positive": null
+   },
+   "test/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 0,
+     "denominator": 22,
+     "value": 0.0,
+     "wilson_95": [
+      0.0,
+      0.1487
+     ]
+    },
+    "hit@3": {
+     "numerator": 0,
+     "denominator": 22,
+     "value": 0.0,
+     "wilson_95": [
+      0.0,
+      0.1487
+     ]
+    },
+    "hit@3_at_threshold": null
+   }
+  },
+  "bigram": {
+   "threshold": 0.237253,
+   "dev/verbatim": {
+    "hit@1": {
+     "numerator": 7,
+     "denominator": 8,
+     "value": 0.875,
+     "wilson_95": [
+      0.5291,
+      0.9776
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 3,
+     "denominator": 8,
+     "value": 0.375,
+     "wilson_95": [
+      0.1368,
+      0.6943
+     ]
+    }
+   },
+   "dev/variant": {
+    "hit@1": {
+     "numerator": 5,
+     "denominator": 10,
+     "value": 0.5,
+     "wilson_95": [
+      0.2366,
+      0.7634
+     ]
+    },
+    "hit@3": {
+     "numerator": 5,
+     "denominator": 10,
+     "value": 0.5,
+     "wilson_95": [
+      0.2366,
+      0.7634
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    }
+   },
+   "dev/paraphrase": {
+    "hit@1": {
+     "numerator": 6,
+     "denominator": 12,
+     "value": 0.5,
+     "wilson_95": [
+      0.2538,
+      0.7462
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 12,
+     "value": 0.6667,
+     "wilson_95": [
+      0.3906,
+      0.8619
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 5,
+     "denominator": 12,
+     "value": 0.4167,
+     "wilson_95": [
+      0.1933,
+      0.6805
+     ]
+    }
+   },
+   "dev/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "dev/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 11,
+     "denominator": 22,
+     "value": 0.5,
+     "wilson_95": [
+      0.3072,
+      0.6928
+     ]
+    },
+    "hit@3": {
+     "numerator": 13,
+     "denominator": 22,
+     "value": 0.5909,
+     "wilson_95": [
+      0.3873,
+      0.7674
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 7,
+     "denominator": 22,
+     "value": 0.3182,
+     "wilson_95": [
+      0.1636,
+      0.5268
+     ]
+    }
+   },
+   "test/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 7,
+     "denominator": 8,
+     "value": 0.875,
+     "wilson_95": [
+      0.5291,
+      0.9776
+     ]
+    }
+   },
+   "test/variant": {
+    "hit@1": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    },
+    "hit@3": {
+     "numerator": 5,
+     "denominator": 10,
+     "value": 0.5,
+     "wilson_95": [
+      0.2366,
+      0.7634
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "test/paraphrase": {
+    "hit@1": {
+     "numerator": 10,
+     "denominator": 12,
+     "value": 0.8333,
+     "wilson_95": [
+      0.552,
+      0.953
+     ]
+    },
+    "hit@3": {
+     "numerator": 10,
+     "denominator": 12,
+     "value": 0.8333,
+     "wilson_95": [
+      0.552,
+      0.953
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 6,
+     "denominator": 12,
+     "value": 0.5,
+     "wilson_95": [
+      0.2538,
+      0.7462
+     ]
+    }
+   },
+   "test/negative": {
+    "false_positive": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    }
+   },
+   "test/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 12,
+     "denominator": 22,
+     "value": 0.5455,
+     "wilson_95": [
+      0.3466,
+      0.7308
+     ]
+    },
+    "hit@3": {
+     "numerator": 15,
+     "denominator": 22,
+     "value": 0.6818,
+     "wilson_95": [
+      0.4732,
+      0.8364
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 6,
+     "denominator": 22,
+     "value": 0.2727,
+     "wilson_95": [
+      0.1315,
+      0.4815
+     ]
+    }
+   }
+  },
+  "exact+bigram": {
+   "dev/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    }
+   },
+   "dev/variant": {
+    "hit@1": {
+     "numerator": 1,
+     "denominator": 10,
+     "value": 0.1,
+     "wilson_95": [
+      0.0179,
+      0.4042
+     ]
+    },
+    "hit@3": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    }
+   },
+   "dev/paraphrase": {
+    "hit@1": {
+     "numerator": 4,
+     "denominator": 12,
+     "value": 0.3333,
+     "wilson_95": [
+      0.1381,
+      0.6094
+     ]
+    },
+    "hit@3": {
+     "numerator": 5,
+     "denominator": 12,
+     "value": 0.4167,
+     "wilson_95": [
+      0.1933,
+      0.6805
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 5,
+     "denominator": 12,
+     "value": 0.4167,
+     "wilson_95": [
+      0.1933,
+      0.6805
+     ]
+    }
+   },
+   "dev/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "dev/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 5,
+     "denominator": 22,
+     "value": 0.2273,
+     "wilson_95": [
+      0.1012,
+      0.4344
+     ]
+    },
+    "hit@3": {
+     "numerator": 7,
+     "denominator": 22,
+     "value": 0.3182,
+     "wilson_95": [
+      0.1636,
+      0.5268
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 7,
+     "denominator": 22,
+     "value": 0.3182,
+     "wilson_95": [
+      0.1636,
+      0.5268
+     ]
+    }
+   },
+   "test/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    }
+   },
+   "test/variant": {
+    "hit@1": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    },
+    "hit@3": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "test/paraphrase": {
+    "hit@1": {
+     "numerator": 6,
+     "denominator": 12,
+     "value": 0.5,
+     "wilson_95": [
+      0.2538,
+      0.7462
+     ]
+    },
+    "hit@3": {
+     "numerator": 6,
+     "denominator": 12,
+     "value": 0.5,
+     "wilson_95": [
+      0.2538,
+      0.7462
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 6,
+     "denominator": 12,
+     "value": 0.5,
+     "wilson_95": [
+      0.2538,
+      0.7462
+     ]
+    }
+   },
+   "test/negative": {
+    "false_positive": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    }
+   },
+   "test/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 6,
+     "denominator": 22,
+     "value": 0.2727,
+     "wilson_95": [
+      0.1315,
+      0.4815
+     ]
+    },
+    "hit@3": {
+     "numerator": 6,
+     "denominator": 22,
+     "value": 0.2727,
+     "wilson_95": [
+      0.1315,
+      0.4815
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 6,
+     "denominator": 22,
+     "value": 0.2727,
+     "wilson_95": [
+      0.1315,
+      0.4815
+     ]
+    }
+   }
+  },
+  "ruri-70m": {
+   "threshold": 0.848566,
+   "build_seconds": 9.15,
+   "per_query_ms_median": 202.9,
+   "deterministic_first10": true,
+   "index_meta": {
+    "model_id": "cl-nagoya/ruri-v3-70m",
+    "model_revision": "07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc",
+    "libs": {
+     "sentence_transformers": "6.1.0",
+     "torch": "2.14.1",
+     "transformers": "5.20.1",
+     "numpy": "2.5.4"
+    }
+   },
+   "decision": {
+    "checks": {
+     "A_hit3>=0.60": false,
+     "B_over_bigram>=0.15": false,
+     "C_fp<=0.20": true
+    },
+    "values": {
+     "ruri_hit@3_at_threshold": 0.3636,
+     "bigram_hit@3_at_threshold": 0.2727,
+     "ruri_negative_fp": 0.0
+    },
+    "verdict": "この証拠では推奨しない: A_hit3>=0.60, B_over_bigram>=0.15"
+   },
+   "dev/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 5,
+     "denominator": 8,
+     "value": 0.625,
+     "wilson_95": [
+      0.3057,
+      0.8632
+     ]
+    }
+   },
+   "dev/variant": {
+    "hit@1": {
+     "numerator": 6,
+     "denominator": 10,
+     "value": 0.6,
+     "wilson_95": [
+      0.3127,
+      0.8318
+     ]
+    },
+    "hit@3": {
+     "numerator": 9,
+     "denominator": 10,
+     "value": 0.9,
+     "wilson_95": [
+      0.5958,
+      0.9821
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    }
+   },
+   "dev/paraphrase": {
+    "hit@1": {
+     "numerator": 11,
+     "denominator": 12,
+     "value": 0.9167,
+     "wilson_95": [
+      0.6461,
+      0.9851
+     ]
+    },
+    "hit@3": {
+     "numerator": 12,
+     "denominator": 12,
+     "value": 1.0,
+     "wilson_95": [
+      0.7575,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 5,
+     "denominator": 12,
+     "value": 0.4167,
+     "wilson_95": [
+      0.1933,
+      0.6805
+     ]
+    }
+   },
+   "dev/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "dev/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 17,
+     "denominator": 22,
+     "value": 0.7727,
+     "wilson_95": [
+      0.5656,
+      0.8988
+     ]
+    },
+    "hit@3": {
+     "numerator": 21,
+     "denominator": 22,
+     "value": 0.9545,
+     "wilson_95": [
+      0.782,
+      0.9919
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 7,
+     "denominator": 22,
+     "value": 0.3182,
+     "wilson_95": [
+      0.1636,
+      0.5268
+     ]
+    }
+   },
+   "test/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 6,
+     "denominator": 8,
+     "value": 0.75,
+     "wilson_95": [
+      0.4093,
+      0.9285
+     ]
+    }
+   },
+   "test/variant": {
+    "hit@1": {
+     "numerator": 5,
+     "denominator": 10,
+     "value": 0.5,
+     "wilson_95": [
+      0.2366,
+      0.7634
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 10,
+     "value": 0.8,
+     "wilson_95": [
+      0.4902,
+      0.9433
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "test/paraphrase": {
+    "hit@1": {
+     "numerator": 11,
+     "denominator": 12,
+     "value": 0.9167,
+     "wilson_95": [
+      0.6461,
+      0.9851
+     ]
+    },
+    "hit@3": {
+     "numerator": 11,
+     "denominator": 12,
+     "value": 0.9167,
+     "wilson_95": [
+      0.6461,
+      0.9851
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 12,
+     "value": 0.6667,
+     "wilson_95": [
+      0.3906,
+      0.8619
+     ]
+    }
+   },
+   "test/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "test/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 16,
+     "denominator": 22,
+     "value": 0.7273,
+     "wilson_95": [
+      0.5185,
+      0.8685
+     ]
+    },
+    "hit@3": {
+     "numerator": 19,
+     "denominator": 22,
+     "value": 0.8636,
+     "wilson_95": [
+      0.6666,
+      0.9525
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 22,
+     "value": 0.3636,
+     "wilson_95": [
+      0.1973,
+      0.5705
+     ]
+    }
+   },
+   "per_query_top1": {
+    "ver01": [
+     "t01",
+     0.846913
+    ],
+    "ver02": [
+     "t03",
+     0.873932
+    ],
+    "ver03": [
+     "t04",
+     0.868079
+    ],
+    "ver04": [
+     "t06",
+     0.810556
+    ],
+    "ver05": [
+     "t09",
+     0.869191
+    ],
+    "ver06": [
+     "t10",
+     0.873158
+    ],
+    "ver07": [
+     "t12",
+     0.877677
+    ],
+    "ver08": [
+     "t15",
+     0.82367
+    ],
+    "ver09": [
+     "t19",
+     0.798835
+    ],
+    "ver10": [
+     "t21",
+     0.849615
+    ],
+    "ver11": [
+     "t25",
+     0.848938
+    ],
+    "ver12": [
+     "t28",
+     0.852234
+    ],
+    "ver13": [
+     "t30",
+     0.829323
+    ],
+    "ver14": [
+     "t37",
+     0.852483
+    ],
+    "ver15": [
+     "t38",
+     0.870852
+    ],
+    "ver16": [
+     "t35",
+     0.854548
+    ],
+    "var01": [
+     "t11",
+     0.797319
+    ],
+    "var02": [
+     "t11",
+     0.799984
+    ],
+    "var03": [
+     "t03",
+     0.856201
+    ],
+    "var04": [
+     "t04",
+     0.845991
+    ],
+    "var05": [
+     "t08",
+     0.858344
+    ],
+    "var06": [
+     "t09",
+     0.77981
+    ],
+    "var07": [
+     "t11",
+     0.848254
+    ],
+    "var08": [
+     "t12",
+     0.817073
+    ],
+    "var09": [
+     "t31",
+     0.770782
+    ],
+    "var10": [
+     "t20",
+     0.843407
+    ],
+    "var11": [
+     "t18",
+     0.82471
+    ],
+    "var12": [
+     "t33",
+     0.786259
+    ],
+    "var13": [
+     "t22",
+     0.82838
+    ],
+    "var14": [
+     "t23",
+     0.798118
+    ],
+    "var15": [
+     "t24",
+     0.830995
+    ],
+    "var16": [
+     "t25",
+     0.807084
+    ],
+    "var17": [
+     "t05",
+     0.794278
+    ],
+    "var18": [
+     "t25",
+     0.830248
+    ],
+    "var19": [
+     "t05",
+     0.799503
+    ],
+    "var20": [
+     "t31",
+     0.773795
+    ],
+    "par01": [
+     "t28",
+     0.826149
+    ],
+    "par02": [
+     "t39",
+     0.808784
+    ],
+    "par03": [
+     "t03",
+     0.848243
+    ],
+    "par04": [
+     "t04",
+     0.829185
+    ],
+    "par05": [
+     "t05",
+     0.880098
+    ],
+    "par06": [
+     "t06",
+     0.82891
+    ],
+    "par07": [
+     "t07",
+     0.778273
+    ],
+    "par08": [
+     "t09",
+     0.868755
+    ],
+    "par09": [
+     "t11",
+     0.86473
+    ],
+    "par10": [
+     "t13",
+     0.870261
+    ],
+    "par11": [
+     "t14",
+     0.818123
+    ],
+    "par12": [
+     "t16",
+     0.842799
+    ],
+    "par13": [
+     "t17",
+     0.841477
+    ],
+    "par14": [
+     "t19",
+     0.852462
+    ],
+    "par15": [
+     "t20",
+     0.867788
+    ],
+    "par16": [
+     "t22",
+     0.881562
+    ],
+    "par17": [
+     "t23",
+     0.771571
+    ],
+    "par18": [
+     "t25",
+     0.869144
+    ],
+    "par19": [
+     "t26",
+     0.799331
+    ],
+    "par20": [
+     "t29",
+     0.849878
+    ],
+    "par21": [
+     "t31",
+     0.903389
+    ],
+    "par22": [
+     "t32",
+     0.865543
+    ],
+    "par23": [
+     "t38",
+     0.870199
+    ],
+    "par24": [
+     "t36",
+     0.893947
+    ],
+    "neg01": [
+     "t39",
+     0.790664
+    ],
+    "neg02": [
+     "t09",
+     0.744204
+    ],
+    "neg03": [
+     "t14",
+     0.760344
+    ],
+    "neg04": [
+     "t05",
+     0.797942
+    ],
+    "neg05": [
+     "t05",
+     0.779203
+    ],
+    "neg06": [
+     "t30",
+     0.763952
+    ],
+    "neg07": [
+     "t16",
+     0.759246
+    ],
+    "neg08": [
+     "t05",
+     0.779754
+    ],
+    "neg09": [
+     "t11",
+     0.795787
+    ],
+    "neg10": [
+     "t28",
+     0.779778
+    ],
+    "neg11": [
+     "t39",
+     0.743621
+    ],
+    "neg12": [
+     "t31",
+     0.751276
+    ],
+    "neg13": [
+     "t16",
+     0.766368
+    ],
+    "neg14": [
+     "t05",
+     0.780142
+    ],
+    "neg15": [
+     "t10",
+     0.782075
+    ],
+    "neg16": [
+     "t09",
+     0.809928
+    ],
+    "neg17": [
+     "t05",
+     0.848566
+    ],
+    "neg18": [
+     "t32",
+     0.778901
+    ],
+    "neg19": [
+     "t31",
+     0.77872
+    ],
+    "neg20": [
+     "t31",
+     0.771433
+    ]
+   }
+  },
+  "exact+ruri-70m": {
+   "dev/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    }
+   },
+   "dev/variant": {
+    "hit@1": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    },
+    "hit@3": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 2,
+     "denominator": 10,
+     "value": 0.2,
+     "wilson_95": [
+      0.0567,
+      0.5098
+     ]
+    }
+   },
+   "dev/paraphrase": {
+    "hit@1": {
+     "numerator": 5,
+     "denominator": 12,
+     "value": 0.4167,
+     "wilson_95": [
+      0.1933,
+      0.6805
+     ]
+    },
+    "hit@3": {
+     "numerator": 5,
+     "denominator": 12,
+     "value": 0.4167,
+     "wilson_95": [
+      0.1933,
+      0.6805
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 5,
+     "denominator": 12,
+     "value": 0.4167,
+     "wilson_95": [
+      0.1933,
+      0.6805
+     ]
+    }
+   },
+   "dev/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "dev/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 7,
+     "denominator": 22,
+     "value": 0.3182,
+     "wilson_95": [
+      0.1636,
+      0.5268
+     ]
+    },
+    "hit@3": {
+     "numerator": 7,
+     "denominator": 22,
+     "value": 0.3182,
+     "wilson_95": [
+      0.1636,
+      0.5268
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 7,
+     "denominator": 22,
+     "value": 0.3182,
+     "wilson_95": [
+      0.1636,
+      0.5268
+     ]
+    }
+   },
+   "test/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    }
+   },
+   "test/variant": {
+    "hit@1": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    },
+    "hit@3": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "test/paraphrase": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 12,
+     "value": 0.6667,
+     "wilson_95": [
+      0.3906,
+      0.8619
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 12,
+     "value": 0.6667,
+     "wilson_95": [
+      0.3906,
+      0.8619
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 12,
+     "value": 0.6667,
+     "wilson_95": [
+      0.3906,
+      0.8619
+     ]
+    }
+   },
+   "test/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "test/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 22,
+     "value": 0.3636,
+     "wilson_95": [
+      0.1973,
+      0.5705
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 22,
+     "value": 0.3636,
+     "wilson_95": [
+      0.1973,
+      0.5705
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 22,
+     "value": 0.3636,
+     "wilson_95": [
+      0.1973,
+      0.5705
+     ]
+    }
+   }
+  },
+  "ruri-310m": {
+   "threshold": 0.805236,
+   "build_seconds": 0.8,
+   "per_query_ms_median": 520.7,
+   "deterministic_first10": true,
+   "index_meta": {
+    "model_id": "cl-nagoya/ruri-v3-310m",
+    "model_revision": "18b60fb8c2b9df296fb4212bb7d23ef94e579cd3",
+    "libs": {
+     "sentence_transformers": "6.1.0",
+     "torch": "2.14.1",
+     "transformers": "5.20.1",
+     "numpy": "2.5.4"
+    }
+   },
+   "decision": {
+    "checks": {
+     "A_hit3>=0.60": true,
+     "B_over_bigram>=0.15": true,
+     "C_fp<=0.20": true
+    },
+    "values": {
+     "ruri_hit@3_at_threshold": 0.7727,
+     "bigram_hit@3_at_threshold": 0.2727,
+     "ruri_negative_fp": 0.0
+    },
+    "verdict": "任意の補助として推奨できる(この証拠の範囲)"
+   },
+   "dev/verbatim": {
+    "hit@1": {
+     "numerator": 7,
+     "denominator": 8,
+     "value": 0.875,
+     "wilson_95": [
+      0.5291,
+      0.9776
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 7,
+     "denominator": 8,
+     "value": 0.875,
+     "wilson_95": [
+      0.5291,
+      0.9776
+     ]
+    }
+   },
+   "dev/variant": {
+    "hit@1": {
+     "numerator": 9,
+     "denominator": 10,
+     "value": 0.9,
+     "wilson_95": [
+      0.5958,
+      0.9821
+     ]
+    },
+    "hit@3": {
+     "numerator": 10,
+     "denominator": 10,
+     "value": 1.0,
+     "wilson_95": [
+      0.7225,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 6,
+     "denominator": 10,
+     "value": 0.6,
+     "wilson_95": [
+      0.3127,
+      0.8318
+     ]
+    }
+   },
+   "dev/paraphrase": {
+    "hit@1": {
+     "numerator": 11,
+     "denominator": 12,
+     "value": 0.9167,
+     "wilson_95": [
+      0.6461,
+      0.9851
+     ]
+    },
+    "hit@3": {
+     "numerator": 12,
+     "denominator": 12,
+     "value": 1.0,
+     "wilson_95": [
+      0.7575,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 10,
+     "denominator": 12,
+     "value": 0.8333,
+     "wilson_95": [
+      0.552,
+      0.953
+     ]
+    }
+   },
+   "dev/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "dev/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 20,
+     "denominator": 22,
+     "value": 0.9091,
+     "wilson_95": [
+      0.7218,
+      0.9747
+     ]
+    },
+    "hit@3": {
+     "numerator": 22,
+     "denominator": 22,
+     "value": 1.0,
+     "wilson_95": [
+      0.8513,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 16,
+     "denominator": 22,
+     "value": 0.7273,
+     "wilson_95": [
+      0.5185,
+      0.8685
+     ]
+    }
+   },
+   "test/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    }
+   },
+   "test/variant": {
+    "hit@1": {
+     "numerator": 7,
+     "denominator": 10,
+     "value": 0.7,
+     "wilson_95": [
+      0.3968,
+      0.8922
+     ]
+    },
+    "hit@3": {
+     "numerator": 10,
+     "denominator": 10,
+     "value": 1.0,
+     "wilson_95": [
+      0.7225,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 5,
+     "denominator": 10,
+     "value": 0.5,
+     "wilson_95": [
+      0.2366,
+      0.7634
+     ]
+    }
+   },
+   "test/paraphrase": {
+    "hit@1": {
+     "numerator": 11,
+     "denominator": 12,
+     "value": 0.9167,
+     "wilson_95": [
+      0.6461,
+      0.9851
+     ]
+    },
+    "hit@3": {
+     "numerator": 12,
+     "denominator": 12,
+     "value": 1.0,
+     "wilson_95": [
+      0.7575,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 12,
+     "denominator": 12,
+     "value": 1.0,
+     "wilson_95": [
+      0.7575,
+      1.0
+     ]
+    }
+   },
+   "test/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "test/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 18,
+     "denominator": 22,
+     "value": 0.8182,
+     "wilson_95": [
+      0.6148,
+      0.9269
+     ]
+    },
+    "hit@3": {
+     "numerator": 22,
+     "denominator": 22,
+     "value": 1.0,
+     "wilson_95": [
+      0.8513,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 17,
+     "denominator": 22,
+     "value": 0.7727,
+     "wilson_95": [
+      0.5656,
+      0.8988
+     ]
+    }
+   },
+   "per_query_top1": {
+    "ver01": [
+     "t01",
+     0.845972
+    ],
+    "ver02": [
+     "t03",
+     0.871606
+    ],
+    "ver03": [
+     "t04",
+     0.854702
+    ],
+    "ver04": [
+     "t06",
+     0.809884
+    ],
+    "ver05": [
+     "t09",
+     0.883778
+    ],
+    "ver06": [
+     "t10",
+     0.892711
+    ],
+    "ver07": [
+     "t12",
+     0.874049
+    ],
+    "ver08": [
+     "t15",
+     0.821382
+    ],
+    "ver09": [
+     "t20",
+     0.809697
+    ],
+    "ver10": [
+     "t21",
+     0.830497
+    ],
+    "ver11": [
+     "t25",
+     0.868593
+    ],
+    "ver12": [
+     "t28",
+     0.849689
+    ],
+    "ver13": [
+     "t30",
+     0.808106
+    ],
+    "ver14": [
+     "t37",
+     0.845009
+    ],
+    "ver15": [
+     "t39",
+     0.844142
+    ],
+    "ver16": [
+     "t35",
+     0.849609
+    ],
+    "var01": [
+     "t01",
+     0.79967
+    ],
+    "var02": [
+     "t02",
+     0.81597
+    ],
+    "var03": [
+     "t03",
+     0.852567
+    ],
+    "var04": [
+     "t09",
+     0.814545
+    ],
+    "var05": [
+     "t08",
+     0.886451
+    ],
+    "var06": [
+     "t09",
+     0.771947
+    ],
+    "var07": [
+     "t11",
+     0.873048
+    ],
+    "var08": [
+     "t12",
+     0.836008
+    ],
+    "var09": [
+     "t32",
+     0.770978
+    ],
+    "var10": [
+     "t20",
+     0.840957
+    ],
+    "var11": [
+     "t18",
+     0.82944
+    ],
+    "var12": [
+     "t21",
+     0.786373
+    ],
+    "var13": [
+     "t22",
+     0.843914
+    ],
+    "var14": [
+     "t12",
+     0.779317
+    ],
+    "var15": [
+     "t24",
+     0.838112
+    ],
+    "var16": [
+     "t25",
+     0.80205
+    ],
+    "var17": [
+     "t26",
+     0.798172
+    ],
+    "var18": [
+     "t27",
+     0.821196
+    ],
+    "var19": [
+     "t31",
+     0.781754
+    ],
+    "var20": [
+     "t30",
+     0.797481
+    ],
+    "par01": [
+     "t08",
+     0.825033
+    ],
+    "par02": [
+     "t08",
+     0.813477
+    ],
+    "par03": [
+     "t03",
+     0.851966
+    ],
+    "par04": [
+     "t04",
+     0.822328
+    ],
+    "par05": [
+     "t05",
+     0.864872
+    ],
+    "par06": [
+     "t06",
+     0.812192
+    ],
+    "par07": [
+     "t07",
+     0.808411
+    ],
+    "par08": [
+     "t09",
+     0.857625
+    ],
+    "par09": [
+     "t11",
+     0.876216
+    ],
+    "par10": [
+     "t13",
+     0.865078
+    ],
+    "par11": [
+     "t14",
+     0.837165
+    ],
+    "par12": [
+     "t16",
+     0.831223
+    ],
+    "par13": [
+     "t17",
+     0.83363
+    ],
+    "par14": [
+     "t19",
+     0.868244
+    ],
+    "par15": [
+     "t20",
+     0.900073
+    ],
+    "par16": [
+     "t22",
+     0.896153
+    ],
+    "par17": [
+     "t23",
+     0.766099
+    ],
+    "par18": [
+     "t25",
+     0.885304
+    ],
+    "par19": [
+     "t26",
+     0.799808
+    ],
+    "par20": [
+     "t29",
+     0.856872
+    ],
+    "par21": [
+     "t31",
+     0.877505
+    ],
+    "par22": [
+     "t32",
+     0.848917
+    ],
+    "par23": [
+     "t38",
+     0.858507
+    ],
+    "par24": [
+     "t36",
+     0.901264
+    ],
+    "neg01": [
+     "t39",
+     0.76563
+    ],
+    "neg02": [
+     "t35",
+     0.748079
+    ],
+    "neg03": [
+     "t32",
+     0.727405
+    ],
+    "neg04": [
+     "t05",
+     0.762699
+    ],
+    "neg05": [
+     "t35",
+     0.758811
+    ],
+    "neg06": [
+     "t24",
+     0.750099
+    ],
+    "neg07": [
+     "t07",
+     0.753082
+    ],
+    "neg08": [
+     "t36",
+     0.746866
+    ],
+    "neg09": [
+     "t11",
+     0.770873
+    ],
+    "neg10": [
+     "t06",
+     0.75936
+    ],
+    "neg11": [
+     "t09",
+     0.726693
+    ],
+    "neg12": [
+     "t08",
+     0.762024
+    ],
+    "neg13": [
+     "t32",
+     0.747307
+    ],
+    "neg14": [
+     "t11",
+     0.753225
+    ],
+    "neg15": [
+     "t10",
+     0.77167
+    ],
+    "neg16": [
+     "t09",
+     0.797707
+    ],
+    "neg17": [
+     "t05",
+     0.805236
+    ],
+    "neg18": [
+     "t32",
+     0.767713
+    ],
+    "neg19": [
+     "t11",
+     0.76995
+    ],
+    "neg20": [
+     "t05",
+     0.764748
+    ]
+   }
+  },
+  "exact+ruri-310m": {
+   "dev/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    }
+   },
+   "dev/variant": {
+    "hit@1": {
+     "numerator": 5,
+     "denominator": 10,
+     "value": 0.5,
+     "wilson_95": [
+      0.2366,
+      0.7634
+     ]
+    },
+    "hit@3": {
+     "numerator": 6,
+     "denominator": 10,
+     "value": 0.6,
+     "wilson_95": [
+      0.3127,
+      0.8318
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 6,
+     "denominator": 10,
+     "value": 0.6,
+     "wilson_95": [
+      0.3127,
+      0.8318
+     ]
+    }
+   },
+   "dev/paraphrase": {
+    "hit@1": {
+     "numerator": 9,
+     "denominator": 12,
+     "value": 0.75,
+     "wilson_95": [
+      0.4677,
+      0.9111
+     ]
+    },
+    "hit@3": {
+     "numerator": 10,
+     "denominator": 12,
+     "value": 0.8333,
+     "wilson_95": [
+      0.552,
+      0.953
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 10,
+     "denominator": 12,
+     "value": 0.8333,
+     "wilson_95": [
+      0.552,
+      0.953
+     ]
+    }
+   },
+   "dev/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "dev/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 14,
+     "denominator": 22,
+     "value": 0.6364,
+     "wilson_95": [
+      0.4295,
+      0.8027
+     ]
+    },
+    "hit@3": {
+     "numerator": 16,
+     "denominator": 22,
+     "value": 0.7273,
+     "wilson_95": [
+      0.5185,
+      0.8685
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 16,
+     "denominator": 22,
+     "value": 0.7273,
+     "wilson_95": [
+      0.5185,
+      0.8685
+     ]
+    }
+   },
+   "test/verbatim": {
+    "hit@1": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 8,
+     "denominator": 8,
+     "value": 1.0,
+     "wilson_95": [
+      0.6756,
+      1.0
+     ]
+    }
+   },
+   "test/variant": {
+    "hit@1": {
+     "numerator": 3,
+     "denominator": 10,
+     "value": 0.3,
+     "wilson_95": [
+      0.1078,
+      0.6032
+     ]
+    },
+    "hit@3": {
+     "numerator": 5,
+     "denominator": 10,
+     "value": 0.5,
+     "wilson_95": [
+      0.2366,
+      0.7634
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 5,
+     "denominator": 10,
+     "value": 0.5,
+     "wilson_95": [
+      0.2366,
+      0.7634
+     ]
+    }
+   },
+   "test/paraphrase": {
+    "hit@1": {
+     "numerator": 11,
+     "denominator": 12,
+     "value": 0.9167,
+     "wilson_95": [
+      0.6461,
+      0.9851
+     ]
+    },
+    "hit@3": {
+     "numerator": 12,
+     "denominator": 12,
+     "value": 1.0,
+     "wilson_95": [
+      0.7575,
+      1.0
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 12,
+     "denominator": 12,
+     "value": 1.0,
+     "wilson_95": [
+      0.7575,
+      1.0
+     ]
+    }
+   },
+   "test/negative": {
+    "false_positive": {
+     "numerator": 0,
+     "denominator": 10,
+     "value": 0.0,
+     "wilson_95": [
+      -0.0,
+      0.2775
+     ]
+    }
+   },
+   "test/variant+paraphrase": {
+    "hit@1": {
+     "numerator": 14,
+     "denominator": 22,
+     "value": 0.6364,
+     "wilson_95": [
+      0.4295,
+      0.8027
+     ]
+    },
+    "hit@3": {
+     "numerator": 17,
+     "denominator": 22,
+     "value": 0.7727,
+     "wilson_95": [
+      0.5656,
+      0.8988
+     ]
+    },
+    "hit@3_at_threshold": {
+     "numerator": 17,
+     "denominator": 22,
+     "value": 0.7727,
+     "wilson_95": [
+      0.5656,
+      0.8988
+     ]
+    }
+   }
+  }
+ },
+ "lexical_overlap_query_bigrams_in_gold_doc_mean": {
+  "verbatim": 0.259,
+  "variant": 0.124,
+  "paraphrase": 0.15
+ }
+}

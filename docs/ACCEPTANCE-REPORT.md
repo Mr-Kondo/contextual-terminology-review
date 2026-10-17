@@ -18,7 +18,7 @@
 | numpy | 2.5.4 |
 | Pillow | 12.3.0 |
 
-テスト 108 件: 失敗 0・エラー 0・skip 4。skip は未実施であり合格に数えない(Ruri実検索・pdfplumber が未導入の環境で出る)。
+テスト 112 件: 失敗 0・エラー 0・skip 4。skip は未実施であり合格に数えない(Ruri実検索・pdfplumber が未導入の環境で出る)。
 
 ## 区分別の状態(06-acceptance-matrix.md)
 
@@ -48,12 +48,12 @@
 | codex / local | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | verified |
 | codex / remote | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | antigravity-ide / local | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
-| antigravity-cli / local | 成功 | 成功 | 成功 | 未実施 | 成功 | 成功 | 成功 | 成功 | incomplete |
+| antigravity-cli / local | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | verified |
 | antigravity / remote | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | chatgpt-work / account | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | claude-cowork / account | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 
-成功は、証拠(種別と内容)がある段階だけ。仮配置・導入の成功は登録・呼び出しの根拠にならない。総合 verified の経路: 2(合成データ1プロンプトの観測に限る)。
+成功は、証拠(種別と内容)がある段階だけ。仮配置・導入の成功は登録・呼び出しの根拠にならない。総合 verified の経路: 3(合成データ1プロンプトの観測に限る)。
 
 ## 検索(実Ruri・同一課題)
 

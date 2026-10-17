@@ -293,9 +293,11 @@
      }
     },
     "source_read": {
-     "state": "not_run",
-     "reason": "references/ を読んだ直接のログを取得できていない(応答に references/ 由来の列挙名はあるが間接証拠。ログには認証情報が含まれるため保存しない)",
-     "next_step": "agy のログ/トレースで references/*.md の読込を確認する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "docs/evidence/real-host-antigravity.md(ストリーム出力による直接ログ): view_file で references/judgment.md・citation.md・feedback-loop.md・review-example.json・hosts.md を読込"
+     }
     },
     "scripts_run": {
      "state": "success",
