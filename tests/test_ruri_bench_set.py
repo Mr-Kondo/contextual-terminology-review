@@ -7,6 +7,7 @@ from helpers import ROOT
 
 sys.path.insert(0, str(ROOT / "tools"))
 import bench_ruri_adoption as bra  # noqa: E402
+import fetch_wiki_bench  # noqa: E402,F401
 
 sys.path.insert(0, str(ROOT / "skill" / "contextual-terminology-review" / "scripts"))
 import ctr_search as se  # noqa: E402
@@ -53,3 +54,45 @@ class RuriBenchSet(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BenchKit(unittest.TestCase):
+    """自分のデータで回すキット(--data)と、Wikipediaから課題セットを作る取得スクリプトの、通信を使わない部分の検査。"""
+
+    def test_user_data_template_is_valid_and_validation_catches_broken_data(self):
+        tmpl = json.loads((ROOT / "tools" / "data" / "user-data-template.json").read_text(encoding="utf-8"))
+        self.assertEqual(bra.validate_dataset(tmpl), [])
+        bad = json.loads(json.dumps(tmpl))
+        bad["queries"][1]["id"] = bad["queries"][0]["id"]                       # id重複
+        bad["queries"][2]["gold"] = ["tXX"]                                      # 無い用語
+        bad["queries"][6]["gold"] = ["t01"]                                      # negative に正解
+        bad["queries"][3]["split"] = "train"                                     # 不正な split
+        text = " ".join(bra.validate_dataset(bad))
+        for needle in ("重複", "gold", "negative", "split"):
+            self.assertIn(needle, text)
+        no_neg = json.loads(json.dumps(tmpl))
+        no_neg["queries"] = [q for q in no_neg["queries"] if q["category"] != "negative"]
+        self.assertTrue(any("negative が無い" in p for p in bra.validate_dataset(no_neg)))
+
+    def test_threshold_rules(self):
+        qs = [{"id": f"n{i}", "category": "negative", "split": "dev"} for i in range(20)]
+        ranked = {f"n{i}": [("t", i / 100)] for i in range(20)}                  # 0.00〜0.19
+        self.assertEqual(bra.threshold_from_dev(ranked, qs, "max"), 0.19)
+        self.assertEqual(bra.threshold_from_dev(ranked, qs, "p95"), 0.18)        # 上位5%(1件)を外れ値として許す
+        self.assertEqual(bra.threshold_from_dev({}, [], "p95"), 0.0)
+
+    def test_wiki_fetcher_builds_a_valid_dataset_from_a_fake_page_without_network(self):
+        import fetch_wiki_bench as fw
+        extract = ("リファクタリングとは、プログラムの外部から見た動作を変えずに内部構造を整理することである。保守性を高める目的で行う。\n\n\n== 概要 ==\n"
+                   "リファクタリングは小さな変更を繰り返して進める作業であり、一度に大きく変えない。テストが整っていると、変更を安全に繰り返し行うことができる。"
+                   "変更の前後で外から見た動作が同じであることを確かめながら進めるのが基本である。"
+                   "重複した処理を一か所にまとめて、読みやすい形に整えることもある。" + "あ" * 300)
+        item = fw.build_item("リファクタリング (プログラミング)", extract, ["リファクタ", "リファクタリング技法", "Refactoring"])
+        self.assertEqual(item["title"], "リファクタリング")                      # 括弧書きは除く
+        self.assertIn("リファクタリング", item["verbatim"])
+        self.assertNotIn("リファクタリング", item["paraphrase"])
+        self.assertEqual(item["variants"], ["Refactoring"])                      # 項目名を含む『リファクタリング技法』・項目名に含まれる『リファクタ』は除く
+        self.assertIsNone(fw.build_item("曖昧", "曖昧。\n\n\n== x ==\n" + "あ。" * 50, []))   # 第1文が短い(曖昧さ回避など)
+        data = fw.build_dataset([item], ["会議室の予約を変更したという、近い分野の別の話の文である。", "リファクタリングを含む文は、否定の課題から外れる。"])
+        self.assertEqual(bra.validate_dataset(data) if any(q["split"] == "dev" and q["category"] == "negative" for q in data["queries"]) else [], [])
+        self.assertEqual(sum(1 for q in data["queries"] if q["category"] == "negative"), 1)   # 用語を含む否定は除かれる

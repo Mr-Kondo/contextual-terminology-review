@@ -1,0 +1,101 @@
+{
+ "description": "利用者自身のデータで検証するための書式の見本(架空)。実際のデータに置き換えて使う。docs/RURI-REAL-DATA-GUIDE.md 参照",
+ "terms": [
+  {
+   "id": "t01",
+   "term": "検収",
+   "aliases": [],
+   "sense": "納品物を確認して受け入れること",
+   "source_id": "doc-01",
+   "line": "発注者が成果物を確認し、合格として受け取る手続き。"
+  },
+  {
+   "id": "t02",
+   "term": "稟議",
+   "aliases": [
+    "りんぎ"
+   ],
+   "sense": "決裁を得るために回覧する起案書",
+   "source_id": "doc-02",
+   "line": "担当者が起案し、関係者が順に承認して決裁者に至る。"
+  },
+  {
+   "id": "t03",
+   "term": "リードタイム",
+   "aliases": [],
+   "sense": "着手から完了までの所要時間",
+   "source_id": "doc-03",
+   "line": "発注してから納品されるまでにかかる時間。"
+  }
+ ],
+ "queries": [
+  {
+   "id": "ver01",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "来週、検収を行います。",
+   "gold": [
+    "t01"
+   ]
+  },
+  {
+   "id": "ver02",
+   "category": "verbatim",
+   "split": "test",
+   "text": "リードタイムが長いので前倒しで発注します。",
+   "gold": [
+    "t03"
+   ]
+  },
+  {
+   "id": "var01",
+   "category": "variant",
+   "split": "dev",
+   "text": "受入確認の日程を決めます。",
+   "gold": [
+    "t01"
+   ]
+  },
+  {
+   "id": "var02",
+   "category": "variant",
+   "split": "test",
+   "text": "Lead timeを短縮します。",
+   "gold": [
+    "t03"
+   ]
+  },
+  {
+   "id": "par01",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "回覧して順番にハンコをもらい、最後に決裁者へ回します。",
+   "gold": [
+    "t02"
+   ]
+  },
+  {
+   "id": "par02",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "注文してから届くまでに何日かかるかを短くしたい。",
+   "gold": [
+    "t03"
+   ]
+  },
+  {
+   "id": "neg01",
+   "category": "negative",
+   "split": "dev",
+   "text": "会議室の予約を変更しました。",
+   "gold": []
+  },
+  {
+   "id": "neg02",
+   "category": "negative",
+   "split": "test",
+   "text": "お客様に挨拶状を送ります。",
+   "gold": []
+  }
+ ]
+}

@@ -12,7 +12,8 @@
 | 実装の判断、既存Skill調査の採否、依存と版、未実施 | [docs/IMPLEMENTATION-NOTES.md](docs/IMPLEMENTATION-NOTES.md) |
 | 受入検査の結果（機械検査・意味審査・実呼び出しを別表示） | [docs/ACCEPTANCE-REPORT.md](docs/ACCEPTANCE-REPORT.md) |
 | 意味審査の確認票（独立した確認者向け） | [docs/SEMANTIC-REVIEW-SHEET.md](docs/SEMANTIC-REVIEW-SHEET.md) |
-| Ruri検索の採否判断（途中結果） | [docs/RURI-ADOPTION.md](docs/RURI-ADOPTION.md) |
+| Ruri検索の採否判断（合成データ＋公開された実文章） | [docs/RURI-ADOPTION.md](docs/RURI-ADOPTION.md) |
+| 自分のデータでRuriを確認する手順 | [docs/RURI-REAL-DATA-GUIDE.md](docs/RURI-REAL-DATA-GUIDE.md) |
 | 利用環境ごとの成功・失敗・未実施 | [docs/HOST-EVIDENCE.json](docs/HOST-EVIDENCE.json)（実呼び出しの記録: `docs/evidence/real-host-*.md`） |
 | Skill本体 | [skill/contextual-terminology-review/](skill/contextual-terminology-review/SKILL.md) |
 
