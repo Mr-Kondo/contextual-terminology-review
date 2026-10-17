@@ -165,9 +165,11 @@
      }
     },
     "export_import": {
-     "state": "not_run",
-     "reason": "この実行のプロンプトでは書き出し・取り込みを依頼していない",
-     "next_step": "導入済みのSkillで ctr.py export / import を、許可設定した一時の保存先で実行する(docs/USAGE.md)"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "docs/evidence/real-host-codex.md(追加の実呼び出し): ホストが export→import を実行し、受理3・重複0・隔離0。別プロセスの check store が ok(一時の保存先・仮の共有許可)"
+     }
     }
    }
   },
@@ -317,9 +319,11 @@
      }
     },
     "export_import": {
-     "state": "not_run",
-     "reason": "この実行のプロンプトでは書き出し・取り込みを依頼していない",
-     "next_step": "導入済みのSkillで ctr.py export / import を、許可設定した一時の保存先で実行する(docs/USAGE.md)"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "docs/evidence/real-host-antigravity.md(追加の実呼び出し): ホストが export→import を実行し、受理3・重複0・隔離0。別プロセスの check store が ok(一時の保存先・仮の共有許可)"
+     }
     }
    }
   },

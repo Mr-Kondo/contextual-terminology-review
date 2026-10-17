@@ -45,15 +45,15 @@
 |---|---|---|---|---|---|---|---|---|---|
 | claude-code / local | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | verified |
 | claude-code / remote | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
-| codex / local | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 未実施 | incomplete |
+| codex / local | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | verified |
 | codex / remote | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | antigravity-ide / local | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
-| antigravity-cli / local | 成功 | 成功 | 成功 | 未実施 | 成功 | 成功 | 成功 | 未実施 | incomplete |
+| antigravity-cli / local | 成功 | 成功 | 成功 | 未実施 | 成功 | 成功 | 成功 | 成功 | incomplete |
 | antigravity / remote | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | chatgpt-work / account | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | claude-cowork / account | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 
-成功は、証拠(種別と内容)がある段階だけ。仮配置・導入の成功は登録・呼び出しの根拠にならない。総合 verified の経路: 1(合成データ1プロンプトの観測に限る)。
+成功は、証拠(種別と内容)がある段階だけ。仮配置・導入の成功は登録・呼び出しの根拠にならない。総合 verified の経路: 2(合成データ1プロンプトの観測に限る)。
 
 ## 検索(実Ruri・同一課題)
 
