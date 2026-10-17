@@ -167,3 +167,52 @@ python3 ~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py fee
 ［F1／直接引用］架空案件Aの役割分担（版1）｜行2｜最終承認は部長が行う。｜リンク未確認
 ［F1／本人の説明］本人の説明｜—｜論点整理・関係者調整・成果物作成を自分が主担当として行う｜リンクなし(外部資料で確認済みではない)
 
+
+
+---
+
+# 追加の実呼び出し(ストリーム出力による直接ログ): 資料(references/)の読込の確認
+
+実施日: 2026-10-17。入力は合成データのみ。作業ディレクトリ・保存先は一時ディレクトリ(`<work>/agy/runtime`)。
+
+- ホスト: Antigravity CLI(agy) 1.4.0。モデル: 出力のどこにもモデルIDが無く不明
+- 実行: `agy --sandbox --dangerously-skip-permissions --output-format stream-json -p <prompt>`(これまでの `json` ではなく `stream-json`)。ストリームの `step_update` に、ツール名・読んだファイルのパス・コマンドが含まれる。認証情報は含まれていなかったので、ツール実行の部分だけを下に転記した
+- 結果: status=SUCCESS、195秒、num_turns=1
+- 直接ログで確認できたこと: `view_file` による SKILL.md と references/(judgment.md・citation.md・feedback-loop.md・review-example.json・hosts.md)の読込、scripts/ の読込、`ctr.py record start / check refs / record finish / check runs` の実行
+- 観測した失敗: 手順12と37で `storage_unwritable`(PermissionError)。ホスト側のサンドボックスが一時の保存先への書き込みを拒否した(手順25のmkdirも Operation not permitted)。Skillは『保存未確認(記録済み件数に加えない)。未許可の場所への自動退避はしない』と報告し、保存済みとは扱わなかった。モデルが再試行した手順29・39で保存が通り、`verified: true`
+- 書き出し・取り込みはこの実行の依頼に含めていない(上の追加の実呼び出しで確認済み)
+
+## プロンプト
+
+```
+会議で「私が取りまとめます。」と言うつもりです。本人の意図は、論点整理・関係者調整・成果物作成を自分が主担当として行うことです。
+資料は、この作業ディレクトリの sources.json にある owner(版1)です(架空の資料)。
+この言い方が用語として合っているか、同僚に伝わるかを確認し、修正案と口頭の言い直し、出典を示してください。
+記録の保存先は ./runtime(初期化済み)の絶対パスを使ってください。
+```
+
+## 観測したツール実行(順序どおり。手順番号はストリームの step_index)
+
+2. view_file `~/.gemini/config/skills/contextual-terminology-review/SKILL.md`
+3. view_file `<work>/agy/sources.json`
+5. view_file `~/.gemini/config/skills/contextual-terminology-review/references/judgment.md`
+6. view_file `~/.gemini/config/skills/contextual-terminology-review/references/citation.md`
+7. view_file `~/.gemini/config/skills/contextual-terminology-review/references/feedback-loop.md`
+9. view_file `~/.gemini/config/skills/contextual-terminology-review/references/review-example.json`
+10. view_file `~/.gemini/config/skills/contextual-terminology-review/references/hosts.md`
+12. run_command `python3 ~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py record start --runtime-root <work>/agy/runtime --host antigravity --route local --domains 業務用語,ビジネス用語` → 出力に error: storage_unwritable
+14. run_command `ls -la <work>/agy <work>/agy/runtime`
+16. view_file `~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py`
+18. view_file `~/.gemini/config/skills/contextual-terminology-review/scripts/ctr_common.py`
+19. view_file `~/.gemini/config/skills/contextual-terminology-review/scripts/ctr_log.py`
+21. view_file `~/.gemini/config/skills/contextual-terminology-review/scripts/ctr_log.py`
+23. run_command `ls -la <work>/agy/runtime <work>/agy/runtime/runs` → ls: <work>/agy/runtime/runs: No such file or directory
+25. run_command `python3 -c 'import pathlib; pathlib.Path("<work>/agy/runtime/runs").mkdir()'` → Traceback (most recent call last):
+27. run_command `ls -leO <work>/agy <work>/agy/runtime`
+29. run_command `python3 ~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py record start --runtime-root <work>/agy/runtime --host antigravity --route local --domains 業務用語,ビジネス用語`
+31. view_file `~/.gemini/config/skills/contextual-terminology-review/scripts/ctr_refs.py`
+33. write_to_file `<work>/agy/review.json`
+35. run_command `python3 ~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py check refs --review <work>/agy/review.json --sources <work>/agy/sources.json`
+37. run_command `python3 ~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py record finish --runtime-root <work>/agy/runtime --run-id run-20261017T074647-072895 --review <work>/agy/review.js` → 出力に error: storage_unwritable
+39. run_command `python3 ~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py record finish --runtime-root <work>/agy/runtime --run-id run-20261017T074647-072895 --review <work>/agy/review.js`
+41. run_command `python3 ~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py check runs --runtime-root <work>/agy/runtime`

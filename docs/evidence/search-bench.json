@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-17T04:17:43Z",
+ "as_of": "2026-10-17T08:05:50Z",
  "scope": "公開された開発用ケースの入力文。件数が少なく、未使用評価でも実務性能でもない",
  "task_count": 11,
  "independent_tasks": 11,
@@ -64,9 +64,9 @@
    "hit": [
     {
      "k": 1,
-     "numerator": 9,
+     "numerator": 10,
      "denominator": 11,
-     "value": 0.8181818181818182
+     "value": 0.9090909090909091
     },
     {
      "k": 3,
@@ -78,18 +78,18 @@
    "per_task": {
     "A01": [
      "t-owner",
-     "t-whole-service",
-     "t-architecture"
+     "t-embedding",
+     "t-cloud"
     ],
     "A03": [
-     "t-architecture",
      "t-whole-service",
+     "t-architecture",
      "t-cloud"
     ],
     "A04": [
-     "t-architecture",
      "t-whole-service",
-     "t-owner"
+     "t-architecture",
+     "t-cloud"
     ],
     "A06": [
      "t-api",
@@ -98,18 +98,18 @@
     ],
     "A07": [
      "t-cloud",
-     "t-api",
+     "t-whole-service",
      "t-embedding"
     ],
     "A08": [
      "t-network",
-     "t-whole-service",
-     "t-architecture"
+     "t-api",
+     "t-embedding"
     ],
     "A09": [
      "t-security",
      "t-api",
-     "t-embedding"
+     "t-network"
     ],
     "A10": [
      "t-embedding",
@@ -123,109 +123,109 @@
     ],
     "A12": [
      "t-business",
-     "t-architecture",
-     "t-whole-service"
+     "t-cloud",
+     "t-api"
     ],
     "A17": [
-     "t-cloud",
-     "t-architecture",
-     "t-owner"
+     "t-owner",
+     "t-embedding",
+     "t-api"
     ]
    },
    "scores": [
     {
      "case": "A01",
      "scores": [
-      0.845612,
-      0.764739,
-      0.761673
+      0.858559,
+      0.76347,
+      0.754913
      ]
     },
     {
      "case": "A03",
      "scores": [
-      0.882872,
-      0.876545,
-      0.787759
+      0.877527,
+      0.867137,
+      0.802932
      ]
     },
     {
      "case": "A04",
      "scores": [
-      0.911792,
-      0.899957,
-      0.806458
+      0.920276,
+      0.891323,
+      0.789489
      ]
     },
     {
      "case": "A06",
      "scores": [
-      0.930743,
-      0.784737,
-      0.773339
+      0.94346,
+      0.769106,
+      0.76651
      ]
     },
     {
      "case": "A07",
      "scores": [
-      0.928965,
-      0.767674,
-      0.760738
+      0.928397,
+      0.771917,
+      0.769941
      ]
     },
     {
      "case": "A08",
      "scores": [
-      0.851987,
-      0.753422,
-      0.748681
+      0.850197,
+      0.762857,
+      0.762015
      ]
     },
     {
      "case": "A09",
      "scores": [
-      0.879987,
-      0.792568,
-      0.760474
+      0.908957,
+      0.793242,
+      0.765654
      ]
     },
     {
      "case": "A10",
      "scores": [
-      0.815543,
-      0.784358,
-      0.750709
+      0.830473,
+      0.826927,
+      0.775126
      ]
     },
     {
      "case": "A11",
      "scores": [
-      0.912292,
-      0.734781,
-      0.721716
+      0.904891,
+      0.748165,
+      0.74209
      ]
     },
     {
      "case": "A12",
      "scores": [
-      0.887977,
-      0.783804,
-      0.781501
+      0.896634,
+      0.754969,
+      0.753723
      ]
     },
     {
      "case": "A17",
      "scores": [
-      0.781948,
-      0.768575,
-      0.768251
+      0.809025,
+      0.779153,
+      0.766086
      ]
     }
    ],
    "index_meta": {
-    "model_id": "cl-nagoya/ruri-v3-70m",
-    "model_revision": "07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc",
-    "tokenizer_revision": "07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc",
+    "model_id": "cl-nagoya/ruri-v3-310m",
+    "model_revision": "18b60fb8c2b9df296fb4212bb7d23ef94e579cd3",
+    "tokenizer_revision": "18b60fb8c2b9df296fb4212bb7d23ef94e579cd3",
     "libs": {
      "sentence_transformers": "6.1.0",
      "torch": "2.14.1",
@@ -238,7 +238,7 @@
     "terms_sha256": "7c8e6967c94282433d92f28a915c5a4cc5188aaa5ef52cb8fd82bab2ffd1fe85",
     "sources_sha256": "f4f236bdf2e718f07ba9dc8a515a6b83ae12efdc30c394bfafff6db9c7b33e5f"
    },
-   "build_seconds": 11.18
+   "build_seconds": 6.5
   }
  }
 }

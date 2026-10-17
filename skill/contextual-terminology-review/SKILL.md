@@ -57,4 +57,4 @@ description: 業務・システム設計・開発・運用・セキュリティ�
 - [feedback-loop](references/feedback-loop.md): 記録・収集・更新案・採用・削除、共有の制限
 - [evaluation](references/evaluation.md): 指標の分子分母、匿名比較、理解問題、未使用評価、週30分
 - [hosts](references/hosts.md): Claude Code / Codex / Antigravity / Work / Cowork と手動記録の経路
-- 依存: pydantic（管理スクリプトに必須）、pdfplumber（PDF抽出、任意）、sentence-transformers + Ruri（任意の検索）。Ruri・pdfplumberが未導入でも、基本レビューと記録検査は動く。スクリプトが使えない環境では、検査・記録を「未実施」と明示して手動の経路に切り替える。
+- 依存: pydantic（管理スクリプトに必須）、pdfplumber（PDF抽出、任意）、sentence-transformers + Ruri（任意の検索。既定モデルは ruri-v3-310m で、重みは約1.2GB）。Ruri・pdfplumberが未導入でも、基本レビューと記録検査は動く。スクリプトが使えない環境では、検査・記録を「未実施」と明示して手動の経路に切り替える。

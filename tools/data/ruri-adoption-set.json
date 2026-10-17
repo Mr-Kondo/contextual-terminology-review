@@ -1,0 +1,1010 @@
+{
+ "description": "Ruri検索の採否判断用の課題セット。作成者はSkillの設計・実装者と同じAIで、独立していない。架空の用語集40語と課題80件(verbatim16/variant20/paraphrase24/negative20)。偶数番=dev(閾値決定のみ)、奇数番=test(報告の主)。 (初回の実行で課題IDの衝突と、言い換え課題が用語集の文言に近すぎる問題が見つかったため、言い換え課題を文脈の中の言い方に書き直しID接頭辞を修正した。採否基準は変更していない。初回の出力は ruri-adoption-bench-run1-invalid.json)",
+ "terms": [
+  {
+   "id": "t01",
+   "term": "冪等",
+   "aliases": [
+    "冪等性"
+   ],
+   "sense": "同じ操作を繰り返しても結果が変わらない性質",
+   "source_id": "g-t01",
+   "line": "同じリクエストを何度送っても、サーバーの状態は最初の1回と同じになる。"
+  },
+  {
+   "id": "t02",
+   "term": "可用性",
+   "aliases": [],
+   "sense": "必要なときにシステムを利用できる度合い",
+   "source_id": "g-t02",
+   "line": "稼働している時間の割合で表し、停止時間が短いほど高い。"
+  },
+  {
+   "id": "t03",
+   "term": "タイムアウト",
+   "aliases": [],
+   "sense": "応答を待つ上限時間を超えたときの打ち切り",
+   "source_id": "g-t03",
+   "line": "規定の秒数を過ぎても応答がなければ、処理を中断して失敗として扱う。"
+  },
+  {
+   "id": "t04",
+   "term": "ハッシュ値",
+   "aliases": [],
+   "sense": "データから計算した固定長の要約値（元に戻せない）",
+   "source_id": "g-t04",
+   "line": "同じ入力からは同じ値になるが、値から元のデータは復元できない。"
+  },
+  {
+   "id": "t05",
+   "term": "暗号化",
+   "aliases": [],
+   "sense": "鍵がないと読めない形に変換する処理（復号で戻せる）",
+   "source_id": "g-t05",
+   "line": "正しい鍵があれば元のデータに戻せる。"
+  },
+  {
+   "id": "t06",
+   "term": "レイテンシ",
+   "aliases": [],
+   "sense": "要求から応答までの遅れ",
+   "source_id": "g-t06",
+   "line": "要求を出してから最初の応答が返るまでの時間。"
+  },
+  {
+   "id": "t07",
+   "term": "スループット",
+   "aliases": [],
+   "sense": "単位時間あたりの処理量",
+   "source_id": "g-t07",
+   "line": "1秒あたりに処理できる件数で表す。"
+  },
+  {
+   "id": "t08",
+   "term": "冗長化",
+   "aliases": [],
+   "sense": "障害に備えて同じ機能を複数用意すること",
+   "source_id": "g-t08",
+   "line": "1台が止まっても別の機器が処理を引き継ぐ。"
+  },
+  {
+   "id": "t09",
+   "term": "キャッシュ",
+   "aliases": [],
+   "sense": "一度取得したデータの一時保存",
+   "source_id": "g-t09",
+   "line": "同じデータを再取得せず、手元の写しを使って高速化する。"
+  },
+  {
+   "id": "t10",
+   "term": "ロールバック",
+   "aliases": [],
+   "sense": "変更前の状態に戻すこと",
+   "source_id": "g-t10",
+   "line": "更新に失敗したとき、直前の正常な状態へ戻す操作。"
+  },
+  {
+   "id": "t11",
+   "term": "リファクタリング",
+   "aliases": [],
+   "sense": "外から見た動作を変えずに内部構造を整えること",
+   "source_id": "g-t11",
+   "line": "機能は変えず、読みやすさと保守しやすさを高める。"
+  },
+  {
+   "id": "t12",
+   "term": "回帰テスト",
+   "aliases": [],
+   "sense": "変更で既存機能が壊れていないか確認するテスト",
+   "source_id": "g-t12",
+   "line": "修正のあとに、以前動いていた機能を再度確認する。"
+  },
+  {
+   "id": "t13",
+   "term": "バックログ",
+   "aliases": [],
+   "sense": "未着手の作業の優先順位つき一覧",
+   "source_id": "g-t13",
+   "line": "チームが取り組む予定の項目を優先度順に並べた一覧。"
+  },
+  {
+   "id": "t14",
+   "term": "スコープ",
+   "aliases": [],
+   "sense": "作業や責任の範囲",
+   "source_id": "g-t14",
+   "line": "このプロジェクトで行うことと行わないことの境界。"
+  },
+  {
+   "id": "t15",
+   "term": "ステークホルダー",
+   "aliases": [],
+   "sense": "利害関係者",
+   "source_id": "g-t15",
+   "line": "計画の結果に影響を受ける、または影響を与える人や組織。"
+  },
+  {
+   "id": "t16",
+   "term": "マイルストーン",
+   "aliases": [],
+   "sense": "工程の節目",
+   "source_id": "g-t16",
+   "line": "重要な到達点として日付を置いた区切り。"
+  },
+  {
+   "id": "t17",
+   "term": "償却",
+   "aliases": [],
+   "sense": "取得費用を使用期間に配分して費用にすること",
+   "source_id": "g-t17",
+   "line": "資産の取得額を耐用年数にわたって少しずつ費用として計上する。"
+  },
+  {
+   "id": "t18",
+   "term": "キャッシュフロー",
+   "aliases": [],
+   "sense": "現金の流入と流出",
+   "source_id": "g-t18",
+   "line": "一定期間に実際に出入りした現金の差。"
+  },
+  {
+   "id": "t19",
+   "term": "粗利",
+   "aliases": [],
+   "sense": "売上高から売上原価を引いた利益",
+   "source_id": "g-t19",
+   "line": "売上から原価を引いたもので、販売費や管理費はまだ引かない。"
+  },
+  {
+   "id": "t20",
+   "term": "営業利益",
+   "aliases": [],
+   "sense": "粗利から販売費・管理費を引いた利益",
+   "source_id": "g-t20",
+   "line": "本業で稼いだ利益を表す。"
+  },
+  {
+   "id": "t21",
+   "term": "標準偏差",
+   "aliases": [],
+   "sense": "ばらつきの大きさを表す値",
+   "source_id": "g-t21",
+   "line": "平均からの偏差の二乗平均の平方根で、ばらつきの目安になる。"
+  },
+  {
+   "id": "t22",
+   "term": "中央値",
+   "aliases": [],
+   "sense": "順に並べた真ん中の値",
+   "source_id": "g-t22",
+   "line": "外れ値の影響を受けにくい代表値。"
+  },
+  {
+   "id": "t23",
+   "term": "相関",
+   "aliases": [],
+   "sense": "2つの量が一緒に動く傾向",
+   "source_id": "g-t23",
+   "line": "一方が増えるともう一方も増減する関係で、因果を意味しない。"
+  },
+  {
+   "id": "t24",
+   "term": "p値",
+   "aliases": [],
+   "sense": "帰無仮説の下で観測以上の結果が出る確率",
+   "source_id": "g-t24",
+   "line": "仮説が正しい確率ではない。"
+  },
+  {
+   "id": "t25",
+   "term": "過学習",
+   "aliases": [],
+   "sense": "訓練データに合いすぎて未知のデータで性能が下がること",
+   "source_id": "g-t25",
+   "line": "訓練では高精度でも、新しいデータでは精度が落ちる。"
+  },
+  {
+   "id": "t26",
+   "term": "再現率",
+   "aliases": [],
+   "sense": "実際に正のもののうち見つけられた割合",
+   "source_id": "g-t26",
+   "line": "見逃しの少なさを表す指標。"
+  },
+  {
+   "id": "t27",
+   "term": "適合率",
+   "aliases": [],
+   "sense": "正と予測したもののうち実際に正だった割合",
+   "source_id": "g-t27",
+   "line": "誤検知の少なさを表す指標。"
+  },
+  {
+   "id": "t28",
+   "term": "トランザクション",
+   "aliases": [],
+   "sense": "全部成功か全部失敗かのひとまとまりの処理",
+   "source_id": "g-t28",
+   "line": "途中で失敗すれば全体を取り消し、一貫性を保つ。"
+  },
+  {
+   "id": "t29",
+   "term": "デッドロック",
+   "aliases": [],
+   "sense": "互いの待ちで進めなくなる状態",
+   "source_id": "g-t29",
+   "line": "複数の処理が相手の持つ資源を待ち続けて止まる。"
+  },
+  {
+   "id": "t30",
+   "term": "認可",
+   "aliases": [],
+   "sense": "操作を許すかどうかを決めること",
+   "source_id": "g-t30",
+   "line": "認証済みの利用者に何を許可するかの判断。"
+  },
+  {
+   "id": "t31",
+   "term": "認証",
+   "aliases": [],
+   "sense": "本人であることの確認",
+   "source_id": "g-t31",
+   "line": "利用者が名乗った本人かを確かめる。"
+  },
+  {
+   "id": "t32",
+   "term": "ゼロトラスト",
+   "aliases": [],
+   "sense": "内部ネットワークも信用しない考え方",
+   "source_id": "g-t32",
+   "line": "ネットワークの内外を問わず常に検証する。"
+  },
+  {
+   "id": "t33",
+   "term": "公差",
+   "aliases": [],
+   "sense": "許容されるばらつきの範囲",
+   "source_id": "g-t33",
+   "line": "寸法が許される範囲。"
+  },
+  {
+   "id": "t34",
+   "term": "トルク",
+   "aliases": [],
+   "sense": "回転させる力",
+   "source_id": "g-t34",
+   "line": "軸を回す力の大きさで、単位はN·m。"
+  },
+  {
+   "id": "t35",
+   "term": "検収",
+   "aliases": [],
+   "sense": "納品物を確認して受け入れること",
+   "source_id": "g-t35",
+   "line": "発注者が成果物を確認し、合格として受け取る手続き。"
+  },
+  {
+   "id": "t36",
+   "term": "契約不適合責任",
+   "aliases": [],
+   "sense": "納品物が契約内容に合わない場合の売主の責任",
+   "source_id": "g-t36",
+   "line": "種類・品質・数量が契約と違うとき、売主が負う責任。"
+  },
+  {
+   "id": "t37",
+   "term": "SLA",
+   "aliases": [],
+   "sense": "サービス水準の合意",
+   "source_id": "g-t37",
+   "line": "提供者と利用者が合意したサービス品質の目標値。"
+  },
+  {
+   "id": "t38",
+   "term": "RPO",
+   "aliases": [],
+   "sense": "許容できるデータ損失の時間幅",
+   "source_id": "g-t38",
+   "line": "障害時に失ってもよいデータの最大時間。"
+  },
+  {
+   "id": "t39",
+   "term": "RTO",
+   "aliases": [],
+   "sense": "復旧までの目標時間",
+   "source_id": "g-t39",
+   "line": "障害発生から復旧するまでに許される時間。"
+  },
+  {
+   "id": "t40",
+   "term": "ベースライン",
+   "aliases": [],
+   "sense": "比較の基準となる値",
+   "source_id": "g-t40",
+   "line": "改善を測るために最初に取った基準の測定値。"
+  }
+ ],
+ "queries": [
+  {
+   "id": "ver01",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "このAPIは冪等性を保証していますか。",
+   "gold": [
+    "t01"
+   ]
+  },
+  {
+   "id": "ver02",
+   "category": "verbatim",
+   "split": "test",
+   "text": "タイムアウトを30秒に設定しました。",
+   "gold": [
+    "t03"
+   ]
+  },
+  {
+   "id": "ver03",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "パスワードはハッシュ値で保存します。",
+   "gold": [
+    "t04"
+   ]
+  },
+  {
+   "id": "ver04",
+   "category": "verbatim",
+   "split": "test",
+   "text": "レイテンシが高くて画面が重いです。",
+   "gold": [
+    "t06"
+   ]
+  },
+  {
+   "id": "ver05",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "キャッシュを有効にして高速化します。",
+   "gold": [
+    "t09"
+   ]
+  },
+  {
+   "id": "ver06",
+   "category": "verbatim",
+   "split": "test",
+   "text": "リリースに失敗したのでロールバックします。",
+   "gold": [
+    "t10"
+   ]
+  },
+  {
+   "id": "ver07",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "仕様変更のあと回帰テストを実施しました。",
+   "gold": [
+    "t12"
+   ]
+  },
+  {
+   "id": "ver08",
+   "category": "verbatim",
+   "split": "test",
+   "text": "ステークホルダーに進捗を共有します。",
+   "gold": [
+    "t15"
+   ]
+  },
+  {
+   "id": "ver09",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "今期の粗利は前年より改善しました。",
+   "gold": [
+    "t19"
+   ]
+  },
+  {
+   "id": "ver10",
+   "category": "verbatim",
+   "split": "test",
+   "text": "標準偏差が大きいので結果が安定しません。",
+   "gold": [
+    "t21"
+   ]
+  },
+  {
+   "id": "ver11",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "過学習を避けるため検証データで確認します。",
+   "gold": [
+    "t25"
+   ]
+  },
+  {
+   "id": "ver12",
+   "category": "verbatim",
+   "split": "test",
+   "text": "二重請求を防ぐためトランザクションを使います。",
+   "gold": [
+    "t28"
+   ]
+  },
+  {
+   "id": "ver13",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "認可の設定が足りず、画面が開けません。",
+   "gold": [
+    "t30"
+   ]
+  },
+  {
+   "id": "ver14",
+   "category": "verbatim",
+   "split": "test",
+   "text": "SLAを99.9%で合意しました。",
+   "gold": [
+    "t37"
+   ]
+  },
+  {
+   "id": "ver15",
+   "category": "verbatim",
+   "split": "dev",
+   "text": "RPOは15分、RTOは1時間です。",
+   "gold": [
+    "t38",
+    "t39"
+   ]
+  },
+  {
+   "id": "ver16",
+   "category": "verbatim",
+   "split": "test",
+   "text": "納品後の検収は来週に行います。",
+   "gold": [
+    "t35"
+   ]
+  },
+  {
+   "id": "var01",
+   "category": "variant",
+   "split": "dev",
+   "text": "べき等な設計にしてください。",
+   "gold": [
+    "t01"
+   ]
+  },
+  {
+   "id": "var02",
+   "category": "variant",
+   "split": "test",
+   "text": "アベイラビリティを高めたいです。",
+   "gold": [
+    "t02"
+   ]
+  },
+  {
+   "id": "var03",
+   "category": "variant",
+   "split": "dev",
+   "text": "時間切れになってリクエストが失敗します。",
+   "gold": [
+    "t03"
+   ]
+  },
+  {
+   "id": "var04",
+   "category": "variant",
+   "split": "test",
+   "text": "ハッシュ化したうえでDBに保存します。",
+   "gold": [
+    "t04"
+   ]
+  },
+  {
+   "id": "var05",
+   "category": "variant",
+   "split": "dev",
+   "text": "冗長構成にして片系が落ちても動かします。",
+   "gold": [
+    "t08"
+   ]
+  },
+  {
+   "id": "var06",
+   "category": "variant",
+   "split": "test",
+   "text": "キャッシング戦略を見直します。",
+   "gold": [
+    "t09"
+   ]
+  },
+  {
+   "id": "var07",
+   "category": "variant",
+   "split": "dev",
+   "text": "リファクタを進めて保守しやすくします。",
+   "gold": [
+    "t11"
+   ]
+  },
+  {
+   "id": "var08",
+   "category": "variant",
+   "split": "test",
+   "text": "リグレッションテストを自動化します。",
+   "gold": [
+    "t12"
+   ]
+  },
+  {
+   "id": "var09",
+   "category": "variant",
+   "split": "dev",
+   "text": "関係者全員に周知します。",
+   "gold": [
+    "t15"
+   ]
+  },
+  {
+   "id": "var10",
+   "category": "variant",
+   "split": "test",
+   "text": "売上総利益を確認します。",
+   "gold": [
+    "t19"
+   ]
+  },
+  {
+   "id": "var11",
+   "category": "variant",
+   "split": "dev",
+   "text": "キャッシュ・フローが赤字です。",
+   "gold": [
+    "t18"
+   ]
+  },
+  {
+   "id": "var12",
+   "category": "variant",
+   "split": "test",
+   "text": "SDが大きいです。",
+   "gold": [
+    "t21"
+   ]
+  },
+  {
+   "id": "var13",
+   "category": "variant",
+   "split": "dev",
+   "text": "メジアンで代表値を示します。",
+   "gold": [
+    "t22"
+   ]
+  },
+  {
+   "id": "var14",
+   "category": "variant",
+   "split": "test",
+   "text": "コリレーションを調べます。",
+   "gold": [
+    "t23"
+   ]
+  },
+  {
+   "id": "var15",
+   "category": "variant",
+   "split": "dev",
+   "text": "P値が0.05未満でした。",
+   "gold": [
+    "t24"
+   ]
+  },
+  {
+   "id": "var16",
+   "category": "variant",
+   "split": "test",
+   "text": "オーバーフィッティングが疑われます。",
+   "gold": [
+    "t25"
+   ]
+  },
+  {
+   "id": "var17",
+   "category": "variant",
+   "split": "dev",
+   "text": "リコールを重視した評価にします。",
+   "gold": [
+    "t26"
+   ]
+  },
+  {
+   "id": "var18",
+   "category": "variant",
+   "split": "test",
+   "text": "プレシジョンが低く誤検知が多いです。",
+   "gold": [
+    "t27"
+   ]
+  },
+  {
+   "id": "var19",
+   "category": "variant",
+   "split": "dev",
+   "text": "Authenticationに失敗しました。",
+   "gold": [
+    "t31"
+   ]
+  },
+  {
+   "id": "var20",
+   "category": "variant",
+   "split": "test",
+   "text": "Authorizationエラーです。",
+   "gold": [
+    "t30"
+   ]
+  },
+  {
+   "id": "par01",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "決済の再送で同じ請求が二重に走っても、結果が1回分と同じになる作りにしたい。",
+   "gold": [
+    "t01"
+   ]
+  },
+  {
+   "id": "par02",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "夜間に止まる時間をできるだけ減らして、いつでも使えるようにしたい。",
+   "gold": [
+    "t02"
+   ]
+  },
+  {
+   "id": "par03",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "相手が黙ったままでも、30秒待ったら諦めて次の処理へ進めるようにします。",
+   "gold": [
+    "t03"
+   ]
+  },
+  {
+   "id": "par04",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "パスワードそのものは保存せず、逆算できない短い指紋のような値だけを残します。",
+   "gold": [
+    "t04"
+   ]
+  },
+  {
+   "id": "par05",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "通信内容が盗み見られても意味が分からないよう、鍵を使って変換してから送ります。",
+   "gold": [
+    "t05"
+   ]
+  },
+  {
+   "id": "par06",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "ボタンを押してから画面が変わるまでが体感で遅いので、その遅れを計測します。",
+   "gold": [
+    "t06"
+   ]
+  },
+  {
+   "id": "par07",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "ピーク時に1分間でさばける注文の数を増やすのが目標です。",
+   "gold": [
+    "t07"
+   ]
+  },
+  {
+   "id": "par08",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "同じ画像を毎回取りに行かず、一度取った分を手元に置いて使い回します。",
+   "gold": [
+    "t09"
+   ]
+  },
+  {
+   "id": "par09",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "挙動を変えないまま、読みにくくなったコードを整理し直します。",
+   "gold": [
+    "t11"
+   ]
+  },
+  {
+   "id": "par10",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "やるべきことの候補を、重要な順に並べた待ち行列のような一覧にしています。",
+   "gold": [
+    "t13"
+   ]
+  },
+  {
+   "id": "par11",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "この案件でどこまで対応して何は対応しないかを、最初に線引きしておきます。",
+   "gold": [
+    "t14"
+   ]
+  },
+  {
+   "id": "par12",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "設計完了、試験開始、本番移行といった重要な日付を計画に置きます。",
+   "gold": [
+    "t16"
+   ]
+  },
+  {
+   "id": "par13",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "購入した機械の代金を、使う年数に分けて毎年の費用に回します。",
+   "gold": [
+    "t17"
+   ]
+  },
+  {
+   "id": "par14",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "売上から商品の仕入れ代を引いた段階の儲けを確認します。",
+   "gold": [
+    "t19"
+   ]
+  },
+  {
+   "id": "par15",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "売上から原価と、営業や総務にかかる費用の両方を引いた本業の儲けです。",
+   "gold": [
+    "t20"
+   ]
+  },
+  {
+   "id": "par16",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "極端な値に引きずられないよう、順位で真ん中に来る数字を代表にします。",
+   "gold": [
+    "t22"
+   ]
+  },
+  {
+   "id": "par17",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "気温が上がるとアイスの売上も増えますが、気温が原因とは言い切れません。",
+   "gold": [
+    "t23"
+   ]
+  },
+  {
+   "id": "par18",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "学習に使ったデータでは満点に近いのに、初めて見るデータでは外してしまいます。",
+   "gold": [
+    "t25"
+   ]
+  },
+  {
+   "id": "par19",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "病気の人を見逃さず、できるだけ全員拾い上げられたかを重視します。",
+   "gold": [
+    "t26"
+   ]
+  },
+  {
+   "id": "par20",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "二つの処理が互いに相手の持つ鍵の解放を待って、どちらも先に進めません。",
+   "gold": [
+    "t29"
+   ]
+  },
+  {
+   "id": "par21",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "ログイン時に、入力したIDの持ち主が本当に本人かを確かめます。",
+   "gold": [
+    "t31"
+   ]
+  },
+  {
+   "id": "par22",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "社内LANにつながっていても無条件には信じず、毎回の通信ごとに確かめる方針にします。",
+   "gold": [
+    "t32"
+   ]
+  },
+  {
+   "id": "par23",
+   "category": "paraphrase",
+   "split": "dev",
+   "text": "障害で復旧するとき、直前の15分より前のデータは失ってもいい前提です。",
+   "gold": [
+    "t38"
+   ]
+  },
+  {
+   "id": "par24",
+   "category": "paraphrase",
+   "split": "test",
+   "text": "届いた商品の品質が契約と違っていたとき、売主が責任を負うかを確認します。",
+   "gold": [
+    "t36"
+   ]
+  },
+  {
+   "id": "neg01",
+   "category": "negative",
+   "split": "dev",
+   "text": "明日の会議は10時に始まります。",
+   "gold": []
+  },
+  {
+   "id": "neg02",
+   "category": "negative",
+   "split": "test",
+   "text": "お弁当を買ってから出社します。",
+   "gold": []
+  },
+  {
+   "id": "neg03",
+   "category": "negative",
+   "split": "dev",
+   "text": "来週の懇親会の場所を探しています。",
+   "gold": []
+  },
+  {
+   "id": "neg04",
+   "category": "negative",
+   "split": "test",
+   "text": "資料の誤字を直しました。",
+   "gold": []
+  },
+  {
+   "id": "neg05",
+   "category": "negative",
+   "split": "dev",
+   "text": "新しい名刺を発注しました。",
+   "gold": []
+  },
+  {
+   "id": "neg06",
+   "category": "negative",
+   "split": "test",
+   "text": "天気が良いので窓を開けます。",
+   "gold": []
+  },
+  {
+   "id": "neg07",
+   "category": "negative",
+   "split": "dev",
+   "text": "出張の旅程をメールで送ります。",
+   "gold": []
+  },
+  {
+   "id": "neg08",
+   "category": "negative",
+   "split": "test",
+   "text": "会議室の予約を変更しました。",
+   "gold": []
+  },
+  {
+   "id": "neg09",
+   "category": "negative",
+   "split": "dev",
+   "text": "報告書の表紙のデザインを変えます。",
+   "gold": []
+  },
+  {
+   "id": "neg10",
+   "category": "negative",
+   "split": "test",
+   "text": "お客様にお礼の連絡をしました。",
+   "gold": []
+  },
+  {
+   "id": "neg11",
+   "category": "negative",
+   "split": "dev",
+   "text": "駅から会場まで徒歩10分です。",
+   "gold": []
+  },
+  {
+   "id": "neg12",
+   "category": "negative",
+   "split": "test",
+   "text": "コーヒーを淹れてきます。",
+   "gold": []
+  },
+  {
+   "id": "neg13",
+   "category": "negative",
+   "split": "dev",
+   "text": "年末の挨拶状を準備しています。",
+   "gold": []
+  },
+  {
+   "id": "neg14",
+   "category": "negative",
+   "split": "test",
+   "text": "席替えをして雰囲気が変わりました。",
+   "gold": []
+  },
+  {
+   "id": "neg15",
+   "category": "negative",
+   "split": "dev",
+   "text": "システムの画面の背景色を青に変えました。",
+   "gold": []
+  },
+  {
+   "id": "neg16",
+   "category": "negative",
+   "split": "test",
+   "text": "データを紙に印刷して配布します。",
+   "gold": []
+  },
+  {
+   "id": "neg17",
+   "category": "negative",
+   "split": "dev",
+   "text": "サーバー室の鍵を総務に返却します。",
+   "gold": []
+  },
+  {
+   "id": "neg18",
+   "category": "negative",
+   "split": "test",
+   "text": "ネットワーク図を壁に貼りました。",
+   "gold": []
+  },
+  {
+   "id": "neg19",
+   "category": "negative",
+   "split": "dev",
+   "text": "ログインページの文言を直しました。",
+   "gold": []
+  },
+  {
+   "id": "neg20",
+   "category": "negative",
+   "split": "test",
+   "text": "プログラムの説明資料を作成しました。",
+   "gold": []
+  }
+ ]
+}

@@ -18,7 +18,7 @@
 | numpy | 2.5.4 |
 | Pillow | 12.3.0 |
 
-テスト 108 件: 失敗 0・エラー 0・skip 4。skip は未実施であり合格に数えない(Ruri実検索・pdfplumber が未導入の環境で出る)。
+テスト 113 件: 失敗 0・エラー 0・skip 4。skip は未実施であり合格に数えない(Ruri実検索・pdfplumber が未導入の環境で出る)。
 
 ## 区分別の状態(06-acceptance-matrix.md)
 
@@ -31,7 +31,7 @@
 | 匿名比較・理解問題 A21〜A23 | 機械検査 合格／人の評価は未実施 | 配布物の秘匿・割付保存・非相殺・単一版配布を検査。実際の評価者による採点は未実施 |
 | フィードバックと更新 A24〜A27 | 機械検査 合格 | 保留の保持・回帰例化・転載の扱い・資料変更の検出 |
 | 更新競合・保存失敗 | 機械検査 合格 | 版の競合、採用失敗時の巻き戻し、原子的保存(A34, A42) |
-| 検索 | 実Ruri実行済み(下記)／効果は未評価 | 一致検索とRuri(cl-nagoya/ruri-v3-70m)を同一課題で比較。件数が少ない公開例で、Ruri採用の根拠にしない |
+| 検索 | 実Ruri実行済み(下記)／効果は未評価 | 一致検索とRuri(既定 cl-nagoya/ruri-v3-310m)を同一課題で比較。件数が少ない公開例で、採用の根拠にはしない。採否の比較は docs/RURI-ADOPTION.md |
 | 導入・更新・削除 A30 | 仮配置で機械検査 合格／実環境へ導入済み | 3環境(4配置先)を一時HOMEで往復。実ユーザーのホームへは導入(--apply)と照合まで実施。実環境での更新・削除は未実施 |
 | 実呼び出し | 一部実施(下の環境別表) | Claude Code・Codex・Antigravity CLI は合成データ1プロンプトで実モデルによる呼び出しを観測(docs/evidence/real-host-*.md)。リモート・Work・Coworkは未実施。1プロンプトの結果で、品質・他入力・他モデルは示さない |
 | 開発の後片付け A31 | **未到達** | マージ・公開は未実施。`tools/post_merge_cleanup.py` を仮のgitで検査済み |
@@ -48,12 +48,12 @@
 | codex / local | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | verified |
 | codex / remote | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | antigravity-ide / local | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
-| antigravity-cli / local | 成功 | 成功 | 成功 | 未実施 | 成功 | 成功 | 成功 | 成功 | incomplete |
+| antigravity-cli / local | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | 成功 | verified |
 | antigravity / remote | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | chatgpt-work / account | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 | claude-cowork / account | 成功 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | 未実施 | incomplete |
 
-成功は、証拠(種別と内容)がある段階だけ。仮配置・導入の成功は登録・呼び出しの根拠にならない。総合 verified の経路: 2(合成データ1プロンプトの観測に限る)。
+成功は、証拠(種別と内容)がある段階だけ。仮配置・導入の成功は登録・呼び出しの根拠にならない。総合 verified の経路: 3(合成データ1プロンプトの観測に限る)。
 
 ## 検索(実Ruri・同一課題)
 
@@ -62,9 +62,9 @@
 | 方式 | hit@1 | hit@3 |
 |---|---|---|
 | 用語・別名の一致 | 9/11 | 10/11 |
-| Ruri | 9/11 | 11/11 |
+| Ruri | 10/11 | 11/11 |
 
-モデル `cl-nagoya/ruri-v3-70m` revision `07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc`、sentence-transformers 6.1.0・torch 2.14.1・transformers 5.20.1、接頭辞 `検索クエリ: `/`検索文書: `。
+モデル `cl-nagoya/ruri-v3-310m` revision `18b60fb8c2b9df296fb4212bb7d23ef94e579cd3`、sentence-transformers 6.1.0・torch 2.14.1・transformers 5.20.1、接頭辞 `検索クエリ: `/`検索文書: `。
 用語エントリは根拠資料の行から作っており、正解も同じ資料。小規模な自己参照的な動作確認であり、Ruriの採否を決める証拠ではない(件数・独立課題数が少ない)。
 
 ## A01〜A48

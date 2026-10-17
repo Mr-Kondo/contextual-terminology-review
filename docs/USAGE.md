@@ -101,8 +101,8 @@ ctr.py import /path/to/package --improvement-root ABS     # 一時領域で検�
 python3 -m unittest discover -s tests                 # 標準ライブラリのみ。未導入の依存に当たるテストは skip（未実施）
 python3 tools/check_design_docs.py                     # 設計資料の整合性（資料の検査）
 python3 tools/run_acceptance.py                        # A01〜A48 の機械検査と docs/ACCEPTANCE-REPORT.md の生成
-# Ruri実検索込み（モデル取得にネットワークが必要。Xet転送がプロキシを通らない環境では HF_HUB_DISABLE_XET=1）
-HF_HUB_DISABLE_XET=1 .venv/bin/python tools/bench_search.py --revision 07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc --out docs/evidence/search-bench.json
+# Ruri実検索込み（既定は ruri-v3-310m。重みは約1.2GBで、初回取得にネットワークが必要。Xet転送がプロキシを通らない環境では HF_HUB_DISABLE_XET=1）
+HF_HUB_DISABLE_XET=1 .venv/bin/python tools/bench_search.py --out docs/evidence/search-bench.json
 CTR_RUN_RURI=1 .venv/bin/python -m unittest discover -s tests
 ```
 

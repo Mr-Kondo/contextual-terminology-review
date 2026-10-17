@@ -40,7 +40,7 @@
 | Pydantic | 2.14.1 | MIT | 参照・レビュー・資料登録簿の検査。strict で暗黙の型変換を避ける。型検査は意味の判定器ではない |
 | pdfplumber | 0.11.10（pdfminer.six 20260107、pypdfium2 5.14.0） | MIT | 機械生成PDFの文字・表・ページ・位置。スキャン・図は視覚確認が別に必要 |
 | SentenceTransformers | 6.1.0（torch 2.14.1、transformers 5.20.1、numpy 2.5.4） | Apache-2.0 | 任意のRuri検索。既存の `util.semantic_search` を使用 |
-| Ruri v3 70m | `cl-nagoya/ruri-v3-70m`、revision `07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc`（取得時のsnapshot） | Apache-2.0（モデルカード確認） | 検索クエリ `検索クエリ: `・検索文書 `検索文書: ` の接頭辞（モデルカードで確認） |
+| Ruri v3 310m（既定） | `cl-nagoya/ruri-v3-310m`、revision `18b60fb8c2b9df296fb4212bb7d23ef94e579cd3`（採否の検証に使ったsnapshot。重み約1.2GB）。70m（`cl-nagoya/ruri-v3-70m`、revision `07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc`）は `--model` で指定できるが、基準に届かなかった | Apache-2.0（モデルカード確認） | 検索クエリ `検索クエリ: `・検索文書 `検索文書: ` の接頭辞（モデルカードで確認） |
 | Pillow | 13.0.0（venv）／12.3.0（A20の素材を生成したシステムPython） | MIT-CMU（メタデータ確認） | A20の試験素材の生成のみ（テスト用、Skill配布物に含めない） |
 
 「無償OSS優先」を非商用限定と読み替えていない。新規成果物（このSkill自体）のライセンスは、当初は指定が無く未確定だったが、のちに利用者がMITと指定したため `LICENSE`（MIT、Copyright (c) 2026 Mr-Kondo）を置いた（Skill配布物にも同じLICENSEを同梱）。モデル取得では、Xet転送がプロキシを通らなかったため `HF_HUB_DISABLE_XET=1` を使った。再現できる版は `requirements-lock.txt`。
@@ -53,7 +53,7 @@
 | `…/references/` | judgment・citation・feedback-loop・evaluation・hosts・review-example.json |
 | `…/scripts/` | `ctr.py`（CLI）、`ctr_common`（原子的保存）、`ctr_refs`（登録簿・引用検査・出典生成）、`ctr_log`（記録・フィードバック・export/import・削除）、`ctr_improve`（更新案・比較・採用・復元・集計・抽出・回帰・未使用評価）、`ctr_blind`（匿名比較・理解問題）、`ctr_search`（一致検索・Ruri）、`ctr_pdf` |
 | `tools/` | `ctr_install.py`（導入・更新・削除・照合・配布物）、`check_design_docs.py`、`run_acceptance.py`、`host_evidence.py`、`post_merge_cleanup.py`、`bench_search.py` |
-| `tests/` | unittest 108件。A01〜A48 の機械検査。A20の図とPDFの素材 |
+| `tests/` | unittest 112件。A01〜A48 の機械検査。A20の図とPDFの素材 |
 | `docs/` | USAGE・本メモ・ACCEPTANCE-REPORT（生成）・SEMANTIC-REVIEW-SHEET（生成）・HOST-EVIDENCE.json・evidence/ |
 
 ## 5. 主な判断と理由
@@ -77,12 +77,13 @@
 
 - **3環境の実呼び出し（2026-10-17、合成データの1プロンプトのみ）**: 利用者の許可を得て、実ユーザーのホームへ導入（`~/.claude/skills`・`~/.agents/skills`・`~/.gemini/config/skills`・`~/.gemini/antigravity-cli/skills`）し、Claude Code・Codex・Antigravity CLI で、スキル名を書かないプロンプトによる実モデルの呼び出しを確認した（`docs/evidence/real-host-*.md`）。Skillの自動選択、`check refs`、記録の保存と再読込、出典一覧の出力を観測。ただし1入力の結果で、品質・他入力・他モデルは示さない。
   - Codex: 既定モデル `gpt-6.1-sol` がChatGPTアカウントで未対応のため `-m gpt-6-sol` を指定した（利用者の設定は変更していない）。
-  - Antigravity CLI: 1回目は権限拒否で回答が空。2回目は `--sandbox --dangerously-skip-permissions`（ターミナル制限付き・合成データの一時ディレクトリのみ）で成功。`references/` の読込の直接ログは取得できず、『資料参照』は未確認。モデルIDも出力に無い。
+  - Antigravity CLI: 1回目は権限拒否で回答が空。2回目は `--sandbox --dangerously-skip-permissions`（ターミナル制限付き・合成データの一時ディレクトリのみ）で成功。1・2回目の `json` 出力では `references/` の読込の直接ログが取れなかったが、`--output-format stream-json` の実行で `view_file` による読込を直接確認した（`docs/evidence/real-host-antigravity.md`）。モデルIDは出力に無いまま。
   - 書き出し・取り込み（export/import）は、Claude Code に加え Codex と Antigravity CLI でも、ホスト自身が実行して受理3・重複0・隔離0を確認した（同じ合成データの1プロンプト、共有許可は一時の保存先に設定した仮のもの。`docs/evidence/real-host-*.md` の追加の実呼び出し）。
+  - リリースv0.1.0のzipを取得し、展開物を一時ホームで実行・導入・検証・更新・削除した（`docs/evidence/release-zip-check.md`）。zipに導入ツールと `INSTALL-ON-REMOTE.txt` が入っていないことが分かった。
   - 未実施: Antigravity IDE/App、リモート、ChatGPT Work、Claude Cowork。
 - 意味審査（A01〜A12, A17, A19, A20, A28, A29）は、作成者がAIで独立ではないため**未確定**。
 - 匿名比較・理解問題の実際の評価者による採点、受け手の理解、本人の習得、実務での改善効果は未測定。性能の数値目標・週30分で確認できる件数は、初回試行後に提案する。
-- Ruri検索の効果は未評価（11課題の自己参照的な動作確認のみ）。採否は判断していない。
+- Ruri検索: 架空の用語集40語・課題80件で一致検索・文字2-gram・Ruri 70m/310mを比較した（[docs/RURI-ADOPTION.md](RURI-ADOPTION.md)）。事前に固定した基準を、310mは満たし70m（既定）は満たさなかった。課題は作成者が作った独立でないもので、実データでの確認が残る。利用者の決定により既定モデルを310m（版固定）に変更した。この変更を含めてSkillの版を0.1.1にした（0.1.0からの違いは、Ruriの既定モデルと、その版固定のみ）。
 - A31（マージ後の後片付け）は、マージ・公開が未実施のため未到達。
 
 ## 参照（確認箇所ごとに1行）
