@@ -79,9 +79,10 @@
   - Codex: 既定モデル `gpt-6.1-sol` がChatGPTアカウントで未対応のため `-m gpt-6-sol` を指定した（利用者の設定は変更していない）。
   - Antigravity CLI: 1回目は権限拒否で回答が空。2回目は `--sandbox --dangerously-skip-permissions`（ターミナル制限付き・合成データの一時ディレクトリのみ）で成功。1・2回目の `json` 出力では `references/` の読込の直接ログが取れなかったが、`--output-format stream-json` の実行で `view_file` による読込を直接確認した（`docs/evidence/real-host-antigravity.md`）。モデルIDは出力に無いまま。
   - 書き出し・取り込み（export/import）は、Claude Code に加え Codex と Antigravity CLI でも、ホスト自身が実行して受理3・重複0・隔離0を確認した（同じ合成データの1プロンプト、共有許可は一時の保存先に設定した仮のもの。`docs/evidence/real-host-*.md` の追加の実呼び出し）。
+  - 0.1.1へ更新した実ユーザー環境で、3ホストが記録から書き出し・取り込みまで再び成功した。Antigravityは `--model` 指定で `gemini-4-argon-medium` と記録でき、保存系コマンドが初回に `storage_unwritable` で拒否される挙動も観測した（`docs/evidence/real-host-*.md`）。v0.1.1のzipも一時ホームで確認した。
   - リリースv0.1.0のzipを取得し、展開物を一時ホームで実行・導入・検証・更新・削除した（`docs/evidence/release-zip-check.md`）。zipに導入ツールと `INSTALL-ON-REMOTE.txt` が入っていないことが分かった。
   - 未実施: Antigravity IDE/App、リモート、ChatGPT Work、Claude Cowork。
-- 意味審査（A01〜A12, A17, A19, A20, A28, A29）は、作成者がAIで独立ではないため**未確定**。
+- 意味審査（A01〜A12, A17, A19, A20, A28, A29）は、作成者がAIで独立ではないため**未確定**。別モデル2つ（Codex gpt-6-sol、Antigravity gemini-4-argon-high）による確認で出力例と確認票の不備が見つかり直した（[docs/evidence/cross-model-semantic-review.md](evidence/cross-model-semantic-review.md)）が、人による独立審査の代わりにならない。未修正の指摘として、「資料づくり」が資料の「成果物の作成」より範囲を狭め得る点が、`references/review-example.json` にも残っている（直すと版を上げる必要があるため判断待ち）。
 - 匿名比較・理解問題の実際の評価者による採点、受け手の理解、本人の習得、実務での改善効果は未測定。性能の数値目標・週30分で確認できる件数は、初回試行後に提案する。
 - Ruri検索: 架空の用語集40語・課題80件で一致検索・文字2-gram・Ruri 70m/310mを比較した（[docs/RURI-ADOPTION.md](RURI-ADOPTION.md)）。事前に固定した基準を、310mは満たし70m（既定）は満たさなかった。課題は作成者が作った独立でないもので、実データでの確認が残る。利用者の決定により既定モデルを310m（版固定）に変更した。この変更を含めてSkillの版を0.1.1にした（0.1.0からの違いは、Ruriの既定モデルと、その版固定のみ）。
 - A31（マージ後の後片付け）は、マージ・公開が未実施のため未到達。
