@@ -62,7 +62,7 @@ python3 tools/ctr_install.py uninstall --target antigravity --scope user --apply
 
 Agent に依頼する（Skillが自動選択される。環境により明示的な呼び出しも可）。
 
-自動で選ばれるかは、Agent のモデルで違う。Claude Code では、使うべき依頼の約9割（既定モデル）・4分の3（Opus）で選ばれたが、**Haiku では選ばれなかった**（[docs/TRIGGER-EVAL.md](TRIGGER-EVAL.md)）。選ばれないときは、依頼文に Skill 名（`contextual-terminology-review`）を書いて呼ぶ。
+自動で選ばれるかは、Agent のモデルで違う。Claude Code では、このSkillと推敲系だけを置いた条件で使うべき依頼の約9割（既定モデル）・4分の3（Opus）、実際の利用環境（フック・CLAUDE.mdあり）では約7割で選ばれ、**Haiku では選ばれなかった**（[docs/TRIGGER-EVAL.md](TRIGGER-EVAL.md)）。選ばれないときは、依頼文に Skill 名（`contextual-terminology-review`）を書いて呼ぶ。
 
 > 「私が取りまとめます」と会議で言うつもりです。役割は論点整理と調整と資料作成の主担当で、最終承認は部長です。資料は <パス>。用語として問題ないか、伝わるかを確認して。
 

@@ -1,0 +1,146 @@
+{
+ "split": "all",
+ "cases": 32,
+ "conditions": {
+  "baseline": {
+   "runs": 64,
+   "pass": {
+    "k": 51,
+    "n": 64,
+    "wilson_95": [
+     0.6829,
+     0.8773
+    ]
+   },
+   "pass_alt_post_hoc": 51,
+   "by_kind": {
+    "ambiguity": {
+     "pass": 12,
+     "n": 16
+    },
+    "correct": {
+     "pass": 9,
+     "n": 16
+    },
+    "mismatch": {
+     "pass": 14,
+     "n": 16
+    },
+    "misuse": {
+     "pass": 16,
+     "n": 16
+    }
+   },
+   "format_failures": 0,
+   "invention": 0,
+   "false_flag_on_correct": {
+    "k": 7,
+    "n": 16
+   },
+   "false_flag_any_on_correct": 16,
+   "extra_flags_on_correct": 21,
+   "len_ratio_median": 3.38,
+   "skill_called": 0,
+   "mean_seconds": 14.9,
+   "mean_cost_usd": 0.04
+  },
+  "skill": {
+   "runs": 64,
+   "pass": {
+    "k": 60,
+    "n": 64,
+    "wilson_95": [
+     0.85,
+     0.9754
+    ]
+   },
+   "pass_alt_post_hoc": 61,
+   "by_kind": {
+    "ambiguity": {
+     "pass": 16,
+     "n": 16
+    },
+    "correct": {
+     "pass": 13,
+     "n": 16
+    },
+    "mismatch": {
+     "pass": 15,
+     "n": 16
+    },
+    "misuse": {
+     "pass": 16,
+     "n": 16
+    }
+   },
+   "format_failures": 0,
+   "invention": 0,
+   "false_flag_on_correct": {
+    "k": 3,
+    "n": 16
+   },
+   "false_flag_any_on_correct": 14,
+   "extra_flags_on_correct": 16,
+   "len_ratio_median": 3.26,
+   "skill_called": 64,
+   "mean_seconds": 20.7,
+   "mean_cost_usd": 0.076
+  }
+ },
+ "paired_alt_post_hoc": {
+  "mean_diff": 0.156,
+  "improved": 8,
+  "worsened": 1
+ },
+ "paired": {
+  "mean_diff": 0.141,
+  "improved": 8,
+  "worsened": 2,
+  "unchanged": 22,
+  "sign_test_p_two_sided": 0.1094,
+  "per_case_diff": {
+   "M1": 0.0,
+   "M2": 0.0,
+   "M3": 0.0,
+   "M4": 0.0,
+   "M5": 0.0,
+   "M6": 0.0,
+   "M7": 0.0,
+   "M8": 0.0,
+   "A1": 0.0,
+   "A2": 0.0,
+   "A3": 0.0,
+   "A4": 0.5,
+   "A5": 0.0,
+   "A6": 0.0,
+   "A7": 0.5,
+   "A8": 1.0,
+   "C1": 0.0,
+   "C2": -0.5,
+   "C3": 0.5,
+   "C4": 1.0,
+   "C5": 0.5,
+   "C6": 0.0,
+   "C7": 0.0,
+   "C8": 0.5,
+   "X1": 0.0,
+   "X2": 0.0,
+   "X3": 1.0,
+   "X4": 0.0,
+   "X5": 0.0,
+   "X6": 0.0,
+   "X7": 0.0,
+   "X8": -0.5
+  }
+ },
+ "criteria": {
+  "mean_diff_min": 0.1,
+  "false_flag_increase_max": 0.1,
+  "invention_not_more_than_baseline": true
+ },
+ "pass": {
+  "accuracy": true,
+  "false_flag": true,
+  "invention": true
+ }
+}

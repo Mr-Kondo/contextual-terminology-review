@@ -1,0 +1,130 @@
+{
+ "split": "dev",
+ "cases": 16,
+ "conditions": {
+  "baseline": {
+   "runs": 32,
+   "pass": {
+    "k": 25,
+    "n": 32,
+    "wilson_95": [
+     0.6124,
+     0.8898
+    ]
+   },
+   "pass_alt_post_hoc": 25,
+   "by_kind": {
+    "ambiguity": {
+     "pass": 7,
+     "n": 8
+    },
+    "correct": {
+     "pass": 4,
+     "n": 8
+    },
+    "mismatch": {
+     "pass": 6,
+     "n": 8
+    },
+    "misuse": {
+     "pass": 8,
+     "n": 8
+    }
+   },
+   "format_failures": 0,
+   "invention": 0,
+   "false_flag_on_correct": {
+    "k": 4,
+    "n": 8
+   },
+   "false_flag_any_on_correct": 8,
+   "extra_flags_on_correct": 9,
+   "len_ratio_median": 3.45,
+   "skill_called": 0,
+   "mean_seconds": 15.3,
+   "mean_cost_usd": 0.04
+  },
+  "skill": {
+   "runs": 32,
+   "pass": {
+    "k": 30,
+    "n": 32,
+    "wilson_95": [
+     0.7985,
+     0.9827
+    ]
+   },
+   "pass_alt_post_hoc": 30,
+   "by_kind": {
+    "ambiguity": {
+     "pass": 8,
+     "n": 8
+    },
+    "correct": {
+     "pass": 6,
+     "n": 8
+    },
+    "mismatch": {
+     "pass": 8,
+     "n": 8
+    },
+    "misuse": {
+     "pass": 8,
+     "n": 8
+    }
+   },
+   "format_failures": 0,
+   "invention": 0,
+   "false_flag_on_correct": {
+    "k": 2,
+    "n": 8
+   },
+   "false_flag_any_on_correct": 6,
+   "extra_flags_on_correct": 7,
+   "len_ratio_median": 3.54,
+   "skill_called": 32,
+   "mean_seconds": 20.7,
+   "mean_cost_usd": 0.075
+  }
+ },
+ "paired_alt_post_hoc": {
+  "mean_diff": 0.156,
+  "improved": 4,
+  "worsened": 1
+ },
+ "paired": {
+  "mean_diff": 0.156,
+  "improved": 4,
+  "worsened": 1,
+  "unchanged": 11,
+  "sign_test_p_two_sided": 0.375,
+  "per_case_diff": {
+   "M1": 0.0,
+   "M2": 0.0,
+   "M3": 0.0,
+   "M4": 0.0,
+   "A1": 0.0,
+   "A2": 0.0,
+   "A3": 0.0,
+   "A4": 0.5,
+   "C1": 0.0,
+   "C2": -0.5,
+   "C3": 0.5,
+   "C4": 1.0,
+   "X1": 0.0,
+   "X2": 0.0,
+   "X3": 1.0,
+   "X4": 0.0
+  }
+ },
+ "criteria": {
+  "mean_diff_min": 0.1,
+  "false_flag_increase_max": 0.1,
+  "invention_not_more_than_baseline": true
+ },
+ "pass": {
+  "accuracy": true,
+  "false_flag": true,
+  "invention": true
+ }
+}

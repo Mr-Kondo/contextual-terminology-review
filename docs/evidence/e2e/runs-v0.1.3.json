@@ -1,0 +1,4052 @@
+{
+ "note": "課題はすべて架空。parsed は各実行が最後に付けたJSON(findings)。モデルは実行時のClaude Codeの既定。Skillは v0.1.3(作業ツリー)",
+ "skill_version": "0.1.3",
+ "runs": [
+  {
+   "split": "dev",
+   "id": "M1",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冪等",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "リトライしても必ず同じレスポンスが返ります",
+      "verdict": "misuse",
+      "proposal": "このAPIは冪等なので、リトライしても結果の状態は1回実行した場合と変わりません(レスポンスは初回と異なる場合があります)。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.04507359999999999,
+   "duration_ms": 14399,
+   "seconds": 15.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M1",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冪等",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "必ず同じレスポンスが返ります",
+      "verdict": "misuse",
+      "proposal": "リトライしても、サーバ上の状態は1回だけ実行した場合と同じになります(レスポンスは毎回同一とは限りません)。"
+     },
+     {
+      "target": "リトライしても",
+      "verdict": "ambiguous",
+      "proposal": "想定する失敗(タイムアウト、5xxなど)と、他クライアントによる状態変更がないという前提を明記する。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0393304,
+   "duration_ms": 12346,
+   "seconds": 13.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M1",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冪等",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "冪等なので、リトライしても必ず同じレスポンスが返ります",
+      "verdict": "misuse",
+      "proposal": "このAPIは冪等なので、リトライしても結果の状態は1回実行した場合と同じになります。(レスポンスの同一性も保証する意図なら、冪等とは別の性質として設計者に確認のうえ明記する)"
+     },
+     {
+      "target": "必ず",
+      "verdict": "misuse",
+      "proposal": "削除する。レスポンス同一性を主張する場合は条件を確認して明記する"
+     },
+     {
+      "target": "リトライ",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.073458,
+   "duration_ms": 19268,
+   "seconds": 20.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M1",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冪等",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "必ず同じレスポンスが返ります",
+      "verdict": "misuse",
+      "proposal": "このAPIは冪等なので、リトライしても結果の状態は1回実行した場合と同じになります。(レスポンス内容が毎回同一であることまでは保証しません)"
+     },
+     {
+      "target": "リトライしても",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08214300000000001,
+   "duration_ms": 19599,
+   "seconds": 20.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M2",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "精度±0.01mm",
+      "verdict": "misuse",
+      "proposal": "確度±0.01mm(数値がばらつきの仕様なら「繰り返し測定のばらつきが±0.01mm」とし、真値への近さは別に示す)"
+     },
+     {
+      "target": "真値に近い測定",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "±0.01mm",
+      "verdict": "insufficient",
+      "proposal": "数値が何を表すか(誤差範囲かばらつきか、測定条件)を元データで確認して明記する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0412636,
+   "duration_ms": 15677,
+   "seconds": 16.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M2",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "精度±0.01mm",
+      "verdict": "ambiguous",
+      "proposal": "±0.01mmが繰り返し測定のばらつき(精度)か真値からの誤差上限(確度)かを明示する。例:「繰り返し測定精度は±0.01mm(同一条件)」"
+     },
+     {
+      "target": "真値に近い測定ができます",
+      "verdict": "misuse",
+      "proposal": "真値への近さは確度(accuracy)であり精度(precision)ではない。確度の数値を別に示すか、精度の説明に限定して「繰り返し測定のばらつきが小さい測定ができます」とする。"
+     },
+     {
+      "target": "測定ができます",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0384882,
+   "duration_ms": 12274,
+   "seconds": 13.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M2",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "精度±0.01mm",
+      "verdict": "misuse",
+      "proposal": "±0.01mmが真値からのずれ幅なら「確度±0.01mm」。繰り返し測定のばらつきなら「精度±0.01mm(繰り返し測定のばらつき)」とし、「真値に近い」は別の根拠を示すか削る"
+     },
+     {
+      "target": "±0.01mm(意味と測定条件)",
+      "verdict": "insufficient",
+      "proposal": "何に対する幅か、どの条件での値かを括弧書きで補う(例: 真値とのずれが0.01mm以内)。根拠データの確認が必要"
+     },
+     {
+      "target": "真値に近い測定",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0736498,
+   "duration_ms": 18853,
+   "seconds": 19.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M2",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "精度±0.01mmで、真値に近い測定ができます",
+      "verdict": "misuse",
+      "proposal": "繰り返し測定のばらつきなら「繰り返し測定のばらつき(精度)が±0.01mm」とし、「真値に近い」は外す。真値との差なら「確度が±0.01mm」とする。"
+     },
+     {
+      "target": "±0.01mm",
+      "verdict": "ambiguous",
+      "proposal": "ばらつき(精度)か真値との差(確度)かを明記する。"
+     },
+     {
+      "target": "真値に近い測定",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08381620000000001,
+   "duration_ms": 20193,
+   "seconds": 21.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M3",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ハッシュ化して暗号化している",
+      "verdict": "misuse",
+      "proposal": "パスワードはハッシュ化して保存しており、暗号化(復号可能な変換)は行っていません。"
+     },
+     {
+      "target": "復号して照合します",
+      "verdict": "misuse",
+      "proposal": "入力値をハッシュ化し、保存済みのハッシュ値と比較して照合します。ハッシュ値は復号できません。"
+     },
+     {
+      "target": "ソルト・ストレッチング等の方式",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0362484,
+   "duration_ms": 14203,
+   "seconds": 15.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M3",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ハッシュ化して暗号化している",
+      "verdict": "misuse",
+      "proposal": "ハッシュ化して保存している(暗号化とは書かない)"
+     },
+     {
+      "target": "復号して照合します",
+      "verdict": "misuse",
+      "proposal": "入力値を同じ方式でハッシュ化し、保存済みのハッシュ値と比較して照合します"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0369896,
+   "duration_ms": 10469,
+   "seconds": 11.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M3",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ハッシュ化して暗号化している",
+      "verdict": "misuse",
+      "proposal": "パスワードはハッシュ化して保存しています(ハッシュ化は一方向の変換であり、暗号化とは別の処理)"
+     },
+     {
+      "target": "復号して照合します",
+      "verdict": "misuse",
+      "proposal": "入力値をハッシュ化し、保存済みのハッシュ値と比較して照合します"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0716744,
+   "duration_ms": 17136,
+   "seconds": 18.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M3",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ハッシュ化して暗号化している",
+      "verdict": "misuse",
+      "proposal": "ハッシュ化して保存しています"
+     },
+     {
+      "target": "復号して照合します",
+      "verdict": "misuse",
+      "proposal": "入力値をハッシュ化し、保存済みのハッシュ値と比較して照合します"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0652066,
+   "duration_ms": 15671,
+   "seconds": 16.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M4",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "検収は完了です",
+      "verdict": "misuse",
+      "proposal": "成果物を納品いたしましたので、ご確認のうえ検収結果をご連絡ください。"
+     },
+     {
+      "target": "送付しました",
+      "verdict": "ambiguous",
+      "proposal": "納品いたしました(契約上の用語に合わせる)"
+     },
+     {
+      "target": "本日で",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0399808,
+   "duration_ms": 18784,
+   "seconds": 19.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M4",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "検収は完了です",
+      "verdict": "misuse",
+      "proposal": "成果物を本日納品いたしました。ご確認のうえ、検収結果をご連絡ください。"
+     },
+     {
+      "target": "送付しました",
+      "verdict": "ambiguous",
+      "proposal": "納品いたしました"
+     },
+     {
+      "target": "本日で",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.041187600000000005,
+   "duration_ms": 14929,
+   "seconds": 16.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M4",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "成果物を送付しましたので、本日で検収は完了です",
+      "verdict": "misuse",
+      "proposal": "成果物を送付しました(納品)。ご確認のうえ、検収結果をご連絡ください。"
+     },
+     {
+      "target": "本日で",
+      "verdict": "ambiguous",
+      "proposal": "本日、納品しました"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07141220000000001,
+   "duration_ms": 16914,
+   "seconds": 17.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "M4",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "検収は完了です",
+      "verdict": "misuse",
+      "proposal": "成果物を納品いたしました。ご確認のうえ、検収結果をご連絡ください。(顧客から合格通知済みなら「検収合格のご連絡をいただきました」と事実を明記)"
+     },
+     {
+      "target": "成果物を送付しました",
+      "verdict": "ambiguous",
+      "proposal": "契約上の納品として扱うなら「成果物を納品いたしました」"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0763216,
+   "duration_ms": 21788,
+   "seconds": 22.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A1",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "この件",
+      "verdict": "insufficient",
+      "proposal": "「○○の件は」と件名を明示する(直前の議題を受けるだけなら現状のままでもよい)"
+     },
+     {
+      "target": "取りまとめます",
+      "verdict": "ambiguous",
+      "proposal": "この件は私が窓口になって、○日までに意見を集約します。(または「主担当として進めます」)"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0415528,
+   "duration_ms": 19899,
+   "seconds": 21.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A1",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "取りまとめます",
+      "verdict": "ambiguous",
+      "proposal": "役割に合わせて「各自の意見を私が取りまとめます。〇日までに共有してください」または「私が担当し、〇日までに報告します」と範囲・期限を明示する"
+     },
+     {
+      "target": "この件",
+      "verdict": "insufficient",
+      "proposal": "議題が複数ある場合は「〇〇の件は」と件名を入れる"
+     },
+     {
+      "target": "私が",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036787799999999996,
+   "duration_ms": 14232,
+   "seconds": 15.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A1",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "取りまとめます",
+      "verdict": "ambiguous",
+      "proposal": "意図に応じて「情報を集めて整理します」「主担当で進めます」「窓口になって取りまとめます」のいずれかに言い直す(意図の確認後に選ぶ)"
+     },
+     {
+      "target": "この件",
+      "verdict": "ambiguous",
+      "proposal": "必要なら件名を添える(例:「〇〇の件は私が取りまとめます」)"
+     },
+     {
+      "target": "私が",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "取りまとめます(資料との照合)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0815378,
+   "duration_ms": 20124,
+   "seconds": 21.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A1",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "取りまとめます",
+      "verdict": "ambiguous",
+      "proposal": "意図に応じて選ぶ。集約なら「私が情報を集めて整理します」、調整なら「私が窓口になって進めます」、成果物を示すなら「私が◯◯をまとめ、◯◯までに共有します」(◯◯は本人が確認した事実で補う)"
+     },
+     {
+      "target": "この件",
+      "verdict": "ambiguous",
+      "proposal": "直前に議題が出ていなければ、件名を添える(例:「◯◯の件は」)"
+     },
+     {
+      "target": "私が",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "取りまとめます(資料との照合)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0726744,
+   "duration_ms": 19065,
+   "seconds": 19.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A2",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "バックアップ",
+      "verdict": "ambiguous",
+      "proposal": "フルバックアップ(対象・取得日時を明記)"
+     },
+     {
+      "target": "取得済みです",
+      "verdict": "insufficient",
+      "proposal": "◯月◯日2時分を取得済みです(直近ログで日付を確認のうえ記載)。復元テストは未実施である旨を併記"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036386999999999996,
+   "duration_ms": 11916,
+   "seconds": 13.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A2",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "バックアップ",
+      "verdict": "ambiguous",
+      "proposal": "フルバックアップ(取得日時を明記)"
+     },
+     {
+      "target": "取得済みです",
+      "verdict": "ambiguous",
+      "proposal": "◯月◯日2時に取得済みです。なお復元テストは未実施のため、復元できることは未確認です。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 4,
+   "cost_usd": 0.049003000000000005,
+   "duration_ms": 14106,
+   "seconds": 15.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A2",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "バックアップは取得済み",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "バックアップ(復元可能かどうかの含意)",
+      "verdict": "ambiguous",
+      "proposal": "バックアップは毎日2時にフルバックアップとして取得済みです。なお、復元テストは未実施です。"
+     },
+     {
+      "target": "バックアップ(対象システム・報告時点)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08190520000000001,
+   "duration_ms": 23067,
+   "seconds": 24.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A2",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "取得済み",
+      "verdict": "ambiguous",
+      "proposal": "バックアップは毎日取得しています(フルバックアップ、毎日2時)。復元テストは未実施です。"
+     },
+     {
+      "target": "バックアップ",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08207539999999999,
+   "duration_ms": 20326,
+   "seconds": 21.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A3",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザー",
+      "verdict": "insufficient",
+      "proposal": "承認前の主体は「申請者」とし、承認後を「ユーザー」と定義して使い分ける"
+     },
+     {
+      "target": "管理者",
+      "verdict": "ambiguous",
+      "proposal": "どの管理者(システム管理者/承認権限者など)かを用語定義で明示する"
+     },
+     {
+      "target": "承認されたら",
+      "verdict": "insufficient",
+      "proposal": "「利用申請が管理者に承認されたとき」と、承認対象を資料の用語「利用申請」で明示する"
+     },
+     {
+      "target": "利用を開始できる",
+      "verdict": "ambiguous",
+      "proposal": "「アカウントが有効になり、ログインできる」など、開始の状態を具体的に書く"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.041343,
+   "duration_ms": 16836,
+   "seconds": 17.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A3",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザー",
+      "verdict": "insufficient",
+      "proposal": "申請者(利用申請を提出した者)と状態が分かる語にするか、用語集で定義する"
+     },
+     {
+      "target": "管理者",
+      "verdict": "insufficient",
+      "proposal": "権限定義・用語集で管理者の範囲を定義し、表記を統一する(例:システム管理者)"
+     },
+     {
+      "target": "承認",
+      "verdict": "insufficient",
+      "proposal": "承認対象を「利用申請」と明記し、申請中→承認済みの状態遷移を記載する"
+     },
+     {
+      "target": "利用を開始できる",
+      "verdict": "ambiguous",
+      "proposal": "アカウントが有効化されログインできる、のように開始の状態を具体的に書く"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.042455400000000004,
+   "duration_ms": 16998,
+   "seconds": 17.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A3",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザー",
+      "verdict": "ambiguous",
+      "proposal": "申請者は、管理者に承認された後、利用を開始できる。"
+     },
+     {
+      "target": "管理者",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "承認されたら",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "利用を開始できる",
+      "verdict": "ambiguous",
+      "proposal": "管理者に承認された申請者は、〈利用開始の具体的な状態〉になる。(状態は本人に確認して記入)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0677652,
+   "duration_ms": 20179,
+   "seconds": 21.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A3",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "管理者",
+      "verdict": "insufficient",
+      "proposal": "資料に「管理者」の定義がないため、要件定義書の用語集・権限定義でロールを確認し、確認後に具体的なロール名へ置き換える(例: 「[ロール名]に承認されたら」)。"
+     },
+     {
+      "target": "承認",
+      "verdict": "insufficient",
+      "proposal": "資料には利用申請の提出方法しかなく承認の記述がない。承認の対象と手順が確認できた場合に限り「ユーザーが提出した利用申請を管理者が承認した場合」のように対象を明示する。"
+     },
+     {
+      "target": "利用を開始できる",
+      "verdict": "insufficient",
+      "proposal": "資料に利用開始の定義がない。「できる」が許可なのか状態なのかを確認し、完了状態(例: ログイン可能になる)を具体的に書く。具体的な状態は確認後に決める。"
+     },
+     {
+      "target": "承認されたら",
+      "verdict": "ambiguous",
+      "proposal": "受け身で承認の主体と時点が曖昧。ロールと承認対象が確認できた後に「[ロール名]が利用申請を承認した場合」と能動態にする。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0787584,
+   "duration_ms": 25455,
+   "seconds": 26.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A4",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "対応済み",
+      "verdict": "ambiguous",
+      "proposal": "「12:20にサーバー再起動により復旧済みです。原因は調査中で、恒久対策は未着手です。」"
+     },
+     {
+      "target": "障害は",
+      "verdict": "ambiguous",
+      "proposal": "「障害(エラー率の急増)は復旧しました」のように、指す範囲を事象に限定して明示する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0376208,
+   "duration_ms": 16494,
+   "seconds": 17.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A4",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "対応済み",
+      "verdict": "misuse",
+      "proposal": "12:20にサーバー再起動で復旧しました。原因は調査中で、恒久対策は未着手です。"
+     },
+     {
+      "target": "障害",
+      "verdict": "insufficient",
+      "proposal": "INC-102(12:05発生のエラー率急増)のように対象を明示する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0371154,
+   "duration_ms": 10281,
+   "seconds": 11.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A4",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "対応済み",
+      "verdict": "ambiguous",
+      "proposal": "障害は、サーバー再起動により12:20に復旧しました。原因は調査中で、恒久対策は未着手です。"
+     },
+     {
+      "target": "障害",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07254,
+   "duration_ms": 17973,
+   "seconds": 18.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "A4",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "対応済み",
+      "verdict": "ambiguous",
+      "proposal": "障害は、12:20にサーバーを再起動して復旧しました。原因は調査中で、恒久対策は未着手です。"
+     },
+     {
+      "target": "障害",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07185040000000001,
+   "duration_ms": 24144,
+   "seconds": 25.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C1",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冪等",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "同じリクエスト",
+      "verdict": "ambiguous",
+      "proposal": "同じ冪等キーを付けたリクエストを2回送っても、注文は1件しか作られません。(「同じ」の判定基準を明示する)"
+     },
+     {
+      "target": "この処理",
+      "verdict": "ambiguous",
+      "proposal": "注文作成API(具体的な処理名)は冪等で、…"
+     },
+     {
+      "target": "注文は1件しか作られません",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0477766,
+   "duration_ms": 16140,
+   "seconds": 16.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C1",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冪等",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "この処理",
+      "verdict": "ambiguous",
+      "proposal": "対象のAPI・処理名を明示する(例: 注文作成API)"
+     },
+     {
+      "target": "同じリクエスト",
+      "verdict": "ambiguous",
+      "proposal": "「同一の冪等キーを持つリクエスト」など、同一性の判定基準を明示する"
+     },
+     {
+      "target": "注文は1件しか作られません",
+      "verdict": "ambiguous",
+      "proposal": "状態(注文1件)は定義に合致。必要なら2回目のレスポンス内容(初回と同じ注文情報を返す等)を補足する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.046550999999999995,
+   "duration_ms": 24312,
+   "seconds": 25.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C1",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冪等",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "同じリクエスト",
+      "verdict": "ambiguous",
+      "proposal": "「同じ」の判定基準(例: 冪等キー、ペイロード一致など実際の基準)を明記する。基準は資料にないため本人に確認する。"
+     },
+     {
+      "target": "注文は1件しか作られません",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "この処理",
+      "verdict": "ambiguous",
+      "proposal": "単独で読まれる資料なら、対象の処理名やAPI名を明記する。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0729246,
+   "duration_ms": 19360,
+   "seconds": 20.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C1",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冪等",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "同じリクエスト",
+      "verdict": "insufficient",
+      "proposal": "同一と判定する条件を明示する(例: 「同一の冪等キーを付けたリクエストを2回送っても」。実際の仕様に合わせる)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.070768,
+   "duration_ms": 16290,
+   "seconds": 17.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C2",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "精度は±0.01mmのばらつき",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "確度は校正により真値から±0.05mm以内",
+      "verdict": "ok",
+      "proposal": "校正後の測定値の真値からのずれ(確度)は±0.05mm以内"
+     },
+     {
+      "target": "校正により",
+      "verdict": "insufficient",
+      "proposal": "校正後の値か、校正で達成可能な値かを明記する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0368002,
+   "duration_ms": 14260,
+   "seconds": 15.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C2",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "精度は±0.01mmのばらつき",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "確度は校正により真値から±0.05mm以内",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "校正により",
+      "verdict": "insufficient",
+      "proposal": "校正の条件(いつ、何を基準に校正した後の値か)を明記する"
+     },
+     {
+      "target": "±0.01mm / ±0.05mm",
+      "verdict": "ambiguous",
+      "proposal": "±が標準偏差・最大幅・信頼区間のどれかを明記する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0359526,
+   "duration_ms": 9918,
+   "seconds": 11.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C2",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "精度は±0.01mmのばらつき",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "確度は校正により真値から±0.05mm以内",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "±0.01mm(ばらつきの統計的定義)",
+      "verdict": "insufficient",
+      "proposal": "資料に定義がないため、実際の定義(標準偏差・最大幅・測定回数など)を確認のうえ明記する"
+     },
+     {
+      "target": "校正により",
+      "verdict": "ambiguous",
+      "proposal": "校正後の保証値か、校正すれば達する値かを、実際の条件に合わせて明記する"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0731106,
+   "duration_ms": 19974,
+   "seconds": 20.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C2",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "精度は±0.01mmのばらつき",
+      "verdict": "ambiguous",
+      "proposal": "精度(繰り返し測定のばらつき)は、(標準偏差/範囲など実際の定義を明記)で±0.01mmです。"
+     },
+     {
+      "target": "精度/確度の使い分け",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "確度は…真値から±0.05mm以内",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "校正により",
+      "verdict": "insufficient",
+      "proposal": "校正の条件(基準器・周期など)を確認済みの事実として補う。資料だけでは判断不可。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07284700000000001,
+   "duration_ms": 19952,
+   "seconds": 20.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C3",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ハッシュ化して保存し",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入力値をハッシュ化して保存済みのハッシュ値と比較します",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入力値",
+      "verdict": "ambiguous",
+      "proposal": "ユーザーが入力したパスワード"
+     },
+     {
+      "target": "ハッシュ化(ソルト・アルゴリズム等の強度要件)",
+      "verdict": "insufficient",
+      "proposal": "ソルトやパスワード用ハッシュ関数の使用を設計書で別途明記する(資料には記載がなく判断不能)"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0376106,
+   "duration_ms": 10736,
+   "seconds": 11.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C3",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ハッシュ化して保存し",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入力値をハッシュ化して保存済みのハッシュ値と比較します",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "ハッシュ化(ソルト・ストレッチング等の方式の記載)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0342282,
+   "duration_ms": 8655,
+   "seconds": 9.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C3",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "パスワードはハッシュ化して保存し",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入力値をハッシュ化して保存済みのハッシュ値と比較します",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "ソルト・ストレッチングなど方式の詳細(対象文には記載なし)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 7,
+   "cost_usd": 0.09291740000000001,
+   "duration_ms": 20557,
+   "seconds": 21.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C3",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "パスワードはハッシュ化して保存し",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入力値をハッシュ化して保存済みのハッシュ値と比較します",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "ハッシュ化の方式(ソルト・アルゴリズム等)の記載がないこと",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.070818,
+   "duration_ms": 17396,
+   "seconds": 18.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C4",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "納品しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "成果物",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "貴社での検収の結果をお待ちしています",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "検収の期限・通知方法の記載がないこと",
+      "verdict": "insufficient",
+      "proposal": "検収期間の定めは提示資料にないため判断できません。必要なら契約上の期限を確認し、「〇月〇日までに検収結果をご連絡ください」と添える"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0382774,
+   "duration_ms": 12967,
+   "seconds": 14.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C4",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "納品しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "貴社での検収の結果をお待ちしています",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "検収の期限・期間の扱い",
+      "verdict": "insufficient",
+      "proposal": "検収期間の定めが別にあるなら「○月○日までに検収結果をご連絡ください」などと添えるとより明確です。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0380264,
+   "duration_ms": 12658,
+   "seconds": 13.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C4",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "納品しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "検収の結果をお待ちしています",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "貴社",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07180879999999999,
+   "duration_ms": 21306,
+   "seconds": 22.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "C4",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "納品しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "検収の結果をお待ちしています",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "貴社",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0745454,
+   "duration_ms": 17938,
+   "seconds": 18.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X1",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "案件A",
+      "verdict": "insufficient",
+      "proposal": "案件Aの契約書・仕様書で確認する(資料は案件Bのもの)"
+     },
+     {
+      "target": "納品後30日以内",
+      "verdict": "insufficient",
+      "proposal": "案件Aの契約で30日と確認できた場合のみ「納品後30日以内」とする"
+     },
+     {
+      "target": "検収が完了します",
+      "verdict": "ambiguous",
+      "proposal": "検収期間は納品後30日以内です"
+     },
+     {
+      "target": "納品後",
+      "verdict": "ambiguous",
+      "proposal": "起算点(納品日・翌日・検収依頼日)を明記する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036615,
+   "duration_ms": 11437,
+   "seconds": 12.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X1",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "案件A/30日以内",
+      "verdict": "insufficient",
+      "proposal": "案件Aの検収期間を定めた資料(契約書等)で確認する。資料にある「30日以内」は案件Bの条件であり、案件Aには当てはめられない。"
+     },
+     {
+      "target": "検収が完了します",
+      "verdict": "ambiguous",
+      "proposal": "案件Aの検収期間は、納品後30日以内です。(期間の上限を示す書き方にする。保証の意図なら主体と条件を明記する)"
+     },
+     {
+      "target": "納品後",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.039532,
+   "duration_ms": 14142,
+   "seconds": 15.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X1",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "検収が完了します",
+      "verdict": "ambiguous",
+      "proposal": "案件Aの契約で検収期間の定めを確認できた場合は「検収期間は納品後30日以内です」。見込みなら「納品後30日以内の検収完了を予定しています」"
+     },
+     {
+      "target": "納品後30日以内",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "案件A",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0761426,
+   "duration_ms": 18881,
+   "seconds": 20.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X1",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "納品後30日以内",
+      "verdict": "insufficient",
+      "proposal": "案件Aの契約・仕様で検収期間を確認する。確認できた場合のみ「案件Aの検収期間は、納品後30日以内です。」とする"
+     },
+     {
+      "target": "検収が完了します",
+      "verdict": "ambiguous",
+      "proposal": "検収の主体と完了条件は案件Aの資料で確認する。確認前は完了を言い切らず、「検収期間は〜です」と期間として述べる"
+     },
+     {
+      "target": "納品後",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.077243,
+   "duration_ms": 22862,
+   "seconds": 23.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X2",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "リリース",
+      "verdict": "insufficient",
+      "proposal": "現行の用語集で定義を確認する。確認できない間は「本番へデプロイ」など具体的な語で書く。"
+     },
+     {
+      "target": "リリースしました。",
+      "verdict": "ambiguous",
+      "proposal": "order-api v1.4.2 を本番へデプロイしました(全ユーザー向けに公開済み)。のように、対象・環境・公開範囲を明記する。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.039406800000000006,
+   "duration_ms": 13199,
+   "seconds": 14.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X2",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "リリース",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "リリースしました。",
+      "verdict": "ambiguous",
+      "proposal": "〇〇サービス v1.2.3 を本番環境にリリースしました。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036350799999999996,
+   "duration_ms": 12087,
+   "seconds": 13.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X2",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "リリース",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "リリースしました。(対象・環境・完了状態の省略)",
+      "verdict": "ambiguous",
+      "proposal": "前後の文脈で対象が明らかなら変更不要。不明なら「〔システム名/バージョン〕を本番環境へリリースしました。」(〔〕は書き手が確認した事実を記入)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0752708,
+   "duration_ms": 23817,
+   "seconds": 24.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X2",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "リリースしました",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "リリースしました(対象・環境・完了範囲の省略)",
+      "verdict": "ambiguous",
+      "proposal": "〇〇(バージョン/機能名)を本番環境にリリースしました。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0675234,
+   "duration_ms": 13551,
+   "seconds": 14.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X3",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さんです",
+      "verdict": "misuse",
+      "proposal": "来月のイベントの取りまとめは、田中さんにお願いする案です(未確定)。"
+     },
+     {
+      "target": "取りまとめ",
+      "verdict": "ambiguous",
+      "proposal": "来月のイベントの取りまとめ(進行管理・窓口など担当範囲を明記)は、田中さんの案です。"
+     },
+     {
+      "target": "来月のイベント",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0371836,
+   "duration_ms": 12025,
+   "seconds": 13.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X3",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さんです",
+      "verdict": "misuse",
+      "proposal": "田中さんにお願いする案です(未合意)。"
+     },
+     {
+      "target": "取りまとめは",
+      "verdict": "ambiguous",
+      "proposal": "取りまとめ役(担当)は"
+     },
+     {
+      "target": "来月のイベント",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0402596,
+   "duration_ms": 16766,
+   "seconds": 17.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X3",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さんです",
+      "verdict": "insufficient",
+      "proposal": "来月のイベントの取りまとめは、田中さんにお願いする案です(まだ確定ではありません)。"
+     },
+     {
+      "target": "取りまとめ",
+      "verdict": "ambiguous",
+      "proposal": "取りまとめの範囲を確認できた内容だけで明示する(例:窓口・進行管理)。未確認なら変更しない。"
+     },
+     {
+      "target": "来月のイベント",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08909159999999999,
+   "duration_ms": 22257,
+   "seconds": 23.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X3",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さんです",
+      "verdict": "insufficient",
+      "proposal": "合意済みならそのまま。未合意なら「田中さんを案としています(未確定です)」"
+     },
+     {
+      "target": "取りまとめ",
+      "verdict": "ambiguous",
+      "proposal": "範囲が決まっている場合のみ「取りまとめ(〈担当する範囲〉)」と範囲を添える。未定なら現状のまま"
+     },
+     {
+      "target": "来月のイベント",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0742806,
+   "duration_ms": 20166,
+   "seconds": 21.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X4",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "SLA",
+      "verdict": "insufficient",
+      "proposal": "「SLAとして定め」のように、数値そのものではなく合意の内容として記述し、保証か目標か、未達時の措置も明記する"
+     },
+     {
+      "target": "稼働率",
+      "verdict": "ambiguous",
+      "proposal": "「月間稼働率(計画メンテナンスを除く)」のように、計測期間・算出方法・除外条件・対象範囲を明示する"
+     },
+     {
+      "target": "99.99%",
+      "verdict": "insufficient",
+      "proposal": "自社の実績・契約条件に基づく数値であることを確認し、対象サービスを特定して記載する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.043403,
+   "duration_ms": 18528,
+   "seconds": 19.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X4",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "SLA",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "稼働率99.99%",
+      "verdict": "ambiguous",
+      "proposal": "月間稼働率99.99%(計画メンテナンスを除く)を目標値とし、未達の場合は〔サービスクレジット等〕を提供する、のように算出期間・対象・保証内容を明記する"
+     },
+     {
+      "target": "当社",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.045756000000000005,
+   "duration_ms": 15250,
+   "seconds": 16.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X4",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "SLA",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "稼働率99.99%",
+      "verdict": "ambiguous",
+      "proposal": "当社のSLAでは、〔対象サービス〕の稼働率を〔月次/年次〕で99.99%と定めています。(保証値か目標値か、計算期間と対象範囲は自社で確認のうえ記入)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.06658339999999999,
+   "duration_ms": 19746,
+   "seconds": 20.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "dev",
+   "id": "X4",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "稼働率99.99%(保証か目標か、測定期間・算定条件)",
+      "verdict": "ambiguous",
+      "proposal": "保証なら「月間稼働率99.99%を保証します(算定条件は別紙SLAのとおり)」、目標なら「稼働率99.99%を目標としています」。期間・条件は自社の確認済み事実に合わせる"
+     },
+     {
+      "target": "99.99%(数値そのもの)",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "SLA",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.073591,
+   "duration_ms": 19807,
+   "seconds": 20.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M5",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "過学習しているので、汎化性能が高い",
+      "verdict": "misuse",
+      "proposal": "このモデルは過学習しておらず、汎化性能が高いです。(過学習している場合は「汎化性能が低いです」とする)"
+     },
+     {
+      "target": "汎化性能が高い",
+      "verdict": "ambiguous",
+      "proposal": "未知データでの性能を指すのか学習データでの性能を指すのかを明示し、根拠となる評価指標を併記する"
+     },
+     {
+      "target": "過学習している",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0364058,
+   "duration_ms": 11993,
+   "seconds": 13.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M5",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "このモデルは過学習しているので、汎化性能が高いです",
+      "verdict": "misuse",
+      "proposal": "このモデルは過学習しておらず、汎化性能が高いです。(または、過学習しているため、汎化性能が低いです。)"
+     },
+     {
+      "target": "過学習",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "汎化性能",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.035896399999999995,
+   "duration_ms": 12829,
+   "seconds": 14.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M5",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "過学習している",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "汎化性能が高い",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "過学習しているので、汎化性能が高い(因果のつなぎ)",
+      "verdict": "misuse",
+      "proposal": "意図が「過学習している」なら「過学習しているので、汎化性能が低いです」。意図が「過学習していない」なら「過学習しておらず、汎化性能が高いです」。どちらかは本人に確認が必要。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0742824,
+   "duration_ms": 19744,
+   "seconds": 20.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M5",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "過学習しているので、汎化性能が高いです",
+      "verdict": "misuse",
+      "proposal": "過学習しておらず、汎化性能が高いです(または、過学習しているため、汎化性能が低いです。意図に応じて選択)"
+     },
+     {
+      "target": "過学習",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "汎化性能",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0678796,
+   "duration_ms": 14052,
+   "seconds": 15.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M6",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ステージング環境にリリースした",
+      "verdict": "misuse",
+      "proposal": "ステージング環境にデプロイしました"
+     },
+     {
+      "target": "利用者はもう使えます",
+      "verdict": "misuse",
+      "proposal": "本番環境へのリリースはまだのため、利用者はまだ使えません(検証担当者のみ利用可)"
+     },
+     {
+      "target": "ステージング環境",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0379462,
+   "duration_ms": 12060,
+   "seconds": 13.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M6",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ステージング環境にリリースした",
+      "verdict": "misuse",
+      "proposal": "ステージング環境にデプロイしました"
+     },
+     {
+      "target": "利用者はもう使えます",
+      "verdict": "ambiguous",
+      "proposal": "ステージング環境は検証用のため、利用者向けには「本番リリースは未実施です」などと状態を明記する。本番リリース済みなら「本番環境へのリリースが完了し、ご利用いただけます」とする"
+     },
+     {
+      "target": "利用者",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0383774,
+   "duration_ms": 11833,
+   "seconds": 12.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M6",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "リリースした",
+      "verdict": "misuse",
+      "proposal": "ステージング環境にデプロイしました"
+     },
+     {
+      "target": "利用者はもう使えます",
+      "verdict": "ambiguous",
+      "proposal": "ステージング環境にデプロイしました。(検証担当者は)確認できる状態です。※本番へはまだリリースしていません"
+     },
+     {
+      "target": "ステージング環境",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0707052,
+   "duration_ms": 19070,
+   "seconds": 19.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M6",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "リリースしたので",
+      "verdict": "misuse",
+      "proposal": "ステージング環境にデプロイしました。"
+     },
+     {
+      "target": "利用者はもう使えます",
+      "verdict": "insufficient",
+      "proposal": "使える人の範囲を確認のうえ、対象を明示する(例: 検証担当者は利用できます)。確認前は言い切らない。"
+     },
+     {
+      "target": "ステージング環境",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0863062,
+   "duration_ms": 23053,
+   "seconds": 24.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M7",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "強度は100N/mm",
+      "verdict": "misuse",
+      "proposal": "ばね定数(剛性)は100N/mm"
+     },
+     {
+      "target": "変形しにくい",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0359174,
+   "duration_ms": 10119,
+   "seconds": 11.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M7",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "強度は100N/mm",
+      "verdict": "misuse",
+      "proposal": "「ばね定数は100N/mm」(または「剛性は100N/mm」)に改める"
+     },
+     {
+      "target": "変形しにくいです",
+      "verdict": "ambiguous",
+      "proposal": "「1mm たわませるのに100N の荷重を要する」など、数値の意味と比較基準を明示する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0368902,
+   "duration_ms": 11722,
+   "seconds": 12.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M7",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "強度",
+      "verdict": "misuse",
+      "proposal": "このばねの剛性(ばね定数)は100N/mmなので、変形しにくいです。"
+     },
+     {
+      "target": "100N/mm",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "変形しにくいです",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08102680000000001,
+   "duration_ms": 19330,
+   "seconds": 20.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M7",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "強度",
+      "verdict": "misuse",
+      "proposal": "ばね定数(または剛性)"
+     },
+     {
+      "target": "100N/mm",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "変形しにくいです",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0649342,
+   "duration_ms": 19987,
+   "seconds": 20.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M8",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "粗利は10です",
+      "verdict": "misuse",
+      "proposal": "粗利益(売上総利益)は100−70=30、営業利益は30−20=10。「売上総利益(粗利益)は30、営業利益は10です」とする"
+     },
+     {
+      "target": "粗利",
+      "verdict": "ambiguous",
+      "proposal": "売上総利益(粗利益)と正式名称で記載する"
+     },
+     {
+      "target": "売上、売上原価、販管費",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "数値の単位・対象期間",
+      "verdict": "insufficient",
+      "proposal": "単位(例:百万円)と対象月を明記する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0380796,
+   "duration_ms": 13977,
+   "seconds": 15.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M8",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "粗利は10です",
+      "verdict": "misuse",
+      "proposal": "粗利益(売上総利益)は30、営業利益は10です"
+     },
+     {
+      "target": "売上100",
+      "verdict": "ambiguous",
+      "proposal": "売上高100"
+     },
+     {
+      "target": "販管費20",
+      "verdict": "ambiguous",
+      "proposal": "販売費及び一般管理費20"
+     },
+     {
+      "target": "売上原価70",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.035680399999999994,
+   "duration_ms": 9547,
+   "seconds": 10.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M8",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "粗利は10",
+      "verdict": "misuse",
+      "proposal": "売上100、売上原価70、販管費20なので、営業利益は10です。(粗利益は100−70=30)"
+     },
+     {
+      "target": "売上100、売上原価70、販管費20",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0728138,
+   "duration_ms": 19176,
+   "seconds": 20.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "M8",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "粗利は10です",
+      "verdict": "misuse",
+      "proposal": "営業利益は10です(粗利益は売上高100−売上原価70=30)"
+     },
+     {
+      "target": "売上",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "売上原価",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "販管費",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.072147,
+   "duration_ms": 16765,
+   "seconds": 17.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A5",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "学習用のデータ",
+      "verdict": "ambiguous",
+      "proposal": "機械学習モデルの学習用データセット(学習用/検証用/評価用の別も明記)"
+     },
+     {
+      "target": "整備しました",
+      "verdict": "ambiguous",
+      "proposal": "欠損値処理と形式統一を行い、基盤上で利用可能にしました(実施内容と完了状態を具体化)"
+     },
+     {
+      "target": "学習用途と利用規約の関係",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0384328,
+   "duration_ms": 14399,
+   "seconds": 15.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A5",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "学習用のデータ",
+      "verdict": "insufficient",
+      "proposal": "「機械学習モデルの学習用データ」のように、何の学習かを明示する(資料に定義がないため、用語集等での確認が必要)"
+     },
+     {
+      "target": "整備しました",
+      "verdict": "insufficient",
+      "proposal": "「欠損値の補完と形式の統一を完了し、基盤上に格納しました」のように、実施した作業内容と完了範囲を具体化する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.038597400000000004,
+   "duration_ms": 13305,
+   "seconds": 14.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A5",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "整備しました",
+      "verdict": "ambiguous",
+      "proposal": "実施した作業(クレンジング/ラベル付け/分割/配置など)と完了状態を明記する。例:「学習用データの〔作業内容〕を完了しました。」"
+     },
+     {
+      "target": "学習用のデータ",
+      "verdict": "ambiguous",
+      "proposal": "「機械学習モデルの学習用データ」または「学習用データセット(train分)」など、指す範囲を明示する"
+     },
+     {
+      "target": "学習用のデータ(利用規約上の業務目的との関係)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0708432,
+   "duration_ms": 16557,
+   "seconds": 17.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A5",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "整備しました",
+      "verdict": "ambiguous",
+      "proposal": "作業内容に合わせて具体化する(例:「学習用データのクレンジングと形式統一を完了しました。」)。完了条件は本人確認のうえで記載する"
+     },
+     {
+      "target": "学習用",
+      "verdict": "ambiguous",
+      "proposal": "「モデル学習用(訓練用)データ」など用途を明示する。検証・テスト用を含むかは本人に確認する"
+     },
+     {
+      "target": "データ(業務目的に限る利用規約との関係)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08469460000000001,
+   "duration_ms": 23059,
+   "seconds": 23.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A6",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "このタスク",
+      "verdict": "ambiguous",
+      "proposal": "課題#12(テスト環境の更新)"
+     },
+     {
+      "target": "引き取ります",
+      "verdict": "ambiguous",
+      "proposal": "担当します"
+     },
+     {
+      "target": "私が",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0472316,
+   "duration_ms": 18590,
+   "seconds": 19.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A6",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "このタスク",
+      "verdict": "ambiguous",
+      "proposal": "課題#12(テスト環境の更新)は"
+     },
+     {
+      "target": "引き取ります",
+      "verdict": "ambiguous",
+      "proposal": "担当します(引き継ぎなら「〇〇さんから引き継ぎます」)"
+     },
+     {
+      "target": "私が",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0399138,
+   "duration_ms": 16174,
+   "seconds": 17.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A6",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "引き取ります",
+      "verdict": "ambiguous",
+      "proposal": "担当します(範囲を絞る場合は、本人が確認した範囲を明示する)"
+     },
+     {
+      "target": "このタスク",
+      "verdict": "insufficient",
+      "proposal": "課題#12(テスト環境の更新)のことなら、その名前を言う。別の課題ならその名前に置き換える"
+     },
+     {
+      "target": "タスク",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.083635,
+   "duration_ms": 23210,
+   "seconds": 24.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A6",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "このタスク",
+      "verdict": "ambiguous",
+      "proposal": "課題12(テスト環境の更新)のように対象名を言う"
+     },
+     {
+      "target": "引き取ります",
+      "verdict": "ambiguous",
+      "proposal": "担当に名乗り出る意図なら「担当します」"
+     },
+     {
+      "target": "私が(担当が確定するか)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0836316,
+   "duration_ms": 24281,
+   "seconds": 25.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A7",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "システムのログ",
+      "verdict": "ambiguous",
+      "proposal": "アプリケーションログ(INFO以上)"
+     },
+     {
+      "target": "取得しています",
+      "verdict": "ambiguous",
+      "proposal": "30日間保存しています(監査ログは対象外)"
+     },
+     {
+      "target": "システムのログは取得しています(システム全体を網羅しているという主張)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036934999999999996,
+   "duration_ms": 11203,
+   "seconds": 12.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A7",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "システムのログ",
+      "verdict": "ambiguous",
+      "proposal": "アプリケーションログ(INFO以上)"
+     },
+     {
+      "target": "取得しています",
+      "verdict": "ambiguous",
+      "proposal": "取得し、30日間保存しています"
+     },
+     {
+      "target": "システムのログ(監査ログとの関係)",
+      "verdict": "misuse",
+      "proposal": "監査ログは本設定の対象外である旨を明記する"
+     },
+     {
+      "target": "取得しています(実績・対象システム)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.046461,
+   "duration_ms": 15952,
+   "seconds": 16.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A7",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "システムのログ",
+      "verdict": "ambiguous",
+      "proposal": "アプリケーションログ(INFO以上)"
+     },
+     {
+      "target": "取得しています",
+      "verdict": "ambiguous",
+      "proposal": "取得し、30日間保存しています"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.072755,
+   "duration_ms": 23184,
+   "seconds": 24.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A7",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "システムのログ",
+      "verdict": "ambiguous",
+      "proposal": "アプリケーションログ(INFO以上)を取得し、30日間保存しています。なお、監査ログは本設定の対象外です。"
+     },
+     {
+      "target": "取得しています",
+      "verdict": "ambiguous",
+      "proposal": "取得対象のレベル(INFO以上)と保存期間(30日間)を明記する"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.06912660000000001,
+   "duration_ms": 16378,
+   "seconds": 17.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A8",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "本番",
+      "verdict": "insufficient",
+      "proposal": "本番環境(対象システム名)のように対象を明記する"
+     },
+     {
+      "target": "問題ありません",
+      "verdict": "misuse",
+      "proposal": "本番環境の監視指標(CPU使用率40%、エラー率0.1%)に異常は見られません。なお、お客様・業務への影響については未確認です。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0440706,
+   "duration_ms": 13193,
+   "seconds": 14.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A8",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "本番",
+      "verdict": "ambiguous",
+      "proposal": "本番環境(対象システム名)"
+     },
+     {
+      "target": "問題ありません",
+      "verdict": "misuse",
+      "proposal": "監視指標(CPU使用率40%、エラー率0.1%)に異常は見られません。利用者への影響は未確認です。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036099400000000004,
+   "duration_ms": 11800,
+   "seconds": 12.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A8",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "問題ありません",
+      "verdict": "ambiguous",
+      "proposal": "本番環境の監視ダッシュボードでは、CPU使用率 40%、エラー率 0.1% でした。利用者への影響は未確認です。"
+     },
+     {
+      "target": "本番",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.072802,
+   "duration_ms": 18975,
+   "seconds": 19.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "A8",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "本番",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "問題ありません",
+      "verdict": "ambiguous",
+      "proposal": "本番の監視指標(CPU使用率40%、エラー率0.1%)に異常は見られません。利用者への影響は未確認です。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.083471,
+   "duration_ms": 24213,
+   "seconds": 25.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C5",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "過学習",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "未知のデータでは71%に下がっています",
+      "verdict": "ambiguous",
+      "proposal": "資料の用語に合わせ、「汎化性能は71%に下がっています」と書く。"
+     },
+     {
+      "target": "98%/71%",
+      "verdict": "insufficient",
+      "proposal": "指標名(正解率、F1など)と、未知のデータが検証データかテストデータかを明記する。"
+     },
+     {
+      "target": "過学習が起きており",
+      "verdict": "insufficient",
+      "proposal": "原因を断定する場合は、根拠(学習曲線や分布の確認など)を別途示す。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0397584,
+   "duration_ms": 11712,
+   "seconds": 12.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C5",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "過学習が起きており",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "98%/71%(指標名なし)",
+      "verdict": "insufficient",
+      "proposal": "指標名(例: 正解率)を明記する"
+     },
+     {
+      "target": "未知のデータ",
+      "verdict": "insufficient",
+      "proposal": "実際に使ったデータ(テストデータ等)を明記する"
+     },
+     {
+      "target": "未知のデータでは71%",
+      "verdict": "ok",
+      "proposal": "必要なら「汎化性能は71%」と言い換える"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0371636,
+   "duration_ms": 13703,
+   "seconds": 14.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C5",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "過学習が起きており",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "未知のデータでは71%に下がっています",
+      "verdict": "ok",
+      "proposal": "用語を揃えるなら「汎化性能は71%に下がっています」(任意)"
+     },
+     {
+      "target": "98%/71%",
+      "verdict": "insufficient",
+      "proposal": "指標名(正解率など、確認済みの実際の指標)を明記する"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07320360000000001,
+   "duration_ms": 21115,
+   "seconds": 22.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C5",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "過学習が起きており",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "学習データでは98%だが、未知のデータでは71%",
+      "verdict": "ambiguous",
+      "proposal": "学習データでの正解率は98%ですが、未知のデータでは71%に下がっています(指標名は実際のものに置き換える)"
+     },
+     {
+      "target": "未知のデータ",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0811024,
+   "duration_ms": 19744,
+   "seconds": 20.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C6",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ステージング環境へのデプロイは完了しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "利用者向けのリリースは金曜です",
+      "verdict": "ambiguous",
+      "proposal": "利用者向けのリリース(本番環境へのデプロイと公開手続きの完了)は○月○日(金)の予定です。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0363064,
+   "duration_ms": 11102,
+   "seconds": 12.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C6",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ステージング環境へのデプロイは完了しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "利用者向けのリリース",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "金曜",
+      "verdict": "insufficient",
+      "proposal": "10/23(金)のように日付を明記する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0391982,
+   "duration_ms": 12925,
+   "seconds": 14.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C6",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ステージング環境へのデプロイは完了しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "利用者向けのリリース",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "金曜",
+      "verdict": "insufficient",
+      "proposal": "利用者向けのリリースは10/23(金)です。(日付は報告者が確認のうえ記載)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0735872,
+   "duration_ms": 18580,
+   "seconds": 19.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C6",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ステージング環境へのデプロイは完了しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "利用者向けのリリースは金曜です",
+      "verdict": "ambiguous",
+      "proposal": "利用者向けのリリース(本番デプロイと公開)は金曜の予定です。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0676492,
+   "duration_ms": 15920,
+   "seconds": 16.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C7",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "剛性は100N/mm",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "変形しにくいです",
+      "verdict": "insufficient",
+      "proposal": "100N/mmが大きいか小さいかを判断する基準が資料になく、定義の言い換えにもなっている。比較対象や基準値を示すか、「1Nあたり0.01mmたわむ」のように数値で表す。"
+     },
+     {
+      "target": "バネ",
+      "verdict": "ok",
+      "proposal": "資料の表記に合わせて「ばね」に統一する(任意)。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.041018399999999997,
+   "duration_ms": 18336,
+   "seconds": 19.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C7",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "剛性",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "100N/mm",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "変形しにくいです",
+      "verdict": "insufficient",
+      "proposal": "比較基準や要求値を示す(例:「要求値(○○N/mm)以上であり、変形しにくい」)。報告書では「です」を「である」にそろえる。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.04009359999999999,
+   "duration_ms": 16420,
+   "seconds": 17.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C7",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "剛性",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "100N/mm",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "変形しにくいです",
+      "verdict": "insufficient",
+      "proposal": "このばねのばね定数は100N/mmであり、1mm変形させるのに100Nの荷重を要する。(比較対象・要求値が確認できれば、それとの比較として「変形しにくい」を残せる)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0827922,
+   "duration_ms": 22934,
+   "seconds": 23.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C7",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "剛性は100N/mm",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "変形しにくいです",
+      "verdict": "ambiguous",
+      "proposal": "このばねの剛性(ばね定数)は100N/mmである。(要求値がある場合は「…要求値(○○N/mm以上)を満たす」と基準を明記する)"
+     },
+     {
+      "target": "100N/mmが測定値か公称値か",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08187900000000001,
+   "duration_ms": 21276,
+   "seconds": 22.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C8",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上100",
+      "verdict": "insufficient",
+      "proposal": "売上高100"
+     },
+     {
+      "target": "売上原価70",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "販管費20",
+      "verdict": "insufficient",
+      "proposal": "販売費及び一般管理費20"
+     },
+     {
+      "target": "粗利は30",
+      "verdict": "insufficient",
+      "proposal": "粗利益(売上総利益)は30"
+     },
+     {
+      "target": "営業利益は10",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0410852,
+   "duration_ms": 14834,
+   "seconds": 16.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C8",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上100",
+      "verdict": "ambiguous",
+      "proposal": "売上高100"
+     },
+     {
+      "target": "売上原価70",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "販管費20",
+      "verdict": "insufficient",
+      "proposal": "初出は「販売費及び一般管理費(販管費)」と正式名を併記する"
+     },
+     {
+      "target": "粗利は30",
+      "verdict": "ok",
+      "proposal": "報告資料では「売上総利益(粗利益)」に統一するとよい"
+     },
+     {
+      "target": "営業利益は10",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "数値の単位",
+      "verdict": "insufficient",
+      "proposal": "単位(百万円など)を明記する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0432614,
+   "duration_ms": 16459,
+   "seconds": 17.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C8",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上100、売上原価70、販管費20(単位)",
+      "verdict": "insufficient",
+      "proposal": "資料に単位の規定がないため判断できない。本人に確認して「(単位:○○円)」を付記する"
+     },
+     {
+      "target": "売上",
+      "verdict": "ok",
+      "proposal": "必要なら「売上高」に揃える"
+     },
+     {
+      "target": "販管費",
+      "verdict": "ambiguous",
+      "proposal": "初出は「販売費及び一般管理費」と書く(略称の扱いは資料に明記なし)"
+     },
+     {
+      "target": "粗利は30",
+      "verdict": "ok",
+      "proposal": "資料の用語に揃えるなら「粗利益(売上総利益)は30」"
+     },
+     {
+      "target": "営業利益は10",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0735084,
+   "duration_ms": 17020,
+   "seconds": 17.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "C8",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "粗利は30",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "営業利益は10",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "販管費",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "売上100、売上原価70",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "100、70、20(単位の記載なし)",
+      "verdict": "ambiguous",
+      "proposal": "数値に単位を付ける(単位は資料にないため、確認のうえ補う)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0823734,
+   "duration_ms": 20444,
+   "seconds": 21.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X5",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "顧客",
+      "verdict": "insufficient",
+      "proposal": "Beta 側の「顧客」の定義と Alpha との関係を確認する。Beta 独自なら「本書で顧客とは、契約済みの法人および個人をいう。Project Alpha(法人のみ)とは範囲が異なる」と明記する。"
+     },
+     {
+      "target": "個人",
+      "verdict": "ambiguous",
+      "proposal": "個人事業主か一般消費者か、契約済みか見込み客かを明示する。例:「契約済みの個人(個人事業主を含む)」"
+     },
+     {
+      "target": "含まれます",
+      "verdict": "ambiguous",
+      "proposal": "定義として範囲を閉じるなら「顧客とは、契約済みの法人および個人をいう」と書く。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0387462,
+   "duration_ms": 13446,
+   "seconds": 14.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X5",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "顧客",
+      "verdict": "insufficient",
+      "proposal": "Project Beta の用語定義を確認したうえで、本書での「顧客」の範囲(契約済みか、法人・個人の別)を明示する。"
+     },
+     {
+      "target": "個人も含まれます",
+      "verdict": "ambiguous",
+      "proposal": "本書で顧客とは、契約済みの法人および個人をいう。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0390696,
+   "duration_ms": 15304,
+   "seconds": 16.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X5",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "顧客",
+      "verdict": "insufficient",
+      "proposal": "Project Beta における顧客の定義を確認する。資料(Project Alpha 設計書 版1.2)の定義は Alpha 限定で、Beta には適用できない。"
+     },
+     {
+      "target": "個人",
+      "verdict": "ambiguous",
+      "proposal": "個人の範囲(個人事業主/消費者/見込み客を含むか)を明示する。例:「顧客には、法人のほか個人(〔範囲:要確認〕)も含まれる。」"
+     },
+     {
+      "target": "含まれます",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0823054,
+   "duration_ms": 20511,
+   "seconds": 21.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X5",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "顧客",
+      "verdict": "insufficient",
+      "proposal": "Project Beta 自身の「顧客」の定義を確認する。Alpha の定義(契約済みの法人のみ)とは別であることが分かるよう、定義節か注記で範囲を示す。"
+     },
+     {
+      "target": "個人も含まれます",
+      "verdict": "ambiguous",
+      "proposal": "本書で顧客には、法人に加え個人(〔個人事業主/消費者などの範囲を本人が確認して記入〕)も含める。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0728338,
+   "duration_ms": 18924,
+   "seconds": 19.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X6",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "繰越上限は20日",
+      "verdict": "insufficient",
+      "proposal": "資料は2019年版で、2022年に改定済みと明記されている。改定後の規定を確認したうえで数値を確定する。"
+     },
+     {
+      "target": "有給休暇",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "繰越上限",
+      "verdict": "ambiguous",
+      "proposal": "繰越日数の上限か、繰越後の保有日数の上限かを明示する(例:「前年度から繰り越せる日数の上限は○日です」)。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.039254800000000006,
+   "duration_ms": 12859,
+   "seconds": 13.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X6",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "有給休暇",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "繰越上限は20日です",
+      "verdict": "insufficient",
+      "proposal": "資料は2019年版で2022年に改定済みのため、2025年時点の数値は現行の就業規則で確認する。確認できた場合は「翌年度に最大20日まで繰り越せます」のように、繰り越せる日数であることを明記する。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0383328,
+   "duration_ms": 12938,
+   "seconds": 14.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X6",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "20日",
+      "verdict": "insufficient",
+      "proposal": "2022年改定後の現行就業規則で値を確認し、「有給休暇の繰越上限は20日です(就業規則〔○年版〕による)。」のように版を明示する(値が変わっていればその値に差し替える)"
+     },
+     {
+      "target": "有給休暇",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "繰越上限",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0696824,
+   "duration_ms": 17532,
+   "seconds": 18.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X6",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "20日",
+      "verdict": "insufficient",
+      "proposal": "資料は2019年版で、2022年に改定済みとあるだけで、現行値が分かりません。改定後の最新版を確認してください。確認後に「2025年現在、有給休暇の繰越上限は○日です。」のように時点を添えます。"
+     },
+     {
+      "target": "繰越上限",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "有給休暇",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.069145,
+   "duration_ms": 17537,
+   "seconds": 18.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X7",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "完了",
+      "verdict": "insufficient",
+      "proposal": "他部門にも共有する場合は、完了の範囲を明記する(例:「コーディングは完了、テスト・レビューは未実施」)。"
+     },
+     {
+      "target": "実装",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0355292,
+   "duration_ms": 10607,
+   "seconds": 11.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X7",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "完了",
+      "verdict": "ambiguous",
+      "proposal": "「実装(コーディング)が完了しました。テスト・レビューは未実施です。」のように、完了の範囲を明示する(品質管理部の基準を満たすなら「テスト合格・レビュー承認済み」と書く)"
+     },
+     {
+      "target": "実装",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0364314,
+   "duration_ms": 10988,
+   "seconds": 12.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X7",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "完了",
+      "verdict": "insufficient",
+      "proposal": "自部門の「完了」の定義を確認のうえ、状態を明記する(例:「実装(コーディング)が完了しました。テストとレビューはこれからです。」)"
+     },
+     {
+      "target": "実装",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.070351,
+   "duration_ms": 17827,
+   "seconds": 18.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X7",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "完了",
+      "verdict": "insufficient",
+      "proposal": "自部門での「完了」の範囲を確認する。コード作成のみなら「実装(コーディング)が終わりました。テスト・レビューはこれからです。」、テスト合格・レビュー承認済みなら「実装が完了しました(テスト合格・レビュー承認済み)。」"
+     },
+     {
+      "target": "実装",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0829112,
+   "duration_ms": 17621,
+   "seconds": 18.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X8",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冗長化",
+      "verdict": "insufficient",
+      "proposal": "資料はベンダーA製品の定義であり、ベンダーB製品の用法は判断できない。B製品のマニュアルで定義を確認する。"
+     },
+     {
+      "target": "3重",
+      "verdict": "insufficient",
+      "proposal": "資料に三重化の定義がなく判断できない。一般的にも構成(Active/Standbyの台数、稼働方式)が定まらないため、「Active 1台・Standby 2台の三重化構成」のように構成を明記する(実構成に合わせる)。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0471804,
+   "duration_ms": 18027,
+   "seconds": 18.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X8",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "冗長化は3重です",
+      "verdict": "ambiguous",
+      "proposal": "3重が何を指すか(合計系統数か、予備系の数か)と構成方式(Active-Standby、Active-Active など)を明記する。例:「サーバ部は同一構成の3系統(Active 1、Standby 2)で冗長化しています」"
+     },
+     {
+      "target": "このシステム",
+      "verdict": "ambiguous",
+      "proposal": "冗長化の対象範囲(システム全体か、サーバ、ネットワーク、電源などの構成要素か)を明記する。"
+     },
+     {
+      "target": "冗長化",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0462138,
+   "duration_ms": 14201,
+   "seconds": 15.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X8",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "3重",
+      "verdict": "ambiguous",
+      "proposal": "B製品の構成を確認したうえで、対象要素と方式を明記する(例:「〇〇を3系統で構成する三重化構成です」。〇〇と方式は確認後に記入)"
+     },
+     {
+      "target": "冗長化",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08281580000000001,
+   "duration_ms": 26540,
+   "seconds": 27.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "split": "test",
+   "id": "X8",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "3重",
+      "verdict": "ambiguous",
+      "proposal": "B製品の実構成を確認したうえで、例えば「Active 1台とStandby 2台の計3台で冗長化しています」や「◯◯を3重化しています」のように、対象と台数・稼働方式を明示する"
+     },
+     {
+      "target": "冗長化",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "このシステム",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0724104,
+   "duration_ms": 18753,
+   "seconds": 19.6,
+   "is_error": false,
+   "timed_out": false
+  }
+ ]
+}
