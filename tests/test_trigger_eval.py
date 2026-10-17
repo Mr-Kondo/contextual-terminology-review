@@ -70,6 +70,14 @@ class Score(unittest.TestCase):
         r = te.score(DATA, res, "test")
         self.assertFalse(r["pass"]["false_fire"])
 
+    def test_runs_that_did_not_finish_cleanly_void_the_verdict(self):
+        res = self.results(lambda q: None)
+        res[0]["finished"] = False
+        r = te.score(DATA, res, "all")
+        self.assertIsNone(r["pass"])
+        self.assertEqual(r["runs_without_clean_finish"], 1)
+        self.assertIn("正常に終わっていない", r["warning"])
+
     def test_split_filter_uses_only_that_split(self):
         res = [r for r in self.results(lambda q: te.SKILL if q["should_trigger"] else None)]
         self.assertEqual(te.score(DATA, res, "dev")["positive_runs"], 12)
