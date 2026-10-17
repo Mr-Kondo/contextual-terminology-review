@@ -75,6 +75,12 @@ class RuriWithoutDependency(TmpCase):
         self.assertEqual(cm.exception.code, "index_missing")
 
 
+class RuriDefaults(unittest.TestCase):
+    def test_default_model_is_310m_with_a_pinned_revision(self):                   # 採否の検証(docs/RURI-ADOPTION.md)で基準を満たした設定
+        self.assertEqual(se.DEFAULT_MODEL, "cl-nagoya/ruri-v3-310m")
+        self.assertRegex(se.DEFAULT_REVISION, r"^[0-9a-f]{40}$")
+
+
 @unittest.skipUnless(HAS_ST and os.environ.get("CTR_RUN_RURI") == "1", "Ruri実検索は未実施(sentence-transformers と CTR_RUN_RURI=1 が必要)")
 class RuriReal(TmpCase):
     """実モデルでの検索。模擬ではない。モデル取得にネットワーク権限が必要。"""

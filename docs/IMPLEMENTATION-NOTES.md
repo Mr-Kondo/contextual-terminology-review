@@ -40,7 +40,7 @@
 | Pydantic | 2.14.1 | MIT | 参照・レビュー・資料登録簿の検査。strict で暗黙の型変換を避ける。型検査は意味の判定器ではない |
 | pdfplumber | 0.11.10（pdfminer.six 20260107、pypdfium2 5.14.0） | MIT | 機械生成PDFの文字・表・ページ・位置。スキャン・図は視覚確認が別に必要 |
 | SentenceTransformers | 6.1.0（torch 2.14.1、transformers 5.20.1、numpy 2.5.4） | Apache-2.0 | 任意のRuri検索。既存の `util.semantic_search` を使用 |
-| Ruri v3 70m | `cl-nagoya/ruri-v3-70m`、revision `07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc`（取得時のsnapshot） | Apache-2.0（モデルカード確認） | 検索クエリ `検索クエリ: `・検索文書 `検索文書: ` の接頭辞（モデルカードで確認） |
+| Ruri v3 310m（既定） | `cl-nagoya/ruri-v3-310m`、revision `18b60fb8c2b9df296fb4212bb7d23ef94e579cd3`（採否の検証に使ったsnapshot。重み約1.2GB）。70m（`cl-nagoya/ruri-v3-70m`、revision `07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc`）は `--model` で指定できるが、基準に届かなかった | Apache-2.0（モデルカード確認） | 検索クエリ `検索クエリ: `・検索文書 `検索文書: ` の接頭辞（モデルカードで確認） |
 | Pillow | 13.0.0（venv）／12.3.0（A20の素材を生成したシステムPython） | MIT-CMU（メタデータ確認） | A20の試験素材の生成のみ（テスト用、Skill配布物に含めない） |
 
 「無償OSS優先」を非商用限定と読み替えていない。新規成果物（このSkill自体）のライセンスは、当初は指定が無く未確定だったが、のちに利用者がMITと指定したため `LICENSE`（MIT、Copyright (c) 2026 Mr-Kondo）を置いた（Skill配布物にも同じLICENSEを同梱）。モデル取得では、Xet転送がプロキシを通らなかったため `HF_HUB_DISABLE_XET=1` を使った。再現できる版は `requirements-lock.txt`。
@@ -83,7 +83,7 @@
   - 未実施: Antigravity IDE/App、リモート、ChatGPT Work、Claude Cowork。
 - 意味審査（A01〜A12, A17, A19, A20, A28, A29）は、作成者がAIで独立ではないため**未確定**。
 - 匿名比較・理解問題の実際の評価者による採点、受け手の理解、本人の習得、実務での改善効果は未測定。性能の数値目標・週30分で確認できる件数は、初回試行後に提案する。
-- Ruri検索: 架空の用語集40語・課題80件で一致検索・文字2-gram・Ruri 70m/310mを比較した（[docs/RURI-ADOPTION.md](RURI-ADOPTION.md)）。事前に固定した基準を、310mは満たし70m（既定）は満たさなかった。課題は作成者が作った独立でないもので、実データでの確認と既定モデルの判断が残る。既定値は変えていない。
+- Ruri検索: 架空の用語集40語・課題80件で一致検索・文字2-gram・Ruri 70m/310mを比較した（[docs/RURI-ADOPTION.md](RURI-ADOPTION.md)）。事前に固定した基準を、310mは満たし70m（既定）は満たさなかった。課題は作成者が作った独立でないもので、実データでの確認が残る。利用者の決定により既定モデルを310m（版固定）に変更した。
 - A31（マージ後の後片付け）は、マージ・公開が未実施のため未到達。
 
 ## 参照（確認箇所ごとに1行）

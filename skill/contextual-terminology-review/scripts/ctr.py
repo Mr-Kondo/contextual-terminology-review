@@ -182,7 +182,7 @@ def cmd_search(a):
     if a.what == "exact":
         return out(se.exact_search(terms, a.query, project=a.project, as_of=a.as_of))
     if a.what == "build-index":
-        return out(se.build_index(terms, reg, Path(a.index_dir), model_id=a.model, revision=a.revision, local_files_only=a.offline))
+        return out(se.build_index(terms, reg, Path(a.index_dir), model_id=a.model or se.DEFAULT_MODEL, revision=a.revision, local_files_only=a.offline))
     return out(se.ruri_search(a.query, terms, reg, Path(a.index_dir), top_k=a.top_k, local_files_only=a.offline))
 
 
@@ -283,7 +283,7 @@ def build():
     se = sub.add_parser("search"); se.add_argument("what", choices=["exact", "build-index", "ruri"])
     se.add_argument("--terms", required=True); se.add_argument("--sources"); se.add_argument("--query", default="")
     se.add_argument("--project"); se.add_argument("--as-of"); se.add_argument("--index-dir")
-    se.add_argument("--model", default="cl-nagoya/ruri-v3-70m"); se.add_argument("--revision"); se.add_argument("--top-k", type=int, default=5)
+    se.add_argument("--model", help="既定: cl-nagoya/ruri-v3-310m(版固定)"); se.add_argument("--revision"); se.add_argument("--top-k", type=int, default=5)
     se.add_argument("--offline", action="store_true"); se.set_defaults(fn=cmd_search)
 
     pf = sub.add_parser("pdf"); pf.add_argument("what", choices=["extract"]); pf.add_argument("pdf")

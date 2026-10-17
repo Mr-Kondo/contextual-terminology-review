@@ -11,7 +11,8 @@ from typing import Optional
 from ctr_common import CtrError, read_json, sha256_obj, skill_version, utcnow, write_json
 from ctr_refs import Registry
 
-DEFAULT_MODEL = "cl-nagoya/ruri-v3-70m"
+DEFAULT_MODEL = "cl-nagoya/ruri-v3-310m"   # 70m は docs/RURI-ADOPTION.md の基準に届かなかったため既定にしない(--model で指定可)
+DEFAULT_REVISION = "18b60fb8c2b9df296fb4212bb7d23ef94e579cd3"   # 検証に使ったsnapshot。既定モデルのときだけ固定する
 QUERY_PREFIX = "検索クエリ: "   # Ruri v3 モデルカードの検索用接頭辞(実装時に取得したモデルカードで再確認すること)
 DOC_PREFIX = "検索文書: "
 INDEX_FORMAT = 1
@@ -70,6 +71,7 @@ def build_index(terms_obj: dict, reg: Optional[Registry], index_dir: Path, *, mo
     import numpy as np
     import torch
     import transformers
+    revision = revision or (DEFAULT_REVISION if model_id == DEFAULT_MODEL else None)
     kwargs = {"revision": revision} if revision else {}
     model = SentenceTransformer(model_id, local_files_only=local_files_only, **kwargs)
     terms = terms_obj.get("terms", [])
