@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 LEDGER = ROOT / "docs" / "HOST-EVIDENCE.json"
 STAGES = ["placement", "register", "invoke", "source_read", "scripts_run", "footer_output", "record_saved", "export_import"]
 STATES = {"success", "failure", "not_run"}
-KINDS = {"file_placement_in_temp_home", "host_listing", "real_invocation", "host_shell", "temp_runtime_roundtrip", "package_built"}
+KINDS = {"file_placement_in_temp_home", "real_home_install", "host_listing", "real_invocation", "host_shell", "temp_runtime_roundtrip", "package_built"}
 NEED_KIND = {"invoke": {"real_invocation"}, "register": {"host_listing", "real_invocation"}}
 
 
