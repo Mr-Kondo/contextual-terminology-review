@@ -18,6 +18,14 @@ DOC_PREFIX = "検索文書: "
 INDEX_FORMAT = 1
 
 
+def _spans(text: str, form: str) -> list:
+    out, i = [], text.find(form)
+    while i >= 0:
+        out.append((i, i + len(form)))
+        i = text.find(form, i + 1)
+    return out
+
+
 def exact_search(terms_obj: dict, text: str, *, project: Optional[str] = None, as_of: Optional[str] = None) -> dict:
     hits = []
     for t in terms_obj.get("terms", []):
@@ -35,7 +43,19 @@ def exact_search(terms_obj: dict, text: str, *, project: Optional[str] = None, a
                          "personal_preference": scope.get("kind") == "personal",
                          "source": t.get("source")})
     hits.sort(key=lambda h: (-len(h["matched_form"]), h["term_id"]))
-    return {"engine": "exact", "hits": hits,
+    # 短い語の当たりが全て、より長い語の当たりの内側にあるなら除く(例: 『キャッシュ・フロー』の文での『キャッシュ』)。除いたものは suppressed に残す
+    kept, suppressed = [], []
+    for h in hits:
+        f = h["matched_form"]
+        longer = [g["matched_form"] for g in hits if len(g["matched_form"]) > len(f) and f in g["matched_form"]]
+        covered = [(a, b) for g in longer for a, b in _spans(text, g)]
+        mine = _spans(text, f)
+        if longer and all(any(a <= i and j <= b for a, b in covered) for i, j in mine):
+            suppressed.append({"term_id": h["term_id"], "matched_form": f, "covered_by": sorted(set(longer))})
+        else:
+            kept.append(h)
+    hits = kept
+    return {"engine": "exact", "hits": hits, "suppressed": suppressed,
             "note": "同じ語の複数の有効な語義は併存する。candidate は確認候補であり採用済みではない"}
 
 

@@ -254,6 +254,56 @@ def check_ref(ref: Ref, reg: Registry) -> dict:
     return {"status": "pass", "errors": []}
 
 
+# ---------------------------------------------------------------- 警告(エラーにしない。人とAgentが確認する候補)
+
+# 修正案が、原文・目的・本人の意図・確認済み事実・紐づく引用のどこにも無いのに足してはいけない語(責務・承認・完了状態)
+PROTECTED_TERMS = ("承認", "決裁", "合意", "確定", "保証", "責任", "完了", "最終判断")
+# 引用箇所の近くにあると、適用範囲や文書の状態が変わる語
+CONDITION_WORDS = ("草案", "ドラフト", "旧版", "廃止", "失効", "未合意", "未承認", "未決", "暫定", "改定", "ただし", "但し", "除く", "例外")
+_HEADING = ("#", "【", "■", "●", "第")
+
+
+def _proposal_warnings(review: Review, ref_by_id: dict) -> list:
+    out = []
+    for f in review.findings:
+        texts = [t for t in (f.proposal_text, f.oral_rephrase) if t]
+        if not texts:
+            continue
+        allowed = "".join([f.target, review.purpose, review.intent or "", *review.confirmed_facts,
+                           *[(ref_by_id[r].quote or "") + (ref_by_id[r].used_content or "") for r in f.ref_ids if r in ref_by_id]])
+        added = [t for t in PROTECTED_TERMS if any(t in x for x in texts) and t not in allowed]
+        if added:
+            out.append({"class": "proposal_adds_protected_term", "finding": f.id, "terms": added,
+                        "note": "修正案に、原文・本人の説明・確認済み事実・引用のどこにもない責務/承認/完了の語がある。資料にあるか確認し、無ければ外す"})
+    return out
+
+
+def _condition_warnings(review: Review, reg: Registry, results: dict) -> list:
+    out = []
+    finding_by_id = {f.id: f for f in review.findings}
+    for r in review.refs:
+        if r.basis != "source" or r.location is None or r.location.kind != "lines" or results[r.ref_id]["status"] != "pass":
+            continue
+        src, _ = reg.lookup(r.source_id or "", r.version or "")
+        if not src or not src.lines:
+            continue
+        start, end = r.location.start, r.location.end if r.location.end is not None else r.location.start
+        outside = {i: src.lines[i - 1] for i in (*range(max(1, start - 2), start), *range(end + 1, min(len(src.lines), end + 2) + 1))}
+        for i in range(start - 1, 0, -1):          # 直近の見出し行
+            if src.lines[i - 1].lstrip().startswith(_HEADING):
+                outside.setdefault(i, src.lines[i - 1])
+                break
+        stated = "".join([r.quote or "", r.used_content or ""] + [
+            (finding_by_id[fid].reason or "") + (finding_by_id[fid].proposal_text or "") + (finding_by_id[fid].oral_rephrase or "")
+            for fid in r.finding_ids if fid in finding_by_id])
+        for i, line in sorted(outside.items()):
+            hit = [w for w in CONDITION_WORDS if w in line and w not in stated]
+            if hit:
+                out.append({"class": "surrounding_condition_unaddressed", "ref": r.ref_id, "line": i, "words": hit,
+                            "note": "引用の近く(前後2行・直近の見出し)に適用範囲や文書の状態を示す語がある。指摘の理由か確認点に反映したか確認する"})
+    return out
+
+
 # ---------------------------------------------------------------- レビュー全体
 
 KIND_LABEL = {"direct_quote": "直接引用", "summary": "要約", "inference": "推論"}
@@ -342,6 +392,7 @@ def review_check(review: Review, reg: Registry) -> dict:
             add(e.split(":")[0], f.id)
         finding_report.append({"id": f.id, "declared": f.judgment, "effective": effective, "errors": ferrs,
                                "passing_refs": passing})
+    warnings = _proposal_warnings(review, ref_by_id) + _condition_warnings(review, reg, results)
     footer = footer_lines(review, reg, results)
     roots = {reg.root(reg.lookup(r.source_id, r.version)[0]) for r in review.refs
              if r.basis == "source" and results[r.ref_id]["status"] == "pass" and reg.lookup(r.source_id, r.version)[0]}
@@ -350,11 +401,12 @@ def review_check(review: Review, reg: Registry) -> dict:
         "refs": ref_report,
         "findings": finding_report,
         "errors": errors,
+        "warnings": warnings,
         "error_classes": sorted(classes | {e for r in ref_report for e in r["errors"]}),
         "footer": footer,
         "independent_source_roots": sorted(roots),
         "independent_source_count": len(roots),
-        "note": "mechanical は参照の存在・範囲・原文一致の検査。semantic(意味適合)は人の記録がある場合だけ表示し、機械検査の合格では埋めない。",
+        "note": "warnings はエラーではない確認候補(修正案が足した責務語、引用の近くの適用条件)。mechanical は参照の存在・範囲・原文一致の検査。semantic(意味適合)は人の記録がある場合だけ表示し、機械検査の合格では埋めない。",
     }
 
 

@@ -19,7 +19,7 @@ def out(*findings):
 class CaseSet(unittest.TestCase):
     def test_dataset_is_valid_and_balanced(self):
         self.assertEqual(e2e.validate(DATA), [])
-        for split in ("dev", "test"):
+        for split in ("dev", "test", "test2"):
             for kind in ("misuse", "ambiguity", "correct", "mismatch"):
                 self.assertEqual(sum(c["split"] == split and c["kind"] == kind for c in DATA["cases"]), 4, (split, kind))
 

@@ -1,0 +1,4049 @@
+{
+ "note": "課題はすべて架空。baseline は Skill なし(各版の測定で別に実行)",
+ "runs": [
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M9",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "misuse",
+      "proposal": "スケーリングして"
+     },
+     {
+      "target": "0〜1の範囲に揃えました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "売上データ",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.1188556,
+   "duration_ms": 10408,
+   "seconds": 11.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M9",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "misuse",
+      "proposal": "スケーリングして"
+     },
+     {
+      "target": "0〜1の範囲に揃えました",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.11811999999999999,
+   "duration_ms": 8824,
+   "seconds": 10.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M9",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "ambiguous",
+      "proposal": "売上データをスケーリングして、0〜1の範囲に揃えました。(方法がmin-maxなら「min-maxスケーリングで」と明記)"
+     },
+     {
+      "target": "売上データ",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "0〜1の範囲に揃えました",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0839422,
+   "duration_ms": 24165,
+   "seconds": 25.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M9",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化",
+      "verdict": "misuse",
+      "proposal": "スケーリング(「0〜1の範囲にスケーリングしました」)"
+     },
+     {
+      "target": "0〜1の範囲に揃えました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "売上データ",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0696536,
+   "duration_ms": 16750,
+   "seconds": 17.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M10",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "再現率が90%なので",
+      "verdict": "misuse",
+      "proposal": "検出結果の正しさを述べるなら「適合率が90%なので」に直す。再現率を述べるなら後半を「実際に正しいものの90%を検出できている」に直す。"
+     },
+     {
+      "target": "検出した結果の90%は正しいです",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036512199999999995,
+   "duration_ms": 9840,
+   "seconds": 10.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M10",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "再現率が90%",
+      "verdict": "misuse",
+      "proposal": "適合率が90%(または、再現率を使うなら「実際に正しいもののうち90%を検出できている」)"
+     },
+     {
+      "target": "検出した結果の90%は正しいです",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.03601,
+   "duration_ms": 9547,
+   "seconds": 10.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M10",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "再現率が90%なので",
+      "verdict": "misuse",
+      "proposal": "90%が適合率なら「適合率が90%なので」、90%が再現率なら後半を「実際に正しいもののうち90%を検出できています」に直す"
+     },
+     {
+      "target": "検出した結果の90%は正しいです",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.06906480000000001,
+   "duration_ms": 14402,
+   "seconds": 15.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M10",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "再現率が90%なので、検出した結果の90%は正しいです",
+      "verdict": "misuse",
+      "proposal": "再現率が90%なので、実際に正しいもののうち90%を検出できています。(検出結果の正しさを言いたい場合は「適合率が90%なので、検出した結果の90%は正しいです。」)"
+     },
+     {
+      "target": "90%",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0679252,
+   "duration_ms": 13930,
+   "seconds": 14.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M11",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "misuse",
+      "proposal": "パスワードと秘密の質問はどちらも知識の要素のため二要素認証にならない。「知識要素のみの認証」と書くか、パスワード(知識)に所持または生体の要素を組み合わせて二要素認証とする。"
+     },
+     {
+      "target": "パスワードと秘密の質問",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0375232,
+   "duration_ms": 12400,
+   "seconds": 13.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M11",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "misuse",
+      "proposal": "パスワードと秘密の質問はどちらも知識の要素のため二要素認証にならない。「パスワードと秘密の質問による知識認証(一要素)」と書くか、所持要素(ワンタイムパスワード等)を加えて「パスワード(知識)とワンタイムパスワード(所持)による二要素認証」とする。"
+     },
+     {
+      "target": "パスワードと秘密の質問",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.035555,
+   "duration_ms": 10119,
+   "seconds": 10.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M11",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証にしています",
+      "verdict": "misuse",
+      "proposal": "パスワードと秘密の質問による認証を行う(いずれも知識の要素であり、二要素認証には該当しない)。二要素認証にする場合は、所持または生体の要素を追加する(追加する要素は設計側で決定)。"
+     },
+     {
+      "target": "秘密の質問",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.068018,
+   "duration_ms": 13990,
+   "seconds": 14.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M11",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "misuse",
+      "proposal": "パスワードと秘密の質問(いずれも知識の要素)を組み合わせて認証します。二要素認証には該当しません。(二要素認証にする場合は、秘密の質問を所持または生体の要素に置き換える。要確認)"
+     },
+     {
+      "target": "パスワードと秘密の質問",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "にしています",
+      "verdict": "ambiguous",
+      "proposal": "現状の構成か設計上の方針かを明示する(例:「〜で認証します」)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08138959999999999,
+   "duration_ms": 19979,
+   "seconds": 20.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M12",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上が1,000万円入りました",
+      "verdict": "misuse",
+      "proposal": "売上を計上した意味なら「売上を1,000万円計上しました」、入金の意味なら「1,000万円が入金されました」"
+     },
+     {
+      "target": "売上",
+      "verdict": "ambiguous",
+      "proposal": "計上額か入金額かを明示する(計上額なら「売上高」「売上計上額」)"
+     },
+     {
+      "target": "今月は",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.035730399999999995,
+   "duration_ms": 11582,
+   "seconds": 12.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M12",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上が1,000万円入りました",
+      "verdict": "misuse",
+      "proposal": "今月の売上は1,000万円(計上額)でした。入金の意味なら「今月は1,000万円が入金されました」"
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "今月は",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036948800000000004,
+   "duration_ms": 14701,
+   "seconds": 15.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M12",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上が1,000万円入りました",
+      "verdict": "ambiguous",
+      "proposal": "計上額なら「今月の売上は1,000万円です。」、入金額なら「今月の入金は1,000万円でした。」"
+     },
+     {
+      "target": "今月は",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0742546,
+   "duration_ms": 19734,
+   "seconds": 20.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "M12",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上が1,000万円入りました",
+      "verdict": "ambiguous",
+      "proposal": "計上の意味なら「今月の売上は1,000万円でした」。入金の意味なら「今月は1,000万円が入金されました」。"
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "今月は",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0730982,
+   "duration_ms": 18115,
+   "seconds": 18.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A9",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "確認しました",
+      "verdict": "ambiguous",
+      "proposal": "A案の納期について部長に確認し、10/20納品で了承を得ました。(確認事項と結果を明記する)"
+     },
+     {
+      "target": "部長",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "部長に確認しました(週報の項目との対応)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0354716,
+   "duration_ms": 11242,
+   "seconds": 12.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A9",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "確認しました",
+      "verdict": "ambiguous",
+      "proposal": "〇〇の件について部長に確認し、△△で進めてよいとの了承を得ました。"
+     },
+     {
+      "target": "部長に",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.035873,
+   "duration_ms": 11605,
+   "seconds": 12.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A9",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "確認しました",
+      "verdict": "ambiguous",
+      "proposal": "〇〇について部長に確認し、△△との回答を得ました。(確認内容・結果は本人の事実に合わせて記入。確認中なら「確認中です」)"
+     },
+     {
+      "target": "部長",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0685152,
+   "duration_ms": 15666,
+   "seconds": 16.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A9",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "確認しました",
+      "verdict": "ambiguous",
+      "proposal": "◯◯の件について、部長に(状況/方針)を確認しました(結果:◯◯)。承認を得た場合に限り「部長の承認を得ました」とする。"
+     },
+     {
+      "target": "(対象の件・結果の欠落)",
+      "verdict": "insufficient",
+      "proposal": "確認した件名と結果を補う。どの項目(進捗・課題)に入れるかは資料では判断できない。"
+     },
+     {
+      "target": "部長",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08299900000000002,
+   "duration_ms": 19049,
+   "seconds": 19.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A10",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "テスト",
+      "verdict": "ambiguous",
+      "proposal": "単体テストは完了しています(結合・総合テストは実施中です)。※全段階完了なら「単体・結合・総合の全テストが完了しています」"
+     },
+     {
+      "target": "完了しています",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0344358,
+   "duration_ms": 10813,
+   "seconds": 11.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A10",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "テスト",
+      "verdict": "ambiguous",
+      "proposal": "単体テスト/結合テスト/総合テストのうち、どの段階かを明記する(例:「単体テストと結合テストは」)"
+     },
+     {
+      "target": "完了しています",
+      "verdict": "insufficient",
+      "proposal": "完了の基準(実施済みか、合格か)を明記する(例:「全件合格で完了しました」)"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0347938,
+   "duration_ms": 10360,
+   "seconds": 11.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A10",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "テスト",
+      "verdict": "ambiguous",
+      "proposal": "どの段階かを明示する(例:「結合テストは完了しています。」。段階は書き手が確認して入れる)"
+     },
+     {
+      "target": "完了しています",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.068446,
+   "duration_ms": 18228,
+   "seconds": 18.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A10",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "テスト",
+      "verdict": "ambiguous",
+      "proposal": "〇〇テスト(単体/結合/総合のうち実際に終わった段階)は完了しています。"
+     },
+     {
+      "target": "完了しています",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0779954,
+   "duration_ms": 18602,
+   "seconds": 19.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A11",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "宿題として",
+      "verdict": "ambiguous",
+      "proposal": "顧客向けには「確認事項として」「社内で確認のうえ」など、やや改まった語にする。語を残す場合は対象の件名を添える。"
+     },
+     {
+      "target": "持ち帰ります",
+      "verdict": "ambiguous",
+      "proposal": "持ち帰る対象と回答時期を明示する。例:「◯◯の件は社内で確認し、次回の打ち合わせまでにご回答します。」"
+     },
+     {
+      "target": "宿題として持ち帰ります(資料との整合)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.038129,
+   "duration_ms": 14814,
+   "seconds": 15.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A11",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "宿題として持ち帰ります",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "持ち帰ります(対象・期限の欠落)",
+      "verdict": "ambiguous",
+      "proposal": "〇〇の件は宿題として持ち帰り、次回の打ち合わせ(来月第1週)までにご回答します。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0440108,
+   "duration_ms": 13140,
+   "seconds": 13.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A11",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "宿題として持ち帰ります",
+      "verdict": "ambiguous",
+      "proposal": "○○の件は、社内で確認のうえ、改めてご連絡します。(期限が決まっていれば「△日までにご回答します」を足す)"
+     },
+     {
+      "target": "持ち帰ります",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "宿題として",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.06912019999999999,
+   "duration_ms": 15183,
+   "seconds": 15.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A11",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "宿題として",
+      "verdict": "ambiguous",
+      "proposal": "その点は社内で確認して、改めてご連絡します。"
+     },
+     {
+      "target": "持ち帰ります",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0681848,
+   "duration_ms": 14456,
+   "seconds": 15.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A12",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "スケーラブルです",
+      "verdict": "ambiguous",
+      "proposal": "何が・どの程度・どう増やせるかを明記する。例:「Webサーバーの追加により、現行の約○倍のアクセスまで対応可能(DBは単一構成のため別途対策が必要)」。数値と根拠は要確認。"
+     },
+     {
+      "target": "このシステム",
+      "verdict": "insufficient",
+      "proposal": "対象範囲(Web層のみか、DBを含む全体か)を明示する。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0387556,
+   "duration_ms": 13189,
+   "seconds": 13.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A12",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "スケーラブルです",
+      "verdict": "ambiguous",
+      "proposal": "何を・どの方向に・どこまで拡張できるかを明示する。例:「Webサーバーは台数追加で処理量の増加に対応できる見込み。データベースは1台のため拡張方法は別途検討」"
+     },
+     {
+      "target": "スケーラブルです(資料との整合)",
+      "verdict": "insufficient",
+      "proposal": "資料は「Webサーバー2台、データベース1台」の構成しか示さず、拡張性を裏付ける記述がない。負荷分散、DBの拡張方法、性能の実測値などの根拠資料を追加してから断定する"
+     },
+     {
+      "target": "このシステム",
+      "verdict": "ambiguous",
+      "proposal": "対象範囲(Web層のみか、データベースを含む全体か)を明示する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0405692,
+   "duration_ms": 14724,
+   "seconds": 15.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A12",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "スケーラブル",
+      "verdict": "ambiguous",
+      "proposal": "何の増加に、どの方法で対応できるかを明記する。例:「(利用者数/データ量)の増加に、(サーバーの追加など)で対応できる設計です。」"
+     },
+     {
+      "target": "スケーラブルです(資料との整合)",
+      "verdict": "insufficient",
+      "proposal": "資料は「Webサーバー2台、データベース1台」の構成のみで、拡張性の根拠にならない。根拠資料を追加するか、資料の事実だけを述べる。"
+     },
+     {
+      "target": "このシステム",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0748302,
+   "duration_ms": 20724,
+   "seconds": 21.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "A12",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "スケーラブルです",
+      "verdict": "ambiguous",
+      "proposal": "何を・どこまで・どの手段で増やせるかを明記する(例:「利用者が〇倍まで増えても、Webサーバーの追加で対応できます」。〇は根拠のある値のみ)。未確認なら「現在はWebサーバー2台、データベース1台の構成です」と事実だけを述べる。"
+     },
+     {
+      "target": "このシステムは(構成との関係)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0686804,
+   "duration_ms": 17901,
+   "seconds": 18.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C9",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "データを正規化して",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "重複を排除する",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "テーブルを分割しました",
+      "verdict": "ok",
+      "proposal": "冗長さを避けるなら「テーブルを正規化(分割)しました」"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0348438,
+   "duration_ms": 9564,
+   "seconds": 10.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C9",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "重複を排除するため、テーブルを分割しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "データを正規化して重複を排除するため、テーブルを分割しました(文全体の構造)",
+      "verdict": "ambiguous",
+      "proposal": "重複を排除するため、テーブルを正規化(分割)しました。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0364036,
+   "duration_ms": 11439,
+   "seconds": 12.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C9",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "重複を排除する",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "テーブルを分割しました",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.06811220000000001,
+   "duration_ms": 14389,
+   "seconds": 15.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C9",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "重複を排除するため、テーブルを分割しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "データを正規化して…分割しました(目的と手段の関係)",
+      "verdict": "ok",
+      "proposal": "必須ではないが、書き分けるなら「データの重複を排除するため、テーブルを分割して正規化しました。」"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0700804,
+   "duration_ms": 15325,
+   "seconds": 16.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C10",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "適合率は、検出した結果の90%",
+      "verdict": "ambiguous",
+      "proposal": "適合率は90%(検出した結果のうち正しいものの割合)"
+     },
+     {
+      "target": "再現率は、実際の正例の80%",
+      "verdict": "ambiguous",
+      "proposal": "再現率は80%(実際に正しいもののうち検出できたものの割合)"
+     },
+     {
+      "target": "正例",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.036943000000000004,
+   "duration_ms": 9609,
+   "seconds": 10.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C10",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "適合率は、検出した結果の90%",
+      "verdict": "ambiguous",
+      "proposal": "適合率は、検出した結果のうち90%が正解であることを示す"
+     },
+     {
+      "target": "再現率は、実際の正例の80%",
+      "verdict": "ambiguous",
+      "proposal": "再現率は、実際の正例のうち80%を検出できたことを示す"
+     },
+     {
+      "target": "正例",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.035788600000000004,
+   "duration_ms": 10511,
+   "seconds": 11.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C10",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "適合率は、検出した結果の90%",
+      "verdict": "ambiguous",
+      "proposal": "適合率は90%で、検出した結果の90%が正しい検出でした。"
+     },
+     {
+      "target": "再現率は、実際の正例の80%",
+      "verdict": "ambiguous",
+      "proposal": "再現率は80%で、実際の正例の80%を検出できました。"
+     },
+     {
+      "target": "正例",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "適合率・再現率という用語の選択",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0704948,
+   "duration_ms": 15540,
+   "seconds": 16.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C10",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "適合率は、検出した結果の90%",
+      "verdict": "ambiguous",
+      "proposal": "適合率は90%で、検出した結果のうち90%が正しい検出です。"
+     },
+     {
+      "target": "再現率は、実際の正例の80%",
+      "verdict": "ambiguous",
+      "proposal": "再現率は80%で、実際の正例のうち80%を検出できています。"
+     },
+     {
+      "target": "適合率",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "再現率",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "正例",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0738292,
+   "duration_ms": 18291,
+   "seconds": 18.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C11",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "パスワード",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "スマートフォンのワンタイムコード",
+      "verdict": "insufficient",
+      "proposal": "資料にワンタイムコードの分類の記載がないため、資料だけでは判断できない。設計書では方式を明記する(例:「スマートフォンの認証アプリが生成するワンタイムコード(所持要素)」)。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0368422,
+   "duration_ms": 10538,
+   "seconds": 11.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C11",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "パスワード",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "スマートフォンのワンタイムコード",
+      "verdict": "ambiguous",
+      "proposal": "所持の要素として、認証アプリがスマートフォン上で生成するワンタイムコード(TOTP)"
+     },
+     {
+      "target": "にしています",
+      "verdict": "ambiguous",
+      "proposal": "ログイン時の認証は、知識の要素(パスワード)と所持の要素(スマートフォンで生成するワンタイムコード)を組み合わせた二要素認証とする。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0393848,
+   "duration_ms": 12128,
+   "seconds": 12.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C11",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "パスワードと、スマートフォンのワンタイムコード",
+      "verdict": "insufficient",
+      "proposal": "方式が確定していて種類を明示したい場合のみ、「パスワード(知識)と、スマートフォンで生成するワンタイムコード(所持)による二要素認証としています」"
+     },
+     {
+      "target": "にしています",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0703558,
+   "duration_ms": 16256,
+   "seconds": 16.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C11",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "パスワードと、スマートフォンのワンタイムコードで、二要素認証",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "スマートフォンのワンタイムコード",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.07005800000000001,
+   "duration_ms": 16384,
+   "seconds": 16.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C12",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "今月の売上は1,000万円",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入金は来月です",
+      "verdict": "ambiguous",
+      "proposal": "入金は来月の予定です(全額か一部か、確定か見込みかを明記する)"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0355998,
+   "duration_ms": 9735,
+   "seconds": 10.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C12",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入金",
+      "verdict": "ok",
+      "proposal": "「来月入金予定」とすると、未入金であることが明確になる(任意)"
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": "税込・税抜の別を明記する(資料に規定がないため任意)"
+     },
+     {
+      "target": "今月/来月",
+      "verdict": "insufficient",
+      "proposal": "「10月」「11月」のように月を明示する(資料に基準日の規定がないため任意)"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0376482,
+   "duration_ms": 12855,
+   "seconds": 13.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C12",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入金",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 7,
+   "cost_usd": 0.09027080000000001,
+   "duration_ms": 16850,
+   "seconds": 17.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "C12",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "今月の売上",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入金は来月です",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": "税込・税抜は資料から判断できない。区別が必要なら本人が確認して「(税抜)」などを添える"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0839686,
+   "duration_ms": 18479,
+   "seconds": 19.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X9",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "返品期限",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "購入後14日",
+      "verdict": "ambiguous",
+      "proposal": "商品到着日の翌日から14日以内(土日祝を含む)に、返品のご連絡をお願いします。"
+     },
+     {
+      "target": "当社",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0369228,
+   "duration_ms": 11839,
+   "seconds": 12.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X9",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "返品期限",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "当社",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "購入後14日",
+      "verdict": "ambiguous",
+      "proposal": "当社の返品期限は、商品到着日の翌日から起算して14日以内(土日祝日を含む)です。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0381058,
+   "duration_ms": 11567,
+   "seconds": 12.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X9",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "購入後14日",
+      "verdict": "ambiguous",
+      "proposal": "起点(購入日/受取日)と数え方を自社規定に合わせて明記する。例:「購入日(または受取日)から14日以内」(起点は自社で確認)"
+     },
+     {
+      "target": "14日",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "返品期限",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "当社",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0694338,
+   "duration_ms": 16434,
+   "seconds": 17.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X9",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "購入後",
+      "verdict": "ambiguous",
+      "proposal": "起算点を明示する(例:「商品のお受け取り日から14日以内」。起算点は自社の運用に合わせて確定)"
+     },
+     {
+      "target": "返品期限",
+      "verdict": "ambiguous",
+      "proposal": "連絡期限か到着期限かを明示する(例:「返品のご連絡は…から14日以内にお願いします」。運用の確認後に確定)"
+     },
+     {
+      "target": "14日",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "当社",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0827278,
+   "duration_ms": 20728,
+   "seconds": 21.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X10",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さん",
+      "verdict": "insufficient",
+      "proposal": "有効な最新の連絡網(2022年改定版以降)で担当者を確認する。資料の2021年版は失効しており、鈴木とあるが2025年の根拠にならない。"
+     },
+     {
+      "target": "障害時の連絡先",
+      "verdict": "ambiguous",
+      "proposal": "障害の範囲、連絡手段、対応時間帯、不在時の代替者を明記する(例:「システム障害発生時の一次連絡先は、◯◯部の田中△△さん(電話:◯◯、平日夜間・休日含む)です。」)。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.042595999999999995,
+   "duration_ms": 12560,
+   "seconds": 13.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X10",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さん",
+      "verdict": "insufficient",
+      "proposal": "2025年時点の現行連絡網で確認し、フルネーム・所属・連絡手段を併記する(例:○○部 田中○○、電話○○、2025年○月時点)"
+     },
+     {
+      "target": "連絡先",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "障害時",
+      "verdict": "ambiguous",
+      "proposal": "対象とする障害の範囲を明示する(例:重大度○以上の障害時)"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0377772,
+   "duration_ms": 13372,
+   "seconds": 14.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X10",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さん",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "障害時の連絡先",
+      "verdict": "ambiguous",
+      "proposal": "障害時の連絡先は、田中さん(〔連絡手段・受付時間〕)です。※連絡手段・受付時間は確認後に記載"
+     },
+     {
+      "target": "さん(敬称)",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0703918,
+   "duration_ms": 16901,
+   "seconds": 17.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X10",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さん",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "障害時の連絡先",
+      "verdict": "ambiguous",
+      "proposal": "障害時の連絡先(担当者)は、田中さんです。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.075034,
+   "duration_ms": 16756,
+   "seconds": 17.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X11",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "この機能",
+      "verdict": "ambiguous",
+      "proposal": "「機能Xの担当は、佐藤さんです。」のように機能名を明記する"
+     },
+     {
+      "target": "担当",
+      "verdict": "ambiguous",
+      "proposal": "「機能Xの開発担当は、佐藤さんです。」のように役割の範囲を具体化する"
+     },
+     {
+      "target": "佐藤さん",
+      "verdict": "insufficient",
+      "proposal": "未確定なら「機能Xの担当は、佐藤さんの案で検討中です(未確定)。」とする"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0384956,
+   "duration_ms": 11947,
+   "seconds": 12.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X11",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "担当",
+      "verdict": "ambiguous",
+      "proposal": "機能Xの担当は佐藤さんで検討中です(未確定)。"
+     },
+     {
+      "target": "この機能",
+      "verdict": "insufficient",
+      "proposal": "機能X"
+     },
+     {
+      "target": "佐藤さん",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "担当は、佐藤さんです(断定の言い切り)",
+      "verdict": "misuse",
+      "proposal": "承認前なら「案」「検討中」と明記する。承認後なら断定のままでよい。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0381142,
+   "duration_ms": 11274,
+   "seconds": 12.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X11",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "担当は、佐藤さんです",
+      "verdict": "insufficient",
+      "proposal": "決定済みなら「佐藤さんに決まりました」。案の段階なら「佐藤さんを案として検討中です(未確定)」。"
+     },
+     {
+      "target": "担当",
+      "verdict": "ambiguous",
+      "proposal": "開発担当・窓口など、本人が意図する範囲を確認のうえ明示する(資料からは範囲を決められない)。"
+     },
+     {
+      "target": "この機能",
+      "verdict": "insufficient",
+      "proposal": "機能Xを指すなら機能名を明記する。前後で対象が明らかなら変更不要。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07839560000000001,
+   "duration_ms": 20479,
+   "seconds": 21.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X11",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "担当は、佐藤さんです",
+      "verdict": "ambiguous",
+      "proposal": "機能Xの担当は、佐藤さんの案で検討しています(未確定です)。※承認済みなら「機能Xの担当は、佐藤さんです。」"
+     },
+     {
+      "target": "この機能",
+      "verdict": "insufficient",
+      "proposal": "機能X(連絡の前後で機能が特定されていない場合は機能名を明記)"
+     },
+     {
+      "target": "担当",
+      "verdict": "ambiguous",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0757288,
+   "duration_ms": 16905,
+   "seconds": 17.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X12",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザーとは社員をいう",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "ユーザー",
+      "verdict": "ambiguous",
+      "proposal": "本システムにおいて「ユーザー」とは、本システムを利用して勤怠の入力・申請を行う社員をいう。承認者・管理者は別途定義する。"
+     },
+     {
+      "target": "社員",
+      "verdict": "ambiguous",
+      "proposal": "社員の範囲(正社員、契約社員、パートタイム従業員、役員等を含むか)を明記する。"
+     },
+     {
+      "target": "〜とは…をいう(定義文の形式)",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.03904980000000001,
+   "duration_ms": 12388,
+   "seconds": 13.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X12",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "本システムでは、ユーザーとは〜をいう",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "社員",
+      "verdict": "ambiguous",
+      "proposal": "本システムでは、ユーザーとは、勤怠の打刻・申請を行う従業員(正社員、契約社員、パートを含む)をいう。承認者・管理者は別の用語として定義する。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0381368,
+   "duration_ms": 12503,
+   "seconds": 13.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X12",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザー",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "社員",
+      "verdict": "ambiguous",
+      "proposal": "本システムでは、ユーザーとは、勤怠を打刻・申請する従業員をいう。(管理者なども含める場合は「本システムを利用する者(従業員、管理者を含む)」)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0756268,
+   "duration_ms": 20247,
+   "seconds": 20.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.3",
+   "split": "test2",
+   "id": "X12",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザーとは社員をいう",
+      "verdict": "ambiguous",
+      "proposal": "「社員」の範囲(正社員のみか、契約・パート・派遣・役員・管理者を含むか)を確認し、設計書内の定義に合わせて明記する。例:「本システムでは、ユーザーとは、本システムを利用する従業員をいう。」(範囲は確認後に確定)"
+     },
+     {
+      "target": "ユーザー(別システム資料との関係)",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "本システムでは、〜とは〜をいう(定義形式)",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0640708,
+   "duration_ms": 16283,
+   "seconds": 16.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M9",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "misuse",
+      "proposal": "スケーリングして(例:売上データをスケーリングして、0〜1の範囲に揃えました。)"
+     },
+     {
+      "target": "0〜1の範囲に揃えました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "売上データ",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0347022,
+   "duration_ms": 9150,
+   "seconds": 9.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M9",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "misuse",
+      "proposal": "スケーリングして(方法を示すなら「min-maxスケーリングで」)"
+     },
+     {
+      "target": "0〜1の範囲に揃えました",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0338306,
+   "duration_ms": 8437,
+   "seconds": 9.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M9",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "misuse",
+      "proposal": "スケーリングして(例: 売上データを0〜1の範囲にスケーリングしました。)"
+     },
+     {
+      "target": "0〜1の範囲に揃えました",
+      "verdict": "ambiguous",
+      "proposal": "変換方法(実際に使った方法名)を補う"
+     },
+     {
+      "target": "売上データ",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.069866,
+   "duration_ms": 15524,
+   "seconds": 16.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M9",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "misuse",
+      "proposal": "スケーリングして"
+     },
+     {
+      "target": "0〜1の範囲に揃えました",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0793214,
+   "duration_ms": 15649,
+   "seconds": 16.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M10",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "再現率が90%なので、検出した結果の90%は正しいです",
+      "verdict": "misuse",
+      "proposal": "再現率が90%なので、実際に正しいものの90%を検出できています。(検出結果の正しさを述べたい場合は「適合率が90%なので、検出した結果の90%は正しいです」)"
+     },
+     {
+      "target": "検出した結果",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "正しい",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.037459000000000006,
+   "duration_ms": 10608,
+   "seconds": 11.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M10",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "再現率が90%",
+      "verdict": "misuse",
+      "proposal": "適合率が90%(検出結果の正しさを述べるなら適合率。再現率を使うなら「実際に正しいもののうち90%を検出できた」)"
+     },
+     {
+      "target": "検出した結果の90%は正しいです",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0347424,
+   "duration_ms": 9150,
+   "seconds": 9.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M10",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "再現率が90%なので",
+      "verdict": "misuse",
+      "proposal": "適合率が90%なので(意図が検出結果の正しさの場合)。意図が取りこぼしの少なさなら、前半は残して後半を「実際に正しいものの90%を検出できています」に直す"
+     },
+     {
+      "target": "検出した結果の90%は正しいです",
+      "verdict": "misuse",
+      "proposal": "再現率の説明としては誤り。適合率の定義に当たる。再現率を残すなら「実際に正しいものの90%を検出できています」"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.06789500000000001,
+   "duration_ms": 13092,
+   "seconds": 13.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M10",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "再現率が90%なので",
+      "verdict": "misuse",
+      "proposal": "実測値が再現率なら「再現率が90%なので、実際に正しいものの90%を検出できています。」、適合率なら「適合率が90%なので、検出した結果の90%は正しいです。」"
+     },
+     {
+      "target": "検出した結果の90%は正しいです",
+      "verdict": "ambiguous",
+      "proposal": "報告する指標(再現率か適合率か)を確認したうえで、指標名と説明を対応させる"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08196600000000001,
+   "duration_ms": 18777,
+   "seconds": 19.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M11",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "misuse",
+      "proposal": "パスワードと秘密の質問(いずれも知識の要素)による認証としています。二要素認証にする場合は、所持または生体の要素(例: ワンタイムパスワード)を加える。"
+     },
+     {
+      "target": "パスワードと秘密の質問",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.04349,
+   "duration_ms": 13492,
+   "seconds": 14.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M11",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "misuse",
+      "proposal": "パスワードと秘密の質問による認証を行う(いずれも知識の要素であり、二要素認証には該当しない)。二要素認証にする場合は、パスワード(知識)とワンタイムパスワード(所持)などの異なる種類の要素を組み合わせる。"
+     },
+     {
+      "target": "パスワードと秘密の質問",
+      "verdict": "ambiguous",
+      "proposal": "パスワード(知識)と秘密の質問(知識)のように、要素の種類を併記する。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0377162,
+   "duration_ms": 10851,
+   "seconds": 11.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M11",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "misuse",
+      "proposal": "パスワードと秘密の質問による認証を行っています。(どちらも知識の要素であり、二要素認証には該当しません。)"
+     },
+     {
+      "target": "パスワードと秘密の質問",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0719052,
+   "duration_ms": 15565,
+   "seconds": 16.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M11",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証にしています",
+      "verdict": "misuse",
+      "proposal": "パスワードと秘密の質問による認証としています(いずれも知識の要素です)。"
+     },
+     {
+      "target": "パスワードと秘密の質問",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0687958,
+   "duration_ms": 14321,
+   "seconds": 15.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M12",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上が1,000万円入りました",
+      "verdict": "misuse",
+      "proposal": "売上の報告なら「今月の売上は1,000万円でした」(または「売上を1,000万円計上しました」)、入金の報告なら「今月は1,000万円が入金されました」と、売上と入金のどちらかに統一する。"
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0372108,
+   "duration_ms": 11044,
+   "seconds": 11.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M12",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上が1,000万円入りました",
+      "verdict": "ambiguous",
+      "proposal": "売上を報告する場合は「今月の売上は1,000万円でした。」、入金を報告する場合は「今月の入金額は1,000万円でした。」"
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "今月は",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0389056,
+   "duration_ms": 12589,
+   "seconds": 13.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M12",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上が1,000万円入りました",
+      "verdict": "ambiguous",
+      "proposal": "売上の意図なら「今月の売上は1,000万円でした」(または「売上を1,000万円計上しました」)、入金の意図なら「今月は、1,000万円が入金されました」"
+     },
+     {
+      "target": "今月は",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0747228,
+   "duration_ms": 18434,
+   "seconds": 19.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "M12",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上が1,000万円入りました",
+      "verdict": "misuse",
+      "proposal": "計上額の意図なら「今月の売上は1,000万円でした」、受け取りの意図なら「今月は、1,000万円が入金されました」"
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "今月は",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.074574,
+   "duration_ms": 17660,
+   "seconds": 18.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A9",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "部長",
+      "verdict": "insufficient",
+      "proposal": "読み手が特定できない場合は「○○部の△△部長」と明示する"
+     },
+     {
+      "target": "確認しました",
+      "verdict": "ambiguous",
+      "proposal": "「○○の方針について部長に確認し、了承を得ました」のように、対象と結果(了承・回答待ちなど)を明記する"
+     },
+     {
+      "target": "文全体(週報の項目との対応)",
+      "verdict": "insufficient",
+      "proposal": "進捗・課題・来週の予定のどれに当たるかが分かるよう、確認の内容と結果を補う"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0375508,
+   "duration_ms": 13074,
+   "seconds": 13.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A9",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "部長",
+      "verdict": "ambiguous",
+      "proposal": "他部署の読み手がいる場合は「○○部の部長」と補う"
+     },
+     {
+      "target": "確認しました",
+      "verdict": "ambiguous",
+      "proposal": "何を確認し、結果がどうだったかを書く(例:「A案について部長の承認を得ました」)"
+     },
+     {
+      "target": "部長に確認しました。(週報の一文としての位置づけ)",
+      "verdict": "insufficient",
+      "proposal": "進捗・課題・来週の予定のどれに当たるかが分かる形にする"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.038647600000000004,
+   "duration_ms": 13144,
+   "seconds": 13.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A9",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "確認しました",
+      "verdict": "ambiguous",
+      "proposal": "〇〇の件について部長に確認しました。(結果:△△)"
+     },
+     {
+      "target": "部長",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0790676,
+   "duration_ms": 18205,
+   "seconds": 18.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A9",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "部長に確認しました",
+      "verdict": "ambiguous",
+      "proposal": "〇〇について部長に確認し、△△との回答を得ました。(了承を得た場合は「〇〇について部長の了承を得ました。」)"
+     },
+     {
+      "target": "確認",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "部長",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0684442,
+   "duration_ms": 14870,
+   "seconds": 15.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A10",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "テスト",
+      "verdict": "ambiguous",
+      "proposal": "単体・結合・総合テストのどの段階を指すかを明記する(例:「単体・結合・総合テストの3段階」)"
+     },
+     {
+      "target": "完了しています",
+      "verdict": "insufficient",
+      "proposal": "実施済みか合格かを明記する(例:「すべて実施し、完了しました」)"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0359298,
+   "duration_ms": 12137,
+   "seconds": 12.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A10",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "テスト",
+      "verdict": "ambiguous",
+      "proposal": "単体・結合・総合のどの段階かを明記する(例:「単体・結合・総合の全テスト」)"
+     },
+     {
+      "target": "完了しています",
+      "verdict": "insufficient",
+      "proposal": "完了の基準(全ケース実施済み、合格判定済みなど)と対象範囲を併記する。例:「単体テストと結合テストは完了し、総合テストは実施中です。」"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0344198,
+   "duration_ms": 9758,
+   "seconds": 10.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A10",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "テスト",
+      "verdict": "ambiguous",
+      "proposal": "【単体/結合/総合のうち該当する段階】テストは完了しています。"
+     },
+     {
+      "target": "完了しています",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.06937080000000001,
+   "duration_ms": 15859,
+   "seconds": 16.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A10",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "テストは完了しています",
+      "verdict": "ambiguous",
+      "proposal": "テストは単体・結合・総合の全段階が完了しています。(一部のみなら「テストのうち、○○が完了しています。」)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0756896,
+   "duration_ms": 15578,
+   "seconds": 16.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A11",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "宿題として",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "持ち帰ります",
+      "verdict": "ambiguous",
+      "proposal": "社内で検討のうえ、次回の打ち合わせまでにご回答します。"
+     },
+     {
+      "target": "宿題として持ち帰ります(資料との照合)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0368916,
+   "duration_ms": 11565,
+   "seconds": 12.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A11",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "宿題として",
+      "verdict": "ambiguous",
+      "proposal": "「本件は社内で確認のうえ、○日までにご回答します」のように、対象と期限を明示する"
+     },
+     {
+      "target": "持ち帰ります",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0352618,
+   "duration_ms": 11900,
+   "seconds": 12.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A11",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "宿題として",
+      "verdict": "ambiguous",
+      "proposal": "〈対象〉の件は、社内で確認のうえ、改めてご連絡します。"
+     },
+     {
+      "target": "持ち帰ります",
+      "verdict": "ambiguous",
+      "proposal": "その点は持ち帰って検討します。(回答まで行うか、返す時期を伝えてよいかは本人に確認)"
+     },
+     {
+      "target": "文全体(資料との照合)",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0744716,
+   "duration_ms": 21262,
+   "seconds": 21.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A11",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "宿題として持ち帰ります",
+      "verdict": "insufficient",
+      "proposal": "資料に「宿題」「持ち帰り」に関する記述がなく判断できない。対象や期限が分かるなら「○○の件は持ち帰って確認し、◇◇までにご連絡します」(○○・◇◇はご本人が決める)。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07465920000000001,
+   "duration_ms": 17007,
+   "seconds": 17.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A12",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "スケーラブルです",
+      "verdict": "ambiguous",
+      "proposal": "何がどの水準まで、どの方法(例: Webサーバー増設)で拡張できるかを明記する。例:「利用者数が現在の○倍(要確認)まで、Webサーバーの増設で対応できる設計です」"
+     },
+     {
+      "target": "このシステムは(根拠の提示)",
+      "verdict": "insufficient",
+      "proposal": "資料は「Webサーバー2台、データベース1台」の構成のみで、拡張性の根拠が示されていない。性能試験の結果や拡張方針などの根拠資料を追加し、DBの制約の有無も確認する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0418138,
+   "duration_ms": 14734,
+   "seconds": 15.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A12",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "スケーラブル",
+      "verdict": "insufficient",
+      "proposal": "資料(Web2台・DB1台)だけでは拡張性の有無を判断できない。何を・どの方向に・どの程度まで拡張できるかを、根拠資料を追加したうえで数値付きで記述する。"
+     },
+     {
+      "target": "このシステムはスケーラブルです。",
+      "verdict": "ambiguous",
+      "proposal": "本システムはWebサーバーの追加により、利用者数が現行の◯倍になるまで対応できる(DBは現在1台のため、それを超える場合は別途増強が必要)。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0395664,
+   "duration_ms": 13978,
+   "seconds": 14.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A12",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "スケーラブル",
+      "verdict": "ambiguous",
+      "proposal": "確認済みの範囲では「現在はWebサーバー2台、データベース1台の構成です。」とする。増強の意図や根拠が本人から確認できた場合は「[対象]が増えた場合に、[方法]で対応できる設計です。[上限や検証の有無]」とする。"
+     },
+     {
+      "target": "このシステム",
+      "verdict": "insufficient",
+      "proposal": "資料にシステム名がなく対応を確認できないため、冒頭で対象システム名を示す。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07619619999999999,
+   "duration_ms": 20926,
+   "seconds": 21.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "A12",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "スケーラブルです",
+      "verdict": "ambiguous",
+      "proposal": "何が増えたときに、どの方法で対応できるかを明示する。例:「〔利用者数/処理件数〕が増えても、〔台数の追加など〕で対応できる設計です。」資料の範囲で言うなら「Webサーバー2台とデータベース1台で構成されています。」"
+     },
+     {
+      "target": "このシステム",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07040940000000001,
+   "duration_ms": 16126,
+   "seconds": 16.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C9",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "重複を排除するため、テーブルを分割しました",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "データを正規化",
+      "verdict": "ambiguous",
+      "proposal": "テーブル設計を正規化して重複を排除するため、テーブルを分割しました。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0358736,
+   "duration_ms": 10627,
+   "seconds": 11.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C9",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化して",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "重複を排除する",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "データを正規化して重複を排除するため、テーブルを分割しました",
+      "verdict": "ambiguous",
+      "proposal": "重複するデータを排除するため、テーブルを分割して正規化しました(例:顧客情報を注文テーブルから分離)。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.037295999999999996,
+   "duration_ms": 11648,
+   "seconds": 12.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C9",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "重複を排除するため",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "テーブルを分割しました",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0699322,
+   "duration_ms": 15514,
+   "seconds": 16.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C9",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "正規化",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "重複を排除する",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "テーブルを分割しました",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0794588,
+   "duration_ms": 15669,
+   "seconds": 16.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C10",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "適合率は、検出した結果の90%",
+      "verdict": "ambiguous",
+      "proposal": "適合率(検出したもののうち正しいものの割合)は90%"
+     },
+     {
+      "target": "再現率は、実際の正例の80%",
+      "verdict": "ambiguous",
+      "proposal": "再現率(実際の正例のうち検出できたものの割合)は80%"
+     },
+     {
+      "target": "正例",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "適合率は、…、再現率は、…です。(文の構造・読点)",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.038868,
+   "duration_ms": 12094,
+   "seconds": 12.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C10",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "適合率は、検出した結果の90%",
+      "verdict": "ambiguous",
+      "proposal": "適合率は、検出したもののうち90%が正しかったことを示します"
+     },
+     {
+      "target": "再現率は、実際の正例の80%",
+      "verdict": "ambiguous",
+      "proposal": "再現率は、実際に正しいもののうち80%を検出できたことを示します"
+     },
+     {
+      "target": "正例",
+      "verdict": "insufficient",
+      "proposal": "資料の用語「実際に正しいもの」に揃えるか、レポート内で正例を定義する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0361868,
+   "duration_ms": 11263,
+   "seconds": 12.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C10",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "適合率は、検出した結果の90%",
+      "verdict": "ok",
+      "proposal": "検出したもののうち正しいものの割合が90%(「正しい」を明示すると、より明確)"
+     },
+     {
+      "target": "再現率は、実際の正例の80%",
+      "verdict": "ok",
+      "proposal": "実際の正例のうち検出できたものの割合が80%(「検出できた」を明示すると、より明確)"
+     },
+     {
+      "target": "90%、80%(測定条件)",
+      "verdict": "insufficient",
+      "proposal": "データセット・クラス・閾値などの条件を、本人に確認のうえ併記する"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.072922,
+   "duration_ms": 16963,
+   "seconds": 17.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C10",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "適合率は、検出した結果の90%",
+      "verdict": "ambiguous",
+      "proposal": "適合率は90%(検出した結果のうち正しいものの割合)"
+     },
+     {
+      "target": "再現率は、実際の正例の80%",
+      "verdict": "ambiguous",
+      "proposal": "再現率は80%(実際の正例のうち検出できたものの割合)"
+     },
+     {
+      "target": "適合率",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "再現率",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "正例",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0785468,
+   "duration_ms": 17378,
+   "seconds": 17.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C11",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "スマートフォンのワンタイムコード",
+      "verdict": "insufficient",
+      "proposal": "スマートフォンの認証アプリが生成するワンタイムコード(所持)"
+     },
+     {
+      "target": "にしています",
+      "verdict": "ambiguous",
+      "proposal": "とする"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0383296,
+   "duration_ms": 12136,
+   "seconds": 12.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C11",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "スマートフォンのワンタイムコード",
+      "verdict": "ambiguous",
+      "proposal": "スマートフォンの認証アプリが生成するワンタイムコード(所持の要素)のように、生成方式と要素の種類を明記する"
+     },
+     {
+      "target": "にしています",
+      "verdict": "ambiguous",
+      "proposal": "採用する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.037614999999999996,
+   "duration_ms": 11324,
+   "seconds": 12.0,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C11",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "パスワードと",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "スマートフォンのワンタイムコード",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "二要素認証",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.08112920000000001,
+   "duration_ms": 17890,
+   "seconds": 18.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C11",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "二要素認証",
+      "verdict": "insufficient",
+      "proposal": "パスワード(知識の要素)と、スマートフォンで生成するワンタイムコード(所持の要素)を組み合わせた二要素認証としています。(ワンタイムコードの方式が所持と確認できた場合のみ。方式が異なる場合は実際の方式に差し替える)"
+     },
+     {
+      "target": "スマートフォンのワンタイムコード",
+      "verdict": "insufficient",
+      "proposal": "生成・受信の方式(アプリ生成かSMS受信かなど)を確認のうえ明記する"
+     },
+     {
+      "target": "パスワード",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 6,
+   "cost_usd": 0.0883314,
+   "duration_ms": 19970,
+   "seconds": 20.5,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C12",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": "税込・税抜の別は資料に記載がなく判断できません。必要なら「(税抜)」などの基準を付記してください。"
+     },
+     {
+      "target": "入金は来月です",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0347016,
+   "duration_ms": 9944,
+   "seconds": 10.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C12",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上は1,000万円",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入金は来月です",
+      "verdict": "ambiguous",
+      "proposal": "今月の売上1,000万円は、全額を来月に入金予定です。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0419516,
+   "duration_ms": 11904,
+   "seconds": 12.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C12",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入金",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": "税込・税抜の別を報告ルールで確認し、必要なら注記する(例:「1,000万円(税抜)」。実際の扱いは要確認)"
+     },
+     {
+      "target": "来月",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0669518,
+   "duration_ms": 15570,
+   "seconds": 16.3,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "C12",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "売上",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "入金",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "1,000万円",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "今月/来月",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.06748000000000001,
+   "duration_ms": 14651,
+   "seconds": 15.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X9",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "当社",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "返品期限",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "購入後14日",
+      "verdict": "ambiguous",
+      "proposal": "商品お受け取り日(配送完了日)の翌日から起算して14日以内(土日祝日を含む)と、起算点と日数の数え方を明示する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0397418,
+   "duration_ms": 14061,
+   "seconds": 14.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X9",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "当社",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "返品期限",
+      "verdict": "insufficient",
+      "proposal": "自社の規約・運用ルールで14日が正しい値か、また期限が申出までか返送到着までかを確認する"
+     },
+     {
+      "target": "購入後14日",
+      "verdict": "ambiguous",
+      "proposal": "商品到着日の翌日から14日以内(暦日)にお申し出ください、のように起算点・日数の数え方・期限の対象を明記する"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.038206,
+   "duration_ms": 12905,
+   "seconds": 13.6,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X9",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "当社の返品期限",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "14日",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "購入後",
+      "verdict": "ambiguous",
+      "proposal": "起算点を明記する。例:「当社の返品期限は、商品到着日(実際の運用に合わせて記載)から14日です。」"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0709034,
+   "duration_ms": 16571,
+   "seconds": 17.1,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X9",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "当社",
+      "verdict": "ok",
+      "proposal": ""
+     },
+     {
+      "target": "返品期限",
+      "verdict": "insufficient",
+      "proposal": "自社の規定が確認できるまで保留。資料(他社規約)は自社の意味の根拠にならない。"
+     },
+     {
+      "target": "購入後14日",
+      "verdict": "ambiguous",
+      "proposal": "当社の返品期限は、〔注文日/商品到着日〕から14日以内です。(〔 〕は自社規定で確認して入れる)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07189179999999999,
+   "duration_ms": 18265,
+   "seconds": 18.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X10",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さん",
+      "verdict": "insufficient",
+      "proposal": "資料(2021年版・失効)は鈴木としており、2025年時点の根拠にならない。2025年版の連絡網で確認する。"
+     },
+     {
+      "target": "連絡先",
+      "verdict": "ambiguous",
+      "proposal": "障害時の連絡先は、田中さん(連絡手段:○○、不在時は△△さん)です。"
+     },
+     {
+      "target": "さん",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0450074,
+   "duration_ms": 13430,
+   "seconds": 14.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X10",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "障害時の連絡先",
+      "verdict": "ambiguous",
+      "proposal": "障害の範囲と、窓口か個人かを明確にする。例:「システム障害時の連絡先(障害対応当番)は、〇〇部の田中です(連絡先:〇〇)。」"
+     },
+     {
+      "target": "田中さん",
+      "verdict": "insufficient",
+      "proposal": "2022年以降の最新の連絡網で確認する。個人名は役割名と別表管理にし、所属を添える。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0459002,
+   "duration_ms": 14699,
+   "seconds": 15.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X10",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さん",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "連絡先",
+      "verdict": "ambiguous",
+      "proposal": ""
+     },
+     {
+      "target": "障害時",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.06933879999999999,
+   "duration_ms": 15716,
+   "seconds": 16.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X10",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "田中さん",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "連絡先",
+      "verdict": "ambiguous",
+      "proposal": "障害時の連絡先は、田中さんです(連絡方法: 〔確認後に記載〕)。"
+     },
+     {
+      "target": "障害時",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.06801600000000001,
+   "duration_ms": 15623,
+   "seconds": 16.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X11",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "担当は、佐藤さんです",
+      "verdict": "insufficient",
+      "proposal": "資料では「佐藤(案)」で未承認・検討中のため、確定事項とは判断できない。未確定なら「機能Xの担当案は佐藤さんです(検討中)」のように案であることを明示する。"
+     },
+     {
+      "target": "この機能",
+      "verdict": "ambiguous",
+      "proposal": "機能名を明記する(例:「機能X」)。ただし「この機能」が機能Xを指すかは資料からは言えない。"
+     },
+     {
+      "target": "担当",
+      "verdict": "ambiguous",
+      "proposal": "役割を具体化する(例:「開発担当」「保守担当」「窓口担当」)。"
+     },
+     {
+      "target": "佐藤さん",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.039443000000000006,
+   "duration_ms": 14005,
+   "seconds": 14.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X11",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "担当",
+      "verdict": "ambiguous",
+      "proposal": "機能Xの実装担当は佐藤さんです(確定している場合)。案の段階なら「担当は佐藤さんの案で検討中(未承認)です」と書く。"
+     },
+     {
+      "target": "この機能",
+      "verdict": "ambiguous",
+      "proposal": "機能X"
+     },
+     {
+      "target": "佐藤さん",
+      "verdict": "insufficient",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.0384798,
+   "duration_ms": 13703,
+   "seconds": 14.4,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X11",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "佐藤さんです",
+      "verdict": "insufficient",
+      "proposal": "承認済みなら原文のまま。案の段階なら「この機能の担当は、佐藤さんの案です(未承認・検討中)。」"
+     },
+     {
+      "target": "この機能",
+      "verdict": "ambiguous",
+      "proposal": "機能Xを指すなら「機能Xの担当は〜」と名称を入れる"
+     },
+     {
+      "target": "担当",
+      "verdict": "ambiguous",
+      "proposal": "範囲が確認できた場合のみ、その範囲を明記する(資料にないため現時点では追加しない)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.0716736,
+   "duration_ms": 17314,
+   "seconds": 17.8,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X11",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "担当は、佐藤さんです",
+      "verdict": "ambiguous",
+      "proposal": "承認済みなら原文のまま。まだ案なら「この機能の担当は、佐藤さんの案です(未確定)。」"
+     },
+     {
+      "target": "この機能",
+      "verdict": "insufficient",
+      "proposal": "資料の「機能X」と同じ機能なら、「機能X」と名前を入れる。"
+     },
+     {
+      "target": "担当",
+      "verdict": "ambiguous",
+      "proposal": "範囲が決まっているなら「〇〇の担当」と補う。決まっていなければそのまま。"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 4,
+   "cost_usd": 0.0697542,
+   "duration_ms": 16099,
+   "seconds": 16.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X12",
+   "condition": "baseline",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザー",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "社員",
+      "verdict": "ambiguous",
+      "proposal": "本システムを利用する当社の従業員(正社員のみか、契約社員・派遣社員・役員等を含むかを明記する)"
+     },
+     {
+      "target": "本システムでは",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 2,
+   "cost_usd": 0.037381,
+   "duration_ms": 11469,
+   "seconds": 12.2,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X12",
+   "condition": "baseline",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザー",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "社員",
+      "verdict": "ambiguous",
+      "proposal": "本システムでは、ユーザーとは、勤怠の打刻・申請を行う従業員(雇用形態を問わない)をいう。承認者・管理者を別用語で定義する場合は併記する。"
+     }
+    ]
+   },
+   "skill_called": false,
+   "turns": 3,
+   "cost_usd": 0.0440696,
+   "duration_ms": 13143,
+   "seconds": 13.9,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X12",
+   "condition": "skill",
+   "run": 1,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザーとは",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "社員",
+      "verdict": "ambiguous",
+      "proposal": "本システムでは、ユーザーとは本システムを利用する従業員をいう。(範囲は契約社員・パート・役員、承認者・管理者を含めるかを確認して確定)"
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07209660000000001,
+   "duration_ms": 18029,
+   "seconds": 18.7,
+   "is_error": false,
+   "timed_out": false
+  },
+  {
+   "skill_version": "0.1.4",
+   "split": "test2",
+   "id": "X12",
+   "condition": "skill",
+   "run": 2,
+   "parsed": {
+    "findings": [
+     {
+      "target": "ユーザーとは社員をいう",
+      "verdict": "insufficient",
+      "proposal": ""
+     },
+     {
+      "target": "ユーザー/社員(範囲)",
+      "verdict": "ambiguous",
+      "proposal": "「社員」に含める雇用区分と、承認者・管理者を含むかを確認のうえ明記する(範囲は確認前に補わない)"
+     },
+     {
+      "target": "〜とは〜をいう",
+      "verdict": "ok",
+      "proposal": ""
+     }
+    ]
+   },
+   "skill_called": true,
+   "turns": 5,
+   "cost_usd": 0.07004239999999999,
+   "duration_ms": 17263,
+   "seconds": 17.8,
+   "is_error": false,
+   "timed_out": false
+  }
+ ]
+}

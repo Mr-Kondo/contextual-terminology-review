@@ -119,6 +119,13 @@ class PostMergeCleanup(TmpCase):
         self.assertFalse(scratch.exists())
         self.assertTrue(any("指定外" in k["why"] for k in rep["kept"]))             # 他者の作業を残した理由を報告
 
+    def test_A31_without_remote_option_the_remote_is_reported_as_out_of_scope_not_as_missing(self):
+        work, remote, g = self.setup_repos()
+        code, rep = self.run_cleanup(work, "--branch", "work/merged", "--base", "main")
+        self.assertEqual(code, 0)
+        why = [k["why"] for k in rep["kept"] if k["what"] == "remote:work/merged"]
+        self.assertTrue(why and "--remote" in why[0] and "存在しない" not in why[0])
+
     def test_A31_unmerged_base_current_branch_and_outside_paths_are_refused(self):
         work, remote, g = self.setup_repos()
         code, rep = self.run_cleanup(work, "--branch", "work/unmerged", "--base", "main", "--remote", "origin", "--apply")
