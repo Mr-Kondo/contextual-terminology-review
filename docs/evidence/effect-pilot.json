@@ -1,0 +1,811 @@
+{
+ "scope": "模擬の受け手(別のAIモデル)による予備試験。人の受け手の代わりにならない。項目と正解の作成者はSkillの設計者と同じAIで独立していない",
+ "runs": {
+  "pilot-codex": {
+   "readers": 10,
+   "answered_files": 10,
+   "invalid_choice_answers": 0,
+   "unsure": {
+    "original": [
+     36,
+     80
+    ],
+    "revised": [
+     5,
+     80
+    ]
+   }
+  },
+  "pilot-agy": {
+   "readers": 6,
+   "answered_files": 6,
+   "invalid_choice_answers": 0,
+   "unsure": {
+    "original": [
+     30,
+     48
+    ],
+    "revised": [
+     0,
+     48
+    ]
+   }
+  }
+ },
+ "overall": {
+  "questions": [
+   {
+    "question": "A01/q1",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 1.0
+   },
+   {
+    "question": "A01/q2",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 1.0
+   },
+   {
+    "question": "A01/q3",
+    "control": false,
+    "original": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 0.0
+   },
+   {
+    "question": "A03/q1",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 1.0
+   },
+   {
+    "question": "A03/q2",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 1.0
+   },
+   {
+    "question": "A04/q1",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 3,
+     "n": 8,
+     "rate": 0.375
+    },
+    "diff": 0.375
+   },
+   {
+    "question": "A04/q2",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 1.0
+   },
+   {
+    "question": "A06/q1",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 1.0
+   },
+   {
+    "question": "A06/q2",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 1.0
+   },
+   {
+    "question": "A08/q1",
+    "control": false,
+    "original": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 0.0
+   },
+   {
+    "question": "A09/q1",
+    "control": false,
+    "original": {
+     "correct": 5,
+     "n": 8,
+     "rate": 0.625
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 0.375
+   },
+   {
+    "question": "A09/q2",
+    "control": false,
+    "original": {
+     "correct": 5,
+     "n": 8,
+     "rate": 0.625
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 0.375
+   },
+   {
+    "question": "A11/q1",
+    "control": false,
+    "original": {
+     "correct": 0,
+     "n": 8,
+     "rate": 0.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 1.0
+   },
+   {
+    "question": "A12/q1",
+    "control": false,
+    "original": {
+     "correct": 5,
+     "n": 8,
+     "rate": 0.625
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 0.375
+   },
+   {
+    "question": "A12/q2",
+    "control": false,
+    "original": {
+     "correct": 5,
+     "n": 8,
+     "rate": 0.625
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 0.375
+   },
+   {
+    "question": "CTL-A07/q1",
+    "control": true,
+    "original": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "revised": {
+     "correct": 8,
+     "n": 8,
+     "rate": 1.0
+    },
+    "diff": 0.0
+   }
+  ],
+  "intervention_questions": 15,
+  "mean_diff": 0.6583,
+  "improved": 13,
+  "worsened": 0,
+  "unchanged": 2,
+  "sign_test_p_two_sided": 0.0002,
+  "harm_suspected": [],
+  "control_diff": [
+   0.0
+  ],
+  "verdict": {
+   "improvement": true,
+   "harm_suspected": false
+  }
+ },
+ "by_run": {
+  "pilot-codex": {
+   "questions": [
+    {
+     "question": "A01/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A01/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A01/q3",
+     "control": false,
+     "original": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "A03/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A03/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A04/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "A04/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A06/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A06/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A08/q1",
+     "control": false,
+     "original": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "A09/q1",
+     "control": false,
+     "original": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "A09/q2",
+     "control": false,
+     "original": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "A11/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 5,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A12/q1",
+     "control": false,
+     "original": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "A12/q2",
+     "control": false,
+     "original": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "CTL-A07/q1",
+     "control": true,
+     "original": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 5,
+      "n": 5,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    }
+   ],
+   "intervention_questions": 15,
+   "mean_diff": 0.5333,
+   "improved": 8,
+   "worsened": 0,
+   "unchanged": 7,
+   "sign_test_p_two_sided": 0.0078,
+   "harm_suspected": [],
+   "control_diff": [
+    0.0
+   ],
+   "verdict": {
+    "improvement": true,
+    "harm_suspected": false
+   }
+  },
+  "pilot-agy": {
+   "questions": [
+    {
+     "question": "A01/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A01/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A01/q3",
+     "control": false,
+     "original": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "A03/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A03/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A04/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A04/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A06/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A06/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A08/q1",
+     "control": false,
+     "original": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    },
+    {
+     "question": "A09/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A09/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A11/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A12/q1",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "A12/q2",
+     "control": false,
+     "original": {
+      "correct": 0,
+      "n": 3,
+      "rate": 0.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 1.0
+    },
+    {
+     "question": "CTL-A07/q1",
+     "control": true,
+     "original": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "revised": {
+      "correct": 3,
+      "n": 3,
+      "rate": 1.0
+     },
+     "diff": 0.0
+    }
+   ],
+   "intervention_questions": 15,
+   "mean_diff": 0.8667,
+   "improved": 13,
+   "worsened": 0,
+   "unchanged": 2,
+   "sign_test_p_two_sided": 0.0002,
+   "harm_suspected": [],
+   "control_diff": [
+    0.0
+   ],
+   "verdict": {
+    "improvement": true,
+    "harm_suspected": false
+   }
+  }
+ }
+}
