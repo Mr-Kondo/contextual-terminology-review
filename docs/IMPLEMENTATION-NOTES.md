@@ -53,7 +53,7 @@
 | `…/references/` | judgment・citation・feedback-loop・evaluation・hosts・review-example.json |
 | `…/scripts/` | `ctr.py`（CLI）、`ctr_common`（原子的保存）、`ctr_refs`（登録簿・引用検査・出典生成）、`ctr_log`（記録・フィードバック・export/import・削除）、`ctr_improve`（更新案・比較・採用・復元・集計・抽出・回帰・未使用評価）、`ctr_blind`（匿名比較・理解問題）、`ctr_search`（一致検索・Ruri）、`ctr_pdf` |
 | `tools/` | `ctr_install.py`（導入・更新・削除・照合・配布物）、`check_design_docs.py`、`run_acceptance.py`、`host_evidence.py`、`post_merge_cleanup.py`、`bench_search.py` |
-| `tests/` | unittest 116件。A01〜A48 の機械検査。A20の図とPDFの素材 |
+| `tests/` | unittest 119件。A01〜A48 の機械検査。A20の図とPDFの素材 |
 | `docs/` | USAGE・本メモ・ACCEPTANCE-REPORT（生成）・SEMANTIC-REVIEW-SHEET（生成）・HOST-EVIDENCE.json・evidence/ |
 
 ## 5. 主な判断と理由
@@ -83,6 +83,7 @@
   - リリースv0.1.0のzipを取得し、展開物を一時ホームで実行・導入・検証・更新・削除した（`docs/evidence/release-zip-check.md`）。zipに導入ツールと `INSTALL-ON-REMOTE.txt` が入っていないことが分かった。
   - 未実施: Antigravity IDE/App、リモート、ChatGPT Work、Claude Cowork。
 - 意味審査（A01〜A12, A17, A19, A20, A28, A29）は、作成者がAIで独立ではないため**未確定**。別モデル2つ（Codex gpt-6-sol、Antigravity gemini-4-argon-high）による確認で出力例と確認票の不備が見つかり直した（[docs/evidence/cross-model-semantic-review.md](evidence/cross-model-semantic-review.md)）が、人による独立審査の代わりにならない。指摘された「資料づくり」が資料の「成果物の作成」より範囲を狭め得る点は、版0.1.2で直し（Issue #5）、3回目の確認で両モデルとも解消を確認した。
+- 効果測定（追記: 予備試験を実施。Issue #7）: 模擬の受け手（Codex 10人・Antigravity 6人）による理解度の予備試験で、修正案は質問ごとの正答率を平均 +0.66 上げ、悪化した質問は0、害の疑いなし（docs/evidence/effect-pilot.md）。**人の受け手の代わりにならず、実務の効果は示さない**。項目の1つ（A04 q1）の正解が資料を超えていたため、現在の項目では削除した。人による測定の手順は docs/EFFECT-MEASUREMENT.md。
 - 匿名比較・理解問題の実際の評価者による採点、受け手の理解、本人の習得、実務での改善効果は未測定。性能の数値目標・週30分で確認できる件数は、初回試行後に提案する。
 - Ruri検索（追記: 公開された実文章での確認を実施。Issue #6）: 日本語Wikipediaの実文章（150語・581課題、正解は機械的）で、70m・310mとも事前基準を満たした。合成データで70mが届かなかった主因は閾値の決め方とみられる。詳細は docs/RURI-ADOPTION.md の追記。自分のデータで回す手順は docs/RURI-REAL-DATA-GUIDE.md。以下は合成データでの経緯:
 - Ruri検索: 架空の用語集40語・課題80件で一致検索・文字2-gram・Ruri 70m/310mを比較した（[docs/RURI-ADOPTION.md](RURI-ADOPTION.md)）。事前に固定した基準を、310mは満たし70m（既定）は満たさなかった。課題は作成者が作った独立でないもので、実データでの確認が残る。利用者の決定により既定モデルを310m（版固定）に変更した。この変更を含めてSkillの版を0.1.1にした（0.1.0からの違いは、Ruriの既定モデルと、その版固定のみ）。
