@@ -39,10 +39,16 @@ class HostEvidence(unittest.TestCase):
         cc = next(e for e in led["entries"] if (e["host"], e["route"]) == ("claude-code", "local"))
         self.assertEqual(cc["stages"]["record_saved"]["state"], "success")
 
-    def test_A32_local_placement_never_makes_an_environment_verified(self):
+    def test_A32_placement_never_makes_an_environment_verified(self):
         led = self.ledger()
         for e in led["entries"]:
-            self.assertEqual(he.overall(e), "incomplete", f"{e['host']}/{e['route']}")
+            st = e["stages"]
+            if he.overall(e) == "verified":                                         # verified は、実呼び出しの証拠がある経路だけ
+                self.assertEqual(st["invoke"]["evidence"]["kind"], "real_invocation", f"{e['host']}/{e['route']}")
+            if st["invoke"]["state"] != "success":
+                self.assertEqual(he.overall(e), "incomplete", f"{e['host']}/{e['route']}")
+        placement_only = [e for e in led["entries"] if e["stages"]["placement"]["state"] == "success" and e["stages"]["invoke"]["state"] != "success"]
+        self.assertTrue(placement_only)                                              # 仮配置・導入だけの経路が残っている
         e = led["entries"][0]
         e2 = json.loads(json.dumps(e))
         e2["stages"]["invoke"] = {"state": "success", "evidence": {"kind": "file_placement_in_temp_home", "detail": "置いただけ"}}
@@ -63,6 +69,11 @@ class HostEvidence(unittest.TestCase):
         for e in led["entries"]:
             if e["stages"]["placement"]["state"] == "success" and e["stages"]["invoke"]["state"] != "success":
                 self.assertNotEqual(he.overall(e), "verified")
+        for f in ("real-host-claude-code.md", "real-host-codex.md", "real-host-antigravity.md"):          # 実呼び出しの証拠ファイル
+            txt = (ROOT / "docs" / "evidence" / f).read_text(encoding="utf-8")
+            self.assertIn("出典一覧" if "出典一覧" in txt else "参照", txt)
+            for private in ("@gmail", "@hotmail", "/Users/", "/private/tmp"):
+                self.assertNotIn(private, txt, f)                                    # 認証情報・個人パスを公開物へ入れない
         self.assertTrue((ROOT / "docs" / "evidence" / "claude-code-local-run.txt").exists())   # 実記録・再読込の証拠ファイル
 
 

@@ -2,19 +2,19 @@
  "tests_run": 108,
  "failures": 0,
  "errors": 0,
- "skipped": 0,
+ "skipped": 4,
  "versions": {
-  "python": "3.12.15",
-  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python": "3.15.0",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
   "pydantic": "2.14.1",
-  "pdfplumber": "0.11.10",
-  "pdfminer.six": "20260107",
-  "pypdfium2": "5.14.0",
-  "sentence-transformers": "6.1.0",
-  "torch": "2.14.1",
-  "transformers": "5.20.1",
+  "pdfplumber": "未導入",
+  "pdfminer.six": "未導入",
+  "pypdfium2": "未導入",
+  "sentence-transformers": "未導入",
+  "torch": "未導入",
+  "transformers": "未導入",
   "numpy": "2.5.4",
-  "Pillow": "13.0.0"
+  "Pillow": "12.3.0"
  },
  "cases": [
   {
@@ -278,7 +278,7 @@
    "id": "A20",
    "kind": "visual_available",
    "verification": "human_or_independent_semantic_review",
-   "automated": "pass",
+   "automated": "partial_skipped",
    "tests": [
     {
      "test": "ReviewLevel.test_A20_visual_required_for_figure_and_ocr_sources",
@@ -287,8 +287,8 @@
     },
     {
      "test": "FigureAndAudience.test_A20_pdf_text_extraction_matches_registered_source",
-     "status": "pass",
-     "detail": ""
+     "status": "skipped",
+     "detail": "pdfplumber 未導入: PDFの実抽出は未実施"
     },
     {
      "test": "FigureAndAudience.test_A20_real_figure_requires_visual_record_and_separates_quote_from_inference",
@@ -522,7 +522,7 @@
      "detail": ""
     },
     {
-     "test": "HostEvidence.test_A32_local_placement_never_makes_an_environment_verified",
+     "test": "HostEvidence.test_A32_placement_never_makes_an_environment_verified",
      "status": "pass",
      "detail": ""
     }

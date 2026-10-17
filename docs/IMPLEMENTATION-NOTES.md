@@ -75,8 +75,10 @@
 
 ## 7. 未実施・残る問題
 
-- 3環境（Claude Code・Codex・Antigravity）での、Skillの**登録・自動/明示呼び出し・資料参照**は未観測。実ユーザーの配置先への導入はこの指示の範囲外。
-- リモート、ChatGPT Work、Claude Cowork は接続・アカウント権限が無く未実施。
+- **3環境の実呼び出し（2026-10-17、合成データの1プロンプトのみ）**: 利用者の許可を得て、実ユーザーのホームへ導入（`~/.claude/skills`・`~/.agents/skills`・`~/.gemini/config/skills`・`~/.gemini/antigravity-cli/skills`）し、Claude Code・Codex・Antigravity CLI で、スキル名を書かないプロンプトによる実モデルの呼び出しを確認した（`docs/evidence/real-host-*.md`）。Skillの自動選択、`check refs`、記録の保存と再読込、出典一覧の出力を観測。ただし1入力の結果で、品質・他入力・他モデルは示さない。
+  - Codex: 既定モデル `gpt-6.1-sol` がChatGPTアカウントで未対応のため `-m gpt-6-sol` を指定した（利用者の設定は変更していない）。
+  - Antigravity CLI: 1回目は権限拒否で回答が空。2回目は `--sandbox --dangerously-skip-permissions`（ターミナル制限付き・合成データの一時ディレクトリのみ）で成功。`references/` の読込の直接ログは取得できず、『資料参照』は未確認。モデルIDも出力に無い。
+  - 未実施: Antigravity IDE/App、リモート、ChatGPT Work、Claude Cowork。export/import は Claude Code のみ（Codex・Antigravityは未実施）。
 - 意味審査（A01〜A12, A17, A19, A20, A28, A29）は、作成者がAIで独立ではないため**未確定**。
 - 匿名比較・理解問題の実際の評価者による採点、受け手の理解、本人の習得、実務での改善効果は未測定。性能の数値目標・週30分で確認できる件数は、初回試行後に提案する。
 - Ruri検索の効果は未評価（11課題の自己参照的な動作確認のみ）。採否は判断していない。

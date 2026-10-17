@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "as_of": "2026-10-17",
- "note": "success は証拠の種別と内容を持つ段階だけ。仮配置の成功は登録・呼び出しの根拠にならない。総合 verified は全段階 success のときだけ。",
+ "note": "success は証拠の種別と内容を持つ段階だけ。仮配置の成功は登録・呼び出しの根拠にならない。総合 verified は全段階 success のときだけ。実呼び出しの証拠は合成データ1プロンプトの結果で、他の入力・他のモデルでの動作や品質を示さない。",
  "entries": [
   {
    "host": "claude-code",
@@ -10,51 +10,57 @@
     "placement": {
      "state": "success",
      "evidence": {
-      "kind": "file_placement_in_temp_home",
-      "detail": "tests/test_install.py (仮のHOMEで claude-code(~/.claude/skills 相当) への導入・更新・削除・照合を往復。実ユーザーの配置先は未変更)"
+      "kind": "real_home_install",
+      "detail": "tools/ctr_install.py install --apply で ~/.claude/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
      }
     },
     "register": {
-     "state": "not_run",
-     "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
-     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を計画表示→--apply。ホストのSkill一覧で名前を確認"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "`claude -p` の起動時スキル一覧(stream-json の init)と、本セッションのスキル一覧に contextual-terminology-review が出現"
+     }
     },
     "invoke": {
-     "state": "not_run",
-     "reason": "Skillの自動選択・明示呼び出しを、対象ホストのモデルで実行していない(アカウント・課金・外部送信を伴うため)",
-     "next_step": "導入後、新しいセッションで『「私が取りまとめます」の用語レビューをして』と依頼し、SKILL.md が読まれ末尾の出典一覧が出ることを観測する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "スキル名を書かないプロンプトで、claude-sonnet-5-5 が説明文からSkillを選び手順に従った(合成データ1件)。docs/evidence/real-host-claude-code.md"
+     }
     },
     "source_read": {
-     "state": "not_run",
-     "reason": "Skill呼び出し時に references/ を読む挙動は未観測",
-     "next_step": "呼び出し後、ホストの実行ログで references/*.md の読み込みを確認する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "Skill呼び出し後、Readツールで references/judgment.md・citation.md・feedback-loop.md を読んだ(ストリームのツール呼び出し)"
+     }
     },
     "scripts_run": {
      "state": "success",
      "evidence": {
-      "kind": "host_shell",
-      "detail": "Claude Code 2.1.292 の Bash ツールで python3.15 から ctr.py を実行(本セッション)。Skillとして登録・呼び出されたわけではない"
+      "kind": "real_invocation",
+      "detail": "ホスト自身のシェル/ツールで ctr.py(check refs / record start / record finish)を実行し終了コード0"
      }
     },
     "footer_output": {
      "state": "success",
      "evidence": {
-      "kind": "host_shell",
-      "detail": "Claude Code 2.1.292 の Bash ツールで python3.15 から ctr.py を実行(本セッション)。Skillとして登録・呼び出されたわけではない。check refs --footer-only の1参照1行を出力"
+      "kind": "real_invocation",
+      "detail": "応答末尾に1参照1行の出典一覧が出力された。docs/evidence/real-host-claude-code.md"
      }
     },
     "record_saved": {
      "state": "success",
      "evidence": {
-      "kind": "temp_runtime_roundtrip",
-      "detail": "docs/evidence/claude-code-local-run.txt: record start/finish/feedback の verified=true と実ファイル一覧"
+      "kind": "real_invocation",
+      "detail": "record start/finish が verified: true。ctr.py check store が ok、check runs が completed(一時の保存先)"
      }
     },
     "export_import": {
      "state": "success",
      "evidence": {
       "kind": "temp_runtime_roundtrip",
-      "detail": "同ファイル: 許可なしで終了コード4、許可設定後に export→import(3件)"
+      "detail": "docs/evidence/claude-code-local-run.txt: 許可なしで終了コード4→許可設定後に export→import(3件)"
      }
     }
    }
@@ -112,44 +118,56 @@
     "placement": {
      "state": "success",
      "evidence": {
-      "kind": "file_placement_in_temp_home",
-      "detail": "tests/test_install.py (仮のHOMEで codex(~/.agents/skills 相当) への導入・更新・削除・照合を往復。実ユーザーの配置先は未変更)"
+      "kind": "real_home_install",
+      "detail": "tools/ctr_install.py install --apply で ~/.agents/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
      }
     },
     "register": {
-     "state": "not_run",
-     "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
-     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を計画表示→--apply。ホストのSkill一覧で名前を確認"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "Codex がスキル名を書かないプロンプトで ~/.agents/skills/contextual-terminology-review/SKILL.md を自分で読みに行った(コマンド実行ログ)"
+     }
     },
     "invoke": {
-     "state": "not_run",
-     "reason": "Skillの自動選択・明示呼び出しを、対象ホストのモデルで実行していない(アカウント・課金・外部送信を伴うため)",
-     "next_step": "導入後、新しいセッションで『「私が取りまとめます」の用語レビューをして』と依頼し、SKILL.md が読まれ末尾の出典一覧が出ることを観測する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "スキル名を書かないプロンプトで、codex(gpt-6-sol) が説明文からSkillを選び手順に従った(合成データ1件)。docs/evidence/real-host-codex.md"
+     }
     },
     "source_read": {
-     "state": "not_run",
-     "reason": "Skill呼び出し時に references/ を読む挙動は未観測",
-     "next_step": "呼び出し後、ホストの実行ログで references/*.md の読み込みを確認する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "cat で SKILL.md と references/feedback-loop.md・judgment.md・citation.md・review-example.json を読んだ(コマンド実行ログ)"
+     }
     },
     "scripts_run": {
-     "state": "not_run",
-     "reason": "Codex のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "ホスト自身のシェル/ツールで ctr.py(check refs / record start / record finish)を実行し終了コード0"
+     }
     },
     "footer_output": {
-     "state": "not_run",
-     "reason": "Codex のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "応答末尾に1参照1行の出典一覧が出力された。docs/evidence/real-host-codex.md"
+     }
     },
     "record_saved": {
-     "state": "not_run",
-     "reason": "Codex のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "record start/finish が verified: true。ctr.py check store が ok、check runs が completed(一時の保存先)"
+     }
     },
     "export_import": {
      "state": "not_run",
-     "reason": "Codex のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "reason": "この実行のプロンプトでは書き出し・取り込みを依頼していない",
+     "next_step": "導入済みのSkillで ctr.py export / import を、許可設定した一時の保存先で実行する(docs/USAGE.md)"
     }
    }
   },
@@ -206,8 +224,8 @@
     "placement": {
      "state": "success",
      "evidence": {
-      "kind": "file_placement_in_temp_home",
-      "detail": "tests/test_install.py (仮のHOMEで antigravity-ide(~/.gemini/config/skills 相当) への導入・更新・削除・照合を往復。実ユーザーの配置先は未変更)"
+      "kind": "real_home_install",
+      "detail": "tools/ctr_install.py install --apply で ~/.gemini/config/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
      }
     },
     "register": {
@@ -254,44 +272,54 @@
     "placement": {
      "state": "success",
      "evidence": {
-      "kind": "file_placement_in_temp_home",
-      "detail": "tests/test_install.py (仮のHOMEで antigravity-cli(~/.gemini/antigravity-cli/skills 相当) への導入・更新・削除・照合を往復。実ユーザーの配置先は未変更)"
+      "kind": "real_home_install",
+      "detail": "tools/ctr_install.py install --apply で ~/.gemini/antigravity-cli/skills(と IDE/App用の ~/.gemini/config/skills) に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
      }
     },
     "register": {
-     "state": "not_run",
-     "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
-     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を計画表示→--apply。ホストのSkill一覧で名前を確認"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "応答がSKILL.mdの手順(4軸・参照記録・record start/finish・出典一覧)に従い、ctr.py が実行された(応答とホストの実行ログ)。ホストのスキル一覧の直接表示は未取得"
+     }
     },
     "invoke": {
-     "state": "not_run",
-     "reason": "Skillの自動選択・明示呼び出しを、対象ホストのモデルで実行していない(アカウント・課金・外部送信を伴うため)",
-     "next_step": "導入後、新しいセッションで『「私が取りまとめます」の用語レビューをして』と依頼し、SKILL.md が読まれ末尾の出典一覧が出ることを観測する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "スキル名を書かないプロンプトで、Antigravity CLI(agy 1.4.0, モデルID不明) が説明文からSkillを選び手順に従った(合成データ1件)。docs/evidence/real-host-antigravity.md"
+     }
     },
     "source_read": {
      "state": "not_run",
-     "reason": "Skill呼び出し時に references/ を読む挙動は未観測",
-     "next_step": "呼び出し後、ホストの実行ログで references/*.md の読み込みを確認する"
+     "reason": "references/ を読んだ直接のログを取得できていない(応答に references/ 由来の列挙名はあるが間接証拠。ログには認証情報が含まれるため保存しない)",
+     "next_step": "agy のログ/トレースで references/*.md の読込を確認する"
     },
     "scripts_run": {
-     "state": "not_run",
-     "reason": "Antigravity CLI(agy 1.4.0) のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "ホスト自身のシェル/ツールで ctr.py(check refs / record start / record finish)を実行し終了コード0"
+     }
     },
     "footer_output": {
-     "state": "not_run",
-     "reason": "Antigravity CLI(agy 1.4.0) のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "応答末尾に1参照1行の出典一覧が出力された。docs/evidence/real-host-antigravity.md"
+     }
     },
     "record_saved": {
-     "state": "not_run",
-     "reason": "Antigravity CLI(agy 1.4.0) のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "state": "success",
+     "evidence": {
+      "kind": "real_invocation",
+      "detail": "record start/finish が verified: true。ctr.py check store が ok、check runs が completed(一時の保存先)"
+     }
     },
     "export_import": {
      "state": "not_run",
-     "reason": "Antigravity CLI(agy 1.4.0) のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "reason": "この実行のプロンプトでは書き出し・取り込みを依頼していない",
+     "next_step": "導入済みのSkillで ctr.py export / import を、許可設定した一時の保存先で実行する(docs/USAGE.md)"
     }
    }
   },
