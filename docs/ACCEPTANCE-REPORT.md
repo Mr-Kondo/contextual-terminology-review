@@ -18,7 +18,7 @@
 | numpy | 2.5.4 |
 | Pillow | 12.3.0 |
 
-テスト 113 件: 失敗 0・エラー 0・skip 4。skip は未実施であり合格に数えない(Ruri実検索・pdfplumber が未導入の環境で出る)。
+テスト 116 件: 失敗 0・エラー 0・skip 4。skip は未実施であり合格に数えない(Ruri実検索・pdfplumber が未導入の環境で出る)。
 
 ## 区分別の状態(06-acceptance-matrix.md)
 

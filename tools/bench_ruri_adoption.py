@@ -15,6 +15,10 @@
 満たさない項目があれば『この証拠では推奨しない』とし、満たさなかった項目を示す。
 
   python3 tools/bench_ruri_adoption.py --out docs/evidence/ruri-adoption-bench.json [--models 70m,310m]
+
+自分のデータ・公開された実文章で回すとき: --data PATH --threshold-rule p95。データの書式は docs/RURI-REAL-DATA-GUIDE.md。
+  閾値の規則: max(devのnegativeの1位得点の最大。件数が少ないとき) / p95(95パーセンタイル。件数が多く、最大値が外れ値に引きずられるとき)。
+  どちらを使うかは、結果を見る前に決める。
 """
 from __future__ import annotations
 
@@ -41,6 +45,41 @@ MODELS = {"70m": ("cl-nagoya/ruri-v3-70m", "07a8b0aba47d29d2ca21f89b915c1efe2c23
           "310m": ("cl-nagoya/ruri-v3-310m", "18b60fb8c2b9df296fb4212bb7d23ef94e579cd3")}
 CATS = ["verbatim", "variant", "paraphrase", "negative"]
 HARD = ("variant", "paraphrase")
+
+
+def validate_dataset(data) -> list:
+    """課題セットの書式の検査。自分のデータを渡すときに、採点が崩れないように先に確かめる。問題の一覧を返す(空なら問題なし)。"""
+    problems = []
+    if not isinstance(data, dict) or not isinstance(data.get("terms"), list) or not isinstance(data.get("queries"), list):
+        return ["terms と queries の配列が必要"]
+    ids = [t.get("id") for t in data["terms"]]
+    if len(set(ids)) != len(ids) or not all(ids):
+        problems.append("terms の id が空か重複")
+    for t in data["terms"]:
+        for k in ("id", "term", "sense", "source_id", "line"):
+            if not isinstance(t.get(k), str) or not t[k]:
+                problems.append(f"term {t.get('id')}: {k} が文字列でない")
+        if not isinstance(t.get("aliases", []), list):
+            problems.append(f"term {t.get('id')}: aliases が配列でない")
+    qids = [q.get("id") for q in data["queries"]]
+    if len(set(qids)) != len(qids):
+        problems.append("queries の id が重複")
+    for q in data["queries"]:
+        if q.get("category") not in CATS:
+            problems.append(f"query {q.get('id')}: category は {CATS} のいずれか")
+        if q.get("split") not in ("dev", "test"):
+            problems.append(f"query {q.get('id')}: split は dev か test")
+        if not isinstance(q.get("text"), str) or not q["text"]:
+            problems.append(f"query {q.get('id')}: text が空")
+        gold = q.get("gold")
+        if not isinstance(gold, list) or not set(gold) <= set(ids):
+            problems.append(f"query {q.get('id')}: gold が terms の id の配列でない")
+        elif (q.get("category") == "negative") != (not gold):
+            problems.append(f"query {q.get('id')}: negative は gold が空、それ以外は1つ以上")
+    for split in ("dev", "test"):
+        if not any(q.get("category") == "negative" and q.get("split") == split for q in data["queries"]):
+            problems.append(f"{split} に negative が無い(閾値と誤検出を測れない)")
+    return problems
 
 
 def terms_and_registry(data, td: Path):
@@ -130,9 +169,11 @@ def exact_rank(terms, queries):
     return {q["id"]: [(h["term_id"], 1.0) for h in se.exact_search(terms, q["text"])["hits"]] for q in queries}
 
 
-def threshold_from_dev(ranked, queries):
-    top = [ranked[q["id"]][0][1] for q in queries if q["category"] == "negative" and q["split"] == "dev" and ranked[q["id"]]]
-    return max(top) if top else 0.0
+def threshold_from_dev(ranked, queries, rule="max"):
+    top = sorted(ranked[q["id"]][0][1] for q in queries if q["category"] == "negative" and q["split"] == "dev" and ranked[q["id"]])
+    if not top:
+        return 0.0
+    return top[-1] if rule == "max" else top[max(math.ceil(0.95 * len(top)) - 1, 0)]
 
 
 def hybrid(exact, other, queries, thr):
@@ -163,12 +204,23 @@ def main(argv=None) -> int:
     ap.add_argument("--out", type=Path)
     ap.add_argument("--models", default="70m")
     ap.add_argument("--offline", action="store_true")
+    ap.add_argument("--data", type=Path, default=DATA, help="課題セット(既定: 合成データ)")
+    ap.add_argument("--threshold-rule", choices=["max", "p95"], default="max")
+    ap.add_argument("--validate-only", action="store_true", help="書式の検査と件数の表示だけ(モデルは使わない)")
     a = ap.parse_args(argv)
-    raw = DATA.read_bytes()
+    raw = a.data.read_bytes()
     data = json.loads(raw)
+    problems = validate_dataset(data)
+    if problems:
+        print(json.dumps({"ok": False, "error": "invalid_dataset", "problems": problems[:20]}, ensure_ascii=False, indent=1))
+        return 2
     queries = data["queries"]
+    if a.validate_only:
+        counts = Counter(f"{q['split']}/{q['category']}" for q in queries)
+        print(json.dumps({"ok": True, "terms": len(data["terms"]), "queries": len(queries), "counts": dict(sorted(counts.items()))}, ensure_ascii=False, indent=1))
+        return 0
     report = {"as_of": utcnow(), "dataset_sha256": hashlib.sha256(raw).hexdigest(), "scope": data["description"],
-              "counts": {f"{s}/{c}": sum(1 for q in queries if q["split"] == s and q["category"] == c) for s in ("dev", "test") for c in CATS},
+              "threshold_rule": a.threshold_rule, "counts": {f"{s}/{c}": sum(1 for q in queries if q["split"] == s and q["category"] == c) for s in ("dev", "test") for c in CATS},
               "engines": {}}
     with tempfile.TemporaryDirectory() as td:
         td = Path(td)
@@ -178,7 +230,7 @@ def main(argv=None) -> int:
         bg = Bigram(terms, reg)
         report["lexical_overlap_query_bigrams_in_gold_doc_mean"] = overlap(queries, data, {i: set(d) for i, d in zip(bg.ids, [bigrams(se._doc_text(t, reg)) for t in terms["terms"]])})
         bg_rank = {q["id"]: bg.search(q["text"]) for q in queries}
-        thr_b = threshold_from_dev(bg_rank, queries)
+        thr_b = threshold_from_dev(bg_rank, queries, a.threshold_rule)
         bres = score_engine(bg_rank, queries, thr_b)
         report["engines"]["bigram"] = {"threshold": thr_b, **bres}
         report["engines"]["exact+bigram"] = score_engine(hybrid(ex, bg_rank, queries, thr_b), queries, thr_b)
@@ -196,7 +248,7 @@ def main(argv=None) -> int:
                     lat.append((time.time() - t1) * 1000)
                     rank[q["id"]] = [(h["term_id"], h["score"]) for h in r["hits"]]
                 rank2 = {q["id"]: [(h["term_id"], h["score"]) for h in se.ruri_search(q["text"], terms, reg, td / f"idx-{key}", top_k=5, local_files_only=a.offline)["hits"]] for q in queries[:10]}
-                thr = threshold_from_dev(rank, queries)
+                thr = threshold_from_dev(rank, queries, a.threshold_rule)
                 res = score_engine(rank, queries, thr)
                 res["_bigram"] = bres
                 report["engines"][name] = {"threshold": thr, "build_seconds": round(build_s, 2),
