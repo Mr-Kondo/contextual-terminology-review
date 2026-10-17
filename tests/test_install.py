@@ -203,6 +203,7 @@ class Install(TmpCase):
         self.assertIn(f"{NAME}/SKILL.md", names)
         self.assertFalse([n for n in names if "__pycache__" in n or n.endswith(ci.MARKER)])
         self.assertIn("Work/Cowork", (out1 / "INSTALL-ON-REMOTE.txt").read_text(encoding="utf-8"))
+        self.assertEqual((out1 / "ctr_install.py").read_bytes(), INSTALL.read_bytes())   # 手順が配布物だけで完結する
 
 
 if __name__ == "__main__":
