@@ -1,0 +1,72 @@
+{
+  "op": "install",
+  "mode": "plan-only(変更なし)",
+  "source_version": "0.1.0",
+  "results": [
+    {
+      "plan": {
+        "op": "install",
+        "dest": "~/.claude/skills/contextual-terminology-review",
+        "targets": [
+          "claude-code"
+        ],
+        "state": {
+          "state": "absent"
+        },
+        "action": "install",
+        "ok": true,
+        "notes": []
+      },
+      "applied": null
+    },
+    {
+      "plan": {
+        "op": "install",
+        "dest": "~/.agents/skills/contextual-terminology-review",
+        "targets": [
+          "codex"
+        ],
+        "state": {
+          "state": "absent"
+        },
+        "action": "install",
+        "ok": true,
+        "notes": []
+      },
+      "applied": null
+    },
+    {
+      "plan": {
+        "op": "install",
+        "dest": "~/.gemini/config/skills/contextual-terminology-review",
+        "targets": [
+          "antigravity-ide"
+        ],
+        "state": {
+          "state": "absent"
+        },
+        "action": "install",
+        "ok": true,
+        "notes": []
+      },
+      "applied": null
+    },
+    {
+      "plan": {
+        "op": "install",
+        "dest": "~/.gemini/antigravity-cli/skills/contextual-terminology-review",
+        "targets": [
+          "antigravity-cli"
+        ],
+        "state": {
+          "state": "absent"
+        },
+        "action": "install",
+        "ok": true,
+        "notes": []
+      },
+      "applied": null
+    }
+  ],
+  "data_protection": "runtime_data_root / improvement_root / 用語正本 / 評価履歴 / 他のSkill には触れない"
+}

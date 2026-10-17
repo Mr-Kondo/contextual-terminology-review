@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Ruri(sentence-transformers)は重いため入れない。該当テストは skip(未実施)になり、合格には数えない
+      - name: Install light dependencies
+        run: python -m pip install "pydantic>=2.14,<3" "pdfplumber>=0.11,<0.12" "Pillow>=12"
+      - name: Design documents integrity (資料の検査。実装の検証ではない)
+        run: python tools/check_design_docs.py
+      - name: Unit tests (機械検査)
+        run: python -m unittest discover -s tests -v

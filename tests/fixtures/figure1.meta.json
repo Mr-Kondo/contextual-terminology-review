@@ -1,0 +1,12 @@
+{
+  "page": 1,
+  "figure_label": "図1",
+  "legend_region": "右上の凡例",
+  "legend_bbox_pdf_pt": [
+    350.0,
+    20.0,
+    580.0,
+    75.0
+  ],
+  "note": "bbox は描画時の指定値(PDFの左上原点換算)。座標系は x0,top,x1,bottom"
+}

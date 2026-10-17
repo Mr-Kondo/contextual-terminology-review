@@ -1,0 +1,45 @@
+{
+  "review_id": "example-001",
+  "purpose": "会議での担当表明の確認（架空の例）",
+  "audience": "同僚",
+  "medium": "口頭",
+  "domains": ["業務用語", "ビジネス用語"],
+  "intent": "論点整理、調整、成果物作成を自分が主担当として行う",
+  "confirmed_facts": ["最終承認は部長が行う（資料: owner）"],
+  "findings": [
+    {
+      "id": "F1",
+      "target": "私が取りまとめます",
+      "judgment": "confirmed",
+      "professional_fit": "conformant",
+      "intent_clarity": "ambiguous",
+      "business_premise": "agreed",
+      "proposal_kind": "meaning_preserving_fix",
+      "reason": "「取りまとめ」だけでは、主担当として行う範囲が聞き手に伝わらない。資料は主担当の範囲を定めている。",
+      "proposal_text": "論点の整理、関係者調整、成果物の作成は私が主担当として進めます。最終承認は部長です。",
+      "oral_rephrase": "論点整理と調整と資料づくりは私が主担当です。承認は部長です。",
+      "ref_ids": ["r1", "r2"]
+    }
+  ],
+  "refs": [
+    {
+      "ref_id": "r1",
+      "finding_ids": ["F1"],
+      "source_id": "owner",
+      "version": "1",
+      "mode": "direct_quote",
+      "location": {"kind": "lines", "start": 1, "end": 1},
+      "quote": "担当者は論点の整理、関係者調整、成果物の作成を主担当として行う。"
+    },
+    {
+      "ref_id": "r2",
+      "finding_ids": ["F1"],
+      "source_id": "owner",
+      "version": "1",
+      "mode": "direct_quote",
+      "location": {"kind": "lines", "start": 2, "end": 2},
+      "quote": "最終承認は部長が行う。"
+    }
+  ],
+  "semantic_reviews": []
+}

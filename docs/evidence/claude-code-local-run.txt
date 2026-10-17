@@ -1,0 +1,58 @@
+# Claude Code(本セッション, ローカル)での通し実行の記録 — 2026-10-17T04:07:09Z
+# ホスト: Claude Code 2.1.292 (Claude Code) / モデル: claude-sonnet-5-5(システム表示) / python: Python 3.15.0
+# 保存先は一時ディレクトリ。Skillの登録・自動呼び出しは観測していない(Bashツールでスクリプトを実行しただけ)
+
+$ ctr.py store init
+{
+  "policy": {
+    "schema_version": 1,
+    "origin_id": "org-40090cda5988",
+
+$ ctr.py record start
+{"run_id": "run-20261017T040710-59e8b0", "event_id": "ev-20261017T040710-3bb812"} True
+
+$ ctr.py check refs --footer-only (A01相当の例)
+［F1／直接引用］架空案件Aの役割分担（版1）｜行1｜担当者は論点の整理、関係者調整、成果物の作成を主担当として行う。｜リンク未確認
+［F1／直接引用］架空案件Aの役割分担（版1）｜行2｜最終承認は部長が行う。｜リンク未確認
+exit=0
+
+$ ctr.py record finish
+verified= True ev-20261017T040711-ce18d5
+
+$ ctr.py feedback add
+verified= True
+
+$ ctr.py check runs / store
+['completed']
+store ok= True files_read= 3
+
+$ ctr.py export (共有許可なし)
+{
+  "ok": false,
+  "error": "sharing_not_configured",
+  "message": "共有許可(項目・範囲・許可者)が未設定です。共有用の書き出しは確認待ちで停止しました。ctr store set-policy --share-fields ... --share-scope ... --granted-by ... で設定してください。"
+}
+exit=4
+
+$ ctr.py export (仮の許可設定後)
+3 events ['environment', 'human_feedback', 'machine_checks', 'problem_axes', 'run_status', 'versions']
+
+$ ctr.py import
+{'status': 'imported', 'package_id': 'pkg-20261017T040711-772194', 'accepted': 3, 'duplicate': 0, 'conflict_quarantined': 0, 'tombstoned': 0}
+
+$ 再読込: 保存した実ファイル
+imp/inbox/pkg-20261017T040711-772194/events/ev-20261017T040710-3bb812.json
+imp/inbox/pkg-20261017T040711-772194/events/ev-20261017T040711-ce18d5.json
+imp/inbox/pkg-20261017T040711-772194/events/fb-20261017T040711-60c802.json
+imp/inbox/pkg-20261017T040711-772194/receipt.json
+imp/inbox/pkg-20261017T040711-772194/source_manifest.json
+imp/receipts/pkg-20261017T040711-772194-8855db84.json
+rt/exports.json
+rt/outbox/pkg-20261017T040711-772194/events/ev-20261017T040710-3bb812.json
+rt/outbox/pkg-20261017T040711-772194/events/ev-20261017T040711-ce18d5.json
+rt/outbox/pkg-20261017T040711-772194/events/fb-20261017T040711-60c802.json
+rt/outbox/pkg-20261017T040711-772194/manifest.json
+rt/policy.json
+rt/runs/2026-10/run-20261017T040710-59e8b0/events/ev-20261017T040711-ce18d5.json
+rt/runs/2026-10/run-20261017T040710-59e8b0/feedback/fb-20261017T040711-60c802.json
+rt/runs/2026-10/run-20261017T040710-59e8b0/run.json

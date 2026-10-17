@@ -1,0 +1,42 @@
+{
+ "extraction": {
+  "library": "pdfplumber",
+  "note": "文字のないページ(スキャン等)は抽出できない。図の内容・矢印・凡例の関係は視覚確認が必要",
+  "pages_without_text": [],
+  "text_layer_note": "画像に不可視の文字層を重ねた試験用PDF。文字層は凡例の文字だけ"
+ },
+ "figures": {
+  "図1": {
+   "page": 1,
+   "regions": [
+    "右上の凡例",
+    "開始ノード",
+    "承認ノード",
+    "破線の矢印"
+   ]
+  }
+ },
+ "file_sha256": "adb483dc218cdab5279abf9df76548c7a4a9e4be853afe7dfee374066b393ad3",
+ "id": "figure-pdf",
+ "kind": "pdf",
+ "layout": {
+  "1": [
+   {
+    "bottom": 57.5,
+    "text": "破線：未承認",
+    "top": 39.5,
+    "x0": 410.0,
+    "x1": 518.0
+   }
+  ]
+ },
+ "link": "tests/fixtures/figure1.pdf",
+ "origin": "synthetic_fixture",
+ "page_text": {
+  "1": "破線：未承認"
+ },
+ "pages": 1,
+ "text_origin": "ocr",
+ "title": "架空図1のPDF(開発用)",
+ "version": "1"
+}

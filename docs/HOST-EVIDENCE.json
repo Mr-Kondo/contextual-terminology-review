@@ -1,0 +1,441 @@
+{
+ "schema_version": 1,
+ "as_of": "2026-10-17",
+ "note": "success は証拠の種別と内容を持つ段階だけ。仮配置の成功は登録・呼び出しの根拠にならない。総合 verified は全段階 success のときだけ。",
+ "entries": [
+  {
+   "host": "claude-code",
+   "route": "local",
+   "stages": {
+    "placement": {
+     "state": "success",
+     "evidence": {
+      "kind": "file_placement_in_temp_home",
+      "detail": "tests/test_install.py (仮のHOMEで claude-code(~/.claude/skills 相当) への導入・更新・削除・照合を往復。実ユーザーの配置先は未変更)"
+     }
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
+     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を計画表示→--apply。ホストのSkill一覧で名前を確認"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "Skillの自動選択・明示呼び出しを、対象ホストのモデルで実行していない(アカウント・課金・外部送信を伴うため)",
+     "next_step": "導入後、新しいセッションで『「私が取りまとめます」の用語レビューをして』と依頼し、SKILL.md が読まれ末尾の出典一覧が出ることを観測する"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "Skill呼び出し時に references/ を読む挙動は未観測",
+     "next_step": "呼び出し後、ホストの実行ログで references/*.md の読み込みを確認する"
+    },
+    "scripts_run": {
+     "state": "success",
+     "evidence": {
+      "kind": "host_shell",
+      "detail": "Claude Code 2.1.292 の Bash ツールで python3.15 から ctr.py を実行(本セッション)。Skillとして登録・呼び出されたわけではない"
+     }
+    },
+    "footer_output": {
+     "state": "success",
+     "evidence": {
+      "kind": "host_shell",
+      "detail": "Claude Code 2.1.292 の Bash ツールで python3.15 から ctr.py を実行(本セッション)。Skillとして登録・呼び出されたわけではない。check refs --footer-only の1参照1行を出力"
+     }
+    },
+    "record_saved": {
+     "state": "success",
+     "evidence": {
+      "kind": "temp_runtime_roundtrip",
+      "detail": "docs/evidence/claude-code-local-run.txt: record start/finish/feedback の verified=true と実ファイル一覧"
+     }
+    },
+    "export_import": {
+     "state": "success",
+     "evidence": {
+      "kind": "temp_runtime_roundtrip",
+      "detail": "同ファイル: 許可なしで終了コード4、許可設定後に export→import(3件)"
+     }
+    }
+   }
+  },
+  {
+   "host": "claude-code",
+   "route": "remote",
+   "stages": {
+    "placement": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "scripts_run": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "footer_output": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "record_saved": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "export_import": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    }
+   }
+  },
+  {
+   "host": "codex",
+   "route": "local",
+   "stages": {
+    "placement": {
+     "state": "success",
+     "evidence": {
+      "kind": "file_placement_in_temp_home",
+      "detail": "tests/test_install.py (仮のHOMEで codex(~/.agents/skills 相当) への導入・更新・削除・照合を往復。実ユーザーの配置先は未変更)"
+     }
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
+     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を計画表示→--apply。ホストのSkill一覧で名前を確認"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "Skillの自動選択・明示呼び出しを、対象ホストのモデルで実行していない(アカウント・課金・外部送信を伴うため)",
+     "next_step": "導入後、新しいセッションで『「私が取りまとめます」の用語レビューをして』と依頼し、SKILL.md が読まれ末尾の出典一覧が出ることを観測する"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "Skill呼び出し時に references/ を読む挙動は未観測",
+     "next_step": "呼び出し後、ホストの実行ログで references/*.md の読み込みを確認する"
+    },
+    "scripts_run": {
+     "state": "not_run",
+     "reason": "Codex のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "footer_output": {
+     "state": "not_run",
+     "reason": "Codex のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "record_saved": {
+     "state": "not_run",
+     "reason": "Codex のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "export_import": {
+     "state": "not_run",
+     "reason": "Codex のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    }
+   }
+  },
+  {
+   "host": "codex",
+   "route": "remote",
+   "stages": {
+    "placement": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "scripts_run": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "footer_output": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "record_saved": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "export_import": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    }
+   }
+  },
+  {
+   "host": "antigravity-ide",
+   "route": "local",
+   "stages": {
+    "placement": {
+     "state": "success",
+     "evidence": {
+      "kind": "file_placement_in_temp_home",
+      "detail": "tests/test_install.py (仮のHOMEで antigravity-ide(~/.gemini/config/skills 相当) への導入・更新・削除・照合を往復。実ユーザーの配置先は未変更)"
+     }
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
+     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を計画表示→--apply。ホストのSkill一覧で名前を確認"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "Skillの自動選択・明示呼び出しを、対象ホストのモデルで実行していない(アカウント・課金・外部送信を伴うため)",
+     "next_step": "導入後、新しいセッションで『「私が取りまとめます」の用語レビューをして』と依頼し、SKILL.md が読まれ末尾の出典一覧が出ることを観測する"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "Skill呼び出し時に references/ を読む挙動は未観測",
+     "next_step": "呼び出し後、ホストの実行ログで references/*.md の読み込みを確認する"
+    },
+    "scripts_run": {
+     "state": "not_run",
+     "reason": "Antigravity IDE のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "footer_output": {
+     "state": "not_run",
+     "reason": "Antigravity IDE のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "record_saved": {
+     "state": "not_run",
+     "reason": "Antigravity IDE のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "export_import": {
+     "state": "not_run",
+     "reason": "Antigravity IDE のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    }
+   }
+  },
+  {
+   "host": "antigravity-cli",
+   "route": "local",
+   "stages": {
+    "placement": {
+     "state": "success",
+     "evidence": {
+      "kind": "file_placement_in_temp_home",
+      "detail": "tests/test_install.py (仮のHOMEで antigravity-cli(~/.gemini/antigravity-cli/skills 相当) への導入・更新・削除・照合を往復。実ユーザーの配置先は未変更)"
+     }
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
+     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を計画表示→--apply。ホストのSkill一覧で名前を確認"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "Skillの自動選択・明示呼び出しを、対象ホストのモデルで実行していない(アカウント・課金・外部送信を伴うため)",
+     "next_step": "導入後、新しいセッションで『「私が取りまとめます」の用語レビューをして』と依頼し、SKILL.md が読まれ末尾の出典一覧が出ることを観測する"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "Skill呼び出し時に references/ を読む挙動は未観測",
+     "next_step": "呼び出し後、ホストの実行ログで references/*.md の読み込みを確認する"
+    },
+    "scripts_run": {
+     "state": "not_run",
+     "reason": "Antigravity CLI(agy 1.4.0) のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "footer_output": {
+     "state": "not_run",
+     "reason": "Antigravity CLI(agy 1.4.0) のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "record_saved": {
+     "state": "not_run",
+     "reason": "Antigravity CLI(agy 1.4.0) のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    },
+    "export_import": {
+     "state": "not_run",
+     "reason": "Antigravity CLI(agy 1.4.0) のホストでは、この作業でスクリプトを実行していない",
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+    }
+   }
+  },
+  {
+   "host": "antigravity",
+   "route": "remote",
+   "stages": {
+    "placement": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "scripts_run": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "footer_output": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "record_saved": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    },
+    "export_import": {
+     "state": "not_run",
+     "reason": "リモート接続先・権限が未指定",
+     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+    }
+   }
+  },
+  {
+   "host": "chatgpt-work",
+   "route": "account",
+   "stages": {
+    "placement": {
+     "state": "success",
+     "evidence": {
+      "kind": "package_built",
+      "detail": "tools/ctr_install.py package が再現できるzipと手順を出力(tests/test_install.py)"
+     }
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "scripts_run": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "footer_output": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "record_saved": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "export_import": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    }
+   }
+  },
+  {
+   "host": "claude-cowork",
+   "route": "account",
+   "stages": {
+    "placement": {
+     "state": "success",
+     "evidence": {
+      "kind": "package_built",
+      "detail": "tools/ctr_install.py package が再現できるzipと手順を出力(tests/test_install.py)"
+     }
+    },
+    "register": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "invoke": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "source_read": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "scripts_run": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "footer_output": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "record_saved": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    },
+    "export_import": {
+     "state": "not_run",
+     "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+    }
+   }
+  }
+ ]
+}

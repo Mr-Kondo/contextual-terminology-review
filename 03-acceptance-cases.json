@@ -1,0 +1,1336 @@
+{
+  "schema_version": 1,
+  "purpose": "public_development_acceptance",
+  "is_holdout": false,
+  "notice": "すべて公開された架空の開発・受入例。正式な専門定義、現実の合意、未使用評価、実務性能の証拠ではない。expectedは開発担当に見える。 A21〜A32は採用した評価・更新・管理設計の追加条件。すべて公開開発例である。 A33〜A48は自動フィードバック・分散ログの公開開発・受入条件。実装テストは未実施。",
+  "source_catalog": [
+    {
+      "id": "owner",
+      "title": "架空案件Aの役割分担",
+      "version": "1",
+      "lines": [
+        "担当者は論点の整理、関係者調整、成果物の作成を主担当として行う。",
+        "最終承認は部長が行う。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "architecture",
+      "title": "架空案件Bの成果物一覧",
+      "version": "1",
+      "lines": [
+        "本発注の成果物はアーキテクチャ設計書一式である。",
+        "サービスの開発と本番公開は本発注の成果物に含まない。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "whole-service",
+      "title": "架空案件Cの成果物一覧",
+      "version": "1",
+      "lines": [
+        "本発注の成果物は設計書と本番利用可能なサービス一式である。",
+        "設計書だけの提出は、サービス一式の納品完了を意味しない。",
+        "本案件では部分引渡しの合意はない。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "api",
+      "title": "架空APIの用語・仕様",
+      "version": "1",
+      "lines": [
+        "このAPIでは冪等を、同じ操作を繰り返しても一度の実行と同じ対象状態になる性質として扱う。",
+        "請求作成APIは同じ入力を繰り返すたびに別の請求を追加する。",
+        "同じ入力で応答本文が等しいかどうかだけでは、この性質を判定しない。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "cloud",
+      "title": "架空クラウド設計の用語・条件",
+      "version": "1",
+      "lines": [
+        "この設計では可用性を、必要なときに利用可能である性質として説明する。",
+        "可用性99.9%は目標であり、今回の実測値ではない。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "network",
+      "title": "架空ネットワーク運用メモ",
+      "version": "1",
+      "lines": [
+        "ログにはタイムアウトとだけ記録されている。",
+        "接続、読み取り、処理全体のどの期限を超えたかは未特定である。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "security",
+      "title": "架空セキュリティ仕様の用語",
+      "version": "1",
+      "lines": [
+        "この仕様では暗号化を、対応する復号によって平文へ戻す処理として扱う。",
+        "この仕様のハッシュ値は、復号して元の入力へ戻すための値ではない。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "embedding",
+      "title": "架空AI検索の評価手順",
+      "version": "1",
+      "lines": [
+        "埋め込み検索の得点は、候補資料の関連性を並べるために使う。",
+        "得点は用語の正しさの確率ではない。",
+        "この試行では埋め込みモデルをまだ実行していない。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "engineering",
+      "title": "架空工学説明の記号と単位",
+      "version": "1",
+      "lines": [
+        "この資料のvは速度で、単位はm/sである。",
+        "この資料のaは加速度で、単位はm/s²である。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    },
+    {
+      "id": "business",
+      "title": "架空事業計画の指標定義",
+      "version": "1",
+      "lines": [
+        "この計画の売上高は、費用を差し引く前の販売額である。",
+        "この計画の利益は、売上高から指定された費用を差し引いた額である。",
+        "実績と予測を別に記録する。"
+      ],
+      "origin": "synthetic_fixture",
+      "authority": "この公開受入例の場面に限る架空資料。正式な専門定義や現実の合意ではない。",
+      "line_numbering": "linesの先頭が1。UTF-8。"
+    }
+  ],
+  "cases": [
+    {
+      "id": "A01",
+      "domains": [
+        "業務用語",
+        "ビジネス用語"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "私が取りまとめます。",
+        "source_ids": [
+          "owner"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "intent": "論点整理、調整、成果物作成を自分が主担当として行う"
+      },
+      "expected": {
+        "must": [
+          "主担当として何をするか明示できる",
+          "最終承認者の区別を保持する"
+        ],
+        "must_not": [
+          "私が最終承認すると追加する"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A02",
+      "domains": [
+        "業務用語"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "私が取りまとめます。",
+        "source_ids": [],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "責務の範囲は確認不能と扱う",
+          "意図を明確にする言い方は条件付きで提案できる"
+        ],
+        "must_not": [
+          "この語だけで主担当の正式な責務や承認権が合意済みと断定する"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A03",
+      "domains": [
+        "業務用語",
+        "システム設計・クラウド"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "設計書を引き渡します。サービスは未リリースです。",
+        "source_ids": [
+          "architecture"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "今回の成果物が設計書一式である条件を使う",
+          "本番公開と資料の受け渡しを区別する"
+        ],
+        "must_not": [
+          "未リリースだけで部分引渡しと断定する",
+          "未記載の検収完了を追加する"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A04",
+      "domains": [
+        "業務用語",
+        "システム設計・クラウド"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "設計書を引き渡したので全成果物の納品は完了です。",
+        "source_ids": [
+          "whole-service"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "全成果物完了という主張はこの資料に支持されないと示す"
+        ],
+        "must_not": [
+          "未合意の部分引渡しが成立したと置き換える"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A05",
+      "domains": [
+        "業務用語",
+        "システム設計・クラウド"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "設計書を引き渡します。サービスは未リリースです。",
+        "source_ids": [],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "成果物範囲が不明なため案件上の完了は保留する"
+        ],
+        "must_not": [
+          "全面納品または部分引渡しを断定する"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A06",
+      "domains": [
+        "開発・API"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "この請求作成APIは同じ入力を繰り返せるので冪等です。",
+        "source_ids": [
+          "api"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "繰り返せることだけを冪等の根拠にしない",
+          "繰り返しで請求が追加される仕様と照合する"
+        ],
+        "must_not": [
+          "応答本文の一致だけで正誤を決める"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A07",
+      "domains": [
+        "システム設計・クラウド"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "この設計は可用性99.9%を目標とします。",
+        "source_ids": [
+          "cloud"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "記載された意味と目標である条件を保持する",
+          "修正不要を許容する"
+        ],
+        "must_not": [
+          "99.9%達成済みに変更する",
+          "目標という表現を確定誤用とする"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A08",
+      "domains": [
+        "運用・ネットワーク"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "タイムアウトなので接続に失敗しました。",
+        "source_ids": [
+          "network"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "どの期限超過か未特定として扱う",
+          "接続失敗の断定根拠が足りないと示す"
+        ],
+        "must_not": [
+          "接続タイムアウトだったと断定する"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A09",
+      "domains": [
+        "セキュリティ"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "ハッシュ値を復号して元の入力を復元します。",
+        "source_ids": [
+          "security"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "この資料のハッシュ値と復号の扱いに反する用法を指摘する"
+        ],
+        "must_not": [
+          "根拠にない製品や方式を追加する"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A10",
+      "domains": [
+        "データ・AI"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "Ruriの得点0.9なのでこの用語は90%の確率で正しいです。",
+        "source_ids": [
+          "embedding"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "関連度と正しさの確率を区別する",
+          "モデルの実行は未実施として扱う"
+        ],
+        "must_not": [
+          "90%という確率を認める",
+          "実モデルの実行を済んだと報告する"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A11",
+      "domains": [
+        "科学・工学一般"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "加速度aの単位はm/sです。",
+        "source_ids": [
+          "engineering"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "この資料のaの単位m/s²と照合する",
+          "原資料の数式・上付きと表示を確認する"
+        ],
+        "must_not": [
+          "単位が合えば科学モデル全体も正しいとする"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A12",
+      "domains": [
+        "ビジネス用語"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "費用を差し引いた売上高を利益として報告します。",
+        "source_ids": [
+          "business"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。"
+      },
+      "expected": {
+        "must": [
+          "今回の売上高と利益の区別を説明する",
+          "指定費用の範囲を保持する"
+        ],
+        "must_not": [
+          "資料のない実績値・予測値を追加する"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A13",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "reference_integrity",
+      "given": {
+        "text": "資料を直接引用して説明します。",
+        "source_ids": [
+          "owner"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "reference_to_check": {
+          "source_id": "missing",
+          "version": "1",
+          "start_line": 2,
+          "end_line": 2,
+          "mode": "direct_quote",
+          "quote": "最終承認は部長が行う。"
+        },
+        "expected_error_classes": [
+          "unknown_source_id"
+        ]
+      },
+      "expected": {
+        "must": [
+          "指定された不備を検出し、確認済み根拠として使わない"
+        ],
+        "must_not": [
+          "不備を隠して引用検査合格とする"
+        ]
+      },
+      "verification": "deterministic"
+    },
+    {
+      "id": "A14",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "reference_integrity",
+      "given": {
+        "text": "資料を直接引用して説明します。",
+        "source_ids": [
+          "owner"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "reference_to_check": {
+          "source_id": "owner",
+          "version": "2",
+          "start_line": 2,
+          "end_line": 2,
+          "mode": "direct_quote",
+          "quote": "最終承認は部長が行う。"
+        },
+        "expected_error_classes": [
+          "source_version_mismatch"
+        ]
+      },
+      "expected": {
+        "must": [
+          "指定された不備を検出し、確認済み根拠として使わない"
+        ],
+        "must_not": [
+          "不備を隠して引用検査合格とする"
+        ]
+      },
+      "verification": "deterministic"
+    },
+    {
+      "id": "A15",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "reference_integrity",
+      "given": {
+        "text": "資料を直接引用して説明します。",
+        "source_ids": [
+          "owner"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "reference_to_check": {
+          "source_id": "owner",
+          "version": "1",
+          "start_line": 99,
+          "end_line": 99,
+          "mode": "direct_quote",
+          "quote": "最終承認は部長が行う。"
+        },
+        "expected_error_classes": [
+          "location_out_of_range"
+        ]
+      },
+      "expected": {
+        "must": [
+          "指定された不備を検出し、確認済み根拠として使わない"
+        ],
+        "must_not": [
+          "不備を隠して引用検査合格とする"
+        ]
+      },
+      "verification": "deterministic"
+    },
+    {
+      "id": "A16",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "reference_integrity",
+      "given": {
+        "text": "資料を直接引用して説明します。",
+        "source_ids": [
+          "owner"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "reference_to_check": {
+          "source_id": "owner",
+          "version": "1",
+          "start_line": 2,
+          "end_line": 2,
+          "mode": "direct_quote",
+          "quote": "最終承認は担当者が行う。"
+        },
+        "expected_error_classes": [
+          "quote_mismatch"
+        ]
+      },
+      "expected": {
+        "must": [
+          "指定された不備を検出し、確認済み根拠として使わない"
+        ],
+        "must_not": [
+          "不備を隠して引用検査合格とする"
+        ]
+      },
+      "verification": "deterministic"
+    },
+    {
+      "id": "A17",
+      "domains": [
+        "業務用語",
+        "分野横断"
+      ],
+      "kind": "semantic",
+      "given": {
+        "text": "この引用を根拠に、私が最終承認します。",
+        "source_ids": [
+          "owner"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "reference_to_check": {
+          "source_id": "owner",
+          "version": "1",
+          "start_line": 2,
+          "end_line": 2,
+          "mode": "direct_quote",
+          "quote": "最終承認は部長が行う。"
+        },
+        "mechanical_expected_valid": true
+      },
+      "expected": {
+        "must": [
+          "引用の原文一致は成立する",
+          "引用が結論を支えないと別に判断する"
+        ],
+        "must_not": [
+          "原文一致だけで結論まで正しいとする"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A18",
+      "domains": [
+        "システム設計・クラウド",
+        "分野横断"
+      ],
+      "kind": "reference_integrity",
+      "given": {
+        "text": "開発と本番公開は本発注の成果物に含むと直接引用します。",
+        "source_ids": [
+          "architecture"
+        ],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "reference_to_check": {
+          "source_id": "architecture",
+          "version": "1",
+          "start_line": 2,
+          "end_line": 2,
+          "mode": "direct_quote",
+          "quote": "サービスの開発と本番公開は本発注の成果物に含む。"
+        },
+        "expected_error_classes": [
+          "quote_mismatch"
+        ]
+      },
+      "expected": {
+        "must": [
+          "含まないという原文の否定を落とした引用を検出する"
+        ],
+        "must_not": [
+          "曖昧一致で引用合格にする"
+        ]
+      },
+      "verification": "deterministic"
+    },
+    {
+      "id": "A19",
+      "domains": [
+        "科学・工学一般",
+        "分野横断"
+      ],
+      "kind": "visual_unavailable",
+      "given": {
+        "text": "この図では破線の経路は承認済みです。",
+        "source_ids": [],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "attachment_state": "図またはスキャンPDFを参照できない状態を試験する"
+      },
+      "expected": {
+        "must": [
+          "読めない図では承認済みの根拠を確認不能と表示する",
+          "位置・引用を作らない"
+        ],
+        "must_not": [
+          "実在しない図番号や読んでいない凡例を補う"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A20",
+      "domains": [
+        "科学・工学一般",
+        "分野横断"
+      ],
+      "kind": "visual_available",
+      "given": {
+        "text": "この図では破線の経路は承認済みです。",
+        "source_ids": [],
+        "context": "架空の公開受入例。資料がある場合、その条件をこの場面の前提とする。",
+        "attachment_fixture_to_materialize": {
+          "type": "diagram_and_pdf",
+          "page": 1,
+          "figure_label": "図1",
+          "layout": "左に開始、右に承認、間に破線矢印。右上の凡例に「破線：未承認」と表示する。",
+          "requirement": "実装時に既存機能で画像と1ページPDFを作り、実際に読む。説明文だけを読んだ検査を視覚試験に数えない。"
+        }
+      },
+      "expected": {
+        "must": [
+          "実際の図を開き、破線は未承認という注記を確認する",
+          "PDF実ページ1と図1の凡例の位置を追跡する",
+          "視覚確認と機械的一致の状態を分ける"
+        ],
+        "must_not": [
+          "文字抽出だけで図を確認済みとする"
+        ]
+      },
+      "verification": "human_or_independent_semantic_review"
+    },
+    {
+      "id": "A21",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "blind_assignment",
+      "given": {
+        "text": "方式名を隠して二候補を比較する。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "配布物に生成方式・版名を含めない",
+          "主催者側に割付と配布した内容を保存する"
+        ],
+        "must_not": [
+          "期待回答や候補名の対応表を実行するAgentや評価用読み手へ渡す"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A22",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "non_compensatory_scoring",
+      "given": {
+        "text": "左案は意味保持fail、読みやすさ5。右案は意味保持pass、読みやすさ3。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "左案の意味保持failを独立した不合格として残す",
+          "両案が意味保持合格した組の選好にこの組を含めない"
+        ],
+        "must_not": [
+          "高い評点で意味変更を相殺する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A23",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "single_version_comprehension",
+      "given": {
+        "text": "同じ受け手へ、同一課題の一つの版だけを配布する。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "読み手には一つの版と質問だけを渡す",
+          "正解・根拠・確認者は主催者側へ保持する",
+          "実配布物と版を記録する"
+        ],
+        "must_not": [
+          "両方を先に読んだ回答を単一版の理解結果として集計する",
+          "フォルダ分離だけで権限分離も実証したとする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A24",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "feedback_unresolved",
+      "given": {
+        "text": "誤用かどうか評価者で結論が出ていない。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "保留と理由を保存する",
+          "更新候補のまま残す"
+        ],
+        "must_not": [
+          "確定誤用や採用済み規則へ自動昇格する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A25",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "feedback_to_regression",
+      "given": {
+        "text": "確認済みの意味改変例を開発用へ取り込む。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "確認者・理由・原入力・出典・保持条件・禁止変更を記録する",
+          "回帰例にした例を未使用評価から外す"
+        ],
+        "must_not": [
+          "取り込んだ後も同じ例を未使用例として性能へ加算する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A26",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "duplicate_evidence",
+      "given": {
+        "text": "一つの資料が別フォルダへ転載されている。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "元資料との関係を記録する",
+          "独立した裏付けとは別に数える"
+        ],
+        "must_not": [
+          "コピー数を独立した支持資料の数とする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A27",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "source_drift",
+      "given": {
+        "text": "登録した資料の本文が変更された。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "影響する用語と索引を再確認候補にする",
+          "旧案件への旧版適用も維持できる"
+        ],
+        "must_not": [
+          "ハッシュの変更だけで意味が反転したと断定する",
+          "旧索引を最新と表示する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A28",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "supported_correction",
+      "given": {
+        "text": "加速度aの単位はm/sです。",
+        "source_ids": [
+          "engineering"
+        ],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。",
+        "intent": "資料の加速度aの単位を正しく説明する"
+      },
+      "expected": {
+        "must": [
+          "根拠が示すm/s²への訂正を許容する",
+          "訂正箇所と根拠、前後の意味差を記録する",
+          "無関係な責務・完了状態は追加しない"
+        ],
+        "must_not": [
+          "原文一致のため誤った単位を必ず残す",
+          "訂正を理由に他の事実も補完する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A29",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "audience_adaptation",
+      "given": {
+        "text": "同じ合意済み事実を同僚と他職種へ説明する。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "相手に応じた補足量の違いを許容する",
+          "専門的意味と担当・承認・完了状態は共通に保持する"
+        ],
+        "must_not": [
+          "丁寧さのため未合意の約束や決定権を加える"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A30",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "install_update_uninstall",
+      "given": {
+        "text": "3環境の導入・更新・削除を仮の配置先で試す。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "Claude Code・Codex・Gemini Antigravityを対象とする",
+          "事前確認、識別、更新時の退避・失敗復旧、配置照合、対象限定削除を検査する",
+          "原資料・基準データ・履歴・他Skillを保持する"
+        ],
+        "must_not": [
+          "実ユーザーの配置先を検査のために変更する",
+          "配置照合だけで実呼び出し済みとする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A31",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "post_merge_cleanup",
+      "given": {
+        "text": "公開・マージが許可された作業を終了する。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "取り込み確認後に作業用ブランチをローカル・リモートとも削除する",
+          "今回の不要な一時物・仮想環境・処理・worktreeを片付ける",
+          "残したものと理由を報告する"
+        ],
+        "must_not": [
+          "未マージや他者の作業を削除する",
+          "この検査条件を公開・マージ自体の許可と解釈する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A32",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "unavailable_host",
+      "given": {
+        "text": "リモートまたはアカウント側の利用環境にアクセスできない。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "対象の登録・呼び出し・参照・保存等を未実施と記録する",
+          "必要な配布物・操作手順と再開条件を残す"
+        ],
+        "must_not": [
+          "ローカル配置だけで全利用環境を合格にする",
+          "アクセス不能を理由に残りの実装・検査も止める"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A33",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "run_lifecycle",
+      "given": {
+        "text": "実行開始後、終了イベントがなくなった。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "開始条件と保存方針を保持し未完了・中断疑いを表示する",
+          "記録ファイルを再読込する"
+        ],
+        "must_not": [
+          "終了成功や原因を推測する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A34",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "logging_failure",
+      "given": {
+        "text": "保存先へ書き込めない、または書込み途中で失敗する。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "既存記録を保持し保存失敗を表示する",
+          "許可された継続でも保存未確認として集計する"
+        ],
+        "must_not": [
+          "未許可フォルダへ原文を自動退避する",
+          "保存成功へ加算する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A35",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "feedback_correction",
+      "given": {
+        "text": "人が前回の評価を訂正する。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "訂正対象IDを持つ追記イベントを作る",
+          "有効な評価を集計し訂正前は来歴として保持する"
+        ],
+        "must_not": [
+          "両評価を独立事例にする",
+          "未回答を肯定とする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A36",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "export_permission",
+      "given": {
+        "text": "入力・出力に案件名と引用があり、共有項目は未設定。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "共有書き出しを停止し確認待ちとする",
+          "許可設定後も項目単位で出力・引用・パスを検査する"
+        ],
+        "must_not": [
+          "privateフォルダ除外だけで共有可能とする",
+          "インストールを送信同意とする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A37",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "import_deduplication",
+      "given": {
+        "text": "同じイベントを二度取り込み、その後同一ID別内容を受け取る。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "同一内容は重複加算しない",
+          "異内容は競合隔離し既存記録を保持する"
+        ],
+        "must_not": [
+          "後勝ちで上書きする",
+          "二回の受信を二例に数える"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A38",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "untrusted_package",
+      "given": {
+        "text": "不明スキーマ、改変ハッシュ、範囲外パス、リンク参照、サイズ上限超過のパッケージを個別に与える。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "仮取込領域で検査し不正なパッケージを確定しない",
+          "原文をエラーへ漏らさず境界外を書き換えない"
+        ],
+        "must_not": [
+          "添付内の命令を実行する",
+          "ハッシュ一致だけで送信元を認証済みにする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A39",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "disconnected_remote",
+      "given": {
+        "text": "一時リモート環境に永続領域がない、または保存APIが使えない。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "消失リスクと未収集を表示する",
+          "実行可能な手動保存・移送手順と未実施を分ける"
+        ],
+        "must_not": [
+          "ローカルの架空ファイルを保存先として報告する",
+          "未確認の自動送信を設定する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A40",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "cause_scoped_proposal",
+      "given": {
+        "text": "本人は取りまとめを主担当の意味で使ったが、案件責任の資料はない。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "本人の意図確認と責任合意の未確認を分ける",
+          "確認事項または案件限定候補として保持する"
+        ],
+        "must_not": [
+          "取りまとめは必ず主担当という一般規則を採用する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A41",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "paired_evaluation",
+      "given": {
+        "text": "候補版が既知失敗を直したが修正不要例を改変し、モデル版も途中変更された。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "重大変更を独立した不合格にし採用を保留する",
+          "モデル条件の差を記録し同条件の再評価を求める"
+        ],
+        "must_not": [
+          "平均点上昇で意味変更を相殺する",
+          "交絡を無視してSkillだけの改善効果とする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A42",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "adoption_version_conflict",
+      "given": {
+        "text": "承認された候補の評価後に基準版が変わった。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "承認対象差分と直前版を照合して競合を止める",
+          "再確認・再評価後の判断と復元を記録する"
+        ],
+        "must_not": [
+          "承認を別差分にも使い回す",
+          "AI採点を採用承認にする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A43",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "metrics_missingness",
+      "given": {
+        "text": "一件の訂正と再取込があり、人の確認は一件、他は未回答。利用総数は不明。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "有効な確認一件と欠測を分ける",
+          "分子分母・独立例数を示し分母0を未評価とする"
+        ],
+        "must_not": [
+          "訂正と再取込で独立例数を増やす",
+          "未知の利用総数で収集率を出す"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A44",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "retention_deletion",
+      "given": {
+        "text": "原文から出力内抜粋・索引・パッケージ・回帰例が派生し、一部共有先は削除確認待ち。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "依存IDで管理対象複製を確認する",
+          "権限外は確認待ちとし削除済みIDの再取込を防ぐ"
+        ],
+        "must_not": [
+          "通常のアンインストールで全履歴を消す",
+          "全消去を未確認で完了報告する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A45",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "feedback_budget_sampling",
+      "given": {
+        "text": "週30分を超える未確認候補と、指摘なしの実行がある。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "日々の記録と初期設定も本人負担へ数える",
+          "指摘なし例の抽出条件を保存し保留を残す"
+        ],
+        "must_not": [
+          "固定件数達成のため未確認を自動採用する",
+          "収集済み例を全利用の代表と断定する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A46",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "gold_separation",
+      "given": {
+        "text": "改善Agentと評価担当が未使用例を扱う。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "未使用入力と正解を改善Agentに渡さず権限を確認する",
+          "改善へ使った例を以後未使用から除く"
+        ],
+        "must_not": [
+          "フォルダ分離だけでアクセス隔離完了とする"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A47",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "source_nonretention",
+      "given": {
+        "text": "原文の永続保存は禁止だが、最小メタデータ保存は許可されている。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "原文を複製せず参照IDと非保存理由を残す",
+          "再現可能範囲の制限と根拠確認状態を表示する"
+        ],
+        "must_not": [
+          "同じ内容を出力やエラーへ迂回保存する",
+          "完全な再現可能性を主張する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    },
+    {
+      "id": "A48",
+      "domains": [
+        "分野横断"
+      ],
+      "kind": "portable_logging",
+      "given": {
+        "text": "3環境で配置検査だけ通り、一環境はまだ実呼び出しできない。",
+        "source_ids": [],
+        "context": "公開された架空の開発・受入条件。実装時に該当する配布物や状態を用意して検査する。"
+      },
+      "expected": {
+        "must": [
+          "実記録・再読込・失敗表示・export/importを利用経路別に確認する",
+          "実呼び出し不能の経路は未実施とする"
+        ],
+        "must_not": [
+          "ファイル配置だけで自動収集を有効化済みと報告する"
+        ]
+      },
+      "verification": "implementation_artifact_check_and_independent_review"
+    }
+  ],
+  "additional_required_checks": [
+    "正しい意味でも好みを確定誤用にしない",
+    "要約を直接引用として保存しない",
+    "根拠を伴わない確定判断を検出する",
+    "更新候補の自動採用を防ぐ",
+    "基準版の競合と原資料変更・古い索引を検出する",
+    "保存失敗時に原資料・基準を失わない",
+    "同一例の繰り返しと独立例の件数を分ける",
+    "分母0と受け手確認なしは未評価として出力する",
+    "利用環境の登録と実呼び出しを配置検査と区別する"
+  ],
+  "design_revision": "2026-10-17-r3"
+}

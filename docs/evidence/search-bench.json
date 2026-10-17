@@ -1,0 +1,244 @@
+{
+ "as_of": "2026-10-17T04:17:43Z",
+ "scope": "公開された開発用ケースの入力文。件数が少なく、未使用評価でも実務性能でもない",
+ "task_count": 11,
+ "independent_tasks": 11,
+ "k": [
+  1,
+  3
+ ],
+ "engines": {
+  "exact": {
+   "status": "ok",
+   "hit": [
+    {
+     "k": 1,
+     "numerator": 9,
+     "denominator": 11,
+     "value": 0.8181818181818182
+    },
+    {
+     "k": 3,
+     "numerator": 10,
+     "denominator": 11,
+     "value": 0.9090909090909091
+    }
+   ],
+   "per_task": {
+    "A01": [
+     "t-owner"
+    ],
+    "A03": [
+     "t-architecture"
+    ],
+    "A04": [
+     "t-architecture",
+     "t-whole-service"
+    ],
+    "A06": [
+     "t-api"
+    ],
+    "A07": [
+     "t-cloud"
+    ],
+    "A08": [
+     "t-network"
+    ],
+    "A09": [
+     "t-security"
+    ],
+    "A10": [
+     "t-embedding"
+    ],
+    "A11": [
+     "t-engineering"
+    ],
+    "A12": [
+     "t-business"
+    ],
+    "A17": []
+   }
+  },
+  "ruri": {
+   "status": "ok",
+   "hit": [
+    {
+     "k": 1,
+     "numerator": 9,
+     "denominator": 11,
+     "value": 0.8181818181818182
+    },
+    {
+     "k": 3,
+     "numerator": 11,
+     "denominator": 11,
+     "value": 1.0
+    }
+   ],
+   "per_task": {
+    "A01": [
+     "t-owner",
+     "t-whole-service",
+     "t-architecture"
+    ],
+    "A03": [
+     "t-architecture",
+     "t-whole-service",
+     "t-cloud"
+    ],
+    "A04": [
+     "t-architecture",
+     "t-whole-service",
+     "t-owner"
+    ],
+    "A06": [
+     "t-api",
+     "t-security",
+     "t-cloud"
+    ],
+    "A07": [
+     "t-cloud",
+     "t-api",
+     "t-embedding"
+    ],
+    "A08": [
+     "t-network",
+     "t-whole-service",
+     "t-architecture"
+    ],
+    "A09": [
+     "t-security",
+     "t-api",
+     "t-embedding"
+    ],
+    "A10": [
+     "t-embedding",
+     "t-cloud",
+     "t-api"
+    ],
+    "A11": [
+     "t-engineering",
+     "t-cloud",
+     "t-api"
+    ],
+    "A12": [
+     "t-business",
+     "t-architecture",
+     "t-whole-service"
+    ],
+    "A17": [
+     "t-cloud",
+     "t-architecture",
+     "t-owner"
+    ]
+   },
+   "scores": [
+    {
+     "case": "A01",
+     "scores": [
+      0.845612,
+      0.764739,
+      0.761673
+     ]
+    },
+    {
+     "case": "A03",
+     "scores": [
+      0.882872,
+      0.876545,
+      0.787759
+     ]
+    },
+    {
+     "case": "A04",
+     "scores": [
+      0.911792,
+      0.899957,
+      0.806458
+     ]
+    },
+    {
+     "case": "A06",
+     "scores": [
+      0.930743,
+      0.784737,
+      0.773339
+     ]
+    },
+    {
+     "case": "A07",
+     "scores": [
+      0.928965,
+      0.767674,
+      0.760738
+     ]
+    },
+    {
+     "case": "A08",
+     "scores": [
+      0.851987,
+      0.753422,
+      0.748681
+     ]
+    },
+    {
+     "case": "A09",
+     "scores": [
+      0.879987,
+      0.792568,
+      0.760474
+     ]
+    },
+    {
+     "case": "A10",
+     "scores": [
+      0.815543,
+      0.784358,
+      0.750709
+     ]
+    },
+    {
+     "case": "A11",
+     "scores": [
+      0.912292,
+      0.734781,
+      0.721716
+     ]
+    },
+    {
+     "case": "A12",
+     "scores": [
+      0.887977,
+      0.783804,
+      0.781501
+     ]
+    },
+    {
+     "case": "A17",
+     "scores": [
+      0.781948,
+      0.768575,
+      0.768251
+     ]
+    }
+   ],
+   "index_meta": {
+    "model_id": "cl-nagoya/ruri-v3-70m",
+    "model_revision": "07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc",
+    "tokenizer_revision": "07a8b0aba47d29d2ca21f89b915c1efe2c23d1cc",
+    "libs": {
+     "sentence_transformers": "6.1.0",
+     "torch": "2.14.1",
+     "transformers": "5.20.1",
+     "numpy": "2.5.4"
+    },
+    "query_prefix": "検索クエリ: ",
+    "doc_prefix": "検索文書: ",
+    "chunking": "term entry 1件=文書1件(語・別名・語義・根拠行)",
+    "terms_sha256": "7c8e6967c94282433d92f28a915c5a4cc5188aaa5ef52cb8fd82bab2ffd1fe85",
+    "sources_sha256": "f4f236bdf2e718f07ba9dc8a515a6b83ae12efdc30c394bfafff6db9c7b33e5f"
+   },
+   "build_seconds": 11.18
+  }
+ }
+}

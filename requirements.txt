@@ -1,0 +1,7 @@
+# contextual-terminology-review の依存。検証した版は requirements-lock.txt(Python 3.12.15 / macOS arm64 で固定)。
+# pydantic は管理スクリプト(ctr.py)に必須。pdfplumber は PDF 抽出、sentence-transformers は任意の Ruri 検索で、
+# 無くても基本レビューと記録検査は動く。Pillow は A20 の試験素材の再生成(tests/fixtures/make_figure_fixture.py)のみ。
+pydantic>=2.14,<3
+pdfplumber>=0.11,<0.12
+sentence-transformers>=6.1,<7
+Pillow>=12

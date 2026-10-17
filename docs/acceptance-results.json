@@ -1,0 +1,821 @@
+{
+ "tests_run": 108,
+ "failures": 0,
+ "errors": 0,
+ "skipped": 0,
+ "versions": {
+  "python": "3.12.15",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "pydantic": "2.14.1",
+  "pdfplumber": "0.11.10",
+  "pdfminer.six": "20260107",
+  "pypdfium2": "5.14.0",
+  "sentence-transformers": "6.1.0",
+  "torch": "2.14.1",
+  "transformers": "5.20.1",
+  "numpy": "2.5.4",
+  "Pillow": "13.0.0"
+ },
+ "cases": [
+  {
+   "id": "A01",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A01_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A02",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A02_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A03",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A03_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A04",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A04_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A05",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A05_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A06",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A06_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A07",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A07_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A08",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A08_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A09",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A09_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A10",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A10_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A11",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A11_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A12",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A12_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A13",
+   "kind": "reference_integrity",
+   "verification": "deterministic",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "RefIntegrity.test_A13_reference_integrity",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A14",
+   "kind": "reference_integrity",
+   "verification": "deterministic",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "RefIntegrity.test_A14_reference_integrity",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A15",
+   "kind": "reference_integrity",
+   "verification": "deterministic",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "RefIntegrity.test_A15_reference_integrity",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A16",
+   "kind": "reference_integrity",
+   "verification": "deterministic",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "RefIntegrity.test_A16_reference_integrity",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A17",
+   "kind": "semantic",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "MechanicalVsSemantic.test_A17_quote_matches_but_conclusion_is_not_supported",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "SemanticGuards.test_A17_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A18",
+   "kind": "reference_integrity",
+   "verification": "deterministic",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "QuoteRules.test_A18_negation_dropped_is_detected_and_no_fuzzy_match",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "RefIntegrity.test_A18_reference_integrity",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A19",
+   "kind": "visual_unavailable",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A19_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A20",
+   "kind": "visual_available",
+   "verification": "human_or_independent_semantic_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "ReviewLevel.test_A20_visual_required_for_figure_and_ocr_sources",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "FigureAndAudience.test_A20_pdf_text_extraction_matches_registered_source",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "FigureAndAudience.test_A20_real_figure_requires_visual_record_and_separates_quote_from_inference",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A21",
+   "kind": "blind_assignment",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Blind.test_A21_distribution_has_no_method_names_or_answers_and_organizer_keeps_assignment",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Blind.test_A21_label_leak_in_candidate_text_is_refused_and_existing_distribution_is_not_overwritten",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Blind.test_A21_same_document_keeps_orientation_and_assignments_are_balanced_by_seed",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A22",
+   "kind": "non_compensatory_scoring",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Blind.test_A22_meaning_failure_is_independent_and_not_offset_by_readability_or_preference",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Blind.test_A22_preference_counts_only_when_both_pass_and_missing_is_reported",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A23",
+   "kind": "single_version_comprehension",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Comprehension.test_A23_each_reader_gets_one_version_per_item_and_answers_stay_with_organizer",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Comprehension.test_A23_other_version_answers_are_excluded_unanswered_stay_in_denominator_and_free_text_needs_human_score",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A24",
+   "kind": "feedback_unresolved",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Proposals.test_A24_unresolved_feedback_stays_a_hypothesis_and_is_never_promoted",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A25",
+   "kind": "feedback_to_regression",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Proposals.test_A25_confirmed_problem_becomes_regression_and_leaves_holdout",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A26",
+   "kind": "duplicate_evidence",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "ReviewLevel.test_A26_copies_do_not_count_as_independent_support",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A27",
+   "kind": "source_drift",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "ReviewLevel.test_A27_changed_source_is_flagged_for_recheck_not_judged_reversed",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "RuriWithoutDependency.test_A27_stale_index_is_refused_before_loading_any_model",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A28",
+   "kind": "supported_correction",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "SemanticGuards.test_A28_mechanical_guards",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A29",
+   "kind": "audience_adaptation",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "FigureAndAudience.test_A29_audience_adaptation_keeps_facts_common",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A30",
+   "kind": "install_update_uninstall",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Install.test_A30_failure_at_every_stage_restores_previous_version",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Install.test_A30_foreign_and_modified_installs_are_not_overwritten_or_deleted_without_consent",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Install.test_A30_plan_only_is_default_and_shows_operation_destination_and_changes",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Install.test_A30_round_trip_for_each_target",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Install.test_A30_source_with_real_data_is_refused_and_dest_option_works",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Install.test_A30_target_paths_are_distinct_per_environment",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Install.test_A30_update_backs_up_old_version_and_preserves_other_skills_and_data",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Install.test_A30_verify_detects_tampering_after_install",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A31",
+   "kind": "post_merge_cleanup",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "PostMergeCleanup.test_A31_merged_branch_is_deleted_locally_and_remotely_and_unmerged_or_others_are_kept",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "PostMergeCleanup.test_A31_not_a_git_repo_is_reported_not_faked",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "PostMergeCleanup.test_A31_unmerged_base_current_branch_and_outside_paths_are_refused",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A32",
+   "kind": "unavailable_host",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "HostEvidence.test_A32_ledger_is_valid_and_unavailable_paths_are_recorded_as_not_run_with_reason_and_next_step",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "HostEvidence.test_A32_local_placement_never_makes_an_environment_verified",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A33",
+   "kind": "run_lifecycle",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "RunLifecycle.test_A33_failed_run_is_recorded_as_failure",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "RunLifecycle.test_A33_run_without_end_event_is_incomplete_not_guessed",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A34",
+   "kind": "logging_failure",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "RunLifecycle.test_A34_existing_id_is_never_overwritten",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "RunLifecycle.test_A34_midwrite_failure_leaves_no_partial_file",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "RunLifecycle.test_A34_unwritable_store_keeps_existing_and_reports_unsaved",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A35",
+   "kind": "feedback_correction",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Feedback.test_A35_correction_is_appended_and_only_effective_value_counts",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Feedback.test_A35_unanswered_is_not_positive",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A36",
+   "kind": "export_permission",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Sharing.test_A36_export_stops_until_item_permission_is_set_and_install_is_not_consent",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Sharing.test_A36_export_with_path_like_model_id_aborts_without_package",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Sharing.test_A36_only_permitted_groups_are_exported",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Sharing.test_A36_permitted_package_contains_only_allowed_items_and_no_leak_by_bypass",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Sharing.test_A36_validator_rejects_extra_and_pathlike_values",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A37",
+   "kind": "import_deduplication",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Sharing.test_A37_duplicate_import_is_not_double_counted_and_same_id_other_content_is_quarantined",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A38",
+   "kind": "untrusted_package",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Sharing.test_A38_import_denies_unpermitted_package",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Sharing.test_A38_untrusted_packages_are_each_rejected_without_side_effects",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A39",
+   "kind": "disconnected_remote",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "RunLifecycle.test_A39_relative_path_is_refused_and_nonexistent_parent_fails_cleanly",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "RunLifecycle.test_A39_unconfigured_store_is_reported_with_manual_route_and_writes_nothing",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A40",
+   "kind": "cause_scoped_proposal",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Proposals.test_A40_unagreed_responsibility_becomes_a_confirmation_item_not_a_general_rule",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A41",
+   "kind": "paired_evaluation",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Evaluation.test_A41_meaning_failure_blocks_adoption_even_when_average_improves_and_confounds_are_recorded",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Evaluation.test_A41_same_conditions_with_all_pass_is_improved_but_needs_coverage",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A42",
+   "kind": "adoption_version_conflict",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Evaluation.test_A42_adoption_requires_matching_base_version_and_does_not_reuse_approval",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Evaluation.test_A42_decision_record_failure_rolls_back_the_standard",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A43",
+   "kind": "metrics_missingness",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Feedback.test_A43_metrics_separate_valid_confirmation_from_missing_and_do_not_inflate_independent_count",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A44",
+   "kind": "retention_deletion",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Deletion.test_A44_delete_tracks_derivatives_marks_external_pending_and_blocks_reimport",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Deletion.test_A44_reimport_of_old_package_is_blocked_by_tombstone",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A45",
+   "kind": "feedback_budget_sampling",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Feedback.test_A45_effort_counts_setup_and_daily_entries_and_flags_budget",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "Feedback.test_A45_sampling_includes_no_finding_runs_with_recorded_conditions_and_no_assumed_correctness",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A46",
+   "kind": "gold_separation",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "Proposals.test_A46_gold_separation_is_reported_as_not_demonstrated_and_overlap_is_detected",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A47",
+   "kind": "source_nonretention",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "RunLifecycle.test_A47_raw_text_kept_only_with_explicit_permission",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "RunLifecycle.test_A47_raw_text_not_retained_when_not_permitted",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "id": "A48",
+   "kind": "portable_logging",
+   "verification": "implementation_artifact_check_and_independent_review",
+   "automated": "pass",
+   "tests": [
+    {
+     "test": "HostEvidence.test_A48_three_required_environments_are_covered_per_route_and_a_placement_only_environment_is_not_reported_as_collecting",
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "test": "PortableLogging.test_A48_each_route_records_rereads_exports_imports_and_reports_failure",
+     "status": "pass",
+     "detail": ""
+    }
+   ]
+  }
+ ],
+ "ledger_valid": true
+}
