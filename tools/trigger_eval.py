@@ -94,13 +94,14 @@ def parse_stream(lines) -> dict:
     return {"fired": None, "finished": False}
 
 
-def run_one(query: str, model, timeout: int, skill_dirs=()) -> dict:
+def run_one(query: str, model, timeout: int, skill_dirs=(), extra_args=()) -> dict:
     cmd = ["claude", "-p", query, "--output-format", "stream-json", "--verbose", "--no-session-persistence",
            "--strict-mcp-config", "--allowedTools", "Skill"]
     if skill_dirs:
         cmd += ["--setting-sources", "project"]
     if model:
         cmd += ["--model", model]
+    cmd += list(extra_args)
     t0 = time.time()
     with tempfile.TemporaryDirectory(prefix="ctr-trigger-") as cwd:
         for d in skill_dirs:
@@ -119,12 +120,12 @@ def run_one(query: str, model, timeout: int, skill_dirs=()) -> dict:
     return out
 
 
-def run(data: dict, split: str, runs: int, model, workers: int, timeout: int, skill_dirs=()) -> list:
+def run(data: dict, split: str, runs: int, model, workers: int, timeout: int, skill_dirs=(), extra_args=()) -> list:
     jobs = [(q["id"], r, q["query"]) for q in data["queries"] if split in ("all", q["split"]) for r in range(1, runs + 1)]
 
     def one(job):
         qid, r, text = job
-        res = run_one(text, model, timeout, skill_dirs)
+        res = run_one(text, model, timeout, skill_dirs, extra_args)
         return {"id": qid, "run": r, **res}
     with ThreadPoolExecutor(max_workers=workers) as ex:
         return list(ex.map(one, jobs))
@@ -168,8 +169,9 @@ def score(data: dict, results: list, split: str) -> dict:
             "no_skill_on_positive": sum(1 for r in pos if not r["fired"]),
             "runs_without_clean_finish": len(invalid), "per_query": per_query,
             "criteria": {"recall_min": RECALL_MIN, "false_fire_max": FALSE_FIRE_MAX},
-            "pass": {"recall": bool(recall is not None and recall >= RECALL_MIN),
-                     "false_fire": bool(false_fire is not None and false_fire <= FALSE_FIRE_MAX)}}
+            "pass": None if invalid else {"recall": bool(recall is not None and recall >= RECALL_MIN),
+                                          "false_fire": bool(false_fire is not None and false_fire <= FALSE_FIRE_MAX)},
+            "warning": f"{len(invalid)}件の実行が正常に終わっていない(即時の失敗・時間切れ)。基準の判定をしない" if invalid else None}
 
 
 def main(argv=None) -> int:
@@ -184,6 +186,7 @@ def main(argv=None) -> int:
     r.add_argument("--model")
     r.add_argument("--workers", type=int, default=3)
     r.add_argument("--timeout", type=int, default=150)
+    r.add_argument("--claude-arg", action="append", default=[], help="claude にそのまま足す引数を1つずつ(例: --claude-arg=--settings --claude-arg='{\"skillListingBudgetFraction\":0.05}')")
     r.add_argument("--skill-dir", type=Path, action="append", default=[], help="このフォルダだけを使う(実環境のSkill・設定は読まない)。複数可")
     r.add_argument("--out", type=Path, required=True)
     s = sub.add_parser("score")
@@ -202,10 +205,10 @@ def main(argv=None) -> int:
         if errs:
             print(json.dumps({"ok": False, "errors": errs}, ensure_ascii=False))
             return 1
-        res = run(data, a.split, a.runs, a.model, a.workers, a.timeout, [str(d) for d in a.skill_dir])
+        res = run(data, a.split, a.runs, a.model, a.workers, a.timeout, [str(d) for d in a.skill_dir], a.claude_arg)
         a.out.parent.mkdir(parents=True, exist_ok=True)
         a.out.write_text(json.dumps({"model": a.model or "default", "split": a.split, "runs": a.runs,
-                                     "skill_dirs": [d.resolve().name for d in a.skill_dir] or "実環境", "results": res}, ensure_ascii=False, indent=1), encoding="utf-8")
+                                     "skill_dirs": [d.resolve().name for d in a.skill_dir] or "実環境", "claude_args": a.claude_arg, "results": res}, ensure_ascii=False, indent=1), encoding="utf-8")
         print(json.dumps({"ok": True, "results": len(res), "out": str(a.out)}, ensure_ascii=False))
         return 0
     results = json.loads(a.results.read_text(encoding="utf-8"))["results"]

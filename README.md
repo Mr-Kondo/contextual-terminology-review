@@ -16,6 +16,7 @@
 | 自分のデータでRuriを確認する手順 | [docs/RURI-REAL-DATA-GUIDE.md](docs/RURI-REAL-DATA-GUIDE.md) |
 | 効果測定の手順（人による測定と、模擬の受け手による予備試験） | [docs/EFFECT-MEASUREMENT.md](docs/EFFECT-MEASUREMENT.md) |
 | 発動精度の評価（descriptionが使うべき依頼で選ばれるか） | [docs/TRIGGER-EVAL.md](docs/TRIGGER-EVAL.md) |
+| E2E評価（初見の課題で、Skillありと素のモデルの最終出力を比較） | [docs/E2E-EVAL.md](docs/E2E-EVAL.md) |
 | 利用環境ごとの成功・失敗・未実施 | [docs/HOST-EVIDENCE.json](docs/HOST-EVIDENCE.json)（実呼び出しの記録: `docs/evidence/real-host-*.md`） |
 | Skill本体 | [skill/contextual-terminology-review/](skill/contextual-terminology-review/SKILL.md) |
 
