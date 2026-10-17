@@ -62,6 +62,8 @@ python3 tools/ctr_install.py uninstall --target antigravity --scope user --apply
 
 Agent に依頼する（Skillが自動選択される。環境により明示的な呼び出しも可）。
 
+自動で選ばれるかは、Agent のモデルで違う。Claude Code では、使うべき依頼の約9割（既定モデル）・4分の3（Opus）で選ばれたが、**Haiku では選ばれなかった**（[docs/TRIGGER-EVAL.md](TRIGGER-EVAL.md)）。選ばれないときは、依頼文に Skill 名（`contextual-terminology-review`）を書いて呼ぶ。
+
 > 「私が取りまとめます」と会議で言うつもりです。役割は論点整理と調整と資料作成の主担当で、最終承認は部長です。資料は <パス>。用語として問題ないか、伝わるかを確認して。
 
 Agent は、入力を確認し、`ctr.py record start`（保存先が設定済みなら）→ 資料読解 → 判定 → `ctr.py check refs` → 出典付きの返答 → `record finish` を行う。返答の末尾の出典一覧は1参照1行で、検査を通った記録から生成される。`要確認` が付いた行は断定の根拠に使われていない。

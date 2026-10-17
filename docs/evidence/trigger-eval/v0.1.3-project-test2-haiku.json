@@ -1,0 +1,176 @@
+{
+ "split": "test2",
+ "positive_runs": 12,
+ "negative_runs": 10,
+ "borderline_runs": 2,
+ "recall": {
+  "hit": 0,
+  "n": 12,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.2425
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 10,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.2775
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 2
+ },
+ "other_skill_on_positive": {
+  "japanese-readability-editor": 4
+ },
+ "other_skill_on_negative": {
+  "japanese-readability-editor": 1
+ },
+ "no_skill_on_positive": 8,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "T01": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "T02": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "T03": {
+   "runs": 1,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 1
+   }
+  },
+  "T04": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "T05": {
+   "runs": 1,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 1
+   }
+  },
+  "T06": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "T07": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "T08": {
+   "runs": 1,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 1
+   }
+  },
+  "T09": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "T10": {
+   "runs": 1,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 1
+   }
+  },
+  "T11": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "T12": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U01": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U02": {
+   "runs": 1,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 1
+   }
+  },
+  "U03": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U04": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U05": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U06": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U07": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U08": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U09": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U10": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U11": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  },
+  "U12": {
+   "runs": 1,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": false,
+  "false_fire": true
+ }
+}
