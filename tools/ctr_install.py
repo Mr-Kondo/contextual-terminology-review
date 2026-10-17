@@ -291,8 +291,9 @@ def main(argv=None) -> int:
             if not a.out:
                 raise InstallError("--out が必要")
             z = build_zip(a.source.resolve(), info, a.out)
+            shutil.copy2(Path(__file__).resolve(), a.out / "ctr_install.py")   # 手順が配布物だけで完結するように、導入ツールも置く
             (a.out / "INSTALL-ON-REMOTE.txt").write_text(
-                f"1. {z.name} と tools/ctr_install.py をリモートへ移す\n"
+                f"1. {z.name} と ctr_install.py をリモートへ移す(同じ出力先に置いてある。依存は pydantic: pip install pydantic)\n"
                 f"2. リモートで: python3 ctr_install.py install --target <claude-code|codex|antigravity> --scope user --source <展開したskill/{NAME}>\n"
                 "   (計画が表示される。内容を確認して --apply を付ける)\n"
                 "3. Work/Cowork などアカウント側の登録はこのスクリプトでは操作できない。docs/USAGE.md の手順で利用者が登録する\n",
