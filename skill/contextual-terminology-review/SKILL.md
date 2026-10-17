@@ -22,7 +22,7 @@ description: 業務・システム設計・開発・運用・セキュリティ�
 2. **記録を開始する**: 保存先が設定済みなら `scripts/ctr.py record start`（[feedback-loop](references/feedback-loop.md)）。未設定なら「記録未設定」と伝えて続ける。保存したと言うのは、コマンドが `verified: true` を返したときだけ。
 3. **基準を探す**: 用語・別名の一致検索（`ctr.py search exact`）と原資料の読解。必要なときだけRuri検索（任意）。図・画像・PDFはAgentの画像・PDF読解で実際に見る。PDFの文字抽出は `ctr.py pdf extract`。読めないものは未確認。基準の選び方は [judgment](references/judgment.md)。
 4. **判定する**: 一つの点数にせず、専門的適合・意図の明確さ・業務上の前提・提案の4軸で記録する（[judgment](references/judgment.md)）。
-5. **参照記録を作って検査する**: 判断ごとの根拠を review.json にし、`ctr.py check refs --review R --sources S` を実行する。不備のある参照は断定の根拠に使わず「要確認」に下げる（[citation](references/citation.md)）。
+5. **参照記録を作って検査する**: 判断ごとの根拠を review.json にし、`ctr.py check refs --review R --sources S` を実行する。不備のある参照は断定の根拠に使わず「要確認」に下げる（[citation](references/citation.md)）。出力の `warnings`（修正案が足した責務語、引用の近くの草案・但し書きなど）は、エラーではない確認候補。該当の語が原文・本人の説明・資料にあるかを確かめ、無ければ修正案から外すか、指摘の理由・確認点に反映する。
 6. **返す**（下の形式）。出典一覧はコマンドが生成した行をそのまま使い、資料名・位置・引用を補わない。
 7. **記録を完了する**: `ctr.py record finish --run-id ID --review R --sources S`（失敗なら `record fail`）。保存結果を確認する。
 8. **任意のフィードバックを案内する**: 指摘は妥当か／意図は保たれたか／使ったか／受け手に確認できたか（各「不明・未回答」可）。`ctr.py feedback add`。未回答を肯定にしない。

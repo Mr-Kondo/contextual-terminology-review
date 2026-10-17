@@ -51,7 +51,9 @@ def main(argv=None) -> int:
             report["refused"].append({"what": a.branch, "why": "base 自身または現在のブランチは削除しない"})
         else:
             for kind, exists, merged in (("local", local_exists, merged_local), ("remote", remote_exists, merged_remote)):
-                if not exists:
+                if kind == "remote" and not a.remote:
+                    report["kept"].append({"what": f"remote:{a.branch}", "why": "--remote が未指定のため対象外(リモートも消すなら --remote origin を付ける)"})
+                elif not exists:
                     report["kept"].append({"what": f"{kind}:{a.branch}", "why": "存在しない(削除済みか未作成)"})
                 elif not merged:
                     report["refused"].append({"what": f"{kind}:{a.branch}", "why": f"{a.base} への取り込みを確認できない(未マージ)。削除しない"})

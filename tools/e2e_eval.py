@@ -43,7 +43,7 @@ from effect_pilot import binom_two_sided  # noqa: E402
 
 DATA = ROOT / "tools" / "data" / "e2e-cases.json"
 SKILL = "contextual-terminology-review"
-SPLITS = ("dev", "test")
+SPLITS = ("dev", "test", "test2")   # test2 = Skillを直した後に新しく書いた未使用の課題
 VERDICTS = ("misuse", "ambiguous", "ok", "insufficient")
 
 INSTRUCTION = (

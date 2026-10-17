@@ -38,6 +38,17 @@ class Exact(TmpCase):
         p = se.exact_search(TERMS, "引き渡します")
         self.assertTrue(p["hits"][0]["personal_preference"])                          # 個人の好みは専門定義と区別
 
+    def test_a_short_term_inside_a_longer_term_hit_is_suppressed_but_kept_in_the_record(self):
+        terms = {"terms": [{"id": "t1", "term": "キャッシュ", "sense": "高速化のための一時保存"},
+                           {"id": "t2", "term": "キャッシュ・フロー", "sense": "現金の流れ"}]}
+        r = se.exact_search(terms, "キャッシュ・フローを確認します。")
+        self.assertEqual([h["term_id"] for h in r["hits"]], ["t2"])
+        self.assertEqual(r["suppressed"], [{"term_id": "t1", "matched_form": "キャッシュ", "covered_by": ["キャッシュ・フロー"]}])
+        # 内側だけでなく単独でも現れるなら、短い語も残す
+        r = se.exact_search(terms, "キャッシュ・フローとキャッシュの違い。")
+        self.assertEqual(sorted(h["term_id"] for h in r["hits"]), ["t1", "t2"])
+        self.assertEqual(r["suppressed"], [])
+
     def test_hit_at_k_uses_only_tasks_with_gold_and_zero_denominator_is_unevaluated(self):
         res = {"q1": ["a", "b"], "q2": ["c"], "q3": ["z"]}
         gold = {"q1": "b", "q2": "x", "q3": None}                                     # q3 は正解資料なし

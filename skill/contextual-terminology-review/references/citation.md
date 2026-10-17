@@ -37,6 +37,12 @@ review.json（判断と参照記録）→ `ctr.py check refs --review review.jso
 - 省略引用は `elided: true` とし、`…` か `[...]` で区切る。各断片が元の範囲に順に現れる必要がある。
 - 判断が `confirmed` でも、合格した資料の参照がなければ `needs_confirmation` に下げられる（`unsupported_confirmed_judgment`）。本人の説明は意図の根拠として表示できるが、専門的適合の確定根拠にはならない。
 
+## 警告（`warnings`。エラーではない確認候補）
+
+- `proposal_adds_protected_term`: 修正案（`proposal_text`・`oral_rephrase`）に、承認・決裁・合意・確定・保証・責任・完了・最終判断の語があり、原文・目的・本人の意図・確認済み事実・紐づく引用のどこにも無い。語が資料にあるなら、その引用を紐づける。無ければ修正案から外す。
+- `surrounding_condition_unaddressed`: 引用の前後2行か直近の見出しに、草案・旧版・失効・未合意・暫定・改定・ただし・除く・例外などがあり、引用・理由・修正案に出てこない。適用範囲や文書の状態が引用と違わないか確認し、違うなら理由か確認点に書く。
+- 警告は語の有無だけを見る。言い換え（例: 「承認」を「了解」と書く）は拾えない。警告が無いことは、意味が保たれている証拠ではない。
+
 ## 機械検査では分からないこと
 
 構造と文字列が合っても、引用が判断を支えるとは限らない（例: 「最終承認は部長が行う」は引用として正しいが「私が最終承認する」を支えない）。この判断は人または独立した確認者が `semantic_reviews` に残す。出力には `mechanical` と `semantic`（not_run / supports / does_not_support / unclear）を別に出す。
