@@ -1,0 +1,167 @@
+{
+ "host": "claude",
+ "model": "default",
+ "skill_dirs": "実環境",
+ "skill_version": "0.1.5",
+ "split": "test4",
+ "positive_runs": 36,
+ "negative_runs": 30,
+ "borderline_runs": 6,
+ "recall": {
+  "hit": 33,
+  "n": 36,
+  "rate": 0.917,
+  "wilson_95": [
+   0.7817,
+   0.9713
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 30,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1135
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 6
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {},
+ "no_skill_on_positive": 3,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "X01": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X02": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X03": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X04": {
+   "runs": 3,
+   "ours": 1,
+   "other": {}
+  },
+  "X05": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "X06": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X07": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X08": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X09": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X10": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X11": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "X12": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "Y01": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y02": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y03": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y04": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y05": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y06": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y07": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y08": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y09": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y10": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y11": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Y12": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": true,
+  "false_fire": true
+ },
+ "warning": null
+}
