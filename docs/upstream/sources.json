@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "japanese-readability-editor",
+      "kind": "repo",
+      "role": "reference",
+      "license": {
+        "spdx": "MIT",
+        "checked": "2026-10-18"
+      },
+      "watch": {
+        "enabled": true,
+        "paths": [
+          "tools/install.py",
+          "tools/package.py",
+          "tools/upstream_watch.py",
+          ".github/workflows/upstream-watch.yml"
+        ]
+      },
+      "reviewed": {
+        "ref": "7ea8a4f",
+        "sha": "7ea8a4fa94cc2c42c0f4f06f61ccdf9b444dc274",
+        "at": "2026-10-18T02:35:10Z",
+        "review": "docs/upstream/reviews/japanese-readability-editor-7ea8a4f.md"
+      },
+      "adopted": [
+        "導入・更新・削除の事前確認、退避、置換の設計(tools/install.py を読んだ。コードは写していない)",
+        "参考先の更新を週1回検知する仕組み(tools/upstream_watch.py とワークフロー。コードを写して使う)"
+      ],
+      "not_adopted": [],
+      "repo": "Mr-Kondo/japanese-readability-editor"
+    },
+    {
+      "id": "official-prompt-tailor",
+      "kind": "repo",
+      "role": "reference",
+      "license": {
+        "spdx": "MIT",
+        "checked": "2026-10-18"
+      },
+      "watch": {
+        "enabled": true,
+        "paths": [
+          ".claude/skills/official-prompt-tailor/SKILL.md",
+          ".claude/skills/official-prompt-tailor/references/evidence-contract.md"
+        ]
+      },
+      "reviewed": {
+        "ref": "ff92e4b",
+        "sha": "ff92e4bcf5b81c0137214fec6eade5e6e703244d",
+        "at": "2026-10-17T07:20:00Z",
+        "review": null
+      },
+      "adopted": [
+        "引用・本文ハッシュ・行範囲・短い原文の結び付けの考え方(コードは写していない)"
+      ],
+      "not_adopted": [],
+      "repo": "Mr-Kondo/official-prompt-tailor"
+    },
+    {
+      "id": "anthropic-skill-creator",
+      "kind": "repo",
+      "role": "reference",
+      "license": {
+        "spdx": "none",
+        "checked": "2026-10-18"
+      },
+      "watch": {
+        "enabled": false,
+        "paths": [
+          "skills/skill-creator/**"
+        ]
+      },
+      "reviewed": {
+        "ref": "dbd4588",
+        "sha": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+        "at": "2026-10-17T07:20:00Z",
+        "review": null
+      },
+      "adopted": [
+        "description を少し強めに書く、という指針(考え方だけ。文章は転載していない。v0.1.5)"
+      ],
+      "not_adopted": [
+        {
+          "item": "skill-creator の文章・スクリプト",
+          "reason": "リポジトリ全体のライセンスが未設定なので転載しない。skills/skill-creator/LICENSE.txt は Apache-2.0 だが、登録簿は監視しない設定にした。考え方だけを自分の言葉で取り入れた"
+        }
+      ],
+      "repo": "anthropics/skills"
+    }
+  ]
+}
