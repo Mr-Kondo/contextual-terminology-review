@@ -48,7 +48,7 @@ def wilson(k: int, n: int):
 
 DATA = ROOT / "tools" / "data" / "trigger-eval.json"
 RECALL_MIN, FALSE_FIRE_MAX = 0.75, 0.10
-SPLITS = ("dev", "dev2", "test", "test2", "test3", "test4")   # test2〜4 = descriptionを直した後に新しく書いた未使用の評価セット(test3 は Issue #21、test4 は Issue #26 で、現行版の結果を見る前に書いた)。dev2 は Issue #28 の調整用(役割の範囲に厚い)
+SPLITS = ("dev", "dev2", "dev3", "test", "test2", "test3", "test4")   # test2〜4 = descriptionを直した後に新しく書いた未使用の評価セット(test3 は Issue #21、test4 は Issue #26 で、現行版の結果を見る前に書いた)。dev2・dev3 は Issue #28・#32 の調整用(役割の範囲・完了状態に厚い)
 
 
 def validate(data: dict) -> list:
