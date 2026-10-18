@@ -1,0 +1,48 @@
+{
+ "host": "codex",
+ "model": "gpt-6-sol",
+ "skill_dirs": [
+  "contextual-terminology-review",
+  "japanese-readability-editor",
+  "yomiyasu"
+ ],
+ "note": "定義だけを尋ねる境界例(W07・W08・Y06・Y07)を、v0.1.4 と v0.1.5 で各6回。ours = このSkillが選ばれた回数",
+ "by_version": {
+  "v0.1.4": {
+   "W07": {
+    "runs": 6,
+    "ours": 0
+   },
+   "W08": {
+    "runs": 6,
+    "ours": 0
+   },
+   "Y06": {
+    "runs": 6,
+    "ours": 0
+   },
+   "Y07": {
+    "runs": 6,
+    "ours": 0
+   }
+  },
+  "v0.1.5": {
+   "W07": {
+    "runs": 6,
+    "ours": 0
+   },
+   "W08": {
+    "runs": 6,
+    "ours": 3
+   },
+   "Y06": {
+    "runs": 6,
+    "ours": 0
+   },
+   "Y07": {
+    "runs": 6,
+    "ours": 0
+   }
+  }
+ }
+}
