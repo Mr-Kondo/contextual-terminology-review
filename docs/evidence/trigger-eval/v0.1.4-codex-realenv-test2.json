@@ -1,0 +1,46 @@
+{
+ "host": "codex",
+ "model": "gpt-6-sol",
+ "skill_dirs": "実環境",
+ "split": "test2",
+ "positive_runs": 36,
+ "negative_runs": 30,
+ "borderline_runs": 6,
+ "recall": {
+  "hit": 20,
+  "n": 36,
+  "rate": 0.556,
+  "wilson_95": [
+   0.3958,
+   0.7046
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 30,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1135
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 6
+ },
+ "other_skill_on_positive": {
+  "japanese-readability-editor": 1
+ },
+ "other_skill_on_negative": {},
+ "no_skill_on_positive": 15,
+ "runs_without_clean_finish": 0,
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": false,
+  "false_fire": true
+ },
+ "warning": null
+}

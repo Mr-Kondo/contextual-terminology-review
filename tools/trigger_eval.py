@@ -22,10 +22,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -94,23 +97,86 @@ def parse_stream(lines) -> dict:
     return {"fired": None, "finished": False}
 
 
-def run_one(query: str, model, timeout: int, skill_dirs=(), extra_args=()) -> dict:
-    cmd = ["claude", "-p", query, "--output-format", "stream-json", "--verbose", "--no-session-persistence",
-           "--strict-mcp-config", "--allowedTools", "Skill"]
-    if skill_dirs:
-        cmd += ["--setting-sources", "project"]
+SKILL_PATH = re.compile(r"skills/([^/\s'\"\\]+)/SKILL\.md")
+HOSTS = ("claude", "codex", "agy")
+DEFAULT_MODEL = {"claude": None, "codex": "gpt-6-sol", "agy": "gemini-4-argon-medium"}
+
+
+def skill_from_codex_event(ev: dict):
+    """codex exec --json: 読んだ SKILL.md の持ち主(skills/<名前>/SKILL.md)。シェルで cat/sed などをした command_execution から取る。"""
+    item = ev.get("item") or {}
+    if ev.get("type") in ("item.started", "item.completed") and item.get("type") == "command_execution":
+        m = SKILL_PATH.search(item.get("command") or "")
+        return m.group(1) if m else None
+    return None
+
+
+def skill_from_agy_event(ev: dict):
+    """agy --output-format stream-json: 道具の呼び出し(view_file の AbsolutePath など)に出る SKILL.md のパス。"""
+    su = ev.get("step_update") or {}
+    if ev.get("event") == "step_update" and su.get("step_type") == "tool":
+        m = SKILL_PATH.search(json.dumps(su.get("tool_info") or {}, ensure_ascii=False))
+        return m.group(1) if m else None
+    return None
+
+
+def parse_host_stream(lines, host: str) -> dict:
+    """codex / agy のストリームから、最初に読まれた SKILL.md の名前。codex は turn.completed、agy は出力の終端で『終わった』とする。"""
+    fn = skill_from_codex_event if host == "codex" else skill_from_agy_event
+    for ln in lines:
+        try:
+            ev = json.loads(ln)
+        except ValueError:
+            continue
+        name = fn(ev)
+        if name:
+            return {"fired": name, "finished": False}
+        if host == "codex" and ev.get("type") == "turn.completed":
+            return {"fired": None, "finished": True}
+    return {"fired": None, "finished": host == "agy"}      # agy: 終端まで読めて、SKILL.md を読んでいない
+
+
+def _command(host: str, query: str, model, skill_dirs, extra_args):
+    model = model or DEFAULT_MODEL[host]
+    if host == "claude":
+        cmd = ["claude", "-p", query, "--output-format", "stream-json", "--verbose", "--no-session-persistence",
+               "--strict-mcp-config", "--allowedTools", "Skill"]
+        if skill_dirs:
+            cmd += ["--setting-sources", "project"]
+    elif host == "codex":
+        cmd = ["codex", "exec", "--skip-git-repo-check", "-s", "read-only", "--ephemeral", "--json"]
+        if skill_dirs:      # 隔離: 偽のHOMEに対象と競合だけを置き、利用者の設定・規則・記憶を読まない
+            cmd += ["--ignore-user-config", "--ignore-rules", "--disable", "memories"]
+        cmd += [query]
+    else:
+        cmd = ["agy", "--sandbox", "--dangerously-skip-permissions", "--output-format", "stream-json", "-p", query]
     if model:
-        cmd += ["--model", model]
-    cmd += list(extra_args)
+        cmd += ["--model" if host != "codex" else "-m", model]
+    return cmd + list(extra_args)
+
+
+def run_one(query: str, model, timeout: int, skill_dirs=(), extra_args=(), host: str = "claude") -> dict:
+    if host == "agy" and skill_dirs:
+        raise SystemExit("agy は Skill を隔離できない(--skill-dir 不可)。実環境だけで測る")
+    cmd = _command(host, query, model, skill_dirs, extra_args)
     t0 = time.time()
     with tempfile.TemporaryDirectory(prefix="ctr-trigger-") as cwd:
-        for d in skill_dirs:
-            shutil.copytree(d, Path(cwd) / ".claude" / "skills" / Path(d).resolve().name, ignore=shutil.ignore_patterns("__pycache__"))
-        p = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
-        timer = __import__("threading").Timer(timeout, p.kill)
+        env = dict(os.environ)
+        if host == "claude":
+            for d in skill_dirs:
+                shutil.copytree(d, Path(cwd) / ".claude" / "skills" / Path(d).resolve().name, ignore=shutil.ignore_patterns("__pycache__"))
+        elif host == "codex" and skill_dirs:
+            home = Path(cwd) / "home"
+            for d in skill_dirs:
+                shutil.copytree(d, home / ".agents" / "skills" / Path(d).resolve().name, ignore=shutil.ignore_patterns("__pycache__"))
+            env["CODEX_HOME"] = env.get("CODEX_HOME") or str(Path.home() / ".codex")     # 認証は本物のまま
+            env["HOME"] = str(home)
+        p = subprocess.Popen(cmd, cwd=cwd, env=env, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+        timer = threading.Timer(timeout, p.kill)
         timer.start()
         try:
-            out = parse_stream(iter(p.stdout.readline, ""))
+            lines = iter(p.stdout.readline, "")
+            out = parse_stream(lines) if host == "claude" else parse_host_stream(lines, host)
         finally:
             timer.cancel()
             p.kill()
@@ -120,12 +186,12 @@ def run_one(query: str, model, timeout: int, skill_dirs=(), extra_args=()) -> di
     return out
 
 
-def run(data: dict, split: str, runs: int, model, workers: int, timeout: int, skill_dirs=(), extra_args=()) -> list:
+def run(data: dict, split: str, runs: int, model, workers: int, timeout: int, skill_dirs=(), extra_args=(), host: str = "claude") -> list:
     jobs = [(q["id"], r, q["query"]) for q in data["queries"] if split in ("all", q["split"]) for r in range(1, runs + 1)]
 
     def one(job):
         qid, r, text = job
-        res = run_one(text, model, timeout, skill_dirs, extra_args)
+        res = run_one(text, model, timeout, skill_dirs, extra_args, host)
         return {"id": qid, "run": r, **res}
     with ThreadPoolExecutor(max_workers=workers) as ex:
         return list(ex.map(one, jobs))
@@ -183,6 +249,7 @@ def main(argv=None) -> int:
     r.add_argument("--data", type=Path, default=DATA)
     r.add_argument("--split", choices=[*SPLITS, "all"], required=True)
     r.add_argument("--runs", type=int, default=3)
+    r.add_argument("--host", choices=HOSTS, default="claude", help="測る環境。codex は --skill-dir で隔離、agy は実環境のみ")
     r.add_argument("--model")
     r.add_argument("--workers", type=int, default=3)
     r.add_argument("--timeout", type=int, default=150)
@@ -205,9 +272,9 @@ def main(argv=None) -> int:
         if errs:
             print(json.dumps({"ok": False, "errors": errs}, ensure_ascii=False))
             return 1
-        res = run(data, a.split, a.runs, a.model, a.workers, a.timeout, [str(d) for d in a.skill_dir], a.claude_arg)
+        res = run(data, a.split, a.runs, a.model, a.workers, a.timeout, [str(d) for d in a.skill_dir], a.claude_arg, a.host)
         a.out.parent.mkdir(parents=True, exist_ok=True)
-        a.out.write_text(json.dumps({"model": a.model or "default", "split": a.split, "runs": a.runs,
+        a.out.write_text(json.dumps({"host": a.host, "model": a.model or DEFAULT_MODEL[a.host] or "default", "split": a.split, "runs": a.runs,
                                      "skill_dirs": [d.resolve().name for d in a.skill_dir] or "実環境", "claude_args": a.claude_arg, "results": res}, ensure_ascii=False, indent=1), encoding="utf-8")
         print(json.dumps({"ok": True, "results": len(res), "out": str(a.out)}, ensure_ascii=False))
         return 0
