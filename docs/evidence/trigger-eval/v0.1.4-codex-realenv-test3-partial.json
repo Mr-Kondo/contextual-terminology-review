@@ -1,0 +1,121 @@
+{
+ "host": "codex",
+ "model": "gpt-6-sol",
+ "skill_dirs": "実環境",
+ "skill_version": "0.1.4 (導入済みのコピーを一時的に入れ替えて測定。測定後に v0.1.5 へ戻して照合)",
+ "note": "否定の W03〜W12 の30回は、Codex の利用上限で即時に失敗したので除いた(誤発動・境界例は W01・W02 の分だけ)。肯定36回は正常に終わった",
+ "split": "test3",
+ "positive_runs": 36,
+ "negative_runs": 6,
+ "borderline_runs": 0,
+ "recall": {
+  "hit": 34,
+  "n": 36,
+  "rate": 0.944,
+  "wilson_95": [
+   0.8186,
+   0.9846
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 6,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.3903
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 0
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {
+  "japanese-readability-editor": 4
+ },
+ "no_skill_on_positive": 2,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "V01": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V02": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V03": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V04": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V05": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V06": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V07": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V08": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V09": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V10": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V11": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "V12": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "W01": {
+   "runs": 3,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 3
+   }
+  },
+  "W02": {
+   "runs": 3,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 1
+   }
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": null,
+ "warning": "否定の大半が無効なので、基準の判定をしない(再現率は肯定36回から出した値)"
+}
