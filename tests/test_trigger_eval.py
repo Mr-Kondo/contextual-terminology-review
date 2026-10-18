@@ -81,7 +81,7 @@ class Score(unittest.TestCase):
     def test_split_filter_uses_only_that_split(self):
         res = [r for r in self.results(lambda q: te.SKILL if q["should_trigger"] else None)]
         self.assertEqual(te.score(DATA, res, "dev")["positive_runs"], 12)
-        self.assertEqual(te.score(DATA, res, "all")["positive_runs"], 96)
+        self.assertEqual(te.score(DATA, res, "all")["positive_runs"], 102)
 
 
 def codex_cmd(cmd):

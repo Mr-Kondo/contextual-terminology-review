@@ -242,6 +242,18 @@
     {"id": "J09", "split": "test5", "category": "generation", "should_trigger": false, "query": "後任への引き継ぎ資料のひな形を作ってください。項目は、担当業務、関係者、過去の経緯、注意点の4つです。"},
     {"id": "J10", "split": "test5", "category": "other_review", "should_trigger": false, "query": "次の関数のスレッド安全性に問題がないかレビューしてください。\n\ncounter = 0\ndef increment():\n    global counter\n    counter += 1"},
     {"id": "J11", "split": "test5", "category": "unrelated", "should_trigger": false, "query": "自宅で簡単にできる、肩こりを和らげる体操を教えてください。"},
-    {"id": "J12", "split": "test5", "category": "generation", "should_trigger": false, "query": "リリース作業が終わったかを確かめるチェックリストを作ってください。項目は、10個ほどでお願いします。"}
+    {"id": "J12", "split": "test5", "category": "generation", "should_trigger": false, "query": "リリース作業が終わったかを確かめるチェックリストを作ってください。項目は、10個ほどでお願いします。"},
+    {"id": "Z01", "split": "diff", "category": "consistency", "should_trigger": true, "query": "次の設計メモで、「バッファ」「キャッシュ」「一時領域」が同じものを指して混ざっている気がします。文書の中で使い分けが一貫しているか確認してください。\n\n「受信したデータはまずバッファに置く。キャッシュが一杯になったら、一時領域に書き出す。バッファの内容は再起動で消える。」"},
+    {"id": "Z02", "split": "diff", "category": "consistency", "should_trigger": true, "query": "契約書の下書きで、「中止」「停止」「終了」が同じ意味で混ざっていないか気になります。文書の中で使い分けが一貫しているか確認してください。\n\n「甲は、乙の債務不履行があった場合、本サービスを中止できる。サービスの停止後、乙が是正した場合は再開する。サービスの終了は書面で通知する。」"},
+    {"id": "Z03", "split": "diff", "category": "consistency", "should_trigger": true, "query": "運用マニュアルの一節で、「リセット」「初期化」「再設定」が同じ操作を指して混ざっている気がします。文書の中で使い分けが一貫しているか見てください。\n\n「機器をリセットするには、設定画面から初期化を選ぶ。再設定のあとは、ネットワークの設定をやり直す。リセットすると履歴が消える。」"},
+    {"id": "Z04", "split": "diff", "category": "consistency", "should_trigger": true, "query": "経営会議の資料で、「売上」「収益」「売上高」が同じ数字を指しているのか、別のものなのか、混ざっていそうです。文書の中で使い分けが一貫しているか確認してください。\n\n「今期の売上は前年比10%増。収益の改善が続き、売上高は過去最高となった。」"},
+    {"id": "Z05", "split": "diff", "category": "consistency", "should_trigger": true, "query": "リリース手順書で、「バージョン」「リビジョン」「リリース」が同じものを指して混ざっている気がします。文書の中で使い分けが一貫しているか確認してください。\n\n「バージョンを上げたら、リビジョンの番号を記録する。リリースの番号は、タグに付ける。」"},
+    {"id": "Z06", "split": "diff", "category": "consistency", "should_trigger": true, "query": "アクセス管理の説明で、「アクセス権」「権限」「特権」が同じ意味で混ざっていないか気になります。文書の中で使い分けが一貫しているか見てください。\n\n「利用者のアクセス権は申請で付与する。管理者には広い権限を与え、特権の操作は記録する。権限を外すときは、アクセス権の一覧から削除する。」"},
+    {"id": "Z07", "split": "diff", "category": "definition_qa", "should_trigger": false, "borderline": true, "query": "「レプリケーション」と「バックアップ」は、何が違うのですか。"},
+    {"id": "Z08", "split": "diff", "category": "definition_qa", "should_trigger": false, "borderline": true, "query": "「ポーリング」と「Webhook」は、何が違いますか。"},
+    {"id": "Z09", "split": "diff", "category": "definition_qa", "should_trigger": false, "borderline": true, "query": "「在庫」と「棚卸資産」は、何が違うのですか。"},
+    {"id": "Z10", "split": "diff", "category": "definition_qa", "should_trigger": false, "borderline": true, "query": "「CAPEX」と「OPEX」の違いを教えてください。"},
+    {"id": "Z11", "split": "diff", "category": "definition_qa", "should_trigger": false, "borderline": true, "query": "「相関」と「因果」は、どう違うのですか。"},
+    {"id": "Z12", "split": "diff", "category": "definition_qa", "should_trigger": false, "borderline": true, "query": "「リファクタリング」と「リライト」は、何が違いますか。"}
   ]
 }
