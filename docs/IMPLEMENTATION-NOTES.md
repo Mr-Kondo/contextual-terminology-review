@@ -101,3 +101,4 @@
 - ［Ruri／直接確認］Hugging Face モデルカード cl-nagoya/ruri-v3-70m｜使用例（1+3 prefix scheme）とLicense｜「検索クエリ: 」「検索文書: 」、Apache 2.0｜https://huggingface.co/cl-nagoya/ruri-v3-70m
 - ［既存Skill／要約］japanese-readability-editor `tools/install.py`｜install_one・配置先表｜事前確認・退避・置換の設計を参考（コード非コピー）｜/Volumes/SSD/Programming/japanese-readability-editor/tools/install.py
 - ［既存Skill／要約］official-prompt-tailor `SKILL.md` 手順2・3｜取得・読了・drift・recommendations.json｜本文ハッシュ・行範囲・短い原文の結び付け（コード非コピー）｜/Volumes/SSD/Programming/official-prompt-tailor/.claude/skills/official-prompt-tailor/SKILL.md
+- 発動精度のホスト別測定（追記: Issue #17）: tools/trigger_eval.py に `--host codex|agy` を追加し、test2 を各3回測った（docs/TRIGGER-EVAL.md）。Antigravity（実環境、隔離不可）36/36、Codex 隔離（偽HOME＋対象と競合だけ）36/36、**Codex 実環境 20/36 = 0.56 で基準未満**（記憶を無効にしても 23/36）。実環境で下がる原因（スキル一覧の予算超過で説明が除かれる、設定・他のSkill）は切り分けていない。1.00 は上限に張り付いており、モデルは各ホスト1つ、作成者はSkillの設計者と同じAI。

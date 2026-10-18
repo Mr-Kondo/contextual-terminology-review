@@ -1,0 +1,50 @@
+{
+ "host": "codex",
+ "model": "gpt-6-sol",
+ "skill_dirs": [
+  "contextual-terminology-review",
+  "japanese-readability-editor",
+  "yomiyasu"
+ ],
+ "split": "test2",
+ "positive_runs": 36,
+ "negative_runs": 30,
+ "borderline_runs": 6,
+ "recall": {
+  "hit": 36,
+  "n": 36,
+  "rate": 1.0,
+  "wilson_95": [
+   0.9036,
+   1.0
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 30,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1135
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 6
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {
+  "japanese-readability-editor": 9
+ },
+ "no_skill_on_positive": 0,
+ "runs_without_clean_finish": 0,
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": true,
+  "false_fire": true
+ },
+ "warning": null
+}

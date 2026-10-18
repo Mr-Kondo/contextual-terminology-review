@@ -84,5 +84,43 @@ class Score(unittest.TestCase):
         self.assertEqual(te.score(DATA, res, "all")["positive_runs"], 36)
 
 
+def codex_cmd(cmd):
+    return json.dumps({"type": "item.started", "item": {"id": "i", "type": "command_execution", "command": cmd, "status": "in_progress"}})
+
+
+def agy_view(path):
+    return json.dumps({"event": "step_update", "step_update": {"step_type": "tool", "tool_name": "view_file", "state": "ACTIVE",
+                                                                "tool_info": {"name": "view_file", "parameters": {"AbsolutePath": path}}}})
+
+
+class HostStreams(unittest.TestCase):
+    def test_codex_reads_of_skill_md_are_attributed_to_the_skill_folder(self):
+        lines = [json.dumps({"type": "thread.started"}), codex_cmd("/bin/zsh -lc 'cat /Users/u/.codex/RTK.md'"),
+                 codex_cmd("/bin/zsh -lc 'cat /Users/u/.agents/skills/contextual-terminology-review/SKILL.md'")]
+        self.assertEqual(te.parse_host_stream(lines, "codex"), {"fired": te.SKILL, "finished": False})
+
+    def test_codex_without_a_skill_read_finishes_at_turn_completed(self):
+        lines = [codex_cmd("rg -n x memo.md"), json.dumps({"type": "turn.completed"}), codex_cmd("cat /a/skills/yomiyasu/SKILL.md")]
+        self.assertEqual(te.parse_host_stream(lines, "codex"), {"fired": None, "finished": True})
+
+    def test_codex_stream_cut_before_the_end_is_not_finished(self):
+        self.assertEqual(te.parse_host_stream([codex_cmd("ls")], "codex"), {"fired": None, "finished": False})
+
+    def test_agy_view_file_of_skill_md(self):
+        r = te.parse_host_stream([json.dumps({"event": "init"}), agy_view("/Users/u/.gemini/config/skills/yomiyasu/SKILL.md")], "agy")
+        self.assertEqual(r, {"fired": "yomiyasu", "finished": False})
+        self.assertEqual(te.parse_host_stream([agy_view("/Users/u/notes.md")], "agy"), {"fired": None, "finished": True})
+
+    def test_commands_are_built_per_host_and_isolation_flags_only_with_skill_dirs(self):
+        c = te._command("codex", "Q", None, [], [])
+        self.assertIn("gpt-6-sol", c)
+        self.assertNotIn("--ignore-user-config", c)
+        self.assertIn("--ignore-user-config", te._command("codex", "Q", None, ["/x/skill"], []))
+        a = te._command("agy", "Q", None, [], [])
+        self.assertEqual((a[0], a[a.index("-p") + 1]), ("agy", "Q"))
+        with self.assertRaises(SystemExit):
+            te.run_one("Q", None, 1, ["/x"], (), "agy")
+
+
 if __name__ == "__main__":
     unittest.main()

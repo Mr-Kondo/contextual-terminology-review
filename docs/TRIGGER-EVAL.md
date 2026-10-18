@@ -2,7 +2,7 @@
 
 Skillの中身がよくても、**依頼のときに選ばれなければ利用者に届かない**。Skillは `description` を手がかりに選ばれる（Anthropic の [Skill作成の指針](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) も、descriptionを選択の要としている）。このページは、その発動精度を測った手順と結果。
 
-測定は Claude Code の `claude -p` だけ。Codex・Antigravity は未測定。**測るのは「選ばれたか」だけで、選ばれた後のレビューの質ではない**（質は [E2E評価](E2E-EVAL.md) と [効果測定](EFFECT-MEASUREMENT.md) の側）。
+測定は Claude Code の `claude -p` に加え、Codex（`codex exec`）と Antigravity（`agy -p`）でも行った（[Codex・Antigravity](#codex・antigravity-の測定issue-17)）。**測るのは「選ばれたか」だけで、選ばれた後のレビューの質ではない**（質は [E2E評価](E2E-EVAL.md) と [効果測定](EFFECT-MEASUREMENT.md) の側）。
 
 ## 方法
 
@@ -35,13 +35,32 @@ Skillの中身がよくても、**依頼のときに選ばれなければ利用�
 - v0.1.3 では、(1) 資料がなくても使うこと、(2) 依頼の言い回し（使い方の確認・使い分けの一貫性・役割/範囲/完了状態の曖昧さ・相手に伝わるかと言い直し）、(3) 使わない場合（定義だけの質問・コード/計算の検証・文体/書式だけの推敲・翻訳・要約）を、descriptionに書いた
 - 推敲系の依頼は、競合の japanese-readability-editor に正しく流れた（dev の否定で3件）。取り合いではなく住み分けになっている
 
+## Codex・Antigravity の測定（Issue #17）
+
+同じ test2（24件×各3回）を、導入済みの v0.1.4 で測った。**発動の判定は各ホストで異なる**: Claude は `Skill` ツールの呼び出し、Codex は `skills/<名前>/SKILL.md` を読むコマンド、Antigravity は `view_file` で `SKILL.md` を開いたこと。最初に読まれたSkillを記録して打ち切る点は同じ。モデルは各CLIの既定（Codex は `gpt-6-sol`、Antigravity は `gemini-4-argon-medium`）。
+
+| ホスト・条件 | 再現率（95%区間） | 誤発動率 | 基準 |
+|---|---|---|---|
+| **Antigravity**、実環境（隔離不可） | **36/36 = 1.00**（0.90〜1.00） | 0/30 | 通過 |
+| **Codex**、隔離（偽HOME。作業ツリーのSkill＋競合2つだけ。設定・規則・記憶を読まない） | **36/36 = 1.00**（0.90〜1.00） | 0/30 | 通過 |
+| **Codex**、実環境（利用者の設定・記憶・他のSkillあり） | 20/36 = 0.56（0.40〜0.70） | 0/30 | **再現率が基準未満** |
+| Codex、実環境、記憶だけ無効（`--disable memories`） | 23/36 = 0.64（0.48〜0.78） | 0/30 | 再現率が基準未満 |
+
+境界例（定義だけの質問）は、どの条件でも発動しなかった（0/6）。取りこぼしは、別のSkillに取られたのではなく**どのSkillも読まれなかった**もの（Codex 実環境で 15/16、残り1件は japanese-readability-editor）。Codex 実環境では、T02・T03・T06 が3回とも読まれなかった。
+
+- **Codex の実環境で下がる理由は、切り分けていない**。この環境の Codex は、スキル一覧の予算超過でSkillの説明が除かれる。隔離（1.00）との差は、この除去と、利用者の設定・規則・他のSkillの合算で、どれがどれだけかは分からない。記憶を無効にしても 0.56 → 0.64 で、区間が重なる。記憶の汚染が主因ではなさそう、というところまで
+- **Antigravity は隔離できない**（偽のHOMEにすると認証が通らない）。1.00 は、利用者の実環境での値で、競合するSkillの有無は統制していない。推敲系の依頼が japanese-readability-editor に流れたのは否定側の1件だけ（想定どおりの住み分け）
+- Codex の隔離では、否定の推敲系の依頼 9 件が japanese-readability-editor に流れた（想定どおり）。Claude の測定（0.89）より Codex・Antigravity の方が選ばれやすい
+- **1.00 は上限に張り付いている**。24件×3回で、区間の下限は 0.90。description の良し悪しの差を測るには易しすぎる可能性がある（test2 は v0.1.3 の description を直した後に書いたが、description の例と同じ語を含む T10 がある。T10 を除いても Codex 隔離・Antigravity は全て発動）
+- 各ホストでモデル1つ、依頼3回。小さいモデル（Claude の Haiku のように）では別の結果になりうる
+
 ## 限界・注意
 
 - **test は燃やした**。v0.1.2 の test の取りこぼしの傾向を見てから description を直したので、test は未使用のセットでなくなった。test2 は直した後に書いたが、**description の例（『障害とインシデント』）と同じ語を含む1件（T10）**がある。T10 を除くと v0.1.3 は 29/33 = 0.88、v0.1.2 は 13/33 = 0.39
 - 評価セットの作成者は、Skillの設計者と同じAI（独立していない）。実際の利用者の言い回しは、これより多様なはず
 - 各依頼3回（Opus・Haiku は1回）で、モデルの揺れがある。件数が少なく、区間は広い
 - **実環境では、作業ツリーの版だけの条件より発動が減る**（0.69 対 0.89）。「作業ツリーの版だけ」の条件は、実環境のフック・CLAUDE.md・他のSkillを読まない。v0.1.3 を導入した後の再測定で、実環境の再現率は基準（0.75）に届かなかった。取りこぼしは別のSkillに取られたのではなく、どのSkillも呼ばれなかった（11/36）。実環境のデバッグログには `Skill listing over budget: 84 skills, 44454 chars > 30000 budget — descriptions will be truncated` が出ており、一覧の予算超過で説明が削られている可能性があった。そこで予算を上げて測ったが、再現率は上がらなかった（0.53）。実環境の測定は、同じ条件でも 0.53〜0.69 と揺れる（区間が重なる）。利用者のフック・CLAUDE.md・他のプラグインのSkillの影響もありうるが、**原因は切り分けていない**。**v0.1.3 の公開時の数値（0.89）は、実環境の数値ではない**
-- Claude Code でのみ測った。Codex・Antigravity は、Skillの選び方が異なり、未測定
+- Codex・Antigravity は下の節で別に測った。モデルが違えば選び方も違い、Claude Code の数値は当てはまらない
 - **Haiku では自動では選ばれない**（test2 で0/12、dev で2/24。v0.1.2 は dev で0/24）。Haikuはどのスキルもほとんど呼ばず、呼んだときも推敲系に流れた。descriptionを足しても届かなかった。Haiku を使うときは、Skill名を書いて呼ぶ
 - 選ばれた後の質（誤用を直せるか、正しい用法を直さないか、責務を作らないか）は、この評価では見ていない
 
@@ -56,6 +75,12 @@ python3 tools/trigger_eval.py run --split test2 --runs 3 --workers 4 \
     --skill-dir skill/contextual-terminology-review --skill-dir ~/.claude/skills/japanese-readability-editor \
     --out .work/trigger.json
 python3 tools/trigger_eval.py score --results .work/trigger.json --split test2
+
+# Codex（実環境 / 隔離）と Antigravity（実環境のみ）
+python3 tools/trigger_eval.py run --split test2 --runs 3 --host codex --out .work/trigger-codex.json
+python3 tools/trigger_eval.py run --split test2 --runs 3 --host codex --skill-dir skill/contextual-terminology-review \
+    --skill-dir ~/.claude/skills/japanese-readability-editor --out .work/trigger-codex-iso.json
+python3 tools/trigger_eval.py run --split test2 --runs 3 --host agy --out .work/trigger-agy.json
 ```
 
 生データ（IDと回数だけ。依頼文は含まない）は [docs/evidence/trigger-eval/](evidence/trigger-eval/)。
