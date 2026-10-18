@@ -19,7 +19,7 @@ class TriggerEvalSet(unittest.TestCase):
     def test_dataset_is_valid_and_balanced(self):
         self.assertEqual(te.validate(DATA), [])
         qs = DATA["queries"]
-        for split in ("dev", "test", "test2", "test3"):
+        for split in ("dev", "test", "test2", "test3", "test4"):
             self.assertEqual(sum(q["split"] == split and q["should_trigger"] for q in qs), 12)
             self.assertEqual(sum(q["split"] == split and not q["should_trigger"] for q in qs), 12)
 
@@ -81,7 +81,7 @@ class Score(unittest.TestCase):
     def test_split_filter_uses_only_that_split(self):
         res = [r for r in self.results(lambda q: te.SKILL if q["should_trigger"] else None)]
         self.assertEqual(te.score(DATA, res, "dev")["positive_runs"], 12)
-        self.assertEqual(te.score(DATA, res, "all")["positive_runs"], 48)
+        self.assertEqual(te.score(DATA, res, "all")["positive_runs"], 60)
 
 
 def codex_cmd(cmd):
