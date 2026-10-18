@@ -54,7 +54,7 @@
 | `…/scripts/` | `ctr.py`（CLI）、`ctr_common`（原子的保存）、`ctr_refs`（登録簿・引用検査・出典生成）、`ctr_log`（記録・フィードバック・export/import・削除）、`ctr_improve`（更新案・比較・採用・復元・集計・抽出・回帰・未使用評価）、`ctr_blind`（匿名比較・理解問題）、`ctr_search`（一致検索・Ruri）、`ctr_pdf` |
 | `tools/` | `ctr_install.py`（導入・更新・削除・照合・配布物）、`check_design_docs.py`、`run_acceptance.py`、`host_evidence.py`、`post_merge_cleanup.py`、`bench_search.py` |
 | `tests/` | unittest 119件。A01〜A48 の機械検査。A20の図とPDFの素材 |
-| `docs/` | USAGE・本メモ・ACCEPTANCE-REPORT（生成）・SEMANTIC-REVIEW-SHEET（生成）・HOST-EVIDENCE.json・evidence/ |
+| `docs/` | USAGE・SETUP・INSTALL・WEEKLY・CHECKS・本メモ・ACCEPTANCE-REPORT（生成）・SEMANTIC-REVIEW-SHEET（生成）・HOST-EVIDENCE.json・evidence/ |
 
 ## 5. 主な判断と理由
 
