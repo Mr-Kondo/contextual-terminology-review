@@ -1,0 +1,108 @@
+{
+ "host": "codex",
+ "model": "gpt-6-sol",
+ "skill_dirs": [
+  "contextual-terminology-review",
+  "japanese-readability-editor",
+  "yomiyasu"
+ ],
+ "skill_version": "0.1.6 (作業ツリー)",
+ "split": "diff",
+ "positive_runs": 18,
+ "negative_runs": 0,
+ "borderline_runs": 18,
+ "recall": {
+  "hit": 18,
+  "n": 18,
+  "rate": 1.0,
+  "wilson_95": [
+   0.8241,
+   1.0
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 0,
+  "rate": null,
+  "wilson_95": null
+ },
+ "borderline_fired": {
+  "fired": 2,
+  "n": 18
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {},
+ "no_skill_on_positive": 0,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "Z01": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "Z02": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "Z03": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "Z04": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "Z05": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "Z06": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "Z07": {
+   "runs": 3,
+   "ours": 1,
+   "other": {}
+  },
+  "Z08": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Z09": {
+   "runs": 3,
+   "ours": 1,
+   "other": {}
+  },
+  "Z10": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Z11": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "Z12": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": true,
+  "false_fire": false
+ },
+ "warning": null
+}
