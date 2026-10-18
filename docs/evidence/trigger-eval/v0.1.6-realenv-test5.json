@@ -1,0 +1,171 @@
+{
+ "host": "claude",
+ "model": "default",
+ "skill_dirs": "実環境",
+ "skill_version": "0.1.6 (案A。導入済みのコピーを一時的に入れ替えて測定し、測定後に元へ戻した)",
+ "split": "test5",
+ "positive_runs": 36,
+ "negative_runs": 30,
+ "borderline_runs": 6,
+ "recall": {
+  "hit": 35,
+  "n": 36,
+  "rate": 0.972,
+  "wilson_95": [
+   0.8583,
+   0.9951
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 30,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1135
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 6
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {
+  "japanese-readability-editor": 1
+ },
+ "no_skill_on_positive": 1,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "H01": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H02": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H03": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "H04": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H05": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H06": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H07": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H08": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H09": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H10": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H11": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "H12": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "J01": {
+   "runs": 3,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 1
+   }
+  },
+  "J02": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J03": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J04": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J05": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J06": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J07": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J08": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J09": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J10": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J11": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "J12": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": true,
+  "false_fire": true
+ },
+ "warning": null
+}

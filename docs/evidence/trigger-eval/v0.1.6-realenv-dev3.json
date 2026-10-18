@@ -1,0 +1,167 @@
+{
+ "host": "claude",
+ "model": "default",
+ "skill_dirs": "実環境",
+ "skill_version": "0.1.6 (案A。調整に使ったセット)",
+ "split": "dev3",
+ "positive_runs": 36,
+ "negative_runs": 30,
+ "borderline_runs": 6,
+ "recall": {
+  "hit": 32,
+  "n": 36,
+  "rate": 0.889,
+  "wilson_95": [
+   0.7468,
+   0.9559
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 30,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1135
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 6
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {},
+ "no_skill_on_positive": 4,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "F01": {
+   "runs": 3,
+   "ours": 1,
+   "other": {}
+  },
+  "F02": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "F03": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "F04": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "F05": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "F06": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "F07": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "F08": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "F09": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "F10": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "F11": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "F12": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "G01": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G02": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G03": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G04": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G05": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G06": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G07": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G08": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G09": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G10": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G11": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "G12": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": true,
+  "false_fire": true
+ },
+ "warning": null
+}
