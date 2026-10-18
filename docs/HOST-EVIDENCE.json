@@ -248,22 +248,22 @@
     "scripts_run": {
      "state": "not_run",
      "reason": "Antigravity IDE のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md と docs/WEEKLY.md の手順(check refs → record → export/import)を実行する"
     },
     "footer_output": {
      "state": "not_run",
      "reason": "Antigravity IDE のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md と docs/WEEKLY.md の手順(check refs → record → export/import)を実行する"
     },
     "record_saved": {
      "state": "not_run",
      "reason": "Antigravity IDE のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md と docs/WEEKLY.md の手順(check refs → record → export/import)を実行する"
     },
     "export_import": {
      "state": "not_run",
      "reason": "Antigravity IDE のホストでは、この作業でスクリプトを実行していない",
-     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md の手順(check refs → record → export/import)を実行する"
+     "next_step": "仮配置または導入後に、対象ホストのシェルで docs/USAGE.md と docs/WEEKLY.md の手順(check refs → record → export/import)を実行する"
     }
    }
   },
@@ -389,37 +389,37 @@
     "register": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "invoke": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "source_read": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "scripts_run": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "footer_output": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "record_saved": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "export_import": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     }
    }
   },
@@ -437,37 +437,37 @@
     "register": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "invoke": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "source_read": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "scripts_run": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "footer_output": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "record_saved": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     },
     "export_import": {
      "state": "not_run",
      "reason": "アカウント側の登録・有効化は、ローカルスクリプトで操作できず、この作業では許可されていない",
-     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/USAGE.md の手順。登録後に呼び出し・保存を観測"
+     "next_step": "配布物(zip)を利用者がアカウントへ登録。docs/INSTALL.md の手順。登録後に呼び出し・保存を観測"
     }
    }
   }
