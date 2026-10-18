@@ -1,0 +1,171 @@
+{
+ "host": "agy",
+ "model": "gemini-4-argon-medium",
+ "skill_dirs": "実環境",
+ "skill_version": "0.1.5",
+ "split": "test3",
+ "positive_runs": 36,
+ "negative_runs": 30,
+ "borderline_runs": 6,
+ "recall": {
+  "hit": 36,
+  "n": 36,
+  "rate": 1.0,
+  "wilson_95": [
+   0.9036,
+   1.0
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 30,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1135
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 6
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {
+  "japanese-readability-editor": 3
+ },
+ "no_skill_on_positive": 0,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "V01": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V02": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V03": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V04": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V05": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V06": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V07": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V08": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V09": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V10": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V11": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "V12": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "W01": {
+   "runs": 3,
+   "ours": 0,
+   "other": {
+    "japanese-readability-editor": 3
+   }
+  },
+  "W02": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W03": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W04": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W05": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W06": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W07": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W08": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W09": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W10": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W11": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "W12": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": true,
+  "false_fire": true
+ },
+ "warning": null
+}

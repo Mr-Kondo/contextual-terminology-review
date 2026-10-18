@@ -1,0 +1,171 @@
+{
+ "host": "claude",
+ "model": "opus",
+ "skill_dirs": [
+  "contextual-terminology-review",
+  "japanese-readability-editor",
+  "yomiyasu"
+ ],
+ "skill_version": "0.1.5",
+ "split": "test2",
+ "positive_runs": 36,
+ "negative_runs": 30,
+ "borderline_runs": 6,
+ "recall": {
+  "hit": 35,
+  "n": 36,
+  "rate": 0.972,
+  "wilson_95": [
+   0.8583,
+   0.9951
+  ]
+ },
+ "false_fire": {
+  "fired": 0,
+  "n": 30,
+  "rate": 0.0,
+  "wilson_95": [
+   0.0,
+   0.1135
+  ]
+ },
+ "borderline_fired": {
+  "fired": 0,
+  "n": 6
+ },
+ "other_skill_on_positive": {},
+ "other_skill_on_negative": {},
+ "no_skill_on_positive": 1,
+ "runs_without_clean_finish": 0,
+ "per_query": {
+  "T01": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T02": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T03": {
+   "runs": 3,
+   "ours": 2,
+   "other": {}
+  },
+  "T04": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T05": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T06": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T07": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T08": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T09": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T10": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T11": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "T12": {
+   "runs": 3,
+   "ours": 3,
+   "other": {}
+  },
+  "U01": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U02": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U03": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U04": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U05": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U06": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U07": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U08": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U09": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U10": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U11": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  },
+  "U12": {
+   "runs": 3,
+   "ours": 0,
+   "other": {}
+  }
+ },
+ "criteria": {
+  "recall_min": 0.75,
+  "false_fire_max": 0.1
+ },
+ "pass": {
+  "recall": true,
+  "false_fire": true
+ },
+ "warning": null
+}
