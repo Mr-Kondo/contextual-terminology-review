@@ -1,12 +1,12 @@
 # 実装メモ（着手時の確認・既存Skill調査・判断の根拠）
 
-2026-10-17 に実装。設計資料第3版（`00`〜`07`、`manifest.json`）に従った。ここに書くのは、実装中の確認結果と判断で、設計資料の改訂ではない。
+2026-10-17 に実装。設計資料第3版（`00`〜`07`、`manifest.json`）に従った。設計資料は、v0.1.12 で、使い終わったものを削除した（タグ v0.1.11 または git の履歴で読める。受入ケースは `tests/data/acceptance-cases.json`、受入の区分と記録の仕様は `docs/ACCEPTANCE-MATRIX.md`・`docs/FEEDBACK-AND-STORAGE.md` に移した）。ここに書くのは、実装中の確認結果と判断で、設計資料の改訂ではない。
 
 ## 1. 着手時の確認と方針
 
 | 確認したこと | 結果 |
 |---|---|
-| 設計資料の場所 | 依頼文は `./contextual-terminology-review-design` だが、そのフォルダは存在せず、資料はプロジェクト直下にあった。移動・改名せず、直下の資料を参照した（manifestは直下の相対パスで一致） |
+| 設計資料の場所（実装時点。v0.1.12 で削除済み） | 依頼文は `./contextual-terminology-review-design` だが、そのフォルダは存在せず、資料はプロジェクト直下にあった。移動・改名せず、直下の資料を参照した（manifestは直下の相対パスで一致） |
 | 作業場所・既存ファイル | `/Volumes/SSD/Programming/contextual-terminology-review`（実装時点ではgitリポジトリではなかった。公開時に `git init`）。既存は設計資料8点・`manifest.json`・空の `.claude/.cc-writes`。**どれも変更・上書きしていない**。新規は `skill/` `tools/` `tests/` `docs/` `requirements*.txt` |
 | AGENTS.md / CLAUDE.md | プロジェクト内には無し。ユーザーのグローバルCLAUDE.md（RTK、graphify、スキル開発前の調査、締めくくりの後片付け）に従った |
 | 実行環境 | システム Python 3.15.0（pydantic 2.14.1 あり、pdfplumber・sentence-transformers なし）。依存検証用にプロジェクト内 `.work/venv`（Python 3.12.15）を作成し、後片付けで削除する |
@@ -52,7 +52,7 @@
 | `skill/contextual-terminology-review/SKILL.md` `VERSION` | 入口（名前・説明・境界・手順・出力）。`VERSION`はSkill版 |
 | `…/references/` | judgment・citation・feedback-loop・evaluation・hosts・review-example.json |
 | `…/scripts/` | `ctr.py`（CLI）、`ctr_common`（原子的保存）、`ctr_refs`（登録簿・引用検査・出典生成）、`ctr_log`（記録・フィードバック・export/import・削除）、`ctr_improve`（更新案・比較・採用・復元・集計・抽出・回帰・未使用評価）、`ctr_blind`（匿名比較・理解問題）、`ctr_search`（一致検索・Ruri）、`ctr_pdf` |
-| `tools/` | `ctr_install.py`（導入・更新・削除・照合・配布物）、`check_design_docs.py`、`run_acceptance.py`、`host_evidence.py`、`post_merge_cleanup.py`、`bench_search.py` |
+| `tools/` | `ctr_install.py`（導入・更新・削除・照合・配布物）、`run_acceptance.py`、`host_evidence.py`、`post_merge_cleanup.py`、`bench_search.py` |
 | `tests/` | unittest 119件。A01〜A48 の機械検査。A20の図とPDFの素材 |
 | `docs/` | USAGE・SETUP・INSTALL・WEEKLY・CHECKS・本メモ・ACCEPTANCE-REPORT（生成）・SEMANTIC-REVIEW-SHEET（生成）・HOST-EVIDENCE.json・evidence/ |
 
@@ -69,7 +69,7 @@
 
 ## 6. 資料との差異・注意
 
-- `manifest.json` の `local_links_checked: 36` と、`check_design_docs.py` が数えたローカルリンク数（20）は数え方が異なる（リンクの定義の違い）。破損リンクは無し。manifestのハッシュは全8点が現物と一致。
+- （実装時点の記録。`manifest.json` と `check_design_docs.py` は v0.1.12 で削除済み）`manifest.json` の `local_links_checked: 36` と、`check_design_docs.py` が数えたローカルリンク数（20）は数え方が異なる（リンクの定義の違い）。破損リンクは無し。manifestのハッシュは全8点が現物と一致。
 - 06が「現在すべて未実施」としている項目のうち、仮保存先・仮配置・実Ruri・実PDFで確認できたものだけを `ACCEPTANCE-REPORT.md` に反映した。実呼び出し・実務効果などは未実施のまま。
 - 03の `must_not` の一部は語彙で近似できない（意味の判断）。語彙ガードは必要条件であり、意味審査は確認票で人が行う。
 

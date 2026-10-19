@@ -6,7 +6,7 @@
 
 ## このSkillについて
 
-用語の専門的な適合、文脈に合う意味、相手への伝わりやすさを、資料に照らして確認するSkillの検証版。返すのは、本人の意図と確認済み事実を保った修正案と、口頭の言い直し。設計資料第3版（`00-START-HERE.md` 以降）に基づく実装である。
+用語の専門的な適合、文脈に合う意味、相手への伝わりやすさを、資料に照らして確認するSkillの検証版。返すのは、本人の意図と確認済み事実を保った修正案と、口頭の言い直し。初期の設計資料（第3版。`00`〜`07`）に基づく実装である。設計資料は、タグ v0.1.11 または git の履歴で読める。
 
 **完成品・導入済み・効果測定済みではない。** 状態は [docs/ACCEPTANCE-REPORT.md](docs/ACCEPTANCE-REPORT.md) を見る。
 
@@ -49,15 +49,16 @@ Windows（PowerShell）では `python3` を `py -3` に、パスの `/` を `\` 
 | 知りたいこと | 見る場所 |
 |---|---|
 | リリースの手順(自動化、ノートの置き場所) | [docs/RELEASING.md](docs/RELEASING.md) |
+| 受入の区分(A01〜A48の合格に要る証拠の種類) | [docs/ACCEPTANCE-MATRIX.md](docs/ACCEPTANCE-MATRIX.md) |
+| 記録・収集・比較・削除の仕様 | [docs/FEEDBACK-AND-STORAGE.md](docs/FEEDBACK-AND-STORAGE.md) |
 | 実装の判断、既存Skill調査の採否、依存と版、未実施 | [docs/IMPLEMENTATION-NOTES.md](docs/IMPLEMENTATION-NOTES.md) |
 | Ruri検索の採否判断（合成データ＋公開された実文章） | [docs/RURI-ADOPTION.md](docs/RURI-ADOPTION.md) |
 | 自分のデータでRuriを確認する手順 | [docs/RURI-REAL-DATA-GUIDE.md](docs/RURI-REAL-DATA-GUIDE.md) |
 | Skill本体 | [skill/contextual-terminology-review/](skill/contextual-terminology-review/SKILL.md) |
 
-## データと設計資料の扱い
+## データの扱い
 
 - 実データ・評価正解・ログは、Skillにも本リポジトリにも含めない。保存先は利用者が決める。
-- 設計資料（`00`〜`07`・`manifest.json`）は、2点（04・07）を除いて変更していない。2点は、公開にあたり、ホームディレクトリ名を含むローカルパスを `~` に置換した（`manifest.json` の `revision_note` 参照）。
 
 ## ライセンス
 

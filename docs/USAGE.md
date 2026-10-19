@@ -66,5 +66,5 @@ Agent は、入力を確認したあと、次の順に進む。
 
 ```bash
 python3 skill/contextual-terminology-review/scripts/ctr.py check refs \
-    --review skill/contextual-terminology-review/references/review-example.json --sources 03-acceptance-cases.json
+    --review skill/contextual-terminology-review/references/review-example.json --sources tests/data/acceptance-cases.json
 ```

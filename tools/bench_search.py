@@ -60,8 +60,8 @@ def main(argv=None) -> int:
     ap.add_argument("--model", default=se.DEFAULT_MODEL)
     ap.add_argument("--revision", help="モデルのコミットを固定する(再現用)")
     a = ap.parse_args(argv)
-    spec = json.loads((ROOT / "03-acceptance-cases.json").read_text(encoding="utf-8"))
-    reg = load_registry(ROOT / "03-acceptance-cases.json")
+    spec = json.loads((ROOT / "tests" / "data" / "acceptance-cases.json").read_text(encoding="utf-8"))
+    reg = load_registry(ROOT / "tests" / "data" / "acceptance-cases.json")
     terms, ts = build_terms(), tasks(spec["cases"])
     report = {"as_of": utcnow(), "scope": "公開された開発用ケースの入力文。件数が少なく、未使用評価でも実務性能でもない",
               "task_count": len(ts), "independent_tasks": len({t["query"] for t in ts}), "k": [1, 3], "engines": {}}

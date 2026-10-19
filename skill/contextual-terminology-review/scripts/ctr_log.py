@@ -1,6 +1,6 @@
 """実行記録・フィードバック・書き出し/取り込み・削除。実行先ごとの runtime_data_root を扱う。
 
-方針(07-feedback-and-storage.md):
+方針(docs/FEEDBACK-AND-STORAGE.md):
   - 実行・イベント別のJSONを原子的に追記する。既存IDは上書きしない。保存後に再読込して照合する。
   - 保存先は利用者が明示する(--runtime-root か CTR_RUNTIME_ROOT)。既定の保存先は持たない。
   - 原文は policy.raw_text_retention が true のときだけ private/ に保存する。
