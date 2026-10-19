@@ -96,7 +96,7 @@ class Install(TmpCase):
         self.assertEqual(paths["antigravity-ide"], f".gemini/config/skills/{NAME}")
         ws = self.mk("ws")
         d = ci.resolve_dirs("workspace", ["all"], self.home, ws.resolve(), None)
-        self.assertEqual(sorted(str(p.relative_to(ws.resolve())) for p, _ in d), [".agents/skills", ".claude/skills"])   # 同じ場所は一つにまとめる
+        self.assertEqual(sorted(p.relative_to(ws.resolve()).as_posix() for p, _ in d), [".agents/skills", ".claude/skills"])   # 同じ場所は一つにまとめる
 
     def test_A30_update_backs_up_old_version_and_preserves_other_skills_and_data(self):
         run(*self.args("install", "claude-code", apply=True))

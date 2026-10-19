@@ -138,7 +138,7 @@ class PostMergeCleanup(TmpCase):
         self.assertEqual(code, 1)
         outside = "/usr/local/some-unrelated-dir"
         code, rep = self.run_cleanup(work, "--branch", "work/merged", "--base", "main", "--remove-path", outside, "--apply")
-        self.assertTrue(any(r["what"] == outside for r in rep["refused"]))
+        self.assertTrue(any(r["what"] == str(Path(outside)) for r in rep["refused"]))   # Windows では区切りが \ になる
 
     def test_A31_not_a_git_repo_is_reported_not_faked(self):
         code, rep = self.run_cleanup(self.mk("plain"), "--branch", "x", "--base", "main")
