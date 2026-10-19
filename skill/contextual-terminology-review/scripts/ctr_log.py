@@ -675,7 +675,7 @@ def _scan_dependents(roots: list[Path], target: str) -> list[dict]:
                        or bool(ids & set(o.get("event_ids") or [])) or bool(ids & set(o.get("accepted_event_ids") or []))
                        or target in (o.get("source_ids") or []))
         if matched:
-            hits.append({"path": str(p), "label": f"{r.name}/{p.relative_to(r)}"})
+            hits.append({"path": str(p), "label": f"{r.name}/{p.relative_to(r).as_posix()}"})
     return hits
 
 

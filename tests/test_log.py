@@ -77,8 +77,8 @@ class RunLifecycle(LogBase):
         self.assertEqual(L.check_runs(self.rt)[0]["status"], "failed")
 
     def test_A34_unwritable_store_keeps_existing_and_reports_unsaved(self):
-        if os.geteuid() == 0:
-            self.skipTest("root では書き込み拒否を再現できない")
+        if os.name == "nt" or os.geteuid() == 0:
+            self.skipTest("root・Windows では、読み取り専用の権限による書き込み拒否を再現できない")
         r = self.start()
         before = self.read_all_text(self.rt)
         runs = self.run_dir(r["run_id"]).parent                         # 月別ディレクトリ。ここを書込み不可にする
@@ -496,7 +496,7 @@ class PortableLogging(TmpCase):
                     start = next(read_json(p) for p in (imp / "inbox").glob("*/events/*.json") if read_json(p)["type"] == "run_started")
                     self.assertEqual((start["host_environment"], start["host_route"]), (host, route))
                     self.assertEqual(start["model_id"], "unknown")                # 取得できないモデル識別子は unknown(後から埋めない)
-        if os.geteuid() != 0:
+        if os.name != "nt" and os.geteuid() != 0:
             ro = self.mk("ro")
             L.store_init(ro)
             (ro / "runs").mkdir()

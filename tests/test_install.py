@@ -90,13 +90,13 @@ class Install(TmpCase):
                 self.assertEqual(run(*self.args("verify", target))[0], 1)       # 削除後の照合は失敗として報告
 
     def test_A30_target_paths_are_distinct_per_environment(self):
-        paths = {t: str(self.dirs(t)[0].relative_to(self.home)) for t in ("claude-code", "codex", "antigravity-ide", "antigravity-cli")}
+        paths = {t: self.dirs(t)[0].relative_to(self.home).as_posix() for t in ("claude-code", "codex", "antigravity-ide", "antigravity-cli")}
         self.assertEqual(len(set(paths.values())), 4)
         self.assertEqual(paths["claude-code"], f".claude/skills/{NAME}")
         self.assertEqual(paths["antigravity-ide"], f".gemini/config/skills/{NAME}")
         ws = self.mk("ws")
         d = ci.resolve_dirs("workspace", ["all"], self.home, ws.resolve(), None)
-        self.assertEqual(sorted(str(p.relative_to(ws.resolve())) for p, _ in d), [".agents/skills", ".claude/skills"])   # 同じ場所は一つにまとめる
+        self.assertEqual(sorted(p.relative_to(ws.resolve()).as_posix() for p, _ in d), [".agents/skills", ".claude/skills"])   # 同じ場所は一つにまとめる
 
     def test_A30_update_backs_up_old_version_and_preserves_other_skills_and_data(self):
         run(*self.args("install", "claude-code", apply=True))

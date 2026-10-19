@@ -28,6 +28,8 @@ def git(repo: Path, *args, check=False):
 
 
 def main(argv=None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="backslashreplace")   # Windows の既定の文字コードで書けない文字があっても落とさない
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--repo", type=Path, required=True)
     ap.add_argument("--branch", required=True)
