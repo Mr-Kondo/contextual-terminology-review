@@ -17,6 +17,8 @@
 
 時間は、次のコマンドで記録する。
 
+`ctr.py` の呼び方と Windows での読み替えは、[USAGE.md](USAGE.md#コマンドの書き方windows)にある。
+
 ```bash
 ctr.py feedback time --category setup|record|evidence|compare|practice --minutes N --who self|collaborator
 ```

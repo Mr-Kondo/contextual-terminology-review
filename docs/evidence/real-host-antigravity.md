@@ -222,7 +222,7 @@ python3 ~/.gemini/config/skills/contextual-terminology-review/scripts/ctr.py fee
 
 # 0.1.1 へ更新した後の再実行(記録・フィードバック・書き出し・取り込みまで)
 
-実施日: 2026-10-17。実ユーザー環境の導入先を `ctr_install.py update --apply` で 0.1.1 に更新した後の実行。入力は合成データのみ。作業ディレクトリ・保存先・取り込み先は一時ディレクトリ(`<work>/agy`)。共有許可は、検証のため私(実行者)が一時の保存先にだけ設定した仮の許可で、利用者の業務上の許可ではない。
+実施日: 2026-10-17。実ユーザー環境の導入先を `ctr_install.py update` で 0.1.1 に更新した後の実行。入力は合成データのみ。作業ディレクトリ・保存先・取り込み先は一時ディレクトリ(`<work>/agy`)。共有許可は、検証のため私(実行者)が一時の保存先にだけ設定した仮の許可で、利用者の業務上の許可ではない。
 
 - ホスト: Antigravity CLI(agy) 1.4.0。**モデル: gemini-4-argon-medium**(`--model` で明示指定。ストリームの init イベントにも同じ値が出力される。これまでの実行では指定しておらずモデルIDが不明だった)
 - 実行: `agy --sandbox --dangerously-skip-permissions --model gemini-4-argon-medium --output-format stream-json -p <prompt>`

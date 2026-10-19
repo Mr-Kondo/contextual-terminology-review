@@ -9,7 +9,8 @@
 
 安全方針:
   - 既定は配置・更新・削除まで行う。--dry-run を付けると「計画の表示」だけで、何も変更しない(計画には操作・配置先・変更点を出す)。
-    識別できない既存や、導入後に手で変更されたものは、既定でも上書き・削除しない(--on-conflict backup で退避してから置換)。
+    識別できない既存や、導入後に手で変更されたものは、既定でも上書き・削除しない。--on-conflict backup で退避してから置換、
+    overwrite で退避せずに置換する(uninstall は、識別できない既存を overwrite でも削除しない)。
   - 配置先は --scope user(--home の下)か workspace(--workspace の下)か --dest。実ユーザーのホームを使うのは、
     --home を省略して --dry-run なしで実行したときだけ。検査では必ず一時ディレクトリを --home に指定する。
   - 配置したSkillには .ctr-install.json(版・全ファイルのsha256)を置く。同名でもこれが無いものは「識別できない既存」として
@@ -155,6 +156,14 @@ def stamp() -> str:
     return datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S-%f")
 
 
+def conflict_action(on_conflict: str) -> tuple:
+    """識別できない既存/手で変更されたものがあるときの (action, ok)。"""
+    return {"backup": ("replace-with-backup", True), "overwrite": ("replace", True)}.get(on_conflict, ("refuse", False))
+
+
+CONFLICT_HINT = "。--on-conflict backup で退避して置換、overwrite で退避せず置換できる"
+
+
 def plan_one(op: str, skills_dir: Path, targets: list, src: Path, info: dict, on_conflict: str) -> dict:
     dest = skills_dir / NAME
     cur = inspect(dest, info)
@@ -169,23 +178,20 @@ def plan_one(op: str, skills_dir: Path, targets: list, src: Path, info: dict, on
             ok, action = False, "refuse"
             notes.append("導入済みの版/内容が異なる。update を使う")
         else:
-            action = "replace-with-backup" if on_conflict == "backup" else "refuse"
-            ok = on_conflict == "backup"
-            notes.append(f"識別できない既存の同名Skill: {cur['why']}" + ("" if ok else "。--on-conflict backup で退避して置換できる"))
+            action, ok = conflict_action(on_conflict)
+            notes.append(f"識別できない既存の同名Skill: {cur['why']}" + ("" if ok else CONFLICT_HINT))
     elif op == "update":
         if st == "absent":
             ok, action = False, "refuse"
             notes.append("導入されていない。install を使う")
         elif st == "foreign":
-            action = "replace-with-backup" if on_conflict == "backup" else "refuse"
-            ok = on_conflict == "backup"
-            notes.append(f"識別できない既存: {cur['why']}")
+            action, ok = conflict_action(on_conflict)
+            notes.append(f"識別できない既存: {cur['why']}" + ("" if ok else CONFLICT_HINT))
         elif cur["identical_to_source"] and not cur["modified_since_install"]:
             action, notes = "noop", ["最新(内容一致)"]
         elif cur["modified_since_install"]:
-            action = "replace-with-backup" if on_conflict == "backup" else "refuse"
-            ok = on_conflict == "backup"
-            notes.append(f"導入後に手で変更されたファイルがある: {cur['modified_since_install'][:5]}")
+            action, ok = conflict_action(on_conflict)
+            notes.append(f"導入後に手で変更されたファイルがある: {cur['modified_since_install'][:5]}" + ("" if ok else CONFLICT_HINT))
         else:
             action = "update"
     elif op == "uninstall":
@@ -194,11 +200,11 @@ def plan_one(op: str, skills_dir: Path, targets: list, src: Path, info: dict, on
         elif st == "foreign":
             ok, action = False, "refuse"
             notes.append(f"{NAME} として識別できないので削除しない: {cur['why']}")
-        elif cur["modified_since_install"] and on_conflict != "backup":
+        elif cur["modified_since_install"] and on_conflict not in ("backup", "overwrite"):
             ok, action = False, "refuse"
-            notes.append("導入後に変更されたファイルがある。--on-conflict backup で退避してから削除できる")
+            notes.append("導入後に変更されたファイルがある。--on-conflict backup で退避してから、overwrite で退避せずに削除できる")
         else:
-            action = "remove" if not cur["modified_since_install"] else "remove-with-backup"
+            action = "remove-with-backup" if cur["modified_since_install"] and on_conflict == "backup" else "remove"
     return {"op": op, "dest": str(dest), "targets": targets, "state": cur, "action": action, "ok": ok, "notes": notes}
 
 
@@ -212,7 +218,7 @@ def apply_one(plan: dict, src: Path, info: dict, skills_dir: Path, fail_hook=Non
     staging = skills_dir / f".{NAME}.staging-{os.getpid()}-{stamp()}"
     try:
         skills_dir.mkdir(parents=True, exist_ok=True)
-        if act in ("install", "update", "replace-with-backup"):
+        if act in ("install", "update", "replace-with-backup", "replace"):
             copy_tree(src, staging, info)
             if fail_hook:
                 fail_hook("after_stage")
@@ -234,7 +240,17 @@ def apply_one(plan: dict, src: Path, info: dict, skills_dir: Path, fail_hook=Non
             verify = verify_one(dest, info)
             if not verify["ok"]:
                 raise InstallError("配置後の照合に失敗: " + "; ".join(verify["problems"]))
-        return {"dest": str(dest), "result": act, "changed": True, "backup": str(bak) if bak else None}
+        kept = str(bak) if bak and act != "replace" else None
+        if bak is not None and act == "replace":   # 上書き: 置換と照合が済んだので、退避していた旧版を捨てる
+            if bak.is_symlink():
+                bak.unlink()
+            else:
+                shutil.rmtree(bak, ignore_errors=True)
+            try:
+                bak.parent.rmdir()   # 空のときだけ消える
+            except OSError:
+                pass
+        return {"dest": str(dest), "result": act, "changed": True, "backup": kept}
     except BaseException as exc:
         # 失敗時は旧版を戻す。新しく作りかけたものは消す
         if dest.exists() and bak is not None:
@@ -274,6 +290,8 @@ def build_zip(src: Path, info: dict, out: Path) -> Path:
 
 
 def main(argv=None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="backslashreplace")   # Windows の既定の文字コードで書けない文字があっても落とさない
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("op", choices=["install", "update", "uninstall", "verify", "package"])
     ap.add_argument("--target", action="append", help=f"{', '.join(TARGETS)}(複数可)")
@@ -282,14 +300,12 @@ def main(argv=None) -> int:
     ap.add_argument("--workspace", type=Path, help="workspace scope の基準(既定: カレントディレクトリ)")
     ap.add_argument("--dest", type=Path, help="skills ディレクトリを直接指定する(リモートで確認済みの場所など)")
     ap.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
-    ap.add_argument("--on-conflict", choices=["refuse", "backup"], default="refuse")
+    ap.add_argument("--on-conflict", choices=["refuse", "backup", "overwrite"], default="refuse",
+                    help="識別できない既存/手で変更されたものがあるとき: refuse=触れない(既定)、backup=退避して置換、overwrite=退避せず置換")
     ap.add_argument("--dry-run", action="store_true", help="計画の表示だけで、何も変更しない")
-    ap.add_argument("--apply", action="store_true", help=argparse.SUPPRESS)   # 旧版の書き方。既定が適用になったので何もしない
     ap.add_argument("--out", type=Path, help="package の出力先")
     a = ap.parse_args(argv)
     try:
-        if a.apply and a.dry_run:
-            raise InstallError("--apply と --dry-run は同時に使えない")
         info = validate_source(a.source.resolve())
         if a.op == "package":
             if not a.out:

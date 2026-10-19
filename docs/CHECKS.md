@@ -14,6 +14,8 @@ python3 tools/run_acceptance.py                        # A01〜A48 の機械検�
 
 既定のモデルは ruri-v3-310m である。重みは約1.2GBで、初回の取得にネットワークが要る。Xet転送がプロキシを通らない環境では、`HF_HUB_DISABLE_XET=1` を付ける。
 
+Windows（PowerShell）では、先に `$env:HF_HUB_DISABLE_XET = "1"` を実行し、`.venv/bin/python` を `.venv\Scripts\python` に読み替える。
+
 ```bash
 HF_HUB_DISABLE_XET=1 .venv/bin/python tools/bench_search.py --out docs/evidence/search-bench.json
 CTR_RUN_RURI=1 .venv/bin/python -m unittest discover -s tests

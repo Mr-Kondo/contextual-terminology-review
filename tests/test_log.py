@@ -117,6 +117,18 @@ class RunLifecycle(LogBase):
         self.assertEqual(cm.exception.code, "already_exists")
         self.assertEqual(read_json(p), {"a": 1})
 
+    def test_A34_write_works_without_hard_links_and_still_never_overwrites(self):
+        from unittest import mock
+        p = self.rt / "nolink.json"
+        with mock.patch("os.link", side_effect=OSError(1, "Operation not permitted")):   # exFAT・一部のネットワーク共有
+            res = write_json(p, {"a": 1})
+            self.assertTrue(res["verified"])
+            with self.assertRaises(CtrError) as cm:
+                write_json(p, {"a": 2})
+        self.assertEqual(cm.exception.code, "already_exists")
+        self.assertEqual(read_json(p), {"a": 1})
+        self.assertEqual([q for q in self.rt.rglob("*") if q.name.startswith(".tmp-")], [])
+
     def test_A39_unconfigured_store_is_reported_with_manual_route_and_writes_nothing(self):
         wd = self.mk("cwd")
         code, out = run_ctr("record", "start", "--host", "codex", cwd=wd)

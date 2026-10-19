@@ -10,6 +10,22 @@ Skill 本体は `skill/contextual-terminology-review/` にある。導入・更�
 4. 週に30分ほど、実例を確認して記録する。→ [WEEKLY.md](WEEKLY.md)
 5. 検査を実行し、意味審査を依頼する。→ [CHECKS.md](CHECKS.md)
 
+## コマンドの書き方（Windows）
+
+この文書群のコマンドは、macOS / Linux の書き方である。Windows（PowerShell）では、次のように読み替える。`ctr.py` とだけ書いてある例は、`skill/contextual-terminology-review/scripts/ctr.py` のことである。
+
+| 文書の書き方 | Windows（PowerShell） |
+|---|---|
+| `python3 ...` | `py -3 ...`（なければ `python ...`） |
+| `skill/contextual-terminology-review/scripts/ctr.py` | `skill\contextual-terminology-review\scripts\ctr.py` |
+| `.venv/bin/python` | `.venv\Scripts\python` |
+| `~/ctr-data/...` | `$env:USERPROFILE\ctr-data\...` |
+| `/abs/path/...`（絶対パス） | `C:\Users\me\...`（ドライブ文字から） |
+| `HF_HUB_DISABLE_XET=1 cmd ...` | 先に `$env:HF_HUB_DISABLE_XET = "1"` を実行してから `cmd ...` |
+| 行末の `\`（行の継続） | 行末の `` ` ``。または1行で書く |
+
+導入の手順は [INSTALL.md](INSTALL.md) にある。
+
 ## 初回の使い方
 
 ### 依頼する

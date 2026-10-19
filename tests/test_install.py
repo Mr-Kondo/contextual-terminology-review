@@ -65,13 +65,11 @@ class Install(TmpCase):
         self.assertEqual(list(self.home.iterdir()), [])          # 何も作られない
         self.assertIn("触れない", out["data_protection"])
 
-    def test_A30_default_applies_and_legacy_apply_flag_still_works(self):
+    def test_A30_default_applies(self):
         code, out = run(*self.args("install", "codex", apply=True))
         self.assertEqual((code, out["mode"]), (0, "apply"))
-        self.assertEqual(run(*self.args("uninstall", "codex", "--apply", apply=True))[1]["results"][0]["applied"]["result"], "remove")
-        code, err = run(*self.args("install", "codex", "--apply"))        # --apply と --dry-run は矛盾する
+        code, err = run(*self.args("install", "codex", "--apply"))        # 廃止した旧版の書き方は受け付けない
         self.assertEqual(code, 2)
-        self.assertIn("同時に使えない", err)
 
     def test_A30_round_trip_for_each_target(self):
         for target in ("claude-code", "codex", "antigravity-ide", "antigravity-cli"):
@@ -178,6 +176,43 @@ class Install(TmpCase):
         self.assertEqual(out["results"][0]["applied"]["result"], "remove-with-backup")
         self.assertFalse(dest.exists())
         self.assertEqual((Path(out["results"][0]["applied"]["backup"]) / "references" / "judgment.md").read_text(encoding="utf-8"), "手での編集")
+
+    def test_A30_overwrite_replaces_without_leaving_a_backup_and_keeps_the_foreign_uninstall_refusal(self):
+        dest = self.dirs("codex")[0]
+        dest.mkdir(parents=True)
+        (dest / "SKILL.md").write_text(f"---\nname: {NAME}\ndescription: 手で置いた別物\n---\n", encoding="utf-8")
+        bak_root = dest.parent.parent / (dest.parent.name + ".bak")
+        code, out = run(*self.args("uninstall", "codex", "--on-conflict", "overwrite", apply=True))   # 識別できないものは overwrite でも消さない
+        self.assertEqual((code, out["results"][0]["applied"]["result"]), (1, "refuse"))
+        code, out = run(*self.args("install", "codex", "--on-conflict", "overwrite", apply=True))
+        self.assertEqual((code, out["results"][0]["applied"]["result"], out["results"][0]["applied"]["backup"]), (0, "replace", None))
+        self.assertFalse(bak_root.exists(), "overwrite は退避を残さない")
+        self.assertEqual(run(*self.args("verify", "codex"))[0], 0)
+        (dest / "references" / "judgment.md").write_text("手での編集", encoding="utf-8")
+        code, out = run(*self.args("update", "codex", "--on-conflict", "overwrite", apply=True))
+        self.assertEqual(out["results"][0]["applied"]["result"], "replace")
+        self.assertEqual(run(*self.args("verify", "codex"))[0], 0)
+        (dest / "references" / "judgment.md").write_text("再び手での編集", encoding="utf-8")
+        code, out = run(*self.args("uninstall", "codex", "--on-conflict", "overwrite", apply=True))
+        self.assertEqual(out["results"][0]["applied"]["result"], "remove")
+        self.assertFalse(dest.exists())
+        self.assertFalse(bak_root.exists())
+
+    def test_A30_overwrite_failure_restores_the_previous_one(self):
+        dest = self.dirs("codex")[0]
+        dest.mkdir(parents=True)
+        (dest / "SKILL.md").write_text(f"---\nname: {NAME}\ndescription: 手で置いた別物\n---\n", encoding="utf-8")
+        old = tree(dest)
+        info = ci.validate_source(self.src)
+        plan = ci.plan_one("install", dest.parent, ["codex"], self.src, info, "overwrite")
+        self.assertEqual(plan["action"], "replace")
+
+        def boom(s):
+            if s == "after_replace":
+                raise OSError("注入した失敗")
+        res = ci.apply_one(plan, self.src, info, dest.parent, fail_hook=boom)
+        self.assertEqual(res["result"], "failed_and_restored")
+        self.assertEqual(tree(dest), old)
 
     def test_A30_verify_detects_tampering_after_install(self):
         run(*self.args("install", "antigravity-cli", apply=True))

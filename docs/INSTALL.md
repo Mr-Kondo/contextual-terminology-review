@@ -27,7 +27,7 @@ py -3 tools\ctr_install.py verify  --target claude-code --scope user
 - Windows に `py` がなければ、`python` で置き換える。どちらも見つからないときは、python.org から Python 3 を入れる（CIは 3.12 で検査している）
 - 導入先を手で指定する必要はない。ホームフォルダは自動で決まる（Windows では `C:\Users\<ユーザー名>`）
 - Codex や Antigravity に入れるときは、`--target` を `codex`、`antigravity`、`all` に変える
-- 同名のものが既にあるときは、識別できないもの・手で編集されたものを上書きも削除もしない。`--on-conflict backup` を付けると、退避してから置換する
+- 同名のものが既にあるときは、上書きも削除もせずに止まる。置き換えるには、下の「既存のSkillとの衝突」の `--on-conflict` を使う
 
 ## すでに入れている場合（更新）
 
@@ -95,8 +95,26 @@ python3 tools/ctr_install.py uninstall --target antigravity --scope user        
 
 配置したSkillには、`.ctr-install.json`（版と全ファイルのsha256）が付く。
 
-- これが無い同名のものは、「識別できない既存」として扱う。上書きも削除もしない。`--on-conflict backup` を付けると、退避してから置換する
-- 導入後に手で編集したファイルがある場合も同じ
+- これが無い同名のものは、「識別できない既存」として扱う
+- 導入後に手で編集したファイルがある場合も、同じく扱う
+
+どちらも、既定では上書きも削除もしない。`--on-conflict` で扱いを選ぶ。
+
+| 指定 | 動作 | 旧版 |
+|---|---|---|
+| `refuse`（既定） | 何もせずに止まる | そのまま |
+| `backup` | 退避してから置換、または削除する | `skills.bak/` に残る |
+| `overwrite` | 退避せずに置換、または削除する | **残らない**。戻せない |
+
+```bash
+python3 tools/ctr_install.py install --target claude-code --scope user --on-conflict backup
+python3 tools/ctr_install.py update  --target claude-code --scope user --on-conflict overwrite
+```
+
+- 迷うなら `backup` を使う。手で編集したファイルを残したいときに戻せる
+- `overwrite` でも、置換の途中で失敗したら旧版に戻る。成功して照合が済んだ後に、旧版を捨てる
+- `uninstall` は、識別できない既存を、どの指定でも削除しない。このSkillが置いたと確認できるものだけを消す
+- 導入済みで版や内容が違うものに `install` を使うと、`--on-conflict` に関わらず拒否される。`update` を使う
 
 ## 更新
 
