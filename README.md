@@ -17,6 +17,8 @@ python3 -m unittest discover -s tests          # 機械検査（標準ライブ�
 python3 tools/ctr_install.py install --target all --scope user   # 計画の表示のみ。変更は --apply を付けたときだけ
 ```
 
+Windows（PowerShell）では `python3` を `py -3` に、パスの `/` を `\` に読み替える。導入の手順と、Mac との書き方の違いは [docs/INSTALL.md](docs/INSTALL.md) にある。
+
 続きは [docs/USAGE.md](docs/USAGE.md) の「全体の流れ」を見る。
 
 ## ドキュメント

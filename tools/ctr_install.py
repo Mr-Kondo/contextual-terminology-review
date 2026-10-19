@@ -296,6 +296,7 @@ def main(argv=None) -> int:
                 f"1. {z.name} と ctr_install.py をリモートへ移す(同じ出力先に置いてある。依存は pydantic: pip install pydantic)\n"
                 f"2. リモートで: python3 ctr_install.py install --target <claude-code|codex|antigravity> --scope user --source <展開したskill/{NAME}>\n"
                 "   (計画が表示される。内容を確認して --apply を付ける)\n"
+                "   Windows(PowerShell)では python3 を py -3 に、パスの / を \\ に読み替える。絶対パスはドライブ文字から書く(例: C:\\Users\\me)\n"
                 "3. Work/Cowork などアカウント側の登録はこのスクリプトでは操作できない。docs/INSTALL.md の手順で利用者が登録する\n",
                 encoding="utf-8")
             print(json.dumps({"zip": str(z), "sha256": sha(z), "files": len(info["files"]),
