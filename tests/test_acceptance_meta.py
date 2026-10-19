@@ -1,4 +1,4 @@
-"""資料の整合性・環境別証拠台帳(A32, A48)・マージ後の後片付け(A31)・Skillの構成と境界。"""
+"""受入ケース表の整合性・環境別証拠台帳(A32, A48)・マージ後の後片付け(A31)・Skillの構成と境界。"""
 import json
 import re
 import subprocess
@@ -6,20 +6,29 @@ import sys
 import unittest
 from pathlib import Path
 
-from helpers import ROOT, SKILL, TmpCase
+from helpers import ACCEPT, ROOT, SKILL, TmpCase
 
 sys.path.insert(0, str(ROOT / "tools"))
-import check_design_docs as cdd  # noqa: E402
 import host_evidence as he  # noqa: E402
 
 CLEANUP = ROOT / "tools" / "post_merge_cleanup.py"
 
 
-class DesignDocs(unittest.TestCase):
-    def test_design_documents_are_consistent(self):
-        res = cdd.check()
-        self.assertTrue(res["ok"], res["problems"])
-        self.assertIn("実装", res["scope"])                                      # 資料の検査であり実装の検証ではないと明記
+class AcceptanceCases(unittest.TestCase):
+    """受入ケース表(tests/data/acceptance-cases.json)の整合性。ケース表の検査であり、実装の検証ではない。"""
+
+    def test_cases_are_a01_to_a48_with_resolvable_sources(self):
+        cases = json.loads(ACCEPT.read_text(encoding="utf-8"))
+        ids = [c["id"] for c in cases["cases"]]
+        self.assertEqual(ids, [f"A{i:02d}" for i in range(1, 49)])
+        src_ids = {s["id"] for s in cases["source_catalog"]}
+        for c in cases["cases"]:
+            for sid in c["given"].get("source_ids", []):
+                self.assertIn(sid, src_ids, f"{c['id']}: 不明な source_id {sid}")
+            ref = c["given"].get("reference_to_check")
+            if ref and c["id"] != "A13":
+                self.assertIn(ref["source_id"], src_ids, f"{c['id']}: 参照の source_id")
+        self.assertIs(cases.get("is_holdout"), False)
 
 
 class HostEvidence(unittest.TestCase):

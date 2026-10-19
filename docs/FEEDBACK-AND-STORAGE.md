@@ -169,9 +169,7 @@ Skillの更新・アンインストールはログを既定で保持する。デ
 
 ## 12. 参照と使用箇所
 
-- ［採用仕様／要約］[01-design.md](01-design.md)｜フィードバックによる更新・段階6｜基準・候補・正解・実行履歴の分離を、物理保存と収集契約に具体化した。
-- ［実装依頼／仕様］[02-implementation-prompt.md](02-implementation-prompt.md)｜7・7A・8｜明示的採用、分母の区別、週30分と接続する。
-- ［受入条件／仕様］[06-acceptance-matrix.md](06-acceptance-matrix.md)｜分散ログと改善ループ｜本書の検査対象を示す。設計の記載は実装済みの証拠ではない。
+- ［受入条件／仕様］[ACCEPTANCE-MATRIX.md](ACCEPTANCE-MATRIX.md)｜分散ログと改善ループ｜本書の検査対象を示す。設計の記載は実装済みの証拠ではない。
 - ［利用Skill／要約］[mece-cluster-advisor判断手順](~/.agents/skills/mece-cluster-advisor/references/judgment.md)｜軸の確認・排他性・網羅性｜処理段階を主軸にし、原因・分野を別軸とした。網羅性の実証や埋め込みによる検証は行っていない。
 
 本書の保存構成・操作名・受入例は今回の設計提案の採用内容であり、既存Skillや製品が既に提供している機能の説明ではない。

@@ -17,7 +17,7 @@ CTR = SCRIPTS / "ctr.py"
 INSTALL = ROOT / "tools" / "ctr_install.py"
 FIXTURES = ROOT / "tests" / "fixtures"
 HOSTS_DOC = SKILL / "references" / "hosts.md"
-ACCEPT = Path(os.environ.get("CTR_ACCEPTANCE_JSON", ROOT / "03-acceptance-cases.json"))
+ACCEPT = Path(os.environ.get("CTR_ACCEPTANCE_JSON", ROOT / "tests" / "data" / "acceptance-cases.json"))
 sys.path.insert(0, str(SCRIPTS))
 
 HAS_PDFPLUMBER = find_spec("pdfplumber") is not None

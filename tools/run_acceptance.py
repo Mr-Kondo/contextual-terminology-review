@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""tests/ を実行し、A01〜A48 ごとの機械検査の結果を、06-acceptance-matrix.md の区分に沿って docs/ へ出力する。
+"""tests/ を実行し、A01〜A48 ごとの機械検査の結果を、docs/ACCEPTANCE-MATRIX.md の区分に沿って docs/ へ出力する。
 
   python3 tools/run_acceptance.py                # system python
   CTR_RUN_RURI=1 CTR_RURI_OFFLINE=1 HF_HOME=... .work/venv/bin/python tools/run_acceptance.py   # 実Ruri・pdfplumber込み
@@ -66,7 +66,7 @@ def main() -> int:
     suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"), top_level_dir=str(ROOT / "tests"))
     runner = unittest.TextTestRunner(resultclass=Collect, verbosity=0, stream=open("/dev/null", "w"))
     res = runner.run(suite)
-    spec = json.loads((ROOT / "03-acceptance-cases.json").read_text(encoding="utf-8"))
+    spec = json.loads((ROOT / "tests" / "data" / "acceptance-cases.json").read_text(encoding="utf-8"))
     by_case: dict = {}
     for tid, row in res.rows.items():
         m = re.search(r"\.test_(A\d\d)_", tid)
@@ -123,9 +123,9 @@ def write_report(s, ledger, bench, spec):
         "## 実行環境", "", "| 項目 | 版 |", "|---|---|", *[f"| {k} | {x} |" for k, x in v.items()], "",
         f"テスト {s['tests_run']} 件: 失敗 {s['failures']}・エラー {s['errors']}・skip {s['skipped']}。"
         f"skip は未実施であり合格に数えない(Ruri実検索・pdfplumber が未導入の環境で出る)。", "",
-        "## 区分別の状態(06-acceptance-matrix.md)", "",
+        "## 区分別の状態(docs/ACCEPTANCE-MATRIX.md)", "",
         "| 区分 | 状態 | 根拠・残り |", "|---|---|---|",
-        "| 設計資料の整合性 | 検査済み(合格) | `tools/check_design_docs.py`(manifestのハッシュ・JSON・ID・リンク)。資料の検査であり実装の検証ではない |",
+        "| 受入ケースの整合性 | 検査済み(合格) | `tests/test_acceptance_meta.py`(A01〜A48のIDが一意・source参照が解決する)。ケース表の検査であり実装の検証ではない |",
         f"| 用語・責務の判断 A01〜A12, A17, A28〜A29 | 機械ガード合格／**意味審査は未実施(独立確認待ち)** | 作成者は実装担当AI。語彙ガードは必要条件のみ。確認票: docs/SEMANTIC-REVIEW-SHEET.md。別モデル(Codex・Antigravity)による確認は参考情報で、独立審査の代わりにならない: docs/evidence/cross-model-semantic-review.md |",
         "| 出典・引用の機械検査 A13〜A18 | 機械検査 合格 | 不明ID・版違い・範囲外・改変・否定欠落を検出。A17は機械合格と意味不支持を別表示 |",
         "| 画像・PDFの実読解 A19〜A20 | 機械側合格／視覚確認は自己確認のみ | A20: 実PNG・1ページPDFを開いて凡例を確認(実装担当AI)。独立確認・実利用でのPDF読解は未実施 |",

@@ -6,7 +6,6 @@
 
 ```bash
 python3 -m unittest discover -s tests                 # 標準ライブラリのみ。未導入の依存に当たるテストは skip（未実施）
-python3 tools/check_design_docs.py                     # 設計資料の整合性（資料の検査）
 python3 tools/run_acceptance.py                        # A01〜A48 の機械検査と docs/ACCEPTANCE-REPORT.md の生成
 ```
 

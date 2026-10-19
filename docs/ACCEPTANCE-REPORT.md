@@ -20,11 +20,11 @@
 
 テスト 119 件: 失敗 0・エラー 0・skip 4。skip は未実施であり合格に数えない(Ruri実検索・pdfplumber が未導入の環境で出る)。
 
-## 区分別の状態(06-acceptance-matrix.md)
+## 区分別の状態(docs/ACCEPTANCE-MATRIX.md)
 
 | 区分 | 状態 | 根拠・残り |
 |---|---|---|
-| 設計資料の整合性 | 検査済み(合格) | `tools/check_design_docs.py`(manifestのハッシュ・JSON・ID・リンク)。資料の検査であり実装の検証ではない |
+| 受入ケースの整合性 | 検査済み(合格) | `tests/test_acceptance_meta.py`(A01〜A48のIDが一意・source参照が解決する)。ケース表の検査であり実装の検証ではない |
 | 用語・責務の判断 A01〜A12, A17, A28〜A29 | 機械ガード合格／**意味審査は未実施(独立確認待ち)** | 作成者は実装担当AI。語彙ガードは必要条件のみ。確認票: docs/SEMANTIC-REVIEW-SHEET.md。別モデル(Codex・Antigravity)による確認は参考情報で、独立審査の代わりにならない: docs/evidence/cross-model-semantic-review.md |
 | 出典・引用の機械検査 A13〜A18 | 機械検査 合格 | 不明ID・版違い・範囲外・改変・否定欠落を検出。A17は機械合格と意味不支持を別表示 |
 | 画像・PDFの実読解 A19〜A20 | 機械側合格／視覚確認は自己確認のみ | A20: 実PNG・1ページPDFを開いて凡例を確認(実装担当AI)。独立確認・実利用でのPDF読解は未実施 |

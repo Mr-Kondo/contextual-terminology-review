@@ -1,6 +1,6 @@
 # 記録・フィードバック・更新
 
-仕様は設計資料 07-feedback-and-storage.md。ここでは操作だけを書く。
+仕様は、リポジトリの docs/FEEDBACK-AND-STORAGE.md（配布物には入らない）。ここでは操作だけを書く。
 
 ## 保存先
 
