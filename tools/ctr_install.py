@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """contextual-terminology-review の導入・更新・アンインストール・照合・配布物の作成。
 
-  python3 tools/ctr_install.py install   --target claude-code --scope user [--apply]
-  python3 tools/ctr_install.py update    --target codex       --scope workspace --workspace DIR [--apply]
-  python3 tools/ctr_install.py uninstall --target antigravity --scope user [--apply]
+  python3 tools/ctr_install.py install   --target claude-code --scope user [--dry-run]
+  python3 tools/ctr_install.py update    --target codex       --scope workspace --workspace DIR [--dry-run]
+  python3 tools/ctr_install.py uninstall --target antigravity --scope user [--dry-run]
   python3 tools/ctr_install.py verify    --target all         --scope user
   python3 tools/ctr_install.py package   --out DIR            Work/Cowork/リモート用の配布物(zip+手順)
 
 安全方針:
-  - 何も指定しなければ「計画の表示」だけ(--apply を付けたときだけ変更する)。計画には操作・配置先・変更点を出す。
+  - 既定は配置・更新・削除まで行う。--dry-run を付けると「計画の表示」だけで、何も変更しない(計画には操作・配置先・変更点を出す)。
+    識別できない既存や、導入後に手で変更されたものは、既定でも上書き・削除しない(--on-conflict backup で退避してから置換)。
   - 配置先は --scope user(--home の下)か workspace(--workspace の下)か --dest。実ユーザーのホームを使うのは、
-    --home を省略して --apply したときだけ。検査では必ず一時ディレクトリを --home に指定する。
+    --home を省略して --dry-run なしで実行したときだけ。検査では必ず一時ディレクトリを --home に指定する。
   - 配置したSkillには .ctr-install.json(版・全ファイルのsha256)を置く。同名でもこれが無いものは「識別できない既存」として
     上書きしない(--on-conflict backup で退避してから置換)。配置後に手で編集されたものも同様に扱う。
   - 更新は 新版を一時領域に作る → 旧版を退避 → 置換 → 照合、の順。どこで失敗しても旧版を戻す。
@@ -282,10 +283,13 @@ def main(argv=None) -> int:
     ap.add_argument("--dest", type=Path, help="skills ディレクトリを直接指定する(リモートで確認済みの場所など)")
     ap.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     ap.add_argument("--on-conflict", choices=["refuse", "backup"], default="refuse")
-    ap.add_argument("--apply", action="store_true", help="指定しなければ計画の表示だけ")
+    ap.add_argument("--dry-run", action="store_true", help="計画の表示だけで、何も変更しない")
+    ap.add_argument("--apply", action="store_true", help=argparse.SUPPRESS)   # 旧版の書き方。既定が適用になったので何もしない
     ap.add_argument("--out", type=Path, help="package の出力先")
     a = ap.parse_args(argv)
     try:
+        if a.apply and a.dry_run:
+            raise InstallError("--apply と --dry-run は同時に使えない")
         info = validate_source(a.source.resolve())
         if a.op == "package":
             if not a.out:
@@ -295,7 +299,7 @@ def main(argv=None) -> int:
             (a.out / "INSTALL-ON-REMOTE.txt").write_text(
                 f"1. {z.name} と ctr_install.py をリモートへ移す(同じ出力先に置いてある。依存は pydantic: pip install pydantic)\n"
                 f"2. リモートで: python3 ctr_install.py install --target <claude-code|codex|antigravity> --scope user --source <展開したskill/{NAME}>\n"
-                "   (計画が表示される。内容を確認して --apply を付ける)\n"
+                "   (そのまま配置される。先に計画だけ見るときは --dry-run を付ける)\n"
                 "   Windows(PowerShell)では python3 を py -3 に、パスの / を \\ に読み替える。絶対パスはドライブ文字から書く(例: C:\\Users\\me)\n"
                 "3. Work/Cowork などアカウント側の登録はこのスクリプトでは操作できない。docs/INSTALL.md の手順で利用者が登録する\n",
                 encoding="utf-8")
@@ -318,13 +322,13 @@ def main(argv=None) -> int:
                 continue
             plan = plan_one(a.op, skills_dir, targets, a.source.resolve(), info, a.on_conflict)
             entry = {"plan": plan, "applied": None}
-            if a.apply:
+            if not a.dry_run:
                 entry["applied"] = apply_one(plan, a.source.resolve(), info, skills_dir)
                 worst = max(worst, 1 if entry["applied"]["result"] in ("failed", "failed_and_restored", "refuse") else 0)
             else:
                 worst = max(worst, 0 if plan["ok"] else 1)
             results.append(entry)
-        print(json.dumps({"op": a.op, "mode": "apply" if a.apply else "plan-only(変更なし)", "source_version": info["version"],
+        print(json.dumps({"op": a.op, "mode": "plan-only(変更なし)" if a.dry_run else "apply", "source_version": info["version"],
                           "results": results, "data_protection": "runtime_data_root / improvement_root / 用語正本 / 評価履歴 / 他のSkill には触れない"},
                          ensure_ascii=False, indent=2))
         return worst
