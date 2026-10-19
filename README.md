@@ -48,6 +48,7 @@ Windows（PowerShell）では `python3` を `py -3` に、パスの `/` を `\` 
 
 | 知りたいこと | 見る場所 |
 |---|---|
+| リリースの手順(自動化、ノートの置き場所) | [docs/RELEASING.md](docs/RELEASING.md) |
 | 実装の判断、既存Skill調査の採否、依存と版、未実施 | [docs/IMPLEMENTATION-NOTES.md](docs/IMPLEMENTATION-NOTES.md) |
 | Ruri検索の採否判断（合成データ＋公開された実文章） | [docs/RURI-ADOPTION.md](docs/RURI-ADOPTION.md) |
 | 自分のデータでRuriを確認する手順 | [docs/RURI-REAL-DATA-GUIDE.md](docs/RURI-REAL-DATA-GUIDE.md) |

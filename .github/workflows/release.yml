@@ -1,0 +1,35 @@
+name: Release
+
+# main の VERSION が変わったら、タグを打ってリリースを作る。ノートは docs/release-notes/v<版>.md(PRで確認済みの文章)。
+on:
+  push:
+    branches: [main]
+    paths:
+      - skill/contextual-terminology-review/VERSION
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=$(tr -d '[:space:]' < skill/contextual-terminology-review/VERSION)
+          TAG="v$V"
+          if gh release view "$TAG" >/dev/null 2>&1; then echo "$TAG は作成済み。何もしない"; exit 0; fi
+          NOTES="docs/release-notes/$TAG.md"
+          test -f "$NOTES" || { echo "::error::$NOTES がない。版を上げるPRには、リリースノートを入れる"; exit 1; }
+          python tools/ctr_install.py package --out dist
+          SHA=$(sha256sum "dist/contextual-terminology-review-$V.zip" | cut -d' ' -f1)
+          { cat "$NOTES"; printf '\nSHA-256（zip）: `%s`\n' "$SHA"; } > notes.md
+          TITLE=$(head -1 "$NOTES" | sed 's/^# //')
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "$TITLE" --notes-file notes.md \
+            "dist/contextual-terminology-review-$V.zip" dist/ctr_install.py dist/INSTALL-ON-REMOTE.txt
