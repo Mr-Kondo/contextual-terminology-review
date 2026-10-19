@@ -2,11 +2,51 @@
 
 [使い方の入口](USAGE.md)の手順2。操作には `tools/ctr_install.py` を使う。
 
-既定は**計画の表示だけ**である。操作・配置先・変更点を確認してから `--apply` を付ける。
+## 最短の導入（Claude Code に入れる例）
+
+導入ツールが使うのはPythonの標準ライブラリだけである。pydantic などの依存は、導入後にSkillを動かすときに要る（[SETUP.md](SETUP.md)）。
+
+作業は、このリポジトリのフォルダで行う。
+
+**macOS / Linux（ターミナル）**
+
+```bash
+python3 tools/ctr_install.py install --target claude-code --scope user
+python3 tools/ctr_install.py install --target claude-code --scope user --apply
+python3 tools/ctr_install.py verify  --target claude-code --scope user
+```
+
+**Windows（PowerShell）**
+
+```powershell
+py -3 tools\ctr_install.py install --target claude-code --scope user
+py -3 tools\ctr_install.py install --target claude-code --scope user --apply
+py -3 tools\ctr_install.py verify  --target claude-code --scope user
+```
+
+- 1行目は計画の表示だけで、何も変更しない。表示された配置先と操作を確かめてから、2行目の `--apply` で配置する。3行目で、配置したものが正本と一致するか照合する
+- Windows に `py` がなければ、`python` で置き換える。どちらも見つからないときは、python.org から Python 3 を入れる（CIは 3.12 で検査している）
+- 導入先を手で指定する必要はない。ホームフォルダは自動で決まる（Windows では `C:\Users\<ユーザー名>`）
+- Codex や Antigravity に入れるときは、`--target` を `codex`、`antigravity`、`all` に変える
+
+## OS による書き方の違い
+
+| | macOS / Linux | Windows（PowerShell） |
+|---|---|---|
+| Python の呼び方 | `python3` | `py -3`（なければ `python`） |
+| パスの区切り | `/` | `\`。`/` も多くの場面で通る |
+| ホームフォルダ | `~`（例: `~/.claude/skills`） | `$env:USERPROFILE`（例: `$env:USERPROFILE\.claude\skills`） |
+| 絶対パス | `/` で始まる（例: `/Users/me/ctr-data`） | **ドライブ文字から始める**（例: `C:\Users\me\ctr-data`） |
+| 仮想環境の Python | `.venv/bin/python` | `.venv\Scripts\python` |
+| 行の継続 | 行末の `\` | 行末の `` ` ``（バッククォート）。迷うなら1行で書く |
+
+`/abs/path/runtime` のように `/` で始まるパスは、Windows では絶対パスと見なされず、エラーになる。保存先の指定（`--runtime-root` など）には、`C:\Users\me\ctr-data\runtime` のようにドライブ文字から書く。
+
+導入先のフォルダ名（`.claude` など）を `--dest` で直接指定するときも、Windows ではドライブ文字から書く。空白を含むときは、引用符で囲む。
 
 ## 配置先
 
-| 環境 | user（ホーム） | workspace（プロジェクト） | 公式資料での確認（2026-10-17） |
+| 環境 | user（ホーム。Windows は `%USERPROFILE%` 以下の同名フォルダ） | workspace（プロジェクト） | 公式資料での確認（2026-10-17） |
 |---|---|---|---|
 | Claude Code | `~/.claude/skills/` | `.claude/skills/` | code.claude.com/docs/en/skills |
 | Codex | `~/.agents/skills/` | `.agents/skills/` | developers.openai.com/codex/skills |
@@ -14,6 +54,8 @@
 | Antigravity CLI | `~/.gemini/antigravity-cli/skills/` | `.agents/skills/` | 同上 |
 
 ## コマンド
+
+Windows では、`python3` を `py -3` に読み替える。
 
 ```bash
 python3 tools/ctr_install.py install   --target claude-code --scope user            # 計画の表示（変更なし）
@@ -42,8 +84,10 @@ python3 tools/ctr_install.py uninstall --target antigravity --scope user --apply
 更新後は、用語データと索引の版を確認する。索引が古ければ作り直す。
 
 ```bash
-ctr.py check data --improvement-root ABS [--index-meta PATH]
+python3 skill/contextual-terminology-review/scripts/ctr.py check data --improvement-root ABS [--index-meta PATH]
 ```
+
+`ABS` は絶対パス。Windows では `py -3 skill\contextual-terminology-review\scripts\ctr.py ...` で、ドライブ文字から書く。
 
 ## アンインストール
 
