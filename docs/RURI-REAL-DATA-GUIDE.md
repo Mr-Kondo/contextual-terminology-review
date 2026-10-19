@@ -49,6 +49,8 @@ python3 tools/bench_ruri_adoption.py --data ~/ctr-data/my-set.json --validate-on
 
 次に比較を実行する（要 sentence-transformers。初回は ruri-v3-310m の重み約1.2GBの取得が必要）。
 
+Windows（PowerShell）では、先に `$env:HF_HUB_DISABLE_XET = "1"` を実行し、`.venv/bin/python` を `.venv\Scripts\python` に読み替える。
+
 ```bash
 HF_HUB_DISABLE_XET=1 .venv/bin/python tools/bench_ruri_adoption.py --data ~/ctr-data/my-set.json \
     --threshold-rule max --models 310m --out ~/ctr-data/my-result.json

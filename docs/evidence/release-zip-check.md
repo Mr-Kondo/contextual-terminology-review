@@ -18,7 +18,7 @@
 
 ## 導入ツールでの一巡(`tools/ctr_install.py`、展開物を `--source`、`--home` は一時ディレクトリ)
 
-`install --target all --apply` → `verify`(4配置先とも ok)→ `update`(`noop`、変更なし)→ `uninstall --apply`(配置先が空になることを確認)。
+`install --target all` → `verify`(4配置先とも ok)→ `update`(`noop`、変更なし)→ `uninstall`(配置先が空になることを確認)。
 
 ## 確認していないこと
 
@@ -35,7 +35,7 @@
 - 取得: `gh release download v0.1.1`。zip の SHA-256 は `820d970561254da0901f7945375ee6cdc4265fb2a555ea41192ab919fb1c3c08`(リリースノートと一致)
 - 展開物とリポジトリの `skill/contextual-terminology-review/` を `diff -r` で比較し、差なし。VERSION は 0.1.1。`ctr_search.py` の既定は `cl-nagoya/ruri-v3-310m`(revision `18b60fb8…`)
 - 展開したコピーを `python3 -I` で実行: `check refs` 終了コード0、`record start`→`finish`→`feedback add` が `verified: true`、許可なしの `export` は終了コード4で停止、仮の許可後の `export`→`import` は受理3・重複0・隔離0、`check store` が ok
-- 導入ツール(展開物を `--source`、一時ホーム): `install --target all --apply`→`verify`(4配置先とも ok)→`update`(4件とも `noop`)→`uninstall --apply`(配置先が空になった)
+- 導入ツール(展開物を `--source`、一時ホーム): `install --target all`→`verify`(4配置先とも ok)→`update`(4件とも `noop`)→`uninstall`(配置先が空になった)
 
 ## 確認していないこと
 - 展開したコピーでの Ruri 実検索(`ctr_search.py` はリポジトリと同一内容で、リポジトリ側で実モデルの実行を確認済み)

@@ -101,6 +101,16 @@ def write_json(path: Path, obj, *, overwrite: bool = False) -> dict:
                     os.link(tmp, path)
                 except FileExistsError as exc:
                     raise CtrError("already_exists", path.name) from exc
+                except OSError:
+                    # shortcut: ハードリンクできない保存先(exFAT・一部のネットワーク共有)では、排他的に作って直接書く。途中で止まると半端なファイルが残るが、下の再読込の照合で検出する。
+                    try:
+                        fd2 = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0))
+                    except FileExistsError as exc:
+                        raise CtrError("already_exists", path.name) from exc
+                    with os.fdopen(fd2, "wb") as f2:
+                        f2.write(data)
+                        f2.flush()
+                        os.fsync(f2.fileno())
                 finally:
                     os.unlink(tmp)
         except BaseException:

@@ -484,7 +484,9 @@ def _safe_read(base: Path, rel: str, max_bytes: int) -> bytes:
     if os.path.realpath(path.parent) != expected:
         raise CtrError("path_outside_boundary")
     try:
-        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+        if path.is_symlink():   # O_NOFOLLOW が無い環境(Windows)でも、リンクは読まない
+            raise OSError("symlink")
+        fd = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_BINARY", 0))
     except OSError as exc:
         raise CtrError("link_or_unreadable_entry") from exc
     with os.fdopen(fd, "rb") as f:

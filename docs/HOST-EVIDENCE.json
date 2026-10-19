@@ -11,7 +11,7 @@
      "state": "success",
      "evidence": {
       "kind": "real_home_install",
-      "detail": "tools/ctr_install.py install --apply で ~/.claude/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
+      "detail": "tools/ctr_install.py install で ~/.claude/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
      }
     },
     "register": {
@@ -119,7 +119,7 @@
      "state": "success",
      "evidence": {
       "kind": "real_home_install",
-      "detail": "tools/ctr_install.py install --apply で ~/.agents/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
+      "detail": "tools/ctr_install.py install で ~/.agents/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
      }
     },
     "register": {
@@ -227,13 +227,13 @@
      "state": "success",
      "evidence": {
       "kind": "real_home_install",
-      "detail": "tools/ctr_install.py install --apply で ~/.gemini/config/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
+      "detail": "tools/ctr_install.py install で ~/.gemini/config/skills に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
      }
     },
     "register": {
      "state": "not_run",
      "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
-     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を計画表示→--apply。ホストのSkill一覧で名前を確認"
+     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を実行。ホストのSkill一覧で名前を確認"
     },
     "invoke": {
      "state": "not_run",
@@ -275,7 +275,7 @@
      "state": "success",
      "evidence": {
       "kind": "real_home_install",
-      "detail": "tools/ctr_install.py install --apply で ~/.gemini/antigravity-cli/skills(と IDE/App用の ~/.gemini/config/skills) に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
+      "detail": "tools/ctr_install.py install で ~/.gemini/antigravity-cli/skills(と IDE/App用の ~/.gemini/config/skills) に導入し verify 一致。仮のHOMEでの往復は tests/test_install.py"
      }
     },
     "register": {

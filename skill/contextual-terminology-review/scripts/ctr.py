@@ -302,6 +302,8 @@ def build():
 
 
 def main(argv=None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="backslashreplace")   # Windows の既定の文字コードで書けない文字があっても落とさない
     args = build().parse_args(argv)
     try:
         return args.fn(args)
