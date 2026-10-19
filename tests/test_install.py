@@ -90,7 +90,7 @@ class Install(TmpCase):
                 self.assertEqual(run(*self.args("verify", target))[0], 1)       # 削除後の照合は失敗として報告
 
     def test_A30_target_paths_are_distinct_per_environment(self):
-        paths = {t: str(self.dirs(t)[0].relative_to(self.home)) for t in ("claude-code", "codex", "antigravity-ide", "antigravity-cli")}
+        paths = {t: self.dirs(t)[0].relative_to(self.home).as_posix() for t in ("claude-code", "codex", "antigravity-ide", "antigravity-cli")}
         self.assertEqual(len(set(paths.values())), 4)
         self.assertEqual(paths["claude-code"], f".claude/skills/{NAME}")
         self.assertEqual(paths["antigravity-ide"], f".gemini/config/skills/{NAME}")
