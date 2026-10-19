@@ -47,14 +47,14 @@ class Install(TmpCase):
 
     def args(self, op, target, *extra, apply=False):
         a = [op, "--target", target, "--scope", "user", "--home", self.home, "--source", self.src]
-        return a + list(extra) + (["--apply"] if apply else [])
+        return a + list(extra) + ([] if apply or op == "verify" else ["--dry-run"])   # apply=False は計画の表示(--dry-run)
 
     def bump(self, text="x"):
         (self.src / "VERSION").write_text("99.0.0\n", encoding="utf-8")   # 実際の版に依存させない
         with open(self.src / "references" / "judgment.md", "a", encoding="utf-8") as f:
             f.write(f"\n<!-- {text} -->\n")
 
-    def test_A30_plan_only_is_default_and_shows_operation_destination_and_changes(self):
+    def test_A30_dry_run_shows_operation_destination_and_changes(self):
         code, out = run(*self.args("install", "all"))
         self.assertEqual(code, 0)
         self.assertIn("plan-only", out["mode"])
@@ -64,6 +64,14 @@ class Install(TmpCase):
             self.assertIn(str(self.home), r["plan"]["dest"])
         self.assertEqual(list(self.home.iterdir()), [])          # 何も作られない
         self.assertIn("触れない", out["data_protection"])
+
+    def test_A30_default_applies_and_legacy_apply_flag_still_works(self):
+        code, out = run(*self.args("install", "codex", apply=True))
+        self.assertEqual((code, out["mode"]), (0, "apply"))
+        self.assertEqual(run(*self.args("uninstall", "codex", "--apply", apply=True))[1]["results"][0]["applied"]["result"], "remove")
+        code, err = run(*self.args("install", "codex", "--apply"))        # --apply と --dry-run は矛盾する
+        self.assertEqual(code, 2)
+        self.assertIn("同時に使えない", err)
 
     def test_A30_round_trip_for_each_target(self):
         for target in ("claude-code", "codex", "antigravity-ide", "antigravity-cli"):
@@ -187,7 +195,7 @@ class Install(TmpCase):
         self.assertEqual(list(self.home.iterdir()), [])
         shutil.rmtree(self.src / "runtime_data")
         dest_dir = self.mk("remote-skills")
-        code, out = run("install", "--target", "codex", "--dest", dest_dir, "--source", self.src, "--apply")
+        code, out = run("install", "--target", "codex", "--dest", dest_dir, "--source", self.src)
         self.assertEqual(code, 0)
         self.assertTrue((dest_dir / NAME / "SKILL.md").exists())
 

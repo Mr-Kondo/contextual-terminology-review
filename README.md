@@ -14,7 +14,7 @@
 
 ```bash
 python3 -m unittest discover -s tests          # 機械検査（標準ライブラリ＋pydantic。CIでも同じものを実行）
-python3 tools/ctr_install.py install --target all --scope user   # 計画の表示のみ。変更は --apply を付けたときだけ
+python3 tools/ctr_install.py install --target all --scope user --dry-run   # 計画の表示のみ。--dry-run を外すと配置する
 ```
 
 Windows（PowerShell）では `python3` を `py -3` に、パスの `/` を `\` に読み替える。導入の手順と、Mac との書き方の違いは [docs/INSTALL.md](docs/INSTALL.md) にある。
