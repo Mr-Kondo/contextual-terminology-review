@@ -52,6 +52,7 @@ Windows（PowerShell）では `python3` を `py -3` に、パスの `/` を `\` 
 | 受入の区分(A01〜A48の合格に要る証拠の種類) | [docs/ACCEPTANCE-MATRIX.md](docs/ACCEPTANCE-MATRIX.md) |
 | 記録・収集・比較・削除の仕様 | [docs/FEEDBACK-AND-STORAGE.md](docs/FEEDBACK-AND-STORAGE.md) |
 | 実装の判断、既存Skill調査の採否、依存と版、未実施 | [docs/IMPLEMENTATION-NOTES.md](docs/IMPLEMENTATION-NOTES.md) |
+| 更新時の知識索引の限定試行、比較結果と採否 | [docs/WIKISKILL-PILOT.md](docs/WIKISKILL-PILOT.md)（[試行設計](adr/2026-11-03-update-knowledge-pilot.md)） |
 | Ruri検索の採否判断（合成データ＋公開された実文章） | [docs/RURI-ADOPTION.md](docs/RURI-ADOPTION.md) |
 | 自分のデータでRuriを確認する手順 | [docs/RURI-REAL-DATA-GUIDE.md](docs/RURI-REAL-DATA-GUIDE.md) |
 | Skill本体 | [skill/contextual-terminology-review/](skill/contextual-terminology-review/SKILL.md) |
