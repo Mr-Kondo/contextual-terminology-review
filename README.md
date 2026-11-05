@@ -12,6 +12,8 @@
 
 ## まず試す
 
+既存の同名配置がある場合は先にバックアップする。Node.js / npm があれば、`npx skills add Mr-Kondo/contextual-terminology-review --skill contextual-terminology-review -g` で導入できる。以後は `npx skills update` で更新する。既存配置からの移行、対象環境の指定、更新対象の範囲は [導入手順](docs/INSTALL.md#skills-cliで導入更新する) を見る。
+
 ```bash
 python3 -m unittest discover -s tests          # 機械検査（標準ライブラリ＋pydantic。CIでも同じものを実行）
 python3 tools/ctr_install.py install --target all --scope user --dry-run   # 計画の表示のみ。--dry-run を外すと配置する
