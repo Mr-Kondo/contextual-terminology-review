@@ -6,6 +6,8 @@
 
 Node.js / npm と Git が必要。Skills CLI 1.7.6 で確認している。
 
+**既存の同名配置がある場合は、上書きに備えて先にバックアップする。** 下の「既存配置からの移行」に従う。
+
 ```bash
 npx skills add Mr-Kondo/contextual-terminology-review --skill contextual-terminology-review -g --agent claude-code codex antigravity antigravity-cli -y
 npx skills update contextual-terminology-review -g
@@ -15,7 +17,9 @@ npx skills update contextual-terminology-review -g
 
 以後は `npx skills update` でも更新できる。このコマンドは他の登録済みスキルも対象にする。上の名前付き・`-g` 付きコマンドなら、このスキルのユーザー配置だけを対象にできる。最新版とは、リリースタグの最大値ではなく、登録したGitHubリポジトリの既定ブランチの内容である。タグ固定で導入したものは、その参照先を追う。
 
-CLIは `~/.agents/.skill-lock.json` に更新元とフォルダーのハッシュを記録する。独自インストーラーや手動コピーだけで配置したものは、`update` だけでは登録されない。ロックファイルは手編集せず、初回に `add` を行う。
+CLIは通常 `~/.agents/.skill-lock.json` に更新元とフォルダーのハッシュを記録する。`XDG_STATE_HOME` が設定されている場合は、その下の `skills/.skill-lock.json` を使う。独自インストーラーや手動コピーだけで配置したものは、`update` だけでは登録されない。ロックファイルは手編集せず、初回に `add` を行う。
+
+更新時の配置対象は、その実行時にCLIが検出した環境に従う。初回の `--agent` 一覧をそのまま保存・再利用する方式ではない。
 
 ### 既存配置からの移行
 
@@ -23,7 +27,7 @@ CLIは `~/.agents/.skill-lock.json` に更新元とフォルダーのハッシ�
 2. 上の `add` を実行する。既定の共有配置とシンボリックリンクを使い、`--copy` は付けない。コピー配置は、実行環境によって更新される対象が異なる場合がある。
 3. `npx skills list -g` で配置を確認し、`npx skills update contextual-terminology-review -g` を実行する。配布元と配置先の `VERSION`・内容を照合してからバックアップを片付ける。
 
-CLI 1.7.6 の Antigravity 配置先は `~/.gemini/antigravity/skills/`、Antigravity CLI は `~/.gemini/antigravity-cli/skills/` である。既存インストーラーが使う IDE/App の `~/.gemini/config/skills/` とは異なる。後者を使う環境では、バックアップ後に、このスキルのディレクトリだけを共有配置 `~/.agents/skills/contextual-terminology-review` へのリンクに置き換えるか、既存インストーラーで別途更新する。親の `skills/` や他のスキルは置き換えない。
+CLI 1.7.6 は Codex・Antigravity・Antigravity CLI を共有配置 `~/.agents/skills/` に導入する。環境検出用の `~/.gemini/antigravity/skills/` や `~/.gemini/antigravity-cli/skills/` に新しく配置するわけではない。既存インストーラーが使う `~/.gemini/config/skills/` と `~/.gemini/antigravity-cli/skills/` にコピーが残っている場合、バックアップ後に、このスキルのディレクトリだけを共有配置 `~/.agents/skills/contextual-terminology-review` へのリンクに置き換えるか、既存インストーラーで別途更新する。親の `skills/` や他のスキルは置き換えない。
 
 移行後の配置は Skills CLI で管理する。独自インストーラーの `.ctr-install.json` による照合・保護とは別の管理方式なので、両方式を同じ配置へ交互に適用しない。Skill実行時のPython依存は、別途 [SETUP.md](SETUP.md) に従って用意する。
 
