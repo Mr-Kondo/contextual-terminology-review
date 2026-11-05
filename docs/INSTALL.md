@@ -1,6 +1,35 @@
 # 導入・更新・アンインストール
 
-[使い方の入口](USAGE.md)の手順2。操作には `tools/ctr_install.py` を使う。
+[使い方の入口](USAGE.md)の手順2。Skills CLI または既存の `tools/ctr_install.py` を使う。
+
+## Skills CLIで導入・更新する
+
+Node.js / npm と Git が必要。Skills CLI 1.7.6 で確認している。
+
+```bash
+npx skills add Mr-Kondo/contextual-terminology-review --skill contextual-terminology-review -g --agent claude-code codex antigravity antigravity-cli -y
+npx skills update contextual-terminology-review -g
+```
+
+初回の `add` は配置と更新元の登録を行う。`-g` はユーザー全体への導入、`--agent` は対象環境である。必要な環境だけ指定できる。`-y` は確認を省略するため、既存の同名配置があれば、先に下の移行手順を行う。
+
+以後は `npx skills update` でも更新できる。このコマンドは他の登録済みスキルも対象にする。上の名前付き・`-g` 付きコマンドなら、このスキルのユーザー配置だけを対象にできる。最新版とは、リリースタグの最大値ではなく、登録したGitHubリポジトリの既定ブランチの内容である。タグ固定で導入したものは、その参照先を追う。
+
+CLIは `~/.agents/.skill-lock.json` に更新元とフォルダーのハッシュを記録する。独自インストーラーや手動コピーだけで配置したものは、`update` だけでは登録されない。ロックファイルは手編集せず、初回に `add` を行う。
+
+### 既存配置からの移行
+
+1. 同名スキルの配置先を確認し、ローカル変更がないか確かめる。配置フォルダーを、スキル検索対象外の場所へバックアップする。
+2. 上の `add` を実行する。既定の共有配置とシンボリックリンクを使い、`--copy` は付けない。コピー配置は、実行環境によって更新される対象が異なる場合がある。
+3. `npx skills list -g` で配置を確認し、`npx skills update contextual-terminology-review -g` を実行する。配布元と配置先の `VERSION`・内容を照合してからバックアップを片付ける。
+
+CLI 1.7.6 の Antigravity 配置先は `~/.gemini/antigravity/skills/`、Antigravity CLI は `~/.gemini/antigravity-cli/skills/` である。既存インストーラーが使う IDE/App の `~/.gemini/config/skills/` とは異なる。後者を使う環境では、バックアップ後に、このスキルのディレクトリだけを共有配置 `~/.agents/skills/contextual-terminology-review` へのリンクに置き換えるか、既存インストーラーで別途更新する。親の `skills/` や他のスキルは置き換えない。
+
+移行後の配置は Skills CLI で管理する。独自インストーラーの `.ctr-install.json` による照合・保護とは別の管理方式なので、両方式を同じ配置へ交互に適用しない。Skill実行時のPython依存は、別途 [SETUP.md](SETUP.md) に従って用意する。
+
+削除する場合は、`npx skills remove contextual-terminology-review -g -y` を使う。手動で追加した旧配置先のリンクは別途取り除く。用語データや評価履歴はスキル配置の外に保持する。
+
+仕様の参照先: [Skills CLI](https://github.com/vercel-labs/skills)、[更新実装](https://github.com/vercel-labs/skills/blob/main/src/update.ts)。CLIの配置先や挙動は版により変わり得る。
 
 ## 最短の導入（Claude Code に入れる例）
 
