@@ -22,17 +22,23 @@ def main():
     if args.global_probe and not (
         os.environ.get("GITHUB_ACTIONS") == "true"
         and os.environ.get("RUNNER_OS") == "Windows"
+        and os.environ.get("RUNNER_ENVIRONMENT") == "github-hosted"
     ):
         parser.error("--global-probe requires a disposable Windows GitHub runner")
     npx = shutil.which("npx.cmd" if os.name == "nt" else "npx")
     assert npx, "npx is required"
     env = dict(os.environ, DISABLE_TELEMETRY="1", DO_NOT_TRACK="1", NO_COLOR="1")
+    # PRs exercise their published branch; local runs and main CI exercise main.
+    ref = os.environ.get("GITHUB_HEAD_REF") or "main"
+    source = f"https://github.com/{SOURCE}.git#{ref}"
+    print(f"Skills CLI 1.7.6 source: {source}", flush=True)
     log_dir = ROOT / "feedback" / "skills-cli-windows"
     log_dir.mkdir(parents=True, exist_ok=True)
 
     def run(label, cwd, *command):
         result = subprocess.run(
             [npx, "--yes", "skills@1.7.6", *command], cwd=cwd, env=env,
+            stdin=subprocess.DEVNULL,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
             encoding="utf-8", errors="replace", timeout=180,
         )
@@ -56,7 +62,7 @@ def main():
 
         workspace = base / "日本語 project"
         workspace.mkdir()
-        run("project-add", workspace, "add", SOURCE, "--skill", NAME,
+        run("project-add", workspace, "add", source, "--skill", NAME,
             "--agent", "codex", "-y")
         dest = workspace / ".agents" / "skills" / NAME
         lock_path = workspace / "skills-lock.json"
@@ -88,11 +94,13 @@ def main():
 
         if args.global_probe:
             home = Path.home()
+            assert not os.environ.get("XDG_STATE_HOME"), "global probe requires default lock location"
             lock_path = home / ".agents" / ".skill-lock.json"
             assert not lock_path.exists(), "global probe requires an empty runner lock"
-            run("global-add", workspace, "add", SOURCE, "--skill", NAME,
-                "--agent", "codex", "-g", "-y")
             dest = home / ".agents" / "skills" / NAME
+            assert not dest.exists() and not dest.is_symlink(), "global install already exists"
+            run("global-add", workspace, "add", source, "--skill", NAME,
+                "--agent", "codex", "-g", "-y")
             verify(dest)
             stale(lock_path, dest, "skillFolderHash")
             output = run("global-project-context", workspace, "update")
