@@ -95,13 +95,21 @@ def main():
             dest = home / ".agents" / "skills" / NAME
             verify(dest)
             stale(lock_path, dest, "skillFolderHash")
-            run("global-bare-update", workspace, "update")
+            output = run("global-project-context", workspace, "update")
+            assert "No project skills to update" in output, output
+            assert (dest / "VERSION").read_text(encoding="utf-8") == "stale-fixture\n"
+            run("global-explicit-update", workspace, "update", NAME, "-g", "-y")
+            verify(dest)
+            stale(lock_path, dest, "skillFolderHash")
+            neutral = base / "global context"
+            neutral.mkdir()
+            run("global-bare-update", neutral, "update")
             verify(dest)
             output = run("global-current", workspace, "update", NAME, "-g", "-y")
             assert "up to date" in output, output
             run("global-remove", workspace, "remove", NAME, "-g", "-y")
             assert not dest.exists()
-            print("PASS: global add/bare update/current/remove; all installed files restored")
+            print("PASS: project context skips global; explicit global and neutral bare update restore files")
 
 
 if __name__ == "__main__":
