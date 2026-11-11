@@ -30,7 +30,15 @@ def main():
     env = dict(os.environ, DISABLE_TELEMETRY="1", DO_NOT_TRACK="1", NO_COLOR="1")
     # PRs exercise their published branch; local runs and main CI exercise main.
     ref = os.environ.get("GITHUB_HEAD_REF") or "main"
-    source = f"https://github.com/{SOURCE}.git#{ref}"
+    url = f"https://github.com/{SOURCE}.git"
+    # Auto-merge deletes the PR branch while this slower job may still run; the merged content is on main.
+    if ref != "main" and subprocess.run(
+        ["git", "ls-remote", "--exit-code", "--heads", url, ref],
+        stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60,
+    ).returncode == 2:
+        print(f"branch {ref} is gone (merged); using main", flush=True)
+        ref = "main"
+    source = f"{url}#{ref}"
     print(f"Skills CLI 1.7.6 source: {source}", flush=True)
     log_dir = ROOT / "feedback" / "skills-cli-windows"
     log_dir.mkdir(parents=True, exist_ok=True)
