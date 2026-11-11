@@ -72,42 +72,42 @@
     "placement": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "register": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "invoke": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "source_read": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "scripts_run": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "footer_output": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "record_saved": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "export_import": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     }
    }
   },
@@ -180,42 +180,42 @@
     "placement": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "register": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "invoke": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "source_read": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "scripts_run": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "footer_output": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "record_saved": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "export_import": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     }
    }
   },
@@ -233,7 +233,7 @@
     "register": {
      "state": "not_run",
      "reason": "実ユーザーの配置先への導入は、この作業の許可範囲外(仮配置のみ検査)",
-     "next_step": "利用者の許可後に tools/ctr_install.py install --target <t> --scope user を実行。ホストのSkill一覧で名前を確認"
+     "next_step": "利用者の許可後に npx skills add でSkillを配置。ホストのSkill一覧で名前を確認"
     },
     "invoke": {
      "state": "not_run",
@@ -336,42 +336,42 @@
     "placement": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "register": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "invoke": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "source_read": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "scripts_run": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "footer_output": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "record_saved": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     },
     "export_import": {
      "state": "not_run",
      "reason": "リモート接続先・権限が未指定",
-     "next_step": "接続先を指定し、ctr_install.py package の配布物を移して対象ホストで導入・呼び出し・保存を試す"
+     "next_step": "接続先を指定し、リリースのzipを移して対象ホストで導入・呼び出し・保存を試す"
     }
    }
   },

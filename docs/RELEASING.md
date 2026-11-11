@@ -12,9 +12,9 @@
 
 ## 自動で行うこと
 
-- `package` で zip・`ctr_install.py`・`INSTALL-ON-REMOTE.txt` を作る
+- `git archive` でSkillのzipを作る
 - ノートの末尾に、zip の SHA-256 を足す
-- タグ `v<版>` を打ち、3つのファイルを添付したリリースを作る。同じタグがあれば、何もしない
+- タグ `v<版>` を打ち、zipを添付したリリースを作る。同じタグがあれば、何もしない
 
 ## マージ
 
@@ -22,4 +22,4 @@
 
 ## 手で行うこと
 
-利用者のマシンの導入先（`~/.claude/skills` など）の更新は、リリース後に、そのマシンで `python3 tools/ctr_install.py update --target all --scope user` を実行する。
+利用者のマシンの導入先（`~/.claude/skills` など）の更新は、リリース後に、そのマシンで `npx skills update contextual-terminology-review -g` を実行する。

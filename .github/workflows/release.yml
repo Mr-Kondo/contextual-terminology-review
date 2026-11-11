@@ -27,9 +27,10 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then echo "$TAG は作成済み。何もしない"; exit 0; fi
           NOTES="docs/release-notes/$TAG.md"
           test -f "$NOTES" || { echo "::error::$NOTES がない。版を上げるPRには、リリースノートを入れる"; exit 1; }
-          python tools/ctr_install.py package --out dist
+          mkdir dist
+          git archive --format=zip --prefix=contextual-terminology-review/ -o "dist/contextual-terminology-review-$V.zip" HEAD:skill/contextual-terminology-review
           SHA=$(sha256sum "dist/contextual-terminology-review-$V.zip" | cut -d' ' -f1)
           { cat "$NOTES"; printf '\nSHA-256（zip）: `%s`\n' "$SHA"; } > notes.md
           TITLE=$(head -1 "$NOTES" | sed 's/^# //')
           gh release create "$TAG" --target "$GITHUB_SHA" --title "$TITLE" --notes-file notes.md \
-            "dist/contextual-terminology-review-$V.zip" dist/ctr_install.py dist/INSTALL-ON-REMOTE.txt
+            "dist/contextual-terminology-review-$V.zip"

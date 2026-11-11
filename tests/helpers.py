@@ -14,7 +14,6 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "skill" / "contextual-terminology-review" / "scripts"
 SKILL = ROOT / "skill" / "contextual-terminology-review"
 CTR = SCRIPTS / "ctr.py"
-INSTALL = ROOT / "tools" / "ctr_install.py"
 FIXTURES = ROOT / "tests" / "fixtures"
 HOSTS_DOC = SKILL / "references" / "hosts.md"
 ACCEPT = Path(os.environ.get("CTR_ACCEPTANCE_JSON", ROOT / "tests" / "data" / "acceptance-cases.json"))
