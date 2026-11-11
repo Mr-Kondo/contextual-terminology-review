@@ -1,6 +1,6 @@
 # 用語・文脈レビュー(contextual-terminology-review)の使い方
 
-Skill 本体は `skill/contextual-terminology-review/` にある。導入・更新・削除には `tools/ctr_install.py` を使う。依存は `requirements.txt` に書いてある。検証した版は `requirements-lock.txt` にある。
+Skill 本体は `skill/contextual-terminology-review/` にある。導入・更新・削除には Skills CLI（`npx skills`）を使う。依存は `requirements.txt` に書いてある。検証した版は `requirements-lock.txt` にある。
 
 ## 全体の流れ
 

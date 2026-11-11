@@ -2,14 +2,14 @@
 
 共通: 判断・データ・スクリプトは同じ。登録、呼び出し、資料参照、スクリプト実行、保存は環境ごとに確認し、ファイルを置いただけで「呼び出せた」「記録が有効」とは言わない。ホストのフックや履歴形式は仮定しない。
 
-| 環境 | 配置（tools/ctr_install.py） | 注意 |
+| 環境 | 配置（Skills CLI） | 注意 |
 |---|---|---|
 | Claude Code | user: `~/.claude/skills/` / workspace: `.claude/skills/` | CLIの配置。Coworkとは別 |
 | Codex | user: `~/.agents/skills/` / workspace: `.agents/skills/` | 配置先は実装時に公式資料で再確認する |
-| Gemini Antigravity | IDE: `~/.gemini/config/skills/` / CLI: `~/.gemini/antigravity-cli/skills/` / workspace: `.agents/skills/` | IDEとCLIで場所が違う |
+| Gemini Antigravity | Skills CLI 1.7.6: user `~/.agents/skills/`（共有配置）。旧インストーラーの IDE: `~/.gemini/config/skills/` / CLI: `~/.gemini/antigravity-cli/skills/` は、移行するまで残る / workspace: `.agents/skills/` | 旧配置先は docs/INSTALL.md の移行手順に従う |
 | ChatGPT Work | 配布物（zip）をアカウント側で登録 | ローカル配置では代用できない。登録・接続方法は利用先の公式手順 |
 | Claude Cowork | 配布物（zip）をアカウントのSkillとして有効化 | PC上の `~/.claude/skills/` を直接読む方式ではない（2026-10-14確認の公式説明）。ローカル配置だけで導入完了としない |
-| リモート | `ctr_install.py package` の配布物を移し、対象ホストで実行 | 接続・権限がなければ未実施 |
+| リモート | リリースのzipを移して展開し、対象ホストの配置先へ置く | 接続・権限がなければ未実施 |
 
 Windows では、`python3` を `py -3`（なければ `python`）に、パスの区切りを `\` に読み替える。保存先の絶対パスはドライブ文字から書く（`/` で始まるパスは絶対パスと見なされない）。
 
