@@ -37,6 +37,16 @@ Skill実行時のPython依存は、別途 [SETUP.md](SETUP.md) に従って用�
 
 削除する場合は、`npx skills remove contextual-terminology-review -g -y` を使う。手動で追加した旧配置先のリンクは別途取り除く。用語データや評価履歴はスキル配置の外に保持する。
 
+### GitHub CLI（`gh skill`）は対象外
+
+`gh skill`（プレビュー機能）は使わない。gh 2.105.0 で確認した（2026-11-18）。
+
+- 名前だけの `gh skill install` は `no skills found` になる。gh が探す配置（`skills/*/SKILL.md` など）に、このリポジトリの `skill/`（単数）が含まれないため。
+- SKILL.md のパスを指定すれば入る。ただし、frontmatter に gh のメタデータが足される。
+- `gh skill update` は、このスキルを見つけられずに飛ばし、「All skills are up to date.」と表示する。更新できていないので、この表示を信用しない。
+
+名前だけで入れる改名（`skill/` → `skills/`）の要否は、[Issue #65](https://github.com/Mr-Kondo/contextual-terminology-review/issues/65) で評価する。
+
 仕様の参照先: [Skills CLI](https://github.com/vercel-labs/skills)、[更新実装](https://github.com/vercel-labs/skills/blob/main/src/update.ts)。CLIの配置先や挙動は版により変わり得る。
 
 ## OS による書き方の違い
