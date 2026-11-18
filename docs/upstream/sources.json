@@ -19,16 +19,18 @@
         ]
       },
       "reviewed": {
-        "ref": "7ea8a4f",
-        "sha": "7ea8a4fa94cc2c42c0f4f06f61ccdf9b444dc274",
-        "at": "2026-10-18T02:35:10Z",
-        "review": "docs/upstream/reviews/japanese-readability-editor-7ea8a4f.md"
+        "ref": "0d00397",
+        "sha": "0d00397efafe638ed92c50093e8aa2f4cb728725",
+        "at": "2026-10-19T00:58:36Z",
+        "review": "docs/upstream/reviews/japanese-readability-editor-0d00397.md"
       },
       "adopted": [
         "導入・更新・削除の事前確認、退避、置換の設計(tools/install.py を読んだ。コードは写していない)",
         "参考先の更新を週1回検知する仕組み(tools/upstream_watch.py とワークフロー。コードを写して使う)"
       ],
-      "not_adopted": [],
+      "not_adopted": [
+        "skill/ → skills/ の改名（gh skill の名前だけの導入のため）。影響が大きく、Issue #65 で評価してから決める"
+      ],
       "repo": "Mr-Kondo/japanese-readability-editor"
     },
     {
@@ -47,15 +49,18 @@
         ]
       },
       "reviewed": {
-        "ref": "ff92e4b",
-        "sha": "ff92e4bcf5b81c0137214fec6eade5e6e703244d",
-        "at": "2026-10-17T07:20:00Z",
-        "review": null
+        "ref": "9bc91c4",
+        "sha": "9bc91c497bb84e2caecec6254372e7ed8794aa22",
+        "at": "2026-10-24T11:04:28Z",
+        "review": "docs/upstream/reviews/official-prompt-tailor-9bc91c4.md"
       },
       "adopted": [
         "引用・本文ハッシュ・行範囲・短い原文の結び付けの考え方(コードは写していない)"
       ],
-      "not_adopted": [],
+      "not_adopted": [
+        "日本語の推敲の連携、読取りの観測の版の追加（範囲外）",
+        "原文を収集しない選択式の評価票（需要が未確認のため当面見送り）"
+      ],
       "repo": "Mr-Kondo/official-prompt-tailor"
     },
     {
