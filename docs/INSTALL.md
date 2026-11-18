@@ -45,7 +45,7 @@ Skill実行時のPython依存は、別途 [SETUP.md](SETUP.md) に従って用�
 - SKILL.md のパスを指定すれば入る。ただし、frontmatter に gh のメタデータが足される。
 - `gh skill update` は、このスキルを見つけられずに飛ばし、「All skills are up to date.」と表示する。更新できていないので、この表示を信用しない。
 
-名前だけで入れる改名（`skill/` → `skills/`）の要否は、[Issue #65](https://github.com/Mr-Kondo/contextual-terminology-review/issues/65) で評価する。
+名前だけで入れる改名（`skill/` → `skills/`）は、見送った。理由と再評価の条件は、[ADR](../adr/2026-11-18-keep-skill-dir-name.md) にある。
 
 仕様の参照先: [Skills CLI](https://github.com/vercel-labs/skills)、[更新実装](https://github.com/vercel-labs/skills/blob/main/src/update.ts)。CLIの配置先や挙動は版により変わり得る。
 
