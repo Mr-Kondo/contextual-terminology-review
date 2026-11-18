@@ -6,7 +6,7 @@ review.json（判断と参照記録）→ `ctr.py check refs --review review.jso
 
 ## sources.json（資料登録簿）
 
-`{"sources": [ {id, title, version, kind: text|pdf|image, lines: [...] | page_text: {"1": "..."} , pages, figures: {"図1": {page, regions: [...]}}, text_origin: original|machine_text|ocr|manual, copy_of, relation: copy|translation|summary, link, sha256} ]}`
+`{"sources": [ {id, title, version, kind: text|pdf|image, lines: [...] | page_text: {"1": "..."} , pages, figures: {"図1": {page, regions: [...]}}, text_origin: original|machine_text|ocr|manual, copy_of, relation: copy|translation|summary, link, sha256, retrieved_at, status: current|superseded|withdrawn|unknown, superseded_by, review_by} ]}`（末尾4項目は任意。取り込み時に、取得日・版・状態を登録した人が書く）
 
 - `lines` の先頭が行1。資料の本文が変わると `sha256` が合わなくなり、`source_hash_mismatch`（再確認候補）になる。ハッシュの変化から意味が反転したとは断定しない。
 - PDFは `ctr.py pdf extract` で作る。誌面ページ番号は抽出できないので空のまま（補わない）。
@@ -41,6 +41,9 @@ review.json（判断と参照記録）→ `ctr.py check refs --review review.jso
 
 - `proposal_adds_protected_term`: 修正案（`proposal_text`・`oral_rephrase`）に、承認・決裁・合意・確定・保証・責任・完了・最終判断の語があり、原文・目的・本人の意図・確認済み事実・紐づく引用のどこにも無い。語が資料にあるなら、その引用を紐づける。無ければ修正案から外す。
 - `surrounding_condition_unaddressed`: 引用の前後2行か直近の見出しに、草案・旧版・失効・未合意・暫定・改定・ただし・除く・例外などがあり、引用・理由・修正案に出てこない。適用範囲や文書の状態が引用と違わないか確認し、違うなら理由か確認点に書く。
+- `source_superseded`: 引用した資料の `status` が `superseded` / `withdrawn`。出典一覧の資料名にも状態が出る。
+- `source_review_overdue`: 引用した資料の `review_by` が今日より前。
+- 上の2つは、断定を「要確認」に下げる材料であり、機械検査の合否は変えない。`status` や `review_by` が書かれていなければ警告は出ない。警告なしは、資料が最新である証拠にならない。
 - 警告は語の有無だけを見る。言い換え（例: 「承認」を「了解」と書く）は拾えない。警告が無いことは、意味が保たれている証拠ではない。
 
 ## 機械検査では分からないこと

@@ -82,3 +82,22 @@ class ConditionWarnings(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SourceFreshness(unittest.TestCase):
+    def run_check(self, **src):
+        s = Source(id="s", title="役割分担", version="1", lines=LINES, **src)
+        return review_check(review(), Registry([s]), today="2026-11-18")
+
+    def test_superseded_and_withdrawn_sources_warn_but_do_not_fail(self):
+        for st in ("superseded", "withdrawn"):
+            rep = self.run_check(status=st, superseded_by="s2@2")
+            self.assertIn("source_superseded", classes(rep))
+            self.assertEqual(rep["errors"], [])                                    # 合否は変えない
+            self.assertTrue(any(st in line for line in rep["footer"]), st)         # 出典一覧に状態が出る
+
+    def test_overdue_review_by_warns_and_future_or_missing_does_not(self):
+        self.assertIn("source_review_overdue", classes(self.run_check(review_by="2026-11-17")))
+        self.assertNotIn("source_review_overdue", classes(self.run_check(review_by="2026-11-18")))
+        for kw in ({}, {"status": "current"}, {"status": "unknown"}, {"retrieved_at": "2020-01-01"}):
+            self.assertEqual([c for c in classes(self.run_check(**kw)) if c.startswith("source_")], [], kw)
