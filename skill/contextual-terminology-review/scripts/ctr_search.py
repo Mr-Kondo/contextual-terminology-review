@@ -26,8 +26,42 @@ def _spans(text: str, form: str) -> list:
     return out
 
 
+_DROP = set("・･·-‐‑‒–—−／/")
+
+
+def _fold(text: str):
+    """候補探し専用の正規化(NFKC・小文字・空白/中黒/ハイフン/スラッシュ除去・語末の長音除去)と、元の位置への対応。
+    引用の一致検査(ctr_refs.normalize)では使わない。長音は直後がカタカナなら残す(ビール≠ビル)。"""
+    import unicodedata
+    out, pos = [], []
+    for i, ch in enumerate(text):
+        for c in unicodedata.normalize("NFKC", ch).lower():
+            if c.isspace() or c in _DROP:
+                continue
+            if c == "ー":
+                nxt = unicodedata.normalize("NFKC", text[i + 1:i + 2])
+                if not ("ァ" <= nxt <= "ヺ"):
+                    continue
+            out.append(c)
+            pos.append(i)
+    return "".join(out), pos
+
+
+def _fuzzy_form(forms: list, folded: str, pos: list, text: str):
+    for f in sorted(forms, key=len, reverse=True):
+        nf = _fold(f)[0]
+        i = folded.find(nf) if nf else -1
+        if i >= 0:
+            end = pos[i + len(nf) - 1] + 1
+            while text[end:end + 1] == "ー" and "ー" not in nf[-1:]:  # 除いた語末の長音も元の表記に含める
+                end += 1
+            return text[pos[i]:end]
+    return None
+
+
 def exact_search(terms_obj: dict, text: str, *, project: Optional[str] = None, as_of: Optional[str] = None) -> dict:
     hits = []
+    folded, pos = _fold(text)
     for t in terms_obj.get("terms", []):
         scope = t.get("scope") or {"kind": "professional"}
         if scope.get("kind") == "project" and scope.get("project") != project:
@@ -36,7 +70,13 @@ def exact_search(terms_obj: dict, text: str, *, project: Optional[str] = None, a
             continue
         forms = [t["term"], *t.get("aliases", [])]
         matched = [f for f in forms if f and f in text]
-        if matched:
+        if not matched:
+            span = _fuzzy_form([f for f in forms if f], folded, pos, text)
+            if span:  # 表記ゆれの一致は確認候補。引用の根拠にしない
+                hits.append({"term_id": t["id"], "matched_form": span, "via": "normalized", "sense": t.get("sense"),
+                             "scope": scope, "status": t.get("status", "candidate"),
+                             "personal_preference": scope.get("kind") == "personal", "source": t.get("source")})
+        else:
             hits.append({"term_id": t["id"], "matched_form": max(matched, key=len),
                          "via": "term" if t["term"] in matched else "alias", "sense": t.get("sense"),
                          "scope": scope, "status": t.get("status", "candidate"),

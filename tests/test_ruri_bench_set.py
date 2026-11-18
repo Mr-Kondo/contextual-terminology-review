@@ -34,7 +34,7 @@ class RuriBenchSet(unittest.TestCase):
 
     def test_categories_mean_what_they_say_for_exact_search(self):
         for q in self.data["queries"]:
-            hit = {h["term_id"] for h in se.exact_search(self.terms, q["text"])["hits"]}
+            hit = {h["term_id"] for h in se.exact_search(self.terms, q["text"])["hits"] if h["via"] != "normalized"}
             if q["category"] == "verbatim":
                 self.assertTrue(hit & set(q["gold"]), q["id"])                   # 語がそのまま入っている
             else:

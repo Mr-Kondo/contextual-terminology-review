@@ -49,6 +49,17 @@ class Exact(TmpCase):
         self.assertEqual(sorted(h["term_id"] for h in r["hits"]), ["t1", "t2"])
         self.assertEqual(r["suppressed"], [])
 
+    def test_normalized_match_finds_notation_variants_but_not_different_words(self):
+        terms = {"terms": [{"id": "a", "term": "サーバー"}, {"id": "b", "term": "API"}, {"id": "c", "term": "キャッシュフロー"},
+                           {"id": "d", "term": "SSL/TLS"}, {"id": "e", "term": "要件定義"}, {"id": "f", "term": "ビル"}]}
+        for text, tid, form in [("サーバが落ちた", "a", "サーバ"), ("ＡＰＩを呼ぶ", "b", "ＡＰＩ"), ("apiを呼ぶ", "b", "api"),
+                                ("キャッシュ・フローを確認", "c", "キャッシュ・フロー"), ("キャッシュ フロー", "c", "キャッシュ フロー"),
+                                ("SSL／TLSを使う", "d", "SSL／TLS"), ("要件\n定義を行う", "e", "要件\n定義")]:
+            h = se.exact_search(terms, text)["hits"]
+            self.assertEqual([(x["term_id"], x["via"], x["matched_form"]) for x in h], [(tid, "normalized", form)], text)
+        self.assertEqual(se.exact_search(terms, "ビールを飲む")["hits"], [])        # 語中の長音は残す
+        self.assertEqual(se.exact_search(terms, "サーバー")["hits"][0]["via"], "term")  # 完全一致が先
+
     def test_hit_at_k_uses_only_tasks_with_gold_and_zero_denominator_is_unevaluated(self):
         res = {"q1": ["a", "b"], "q2": ["c"], "q3": ["z"]}
         gold = {"q1": "b", "q2": "x", "q3": None}                                     # q3 は正解資料なし
