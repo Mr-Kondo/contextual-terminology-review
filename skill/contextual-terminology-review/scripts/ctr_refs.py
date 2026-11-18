@@ -283,6 +283,37 @@ def _proposal_warnings(review: Review, ref_by_id: dict) -> list:
     return out
 
 
+_TOKEN = re.compile(r"[一-鿿々]+|[ァ-ヺー]+|[A-Za-z]+|\d+|[ぁ-ゟ]+|\s+|.")
+_CONTENT = re.compile(r"[一-鿿々ァ-ヺA-Za-z\d]")
+
+
+def _added_tokens(before: str, after: str) -> list:
+    """原文(target)から修正案へ足された・置き換えられた内容語(漢字・カタカナ・英字・数字の連なり)。助詞などのひらがなと1字の語は見ない。"""
+    import difflib
+    a, b = _TOKEN.findall(before), _TOKEN.findall(after)
+    out = []
+    for op, _, _, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+        if op in ("insert", "replace"):
+            out += [t for t in b[j1:j2] if _CONTENT.match(t) and (len(t) >= 2 or t.isdigit())]
+    return out
+
+
+def _edit_warnings(review: Review, ref_by_id: dict) -> list:
+    out = []
+    for f in review.findings:
+        texts = [t for t in (f.proposal_text, f.oral_rephrase) if t]
+        if not texts:
+            continue
+        allowed = "".join([f.target, review.purpose, review.intent or "", *review.confirmed_facts,
+                           f.correction.corrected_item if f.correction else "",
+                           *[(ref_by_id[r].quote or "") + (ref_by_id[r].used_content or "") for r in f.ref_ids if r in ref_by_id]])
+        added = sorted({t for x in texts for t in _added_tokens(f.target, x) if t not in allowed})
+        if added:
+            out.append({"class": "edit_without_finding", "finding": f.id, "edits": added,
+                        "note": "修正案が足した語が、原文・本人の説明・確認済み事実・引用・correction.corrected_item のどこにもない。資料にあるか確認し、無ければ外す(確認候補)"})
+    return out
+
+
 def _condition_warnings(review: Review, reg: Registry, results: dict) -> list:
     out = []
     finding_by_id = {f.id: f for f in review.findings}
@@ -414,7 +445,7 @@ def review_check(review: Review, reg: Registry, *, today: Optional[str] = None) 
             add(e.split(":")[0], f.id)
         finding_report.append({"id": f.id, "declared": f.judgment, "effective": effective, "errors": ferrs,
                                "passing_refs": passing})
-    warnings = _proposal_warnings(review, ref_by_id) + _condition_warnings(review, reg, results) \
+    warnings = _proposal_warnings(review, ref_by_id) + _edit_warnings(review, ref_by_id) + _condition_warnings(review, reg, results) \
         + _source_warnings(review, reg, results, today)
     footer = footer_lines(review, reg, results)
     roots = {reg.root(reg.lookup(r.source_id, r.version)[0]) for r in review.refs

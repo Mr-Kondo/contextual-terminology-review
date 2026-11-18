@@ -41,6 +41,7 @@ review.json（判断と参照記録）→ `ctr.py check refs --review review.jso
 
 - `proposal_adds_protected_term`: 修正案（`proposal_text`・`oral_rephrase`）に、承認・決裁・合意・確定・保証・責任・完了・最終判断の語があり、原文・目的・本人の意図・確認済み事実・紐づく引用のどこにも無い。語が資料にあるなら、その引用を紐づける。無ければ修正案から外す。
 - `surrounding_condition_unaddressed`: 引用の前後2行か直近の見出しに、草案・旧版・失効・未合意・暫定・改定・ただし・除く・例外などがあり、引用・理由・修正案に出てこない。適用範囲や文書の状態が引用と違わないか確認し、違うなら理由か確認点に書く。
+- `edit_without_finding`: 修正案が原文（target）に足した・置き換えた内容語（漢字・カタカナ・英字・数字の連なり。ひらがなと1字の語は除く）が、原文・目的・本人の意図・確認済み事実・引用・`correction.corrected_item` のどこにもない。同義の言い換えにも出る確認候補。資料にあるか確認し、無ければ外す。
 - `source_superseded`: 引用した資料の `status` が `superseded` / `withdrawn`。出典一覧の資料名にも状態が出る。
 - `source_review_overdue`: 引用した資料の `review_by` が今日より前。
 - 上の2つは、断定を「要確認」に下げる材料であり、機械検査の合否は変えない。`status` や `review_by` が書かれていなければ警告は出ない。警告なしは、資料が最新である証拠にならない。
