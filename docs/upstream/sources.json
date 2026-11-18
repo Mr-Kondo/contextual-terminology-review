@@ -29,7 +29,7 @@
         "参考先の更新を週1回検知する仕組み(tools/upstream_watch.py とワークフロー。コードを写して使う)"
       ],
       "not_adopted": [
-        "skill/ → skills/ の改名（gh skill の名前だけの導入のため）。影響が大きく、Issue #65 で評価してから決める"
+        "skill/ → skills/ の改名（gh skill の名前だけの導入のため）。評価の結果、見送った（adr/2026-11-18-keep-skill-dir-name.md）"
       ],
       "repo": "Mr-Kondo/japanese-readability-editor"
     },
