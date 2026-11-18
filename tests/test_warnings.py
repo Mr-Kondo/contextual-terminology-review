@@ -101,3 +101,34 @@ class SourceFreshness(unittest.TestCase):
         self.assertNotIn("source_review_overdue", classes(self.run_check(review_by="2026-11-18")))
         for kw in ({}, {"status": "current"}, {"status": "unknown"}, {"retrieved_at": "2020-01-01"}):
             self.assertEqual([c for c in classes(self.run_check(**kw)) if c.startswith("source_")], [], kw)
+
+
+# 模擬の修正案(作成者のAIが書いた。独立ではない)。原文 target=「私が取りまとめます」、資料の行は LINES[1]=「取りまとめ: 田中が論点整理と資料作成を行う。」
+FAITHFUL = ["論点整理と資料作成は私が行います。", "私が論点整理を行います。", "私が資料作成を取りまとめます。",
+            "私が論点整理と資料作成を担当します。", "田中が論点整理と資料作成を行います。", "資料作成は私が取りまとめます。"]
+# (種類, 修正案, 語彙検査(保護語)が拾えるか)
+ADDED = [("責務", "私が取りまとめ、品質管理も行います。", False), ("責務", "私が取りまとめ、最終承認も行います。", True),
+         ("責務", "私が取りまとめ、関係者への連絡も担います。", False), ("責務", "私が取りまとめ、責任を負います。", True),
+         ("条件", "私が取りまとめます。ただし来月以降に限ります。", False), ("条件", "私が全案件について取りまとめます。", False),
+         ("条件", "私が取りまとめます。例外は認めません。", False), ("条件", "私が取りまとめます。確定後に着手します。", True),
+         ("完了状態", "私が取りまとめ、検収済みとします。", False), ("完了状態", "私が取りまとめ、納品します。", False),
+         ("完了状態", "私が取りまとめ、完了させます。", True), ("完了状態", "私が取りまとめ、公開まで行います。", False),
+         ("数値", "私が3日以内に取りまとめます。", False), ("数値", "私が週2回取りまとめます。", False),
+         ("数値", "私が100件を取りまとめます。", False), ("数値", "私が取りまとめ、保証期間を90日とします。", True)]
+
+
+class EditWarning(unittest.TestCase):
+    def check(self, text):
+        return classes(review_check(review(proposal=text), reg()))
+
+    def test_false_warnings_on_faithful_proposals_are_counted(self):
+        bad = [t for t in FAITHFUL if "edit_without_finding" in self.check(t)]
+        self.assertEqual(bad, ["私が論点整理と資料作成を担当します。"])         # 同義の言い換え(担当)に出る。誤警告 1/6。事前基準(0件)は未達
+
+    def test_added_content_is_detected_beyond_the_protected_word_check(self):
+        old = [t for _, t, _ in ADDED if "proposal_adds_protected_term" in self.check(t)]
+        new = [t for _, t, _ in ADDED if "edit_without_finding" in self.check(t)]
+        self.assertEqual((len(old), len(new), len(ADDED)), (5, 16, 16))       # 語彙検査 5/16 → 編集の検査 16/16(模擬・作成者AI)
+
+    def test_edit_warning_is_not_an_error(self):
+        self.assertEqual(review_check(review(proposal="私が3日以内に取りまとめます。"), reg())["errors"], [])
