@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import re
+from datetime import date
 from pathlib import Path
 from typing import Literal, Optional
 
@@ -40,6 +41,10 @@ class Source(BaseModel):
     relation: Optional[Literal["copy", "translation", "summary"]] = None
     link: Optional[str] = None
     sha256: Optional[str] = None
+    retrieved_at: Optional[str] = None   # 取得日。登録した人が書く。無ければ警告は出ない
+    status: Optional[Literal["current", "superseded", "withdrawn", "unknown"]] = None
+    superseded_by: Optional[str] = None
+    review_by: Optional[str] = None      # 次の再確認の期日(YYYY-MM-DD)
 
 
 class Location(Base):
@@ -332,7 +337,24 @@ def _short(text: str, limit: int = 50) -> str:
     return text if len(text) <= limit else text[:limit] + "…(以下省略)"
 
 
-def review_check(review: Review, reg: Registry) -> dict:
+def _source_warnings(review: Review, reg: Registry, results: dict, today: str) -> list:
+    out, seen = [], set()
+    for r in review.refs:
+        src, _ = reg.lookup(r.source_id or "", r.version or "") if r.source_id else (None, None)
+        if r.basis != "source" or not src or results[r.ref_id]["status"] != "pass":
+            continue
+        for cls, bad in (("source_superseded", src.status in ("superseded", "withdrawn")),
+                         ("source_review_overdue", bool(src.review_by) and src.review_by < today)):
+            if bad and (cls, src.id, src.version) not in seen:
+                seen.add((cls, src.id, src.version))
+                out.append({"class": cls, "source_id": src.id, "version": src.version, "status": src.status,
+                            "superseded_by": src.superseded_by, "review_by": src.review_by,
+                            "note": "断定を要確認に下げる材料。資料が古いと決めつけない"})
+    return out
+
+
+def review_check(review: Review, reg: Registry, *, today: Optional[str] = None) -> dict:
+    today = today or date.today().isoformat()
     ref_by_id = {r.ref_id: r for r in review.refs}
     finding_ids = {f.id for f in review.findings}
     errors: list[str] = []
@@ -392,7 +414,8 @@ def review_check(review: Review, reg: Registry) -> dict:
             add(e.split(":")[0], f.id)
         finding_report.append({"id": f.id, "declared": f.judgment, "effective": effective, "errors": ferrs,
                                "passing_refs": passing})
-    warnings = _proposal_warnings(review, ref_by_id) + _condition_warnings(review, reg, results)
+    warnings = _proposal_warnings(review, ref_by_id) + _condition_warnings(review, reg, results) \
+        + _source_warnings(review, reg, results, today)
     footer = footer_lines(review, reg, results)
     roots = {reg.root(reg.lookup(r.source_id, r.version)[0]) for r in review.refs
              if r.basis == "source" and results[r.ref_id]["status"] == "pass" and reg.lookup(r.source_id, r.version)[0]}
@@ -428,6 +451,8 @@ def footer_lines(review: Review, reg: Registry, results: dict) -> list[str]:
         link = r.link or (src.link if src and src.link else None)
         link_text = link if link else "リンク未確認"
         if res["status"] == "pass":
+            if src and src.status in ("superseded", "withdrawn"):
+                title += f"【資料の状態: {src.status}" + (f"→{src.superseded_by}" if src.superseded_by else "") + "】"
             lines.append(f"［{ids}／{kind}］{title}｜{_loc_text(r)}｜{content}｜{link_text}")
         else:
             lines.append(f"［{ids}／{kind}］{title}｜{_loc_text(r)}｜要確認(機械検査: {res['status']} {','.join(res['errors'])}。"
